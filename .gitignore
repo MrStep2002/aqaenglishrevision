@@ -1,0 +1,10 @@
+# Built site and installed tools (recreated by `npm install` / `npm run build`)
+node_modules/
+_site/
+
+# Mac clutter
+.DS_Store
+
+# Never commit the Google Sites export or form responses here
+AQA English Website/
+*.zip

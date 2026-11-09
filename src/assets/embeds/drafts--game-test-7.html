@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plot Sequencing Game</title>
+    <style>
+        body { 
+            font-family: 'Arial', sans-serif; 
+            background: url('https://www.transparenttextures.com/patterns/black-linen.png'); 
+            background-color: #2f4f4f;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2em;
+            color: #ff0000;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px #000;
+        }
+        .list {
+            list-style: none;
+            padding: 0;
+            width: 90%;
+            max-width: 600px;
+        }
+        .list li {
+            margin: 5px;
+            padding: 10px;
+            border: 1px solid #000;
+            cursor: pointer;
+            background-color: #4f4f4f;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-size: 1.2em;
+        }
+        .list li:hover {
+            background-color: #6b6b6b;
+        }
+        .correct {
+            background-color: #6b8e23;
+        }
+        .incorrect {
+            background-color: #ffcdd2;
+        }
+        .selected {
+            background-color: #bbdefb;
+        }
+        .button {
+            background-color: #a3c9f1;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1em;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5em;
+            }
+            .list li {
+                font-size: 1em;
+            }
+            .button {
+                font-size: 0.9em;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Plot Sequencing Game</h1>
+    <ul class="list" id="events">
+        <!-- Events will be populated here -->
+    </ul>
+    <button class="button" onclick="checkOrder()">Check Order</button>
+    <script>
+        const apiKey = 'AIzaSyBsLzSdSZoXOKzd4IEM2PB9L4Cw8iwPcys';
+        const spreadsheetId = '13xd2wbh6w6mWQPMmiopxEfagUP_iLsEOutMfeTfMT6I';
+        const range = 'Sheet4!A1:A5';
+        let selectedElement = null;
+
+        async function fetchEvents() {
+            try {
+                const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${apiKey}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                if (!data.values || data.values.length === 0) {
+                    throw new Error('No data found in the specified range.');
+                }
+                const events = data.values.map((row, index) => ({
+                    id: `event${index + 1}`,
+                    text: row[0]
+                }));
+                shuffle(events);
+                displayEvents(events);
+            } catch (error) {
+                console.error('Error fetching events:', error);
+            }
+        }
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function displayEvents(events) {
+            const eventsList = document.getElementById('events');
+            eventsList.innerHTML = '';
+            events.forEach(event => {
+                const li = document.createElement('li');
+                li.id = event.id;
+                li.textContent = event.text;
+                li.onclick = () => selectElement(li);
+                eventsList.appendChild(li);
+            });
+        }
+
+        function selectElement(element) {
+            if (selectedElement) {
+                swapElements(selectedElement, element);
+                selectedElement.classList.remove('selected');
+                selectedElement = null;
+            } else {
+                selectedElement = element;
+                element.classList.add('selected');
+            }
+        }
+
+        function swapElements(element1, element2) {
+            const parent = element1.parentNode;
+            const sibling1 = element1.nextSibling === element2 ? element1 : element1.nextSibling;
+            parent.insertBefore(element1, element2);
+            parent.insertBefore(element2, sibling1);
+        }
+
+        function checkOrder() {
+            const events = document.getElementById('events').children;
+            const correctOrder = ['event1', 'event2', 'event3', 'event4', 'event5'];
+            let isCorrect = true;
+            for (let i = 0; i < events.length; i++) {
+                if (events[i].id !== correctOrder[i]) {
+                    events[i].classList.add('incorrect');
+                    isCorrect = false;
+                } else {
+                    events[i].classList.add('correct');
+                }
+            }
+            if (isCorrect) {
+                alert("Correct!");
+            } else {
+                alert("Try again!");
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchEvents);
+    </script>
+</body>
+</html>

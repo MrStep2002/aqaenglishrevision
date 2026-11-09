@@ -1,0 +1,439 @@
+<div id="mcq-app" style="max-width:820px;margin:16px auto;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;">
+  <div style="border:1px solid rgba(0,0,0,0.12);border-radius:16px;padding:16px;box-shadow:0 10px 28px rgba(0,0,0,0.10);background:#fff;">
+    <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:12px;flex-wrap:wrap;">
+      <div style="font-weight:800;font-size:16px;letter-spacing:0.2px;">Multiple Choice</div>
+
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+        <label style="font-size:13px;color:rgba(0,0,0,0.7);display:flex;gap:6px;align-items:center;">
+          Difficulty
+          <select id="difficulty" style="border:1px solid rgba(0,0,0,0.12);border-radius:10px;padding:7px 8px;background:#fff;"></select>
+        </label>
+
+        <button id="restart"
+          style="border:1px solid rgba(0,0,0,0.12);background:#fff;border-radius:10px;padding:8px 10px;cursor:pointer;">
+          Restart
+        </button>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;">
+      <div id="chip-timer" style="padding:7px 10px;border-radius:999px;border:1px solid rgba(0,0,0,0.12);font-size:13px;">
+        ⏱ <span id="timer">--</span>s
+      </div>
+      <div style="padding:7px 10px;border-radius:999px;border:1px solid rgba(0,0,0,0.12);font-size:13px;">
+        ✅ Score: <span id="score">0</span>
+      </div>
+      <div style="padding:7px 10px;border-radius:999px;border:1px solid rgba(0,0,0,0.12);font-size:13px;">
+        🔥 Streak: <span id="streak">0</span>
+      </div>
+      <div style="padding:7px 10px;border-radius:999px;border:1px solid rgba(0,0,0,0.12);font-size:13px;">
+        📦 Remaining: <span id="remaining">0</span>
+      </div>
+    </div>
+
+    <div id="status" style="font-size:13px;color:rgba(0,0,0,0.65);margin-bottom:10px;">Loading…</div>
+    <div id="question" style="font-size:19px;font-weight:700;line-height:1.35;margin-bottom:14px;"></div>
+    <div id="options" style="display:grid;gap:10px;"></div>
+
+    <div id="overlay" style="display:none;margin-top:14px;border-radius:14px;padding:14px;border:1px solid rgba(0,0,0,0.12);">
+      <div id="overlay-title" style="font-weight:900;font-size:16px;margin-bottom:6px;"></div>
+      <div id="overlay-body" style="font-size:14px;line-height:1.35;"></div>
+      <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap;">
+        <button id="play-again"
+          style="border:1px solid rgba(0,0,0,0.12);background:#fff;border-radius:10px;padding:8px 10px;cursor:pointer;">
+          Play again
+        </button>
+      </div>
+    </div>
+
+    <div style="margin-top:10px;font-size:12px;color:rgba(0,0,0,0.55);">
+      Shortcuts: <strong>A–D</strong> or <strong>1–4</strong> to answer
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  // =========================
+  // CONFIG
+  // =========================
+  const SHEET_ID = "14s4up8AEOaCGfr0ph8uTaHIucagLRxy4uWTXHgyaKh0";
+
+  // Tab names in the same spreadsheet
+  const SHEETS = {
+    Easy: "Easy",
+    Hard: "Hard"
+  };
+
+  const TIME_LIMIT_SECONDS = 15;
+  const AUTO_NEXT_DELAY_MS = 550;
+
+  // =========================
+  // UI refs
+  // =========================
+  const $status = document.getElementById("status");
+  const $question = document.getElementById("question");
+  const $options  = document.getElementById("options");
+  const $difficulty = document.getElementById("difficulty");
+  const $timer = document.getElementById("timer");
+  const $chipTimer = document.getElementById("chip-timer");
+  const $score = document.getElementById("score");
+  const $streak = document.getElementById("streak");
+  const $remaining = document.getElementById("remaining");
+  const $restart = document.getElementById("restart");
+
+  const $overlay = document.getElementById("overlay");
+  const $overlayTitle = document.getElementById("overlay-title");
+  const $overlayBody = document.getElementById("overlay-body");
+  const $playAgain = document.getElementById("play-again");
+
+  // =========================
+  // State
+  // =========================
+  let current = null;
+  let locked = false;
+  let gameOver = false;
+
+  let timerId = null;
+  let timeLeft = TIME_LIMIT_SECONDS;
+
+  let score = 0;
+  let streak = 0;
+
+  // track which *button* is correct after shuffling
+  let correctButtonId = null;
+
+  // Cache per difficulty tab
+  const cache = {};
+
+  // =========================
+  // Helpers
+  // =========================
+  function setStatus(msg){ $status.textContent = msg; }
+  function setStats(){
+    $score.textContent = String(score);
+    $streak.textContent = String(streak);
+  }
+function showOverlay(title, bodyHtml){
+  $overlayTitle.textContent = title;
+  $overlayBody.innerHTML = bodyHtml;
+  $overlay.style.display = "block";
+  }
+  function hideOverlay(){
+    $overlay.style.display = "none";
+    $overlayTitle.textContent = "";
+    $overlayBody.textContent = "";
+  }
+
+  function normalizeCell(c){
+    if (c == null) return "";
+    if (typeof c === "object" && "v" in c) return String(c.v ?? "");
+    return String(c);
+  }
+  function parseGViz(text){
+    const start = text.indexOf("{");
+    const end   = text.lastIndexOf("}");
+    return JSON.parse(text.slice(start, end + 1));
+  }
+  function shuffle(arr){
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+  }
+
+  function stopTimer(){
+    if (timerId) clearInterval(timerId);
+    timerId = null;
+  }
+  function startTimer(){
+    stopTimer();
+    timeLeft = TIME_LIMIT_SECONDS;
+    $timer.textContent = String(timeLeft);
+
+    timerId = setInterval(() => {
+      timeLeft -= 1;
+      $timer.textContent = String(Math.max(0, timeLeft));
+
+      if (timeLeft <= 5) {
+        $chipTimer.style.borderColor = "rgba(220,0,0,0.35)";
+        $chipTimer.style.background = "rgba(220,0,0,0.06)";
+      } else {
+        $chipTimer.style.borderColor = "rgba(0,0,0,0.12)";
+        $chipTimer.style.background = "#fff";
+      }
+
+      if (timeLeft <= 0) {
+        stopTimer();
+        if (!locked && !gameOver) timeOut();
+      }
+    }, 1000);
+  }
+
+  function getActiveKey(){ return $difficulty.value; }
+  function getActiveTabName(){ return SHEETS[getActiveKey()]; }
+
+  function ensureBag(key){
+    if (!cache[key]) cache[key] = { items: [], bag: [] };
+    if (cache[key].bag.length === 0 && cache[key].items.length) {
+      cache[key].bag = cache[key].items.slice();
+      shuffle(cache[key].bag);
+    }
+    $remaining.textContent = String(cache[key].bag.length);
+  }
+
+  async function fetchSheetRows(sheetName){
+    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?sheet=${encodeURIComponent(sheetName)}&tq=${encodeURIComponent("select *")}`;
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) throw new Error("Could not fetch sheet. Make sure it is published to the web.");
+
+    const raw = await res.text();
+    const json = parseGViz(raw);
+
+    const cols = json.table.cols.map(c => (c.label || "").trim());
+    const rows = json.table.rows.map(r => r.c.map(normalizeCell));
+
+    const idx = {};
+    cols.forEach((h, i) => idx[h.toLowerCase()] = i);
+
+    const required = ["question","a","b","c","d","correct"];
+    for (const key of required) {
+      if (!(key in idx)) throw new Error(`Missing column: ${key} (in tab "${sheetName}")`);
+    }
+
+    const cleaned = rows
+      .filter(r => (r[idx.question] || "").trim() !== "")
+      .map(r => ({
+        id: (r[idx.id] ?? "").trim(),
+        question: (r[idx.question] || "").trim(),
+        A: (r[idx.a] || "").trim(),
+        B: (r[idx.b] || "").trim(),
+        C: (r[idx.c] || "").trim(),
+        D: (r[idx.d] || "").trim(),
+        correct: (r[idx.correct] || "").trim().toUpperCase()
+      }))
+      .filter(q => ["A","B","C","D"].includes(q.correct));
+
+    if (!cleaned.length) throw new Error(`No valid rows found in tab "${sheetName}".`);
+    return cleaned;
+  }
+
+  async function loadIfNeeded(){
+    const key = getActiveKey();
+    const tab = getActiveTabName();
+
+    setStatus(`Loading ${key} questions…`);
+    if (!cache[key] || cache[key].items.length === 0) {
+      const items = await fetchSheetRows(tab);
+      cache[key] = { items, bag: [] };
+    }
+    ensureBag(key);
+  }
+
+  function drawFromBag(){
+    const key = getActiveKey();
+    ensureBag(key);
+    const q = cache[key].bag.pop();
+    $remaining.textContent = String(cache[key].bag.length);
+    return q;
+  }
+
+  function setAllButtonsDisabled(disabled){
+    [...$options.querySelectorAll("button")].forEach(b => b.disabled = disabled);
+  }
+
+  function markCorrectAndWrong(chosenId){
+    [...$options.querySelectorAll("button")].forEach(b => {
+      const id = b.getAttribute("data-id");
+      if (id === correctButtonId) {
+        b.style.borderColor = "rgba(0,128,0,0.6)";
+        b.style.background = "rgba(0,128,0,0.08)";
+      } else if (id === chosenId) {
+        b.style.borderColor = "rgba(220,0,0,0.45)";
+        b.style.background = "rgba(220,0,0,0.06)";
+      } else {
+        b.style.opacity = "0.9";
+      }
+    });
+  }
+
+  function renderQuestion(q){
+    current = q;
+    locked = false;
+    gameOver = false;
+    hideOverlay();
+
+    $question.textContent = q.question;
+    $options.innerHTML = "";
+    correctButtonId = null;
+
+    // Build an array of options then shuffle
+    const opts = [
+      { letter: "A", text: q.A },
+      { letter: "B", text: q.B },
+      { letter: "C", text: q.C },
+      { letter: "D", text: q.D }
+    ];
+    shuffle(opts);
+
+    // After shuffle, we assign ids 1..4 to buttons (stable for marking)
+    opts.forEach((opt, i) => {
+      const btnId = String(i + 1);
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.setAttribute("data-id", btnId);
+
+      if (opt.letter === q.correct) correctButtonId = btnId;
+
+      btn.style.cssText = `
+        text-align:left;
+        padding:12px 12px;
+        border-radius:12px;
+        border:1px solid rgba(0,0,0,0.12);
+        background:#fff;
+        cursor:pointer;
+        font-size:15px;
+        line-height:1.25;
+        transition:transform .05s ease, box-shadow .15s ease, border-color .15s ease;
+      `;
+      btn.onmouseenter = () => { if(!locked && !gameOver){ btn.style.boxShadow = "0 8px 18px rgba(0,0,0,0.10)"; } };
+      btn.onmouseleave = () => { btn.style.boxShadow = "none"; };
+      btn.onmousedown  = () => { if(!locked && !gameOver){ btn.style.transform = "translateY(1px)"; } };
+      btn.onmouseup    = () => { btn.style.transform = "none"; };
+
+      // Show numbers rather than A-D because we shuffle positions
+      btn.innerHTML = `<span style="font-weight:850;margin-right:8px;">${i + 1}.</span> ${opt.text}`;
+
+      btn.addEventListener("click", () => answer(btnId));
+      $options.appendChild(btn);
+    });
+
+    setStatus(q.id ? `Tab: ${getActiveKey()} • Question ID: ${q.id}` : `Tab: ${getActiveKey()} • Ready`);
+    ensureBag(getActiveKey());
+    startTimer();
+  }
+
+  function endGame(reasonText){
+    gameOver = true;
+    locked = true;
+    stopTimer();
+    setAllButtonsDisabled(true);
+
+    showOverlay(
+      "GAME OVER",
+      `${reasonText}<br><br><strong>Final score:</strong> ${score}<br><strong>Streak:</strong> ${streak}`
+    );
+  }
+
+  function answer(chosenId){
+    if (locked || gameOver || !current) return;
+    locked = true;
+    stopTimer();
+
+    const isCorrect = (chosenId === correctButtonId);
+    markCorrectAndWrong(chosenId);
+
+    if (isCorrect) {
+      score += 1;
+      streak += 1;
+      setStats();
+      setAllButtonsDisabled(true);
+
+      // next question automatically
+      setTimeout(() => {
+        newQuestion();
+      }, AUTO_NEXT_DELAY_MS);
+    } else {
+      streak = 0;
+      setStats();
+      endGame("Wrong answer.");
+    }
+  }
+
+  function timeOut(){
+    if (locked || gameOver || !current) return;
+    locked = true;
+    streak = 0;
+    setStats();
+
+    // reveal correct
+    markCorrectAndWrong(null);
+    endGame("Time’s up.");
+  }
+
+  async function newQuestion(){
+    try {
+      if (gameOver) return; // avoid accidental loads after game over
+      locked = true;
+      stopTimer();
+      await loadIfNeeded();
+      const q = drawFromBag();
+      renderQuestion(q);
+    } catch (e) {
+      console.error(e);
+      stopTimer();
+      endGame(e.message || "Could not load questions.");
+    } finally {
+      locked = false;
+    }
+  }
+
+  async function restartGame(){
+    stopTimer();
+    hideOverlay();
+    gameOver = false;
+    locked = false;
+    current = null;
+
+    score = 0;
+    streak = 0;
+    setStats();
+
+    // reset only the current difficulty's bag (so it replays)
+    const key = getActiveKey();
+    if (cache[key] && cache[key].items.length) {
+      cache[key].bag = [];
+      ensureBag(key);
+    }
+    await newQuestion();
+  }
+
+  // =========================
+  // Keyboard controls
+  // =========================
+  window.addEventListener("keydown", (e) => {
+    if (gameOver) return;
+
+    const k = e.key.toLowerCase();
+
+    // Because we shuffle display order, we map 1-4 to the 4 buttons
+    if (k === "1") return answer("1");
+    if (k === "2") return answer("2");
+    if (k === "3") return answer("3");
+    if (k === "4") return answer("4");
+
+    // Keep A-D as an alternative, also mapped to 1-4 (not letter-correctness)
+    if (k === "a") return answer("1");
+    if (k === "b") return answer("2");
+    if (k === "c") return answer("3");
+    if (k === "d") return answer("4");
+  });
+
+  // =========================
+  // Init
+  // =========================
+  Object.keys(SHEETS).forEach(key => {
+    const opt = document.createElement("option");
+    opt.value = key;
+    opt.textContent = key;
+    $difficulty.appendChild(opt);
+  });
+
+  $difficulty.addEventListener("change", restartGame);
+  $restart.addEventListener("click", restartGame);
+  $playAgain.addEventListener("click", restartGame);
+
+  setStats();
+  restartGame();
+})();
+</script>

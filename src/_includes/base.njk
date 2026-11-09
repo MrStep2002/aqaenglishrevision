@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if (page.url | clean) != "/" %}{{ title }} | {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ description or site.description }}">
+  <link rel="icon" href="/assets/images/site/favicon.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400;1,700&display=swap">
+  <link rel="stylesheet" href="/assets/css/site.css">
+  {%- set cur = page.url | clean %}
+  <link rel="canonical" href="{{ site.url }}{{ cur }}">
+  {%- if site.goatcounter %}
+  {#- Visitor statistics: GoatCounter (no cookies). Set "goatcounter" in src/_data/site.json. -#}
+  <script data-goatcounter="https://{{ site.goatcounter }}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+  {%- endif %}
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a class="brand" href="/">
+      <img src="/assets/images/site/logo.jpg" alt="" width="60" height="40">
+      <span>{{ site.title }}</span>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
+    </button>
+    {#- The menu comes from src/_data/nav.json (three levels deep). -#}
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <ul class="nav-list">
+      {%- for item in nav %}
+        {%- set here = cur == item.url %}
+        {%- set inside = item.url != "/" and (here or cur.startsWith(item.url + "/")) %}
+        <li class="{% if item.children %}has-sub{% endif %}{% if inside %} is-open is-current{% endif %}">
+          <a href="{{ item.url }}"{% if here %} aria-current="page"{% endif %}>{{ item.title }}</a>
+          {%- if item.children %}
+          <button class="sub-toggle" type="button" aria-expanded="{{ 'true' if inside else 'false' }}" aria-label="Show {{ item.title }} pages"></button>
+          <ul class="sub">
+            {%- for child in item.children %}
+            {%- set chere = cur == child.url %}
+            {%- set cinside = chere or cur.startsWith(child.url + "/") %}
+            <li class="{% if child.children %}has-sub{% endif %}{% if cinside %} is-open is-current{% endif %}">
+              <a href="{{ child.url }}"{% if chere %} aria-current="page"{% endif %}>{{ child.title }}</a>
+              {%- if child.children %}
+              <button class="sub-toggle" type="button" aria-expanded="{{ 'true' if cinside else 'false' }}" aria-label="Show {{ child.title }} pages"></button>
+              <ul class="sub">
+                {%- for gchild in child.children %}
+                <li{% if cur == gchild.url %} class="is-current"{% endif %}><a href="{{ gchild.url }}"{% if cur == gchild.url %} aria-current="page"{% endif %}>{{ gchild.title }}</a></li>
+                {%- endfor %}
+              </ul>
+              {%- endif %}
+            </li>
+            {%- endfor %}
+          </ul>
+          {%- endif %}
+        </li>
+      {%- endfor %}
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+{{ content | safe }}
+  </main>
+
+  {#- The footer text lives in src/_data/site.json -#}
+  <footer class="site-footer">
+    <p>{{ site.footer | safe }}</p>
+    <p>{{ site.copyright | safe }}</p>
+  </footer>
+
+  <script src="/assets/js/site.js" defer></script>
+</body>
+</html>
