@@ -332,17 +332,18 @@ div.slot::after { content: none; }
 .big-lines.is-centred li { justify-content: center; text-align: center; padding: 12px 0; font-size: clamp(26px, 2.6vw, 36px); }
 .big-lines.is-centred li::before { display: none; }
 /* a box drawn like a stave of music */
-.stave-box { position: relative; margin: 0 0 56px; padding: 58px 72px 58px; border: 1px solid var(--rule); border-radius: 12px; text-align: center; overflow: hidden;
+.stave-box { position: relative; margin: 0 0 56px; padding: 76px 72px 70px; border: 1px solid var(--rule); border-radius: 12px; text-align: center;
   background:
-    repeating-linear-gradient(to bottom, color-mix(in srgb, var(--accent) 45%, transparent) 0 1px, transparent 1px 8px) left 0 top 14px / 100% 33px no-repeat,
-    repeating-linear-gradient(to bottom, color-mix(in srgb, var(--accent) 45%, transparent) 0 1px, transparent 1px 8px) left 0 bottom 14px / 100% 33px no-repeat,
+    repeating-linear-gradient(to bottom, color-mix(in srgb, var(--accent) 45%, transparent) 0 1px, transparent 1px 9px) left 0 top 20px / 100% 37px no-repeat,
+    repeating-linear-gradient(to bottom, color-mix(in srgb, var(--accent) 45%, transparent) 0 1px, transparent 1px 9px) left 0 bottom 16px / 100% 37px no-repeat,
     var(--card); }
 .stave-box p { position: relative; z-index: 1; max-width: 30em; margin: 0 auto; font-family: var(--head); font-weight: var(--hw); font-size: clamp(22px, 2.2vw, 30px); line-height: 1.35; }
-.stave-clef { position: absolute; left: 18px; top: 4px; font-family: "Noto Music", "Apple Symbols", "Segoe UI Symbol", serif; font-size: 60px; line-height: 1; color: var(--accent); }
-.stave-notes { position: absolute; left: 0; right: 0; bottom: 19px; display: flex; justify-content: space-around; padding: 0 12%; font-family: "Noto Music", "Apple Symbols", "Segoe UI Symbol", serif; font-size: 26px; line-height: 1; color: var(--accent); }
+/* the clef is sized to the stave: 9px between lines, top line 20px down, so it starts 8px down and never gets cut off */
+.stave-clef { position: absolute; left: 24px; top: 8px; width: 22px; height: 62.4px; color: var(--accent); overflow: visible; }
+.stave-notes { position: absolute; left: 0; right: 0; bottom: 22px; display: flex; justify-content: space-around; padding: 0 12%; font-family: "Noto Music", "Apple Symbols", "Segoe UI Symbol", serif; font-size: 24px; line-height: 1; color: var(--accent); }
 .stave-notes span:nth-child(odd) { transform: translateY(-9px); }
 .stave-notes span:nth-child(3n) { transform: translateY(-4px); }
-@media (max-width: 767px) { .stave-box { padding: 54px 22px; } .stave-clef { font-size: 46px; left: 8px; } }
+@media (max-width: 767px) { .stave-box { padding: 72px 22px 66px; } .stave-clef { left: 12px; } }
 .front-facts { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 18px; font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em; color: rgba(255,255,255,.8); }
 .front-facts li + li::before { content: "·"; margin-right: 18px; color: rgba(255,255,255,.45); }
 .content :is(.cards, .acts, .link-rows, .toc, .front-facts, .big-lines) { max-width: none; padding-left: 0; margin-left: 0; list-style: none; }
