@@ -364,6 +364,12 @@ div.slot::after { content: none; }
 .cards .pic img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease; }
 .cards a:hover .pic img { transform: scale(1.03); }
 /* pictures on front pages */
+.link-rows .thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.content .tile-img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 8px; }
+.content figure.wide-pic { margin: 1.4em 0; }
+.content figure.wide-pic img { display: block; width: 100%; height: auto; border-radius: 8px; }
+/* a section's title-plate picture (set in sections.json): faint, behind the title */
+.plate.has-banner::before { opacity: .42; background-position: center 40%; }
 .side-pic, .act-pic { display: block; width: 100%; height: auto; border-radius: 8px; background: var(--slot); }
 .act-pic { aspect-ratio: 4 / 5; object-fit: cover; margin-bottom: 4px; }
 .side-pic { aspect-ratio: 3 / 4; object-fit: cover; }

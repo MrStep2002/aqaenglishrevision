@@ -18,7 +18,8 @@
     "macbeth": {
       "label": "Macbeth",
       "eyebrow": "Paper 1 · Section A",
-      "world": "blood"
+      "world": "blood",
+      "banner": "/assets/pictures/macbeth/MAC-33.jpg"
     },
     "an-inspector-calls": {
       "label": "An Inspector Calls",

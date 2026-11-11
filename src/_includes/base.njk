@@ -109,7 +109,9 @@
 
   {#- The title plate, in the text's colour. A page can give it a picture with --banner on its banner section. -#}
   {%- set rt = b.rest | readingTime %}
-  <header class="plate{% if b.extra %} {{ b.extra }}{% endif %}{% if showContents %} has-contents{% endif %}"{% if b.style %} style="{{ b.style }}"{% endif %}>
+  {%- set plateStyle = b.style %}
+  {%- if sec and sec.banner and not ("--banner" in b.style) %}{% set plateStyle = (b.style + ";" if b.style else "") + "--banner:url('" + sec.banner + "')" %}{% endif %}
+  <header class="plate{% if b.extra %} {{ b.extra }}{% endif %}{% if showContents %} has-contents{% endif %}{% if "--banner" in plateStyle %} has-banner{% endif %}"{% if plateStyle %} style="{{ plateStyle }}"{% endif %}>
     <div class="plate-inner">
       {%- if sec and not isFront %}
       <p class="plate-eyebrow"><a href="/{{ slug }}">{{ sec.label }}</a>{% if sec.eyebrow and sec.eyebrow != sec.label %}<span> · {{ sec.eyebrow }}</span>{% endif %}</p>
