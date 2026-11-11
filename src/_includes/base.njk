@@ -1,75 +1,181 @@
 <!doctype html>
-<html lang="en-GB">
+{%- set cur = page.url | clean %}
+{%- set slug = cur.split("/")[1] if cur != "/" else "" %}
+{%- set sec = sections.list[slug] if slug else null %}
+{%- set world = sec.world if sec else "navy" %}
+{%- set isFront = sec and cur == "/" + slug %}
+{%- set navItem = nav | findUrl("/" + slug) if slug else null %}
+{%- set showContents = navItem and navItem.children and not isFront %}
+{%- set b = content | splitBanner %}
+<html lang="en-GB" data-world="{{ world }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% if (page.url | clean) != "/" %}{{ title }} | {% endif %}{{ site.title }}</title>
+  <title>{% if cur != "/" %}{{ title }} | {% endif %}{{ site.title }}</title>
   <meta name="description" content="{{ description or site.description }}">
-  <link rel="icon" href="/assets/images/site/favicon.jpg">
+  <link rel="icon" href="/assets/images/site/mouse.svg" type="image/svg+xml">
+  {#- Reading settings (font, size, spacing, page colour) are applied before the page draws, so it never flashes. -#}
+  <script>
+    (function () {
+      var s = {};
+      try { s = JSON.parse(localStorage.getItem("aqa:reading:v1") || "{}") || {}; } catch (e) {}
+      var r = document.documentElement;
+      if (s.font) r.setAttribute("data-font", s.font);
+      if (s.page) r.setAttribute("data-page", s.page);
+      if (s.spacing) r.setAttribute("data-spacing", s.spacing);
+      if (s.size) r.style.setProperty("--size", s.size + "px");
+      var extra = { clear: "Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800", lexend: "Lexend:wght@400;600" }[s.font];
+      if (extra) document.write('<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=' + extra + '&display=swap">');
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400;1,700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&display=swap">
   <link rel="stylesheet" href="/assets/css/site.css">
-  {%- set cur = page.url | clean %}
   <link rel="canonical" href="{{ site.url }}{{ cur }}">
   {%- if site.goatcounter %}
   {#- Visitor statistics: GoatCounter (no cookies). Set "goatcounter" in src/_data/site.json. -#}
   <script data-goatcounter="https://{{ site.goatcounter }}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
   {%- endif %}
 </head>
-<body>
+<body class="{% if cur == '/' %}is-home{% elif isFront %}is-front{% else %}is-article{% endif %}{% if layoutClass %} {{ layoutClass }}{% endif %}">
   <a class="skip-link" href="#main">Skip to content</a>
 
+  {#- One slim bar: logo, main menu, reading settings. It stays at the top as you scroll. -#}
   <header class="site-header">
-    <a class="brand" href="/">
-      <img src="/assets/images/site/logo.jpg" alt="" width="60" height="40">
-      <span>{{ site.title }}</span>
-    </a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-      <span class="menu-icon" aria-hidden="true"></span><span class="menu-label">Menu</span>
-    </button>
-    {#- The menu comes from src/_data/nav.json (three levels deep). -#}
-    <nav id="site-nav" class="site-nav" aria-label="Main">
-      <ul class="nav-list">
-      {%- for item in nav %}
-        {%- set here = cur == item.url %}
-        {%- set inside = item.url != "/" and (here or cur.startsWith(item.url + "/")) %}
-        <li class="{% if item.children %}has-sub{% endif %}{% if inside %} is-open is-current{% endif %}">
-          <a href="{{ item.url }}"{% if here %} aria-current="page"{% endif %}>{{ item.title }}</a>
-          {%- if item.children %}
-          <button class="sub-toggle" type="button" aria-expanded="{{ 'true' if inside else 'false' }}" aria-label="Show {{ item.title }} pages"></button>
-          <ul class="sub">
-            {%- for child in item.children %}
-            {%- set chere = cur == child.url %}
-            {%- set cinside = chere or cur.startsWith(child.url + "/") %}
-            <li class="{% if child.children %}has-sub{% endif %}{% if cinside %} is-open is-current{% endif %}">
-              <a href="{{ child.url }}"{% if chere %} aria-current="page"{% endif %}>{{ child.title }}</a>
-              {%- if child.children %}
-              <button class="sub-toggle" type="button" aria-expanded="{{ 'true' if cinside else 'false' }}" aria-label="Show {{ child.title }} pages"></button>
-              <ul class="sub">
-                {%- for gchild in child.children %}
-                <li{% if cur == gchild.url %} class="is-current"{% endif %}><a href="{{ gchild.url }}"{% if cur == gchild.url %} aria-current="page"{% endif %}>{{ gchild.title }}</a></li>
-                {%- endfor %}
-              </ul>
-              {%- endif %}
-            </li>
+    <div class="bar">
+      <a class="brand" href="/" aria-label="{{ site.title }}: home">
+        <img src="/assets/images/site/mouse.svg" alt="" width="36" height="30" class="brand-mouse">
+        <img src="/assets/images/site/mouse-white.svg" alt="" width="36" height="30" class="brand-mouse-dark">
+        <span>{{ site.title }}</span>
+      </a>
+      {#- The main menu, in the order set in src/_data/sections.json -#}
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          {%- for key in sections.header %}
+          {%- set s = sections.list[key] %}
+          <li data-world="{{ s.world }}"><a href="/{{ key }}"{% if slug == key %} aria-current="{{ 'page' if isFront else 'true' }}"{% endif %}>{{ s.short or s.label }}</a></li>
+          {%- endfor %}
+        </ul>
+      </nav>
+      <button class="reading-toggle" type="button" aria-expanded="false" aria-controls="reading-settings">
+        <svg aria-hidden="true" width="20" height="15" viewBox="0 0 22 16"><path d="M1 15 L6 1 L11 15 M3 10 H9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 15 L17.5 6 L21 15 M15.3 12 H19.7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Reading settings</span>
+      </button>
+    </div>
+
+    {#- Reading settings: chosen by each reader, remembered in their own browser (src/assets/js/site.js) -#}
+    <section id="reading-settings" class="reading-panel" aria-label="Reading settings" hidden>
+      <div class="reading-inner">
+        <div class="rs-group rs-font">
+          <p class="rs-label">Font</p>
+          <div class="rs-options">
+            <button type="button" data-set="font" data-value="book" class="rs-font-book"><span class="rs-aa">Aa</span><span>Book</span></button>
+            <button type="button" data-set="font" data-value="clear" class="rs-font-clear"><span class="rs-aa">Aa</span><span>Clear</span></button>
+            <button type="button" data-set="font" data-value="lexend" class="rs-font-lexend"><span class="rs-aa">Aa</span><span>Lexend</span></button>
+          </div>
+        </div>
+        <div class="rs-group">
+          <p class="rs-label">Text size</p>
+          <div class="rs-options rs-size">
+            <button type="button" data-step="-1" aria-label="Smaller text">A−</button>
+            <span class="rs-size-value" aria-live="polite">18</span>
+            <button type="button" data-step="1" aria-label="Bigger text">A+</button>
+          </div>
+        </div>
+        <div class="rs-group">
+          <p class="rs-label">Spacing</p>
+          <div class="rs-options">
+            <button type="button" data-set="spacing" data-value="standard">Standard</button>
+            <button type="button" data-set="spacing" data-value="roomy" class="rs-roomy">Roomy</button>
+          </div>
+        </div>
+        <div class="rs-group rs-pages">
+          <p class="rs-label">Page colour</p>
+          <div class="rs-options">
+            {%- for p in [["paper","Paper"],["white","White"],["peach","Peach"],["yellow","Yellow"],["blue","Blue"],["dark","Dark"]] %}
+            <button type="button" data-set="page" data-value="{{ p[0] }}" class="rs-swatch rs-swatch-{{ p[0] }}" aria-label="{{ p[1] }}"><span class="rs-dot" aria-hidden="true">Aa</span><span class="rs-swatch-name">{{ p[1] }}</span></button>
             {%- endfor %}
-          </ul>
-          {%- endif %}
-        </li>
-      {%- endfor %}
-      </ul>
-    </nav>
+          </div>
+        </div>
+        <div class="rs-group rs-reset">
+          <button type="button" data-reset>Reset</button>
+          <p class="rs-note">Remembered on this device, on every page.</p>
+        </div>
+      </div>
+    </section>
+    <div class="progress" aria-hidden="true"><span></span></div>
   </header>
 
-  <main id="main">
-{{ content | safe }}
-  </main>
+  {#- The title plate, in the text's colour. A page can give it a picture with --banner on its banner section. -#}
+  {%- set rt = b.rest | readingTime %}
+  <header class="plate{% if b.extra %} {{ b.extra }}{% endif %}{% if showContents %} has-contents{% endif %}"{% if b.style %} style="{{ b.style }}"{% endif %}>
+    <div class="plate-inner">
+      {%- if sec and not isFront %}
+      <p class="plate-eyebrow"><a href="/{{ slug }}">{{ sec.label }}</a>{% if sec.eyebrow and sec.eyebrow != sec.label %}<span> · {{ sec.eyebrow }}</span>{% endif %}</p>
+      {%- elif sec %}
+      <p class="plate-eyebrow">{{ sec.eyebrow }}</p>
+      {%- endif %}
+      {{ b.inner | safe }}
+      {%- if not isFront and cur != "/" %}
+      <p class="plate-meta"><span>{{ rt.minutes }} min read</span><span>{{ rt.wordsText }} words</span></p>
+      {%- endif %}
+    </div>
+  </header>
+
+  <div class="page{% if showContents %} has-contents{% endif %}{% if not isFront and cur != '/' %} has-margin{% endif %}">
+    {%- if showContents %}
+    {#- Contents column: this text's pages, like the contents page of a book. The page you're on
+        opens out to show its own sections ("On this page"), added by src/assets/js/site.js. -#}
+    <nav class="contents" aria-label="{{ navItem.title }}">
+      <button class="contents-toggle" type="button" aria-expanded="false">Contents</button>
+      <div class="contents-body">
+        <p class="contents-title"><a href="{{ navItem.url }}">{{ sec.label if sec else navItem.title }}</a></p>
+        <p class="contents-progress" hidden></p>
+        <ul>
+          {%- for child in navItem.children %}
+          {%- set chere = cur == child.url %}
+          {%- set cinside = chere or cur.startsWith(child.url + "/") %}
+          <li class="{% if chere %}is-current{% endif %}{% if cinside and not chere %} is-inside{% endif %}">
+            <a href="{{ child.url }}"{% if chere %} aria-current="page"{% endif %}>{{ child.title }}</a>
+            {%- if child.children and cinside %}
+            <ul>
+              {%- for g in child.children %}
+              <li class="{% if cur == g.url %}is-current{% endif %}"><a href="{{ g.url }}"{% if cur == g.url %} aria-current="page"{% endif %}>{{ g.title }}</a></li>
+              {%- endfor %}
+            </ul>
+            {%- endif %}
+            {%- if cinside and not chere and not child.children %}
+            <ul><li class="is-current"><a href="{{ cur }}" aria-current="page">{{ title }}</a></li></ul>
+            {%- endif %}
+          </li>
+          {%- endfor %}
+        </ul>
+      </div>
+    </nav>
+    {%- endif %}
+
+    <main id="main" class="content">
+      {%- if not isFront and cur != "/" %}
+      {#- The right-hand margin: this box sits at its top; notes, pictures and games for the page float beside their paragraphs. -#}
+      <aside class="page-info" aria-label="About this page">
+        <p class="pi-label">This page</p>
+        <p class="pi-time">{{ rt.minutes }} min read</p>
+        <button type="button" class="mark-read" aria-pressed="false" hidden><span class="mr-box" aria-hidden="true"></span><span class="mr-text">Mark as read</span></button>
+      </aside>
+      {%- endif %}
+{{ b.rest | safe }}
+    </main>
+  </div>
 
   {#- The footer text lives in src/_data/site.json -#}
   <footer class="site-footer">
-    <p>{{ site.footer | safe }}</p>
-    <p>{{ site.copyright | safe }}</p>
+    <div class="footer-inner">
+      <img src="/assets/images/site/mouse.svg" alt="" width="36" height="30" class="brand-mouse">
+      <img src="/assets/images/site/mouse-white.svg" alt="" width="36" height="30" class="brand-mouse-dark">
+      <p>{{ site.footer | safe }}</p>
+      <p class="footer-copy">{{ site.copyright | safe }}</p>
+    </div>
   </footer>
 
   <script src="/assets/js/site.js" defer></script>

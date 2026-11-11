@@ -4,12 +4,41 @@
 
 module.exports = function (eleventyConfig) {
   // Images, styles, scripts and the quiz/game pages are copied across untouched.
-  eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
+  // Only our own files are published. The old pictures in src/assets/images/ (other people's, from
+  // the Google Sites version) are no longer used or published; only the mouse logo in images/site/ is.
+  eleventyConfig.addPassthroughCopy({ "src/assets/css": "assets/css" });
+  eleventyConfig.addPassthroughCopy({ "src/assets/js": "assets/js" });
+  eleventyConfig.addPassthroughCopy({ "src/assets/embeds": "assets/embeds" });
+  eleventyConfig.addPassthroughCopy({ "src/assets/images/site/mouse.svg": "assets/images/site/mouse.svg" });
+  eleventyConfig.addPassthroughCopy({ "src/assets/images/site/mouse-white.svg": "assets/images/site/mouse-white.svg" });
   eleventyConfig.ignores.add("src/assets/**");
 
   // Page addresses have no ".html" or trailing slash (as on Google Sites): /macbeth/plot is macbeth/plot.html.
   eleventyConfig.addFilter("clean", (url) =>
     (url || "").replace(/index\.html$/, "").replace(/\.html$/, "") || "/");
+
+  // Every page starts with its title banner (<section class="banner" ...>). The template lifts it out
+  // and shows it as the page's coloured title plate, above the contents column and the page itself.
+  eleventyConfig.addFilter("splitBanner", (html) => {
+    const m = /<section class="banner([^"]*)"(?: style="([^"]*)")?>([\s\S]*?)<\/section>/.exec(html || "");
+    if (!m) return { found: false, extra: "", style: "", inner: "", rest: html || "" };
+    return {
+      found: true,
+      extra: m[1].trim(),
+      style: m[2] || "",
+      inner: m[3],
+      rest: html.slice(0, m.index) + html.slice(m.index + m[0].length),
+    };
+  });
+
+  // Finds the menu entry (from src/_data/nav.json) with a given address.
+  // Reading time for the title plate: words in the page (tags stripped) at 200 a minute.
+  eleventyConfig.addFilter("readingTime", (html) => {
+    const words = (html || "").replace(/<(script|style)[\s\S]*?<\/\1>/g, " ").replace(/<[^>]+>/g, " ")
+      .replace(/&[a-z#0-9]+;/gi, " ").split(/\s+/).filter((w) => /[A-Za-z0-9]/.test(w)).length;
+    return { words, wordsText: (Math.round(words / 10) * 10).toLocaleString("en-GB"), minutes: Math.max(1, Math.round(words / 200)) };
+  });
+  eleventyConfig.addFilter("findUrl", (list, url) => (list || []).find((i) => i.url === url) || null);
 
   // Pages marked `draft: true` show up when previewing locally, but are left out of the live site.
   eleventyConfig.addPreprocessor("drafts", "html", (data) => {

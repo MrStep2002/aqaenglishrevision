@@ -2,7 +2,16 @@
 
 The source for **aqaenglishrevision.com**, rebuilt from the Google Sites version in November 2026.
 It's a static site made with [Eleventy](https://www.11ty.dev/): every page is a plain HTML file,
-and one shared template adds the banner, menu and footer.
+and one shared template adds the header, menu, title plate, contents column and footer.
+
+The look ("the Annotated Edition", November 2026) is written-first and laid out like a newspaper page:
+the contents column on the left, the text in the middle, and a right-hand margin for notes, word
+definitions, pictures and games. Readers can change the font, size, spacing and page colour, and tick
+pages off as read; their browser remembers both.
+
+**Pictures:** the old pictures (other people's, from the Google Sites version) have all been taken
+out of the pages and are no longer published. Each one is now a "picture to come" space. The files are
+still in `src/assets/images/` for reference and can be deleted.
 
 ## Preview it on your Mac
 
@@ -21,14 +30,16 @@ Pages reload automatically when you save a file. Press `Ctrl+C` to stop.
 | What | Where |
 |---|---|
 | Page content | `src/…` — the folder path matches the web address, e.g. `src/macbeth/plot.html` is `/macbeth/plot`, and `src/macbeth/index.html` is `/macbeth` |
-| The menu | `src/_data/nav.json` |
+| The contents column for each text (and the pages in it) | `src/_data/nav.json` |
+| The main menu order, each section's label and its colour "world" | `src/_data/sections.json` |
 | Site name, web address, footer text, visitor statistics | `src/_data/site.json` |
 | Sitemap and robots.txt (made automatically) | `src/sitemap.njk`, `src/robots.njk` |
-| Shared page template (header, menu, footer) | `src/_includes/base.njk` |
-| Styles / menu script | `src/assets/css/site.css`, `src/assets/js/site.js` |
-| Images | `src/assets/images/<page>/…`; images used on several pages are in `src/assets/images/shared/` |
+| Shared page template (header, reading settings, title plate, contents, footer) | `src/_includes/base.njk` |
+| Styles / reading settings and contents script | `src/assets/css/site.css`, `src/assets/js/site.js` |
+| The mouse logo | `src/assets/images/site/mouse.svg` (and `mouse-white.svg` for the dark page colour) |
+| Images | Only the mouse logo (`src/assets/images/site/`) is published; the old pictures are no longer used |
 | Custom quizzes and games | `src/assets/embeds/` (each is a self-contained HTML file shown in a frame) |
-| Publishing workflow (not switched on yet) | `tools/github-pages-deploy.yml` |
+| Publishing workflow | `.github/workflows/deploy.yml` |
 
 ### Addresses
 
@@ -57,11 +68,29 @@ permalink: /macbeth/plot.html   # address: /macbeth/plot
 The building blocks used across the site:
 
 - `<section class="sec">` is a band of the page; add `sec-light` (grey) or `sec-dark` (navy) for coloured bands.
-- `<section class="banner" style="--banner:url('/assets/images/…');--shade:0.6">` is the big title banner at the top (`--shade` darkens the photo, 0 to 1).
+- `<section class="banner" style="--banner:url('/assets/images/…');--shade:0.6">` holds the page title. The template lifts it out into the coloured title plate at the top, with the banner picture showing faintly behind it. Each page should have exactly one, at the top.
 - `<div class="row">` with `<div class="col" style="--span:6">` makes columns; the spans in a row add up to 12. They stack on phones.
 - `<details class="drop"><summary><h3>Title</h3></summary><div class="drop-body">…</div></details>` is a drop-down box.
 - `<p class="sm">` is the smaller body text; `class="tc"` centres text.
 - Headings are bold by default; `class="nb"` makes one not bold.
+
+New blocks for the redesign (use them as pages get reworked). Anything below that's marked "margin" floats into the right-hand margin, beside the paragraph that comes after it:
+
+- `<aside class="note">…</aside>` puts an annotation in the right-hand margin, next to the paragraph that follows it. `<aside class="note word"><b>sovereign</b> a king or queen</aside>` is a word definition. `<figure class="margin"><img …><figcaption>…</figcaption></figure>` is a small margin picture. On narrower screens these become small boxes in the text instead.
+- `<figure class="slot margin" data-caption="What the picture should show"></figure>` is a picture space in the margin; `<figure class="slot wide" …>` is one across the text column. When your picture is ready, swap it for `<figure class="margin"><img src="/assets/images/…" alt="…"></figure>` (and add that folder to the build in `eleventy.config.js`).
+- `<aside class="note quote"><p>“A quotation”</p><p class="note-ref">Act 1, Scene 5</p></aside>` is a key quote in the margin (see Macbeth › Lady Macbeth for examples).
+- `<aside class="margin-card">` holds a game or link card in the margin; `<aside class="listen">` holds an audio player.
+- `<div class="tiles">` with `<div class="tile">`s is a grid of pages, each with a picture space; `<div class="card-grid">` is a grid of game cards.
+- `<div class="game-box">…</div>` is a space for a game or quiz.
+
+The front pages (`src/index.html` and each text's `index.html`) use a few more: `front-facts` (the line of facts in the title plate), `front-split` with `main` and `side` (text with a side column), `side-quote`, `acts` (the plot strip), `cards big` / `cards small` (picture links), `link-rows` (links with a line of description), `toc` (the home page contents), `panel` and `signoff`. Copy from an existing front page rather than starting from nothing.
+
+### The colour worlds
+
+Each section has a world colour, set in `src/_data/sections.json`: fog (A Christmas Carol), blood
+(Macbeth), port (An Inspector Calls), ink (Unseen Poetry), moss (Language Paper 1), slate
+(Language Paper 2), navy (How to Revise and Who am I?) and study (Teachers' Corner). The colours
+themselves are near the top of `src/assets/css/site.css`.
 
 ### Pages that aren't in the menu
 

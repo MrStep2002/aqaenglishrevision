@@ -5,7 +5,29 @@
   },
   {
     "title": "Teachers' Corner",
-    "url": "/teachers-corner"
+    "url": "/teachers-corner",
+    "children": [
+      {
+        "title": "Page Turners",
+        "url": "/teachers-corner/page-turners"
+      },
+      {
+        "title": "Flash Fiction",
+        "url": "/teachers-corner/flash-fiction"
+      },
+      {
+        "title": "A Short History",
+        "url": "/teachers-corner/a-short-history"
+      },
+      {
+        "title": "Talking About Ai",
+        "url": "/teachers-corner/talking-about-ai"
+      },
+      {
+        "title": "Siege of Troy",
+        "url": "/teachers-corner/siege-of-troy"
+      }
+    ]
   },
   {
     "title": "A Christmas Carol",
@@ -204,6 +226,20 @@
       {
         "title": "Challenges to the readings",
         "url": "/macbeth/challenges-to-the-readings"
+      }
+    ]
+  },
+  {
+    "title": "Unseen Poetry",
+    "url": "/unseen-poetry",
+    "children": [
+      {
+        "title": "Time",
+        "url": "/unseen-poetry/time"
+      },
+      {
+        "title": "Rorschach Test",
+        "url": "/unseen-poetry/rorschach-test"
       }
     ]
   },

@@ -1,0 +1,61 @@
+{
+  "header": [
+    "a-christmas-carol",
+    "macbeth",
+    "an-inspector-calls",
+    "unseen-poetry",
+    "lang-paper-1",
+    "lang-paper-2",
+    "how-to-revise",
+    "teachers-corner"
+  ],
+  "list": {
+    "a-christmas-carol": {
+      "label": "A Christmas Carol",
+      "eyebrow": "Paper 1 · Section B",
+      "world": "fog"
+    },
+    "macbeth": {
+      "label": "Macbeth",
+      "eyebrow": "Paper 1 · Section A",
+      "world": "blood"
+    },
+    "an-inspector-calls": {
+      "label": "An Inspector Calls",
+      "eyebrow": "Paper 2 · Section A",
+      "world": "port"
+    },
+    "unseen-poetry": {
+      "label": "Unseen Poetry",
+      "eyebrow": "Paper 2 · Section C",
+      "world": "ink"
+    },
+    "lang-paper-1": {
+      "label": "Language Paper 1",
+      "eyebrow": "Explorations in Creative Reading and Writing",
+      "world": "moss",
+      "short": "Lang Paper 1"
+    },
+    "lang-paper-2": {
+      "label": "Language Paper 2",
+      "eyebrow": "Writers' Viewpoints and Perspectives",
+      "world": "slate",
+      "short": "Lang Paper 2"
+    },
+    "how-to-revise": {
+      "label": "How to Revise",
+      "eyebrow": "Start here",
+      "world": "navy"
+    },
+    "teachers-corner": {
+      "label": "Teachers' Corner",
+      "eyebrow": "For teachers",
+      "world": "study"
+    },
+    "who-am-i": {
+      "label": "Who am I?",
+      "eyebrow": "About this site",
+      "world": "navy"
+    }
+  }
+}
