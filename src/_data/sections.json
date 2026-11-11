@@ -56,7 +56,8 @@
     "who-am-i": {
       "label": "Who am I?",
       "eyebrow": "About this site",
-      "world": "navy"
+      "world": "navy",
+      "banner": "/assets/pictures/home/HOME-08.jpg"
     }
   }
 }

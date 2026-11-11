@@ -398,6 +398,11 @@ div.slot::after { content: none; }
 .toc .toc-pic.is-slot { border: 0; background: linear-gradient(120deg, var(--w) 0%, var(--w) 50%, color-mix(in srgb, var(--w) 65%, #000) 100%); }
 .toc .toc-pic.is-slot::before { content: "Picture to come"; position: absolute; left: 14px; bottom: 11px; z-index: 1; font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.7); }
 .toc .toc-pic.is-slot::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, rgba(255,255,255,.07) 0 1px, transparent 1px 14px); }
+@media (min-width: 981px) { .toc { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.toc .toc-pic img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease; }
+.toc a:hover .toc-pic img { transform: scale(1.03); }
+.panel-pic { display: block; border-radius: 8px; overflow: hidden; }
+.panel-pic img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
 .toc .toc-text { flex: 1 1 auto; min-width: 0; }
 .toc .toc-num { display: block; margin: 0 0 3px; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
 .toc .toc-name { display: block; font-family: var(--head); font-weight: var(--hw); font-size: 25px; line-height: 1.1; }
