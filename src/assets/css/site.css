@@ -159,6 +159,10 @@ body { font-size: 16px; }
 .page.has-margin > .content { grid-row: 1; }
 .page.has-margin.has-contents > .content { grid-column: 2; }
 .page.has-margin > .contents { grid-row: 1; grid-column: 1; }
+/* front pages: the contents column on the left, the page filling the rest of the width */
+.page.has-contents:not(.has-margin) { display: grid; grid-template-columns: var(--nav-w) minmax(0, 1fr); column-gap: var(--gap); align-items: start; }
+.page.has-contents:not(.has-margin) > .contents { grid-row: 1; grid-column: 1; }
+.page.has-contents:not(.has-margin) > .content { grid-row: 1; grid-column: 2; }
 
 /* the contents column: this text's pages, like a book's contents */
 .contents { position: sticky; top: calc(var(--header-h) + 18px); max-height: calc(100vh - var(--header-h) - 36px); overflow: auto; font-size: 14.5px; line-height: 1.35; padding: 0 6px 12px 0; scrollbar-width: thin; }
@@ -301,14 +305,14 @@ div.slot::after { content: none; }
 .game-box .title { margin: 4px 0 0; font-family: var(--head); font-weight: var(--hw); font-size: 21px; line-height: 1.25; color: #fff; }
 
 /* ---------- 11. Front pages (home and each text's front page) ---------- */
-.is-front .page, .is-home .page { max-width: calc(1180px + 2 * var(--gutter)); }
+.is-front .page, .is-home .page { max-width: none; }
 .front { font-size: 17px; line-height: 1.6; }
 .front-block { margin: 0 0 56px; }
 .front .sec-dark { margin: 0 0 40px; padding: 14px 20px; border-radius: 10px; background: var(--world); color: #fff; }
 .front .sec-dark :is(h2, h3) { margin: 0; font-size: 18px; font-weight: 400; line-height: 1.4; text-align: left; }
 .front .sec-dark a { color: #fff; }
 .front-split { display: flex; flex-wrap: wrap; gap: 28px 56px; align-items: flex-start; }
-.front-split > .main { flex: 999 1 520px; min-width: 0; max-width: 720px; }
+.front-split > .main { flex: 999 1 520px; min-width: 0; max-width: 760px; }
 .front-split > .side { flex: 1 1 240px; max-width: 300px; display: flex; flex-direction: column; gap: 20px; }
 .front-split .main > p { max-width: 38em; }
 .front h2 { margin: 0 0 14px; font-family: var(--head); font-weight: var(--hw); font-size: 30px; line-height: 1.12; letter-spacing: -.005em; }
@@ -323,6 +327,22 @@ div.slot::after { content: none; }
 .big-lines { list-style: none; margin: 0; padding: 0; counter-reset: bl; }
 .big-lines li { counter-increment: bl; display: flex; gap: 14px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid var(--rule); font-family: var(--head); font-weight: var(--hw); font-size: 22px; line-height: 1.25; }
 .big-lines li::before { content: counter(bl); font-family: var(--mono); font-size: 12px; color: var(--accent); }
+/* centred version of the big lines (A Christmas Carol's "really simple story") */
+.front-split .main > .eyebrow.is-centred, .eyebrow.is-centred { text-align: center; max-width: none; }
+.big-lines.is-centred li { justify-content: center; text-align: center; padding: 12px 0; font-size: clamp(26px, 2.6vw, 36px); }
+.big-lines.is-centred li::before { display: none; }
+/* a box drawn like a stave of music */
+.stave-box { position: relative; margin: 0 0 56px; padding: 58px 72px 58px; border: 1px solid var(--rule); border-radius: 12px; text-align: center; overflow: hidden;
+  background:
+    repeating-linear-gradient(to bottom, color-mix(in srgb, var(--accent) 45%, transparent) 0 1px, transparent 1px 8px) left 0 top 14px / 100% 33px no-repeat,
+    repeating-linear-gradient(to bottom, color-mix(in srgb, var(--accent) 45%, transparent) 0 1px, transparent 1px 8px) left 0 bottom 14px / 100% 33px no-repeat,
+    var(--card); }
+.stave-box p { position: relative; z-index: 1; max-width: 30em; margin: 0 auto; font-family: var(--head); font-weight: var(--hw); font-size: clamp(22px, 2.2vw, 30px); line-height: 1.35; }
+.stave-clef { position: absolute; left: 18px; top: 4px; font-family: "Noto Music", "Apple Symbols", "Segoe UI Symbol", serif; font-size: 60px; line-height: 1; color: var(--accent); }
+.stave-notes { position: absolute; left: 0; right: 0; bottom: 19px; display: flex; justify-content: space-around; padding: 0 12%; font-family: "Noto Music", "Apple Symbols", "Segoe UI Symbol", serif; font-size: 26px; line-height: 1; color: var(--accent); }
+.stave-notes span:nth-child(odd) { transform: translateY(-9px); }
+.stave-notes span:nth-child(3n) { transform: translateY(-4px); }
+@media (max-width: 767px) { .stave-box { padding: 54px 22px; } .stave-clef { font-size: 46px; left: 8px; } }
 .front-facts { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 18px; font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em; color: rgba(255,255,255,.8); }
 .front-facts li + li::before { content: "·"; margin-right: 18px; color: rgba(255,255,255,.45); }
 .content :is(.cards, .acts, .link-rows, .toc, .front-facts, .big-lines) { max-width: none; padding-left: 0; margin-left: 0; list-style: none; }
@@ -340,10 +360,16 @@ div.slot::after { content: none; }
 .cards > li { margin: 0; }
 .cards a { display: block; text-decoration: none; }
 .cards .pic { display: block; aspect-ratio: var(--pic, 4 / 3); border-radius: 8px; overflow: hidden; }
+.cards .pic img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease; }
+.cards a:hover .pic img { transform: scale(1.03); }
+/* pictures on front pages */
+.side-pic, .act-pic { display: block; width: 100%; height: auto; border-radius: 8px; background: var(--slot); }
+.act-pic { aspect-ratio: 4 / 5; object-fit: cover; margin-bottom: 4px; }
+.side-pic { aspect-ratio: 3 / 4; object-fit: cover; }
 .cards a:hover .card-name { text-decoration: underline; text-underline-offset: 4px; }
 .cards .card-name { display: block; margin-top: 8px; font-family: var(--head); font-weight: var(--hw); font-size: 19px; line-height: 1.2; }
 .cards.big { --card-min: 300px; --pic: 21 / 9; --fill: auto-fit; }
-.cards.small { --card-min: 150px; --pic: 1 / 1; }
+.cards.small { --card-min: 140px; --pic: 1 / 1; --fill: auto-fit; }
 .cards.small .card-name { font-size: 17px; }
 /* a picture space inside a card, link row or contents tile */
 .is-slot { position: relative; border: 1px dashed color-mix(in srgb, var(--accent) 40%, var(--rule)); border-radius: 8px;
@@ -405,7 +431,7 @@ div.slot::after { content: none; }
   .pi-time { margin: 0; font-size: 16px; }
 }
 @media (max-width: 980px) {
-  .page.has-margin.has-contents { display: block; }
+  .page.has-margin.has-contents, .page.has-contents:not(.has-margin) { display: block; }
   .plate.has-contents .plate-inner { padding-left: var(--gutter); }
   .contents { position: static; max-height: none; overflow: visible; margin: 0 0 24px; border: 1px solid var(--rule); border-radius: 10px; background: var(--card); padding: 0; }
   .contents-toggle { display: flex; width: 100%; min-height: 46px; align-items: center; justify-content: space-between; padding: 8px 14px; background: transparent; border: 0; cursor: pointer; font-size: 15px; font-weight: 600; text-align: left; }

@@ -5,7 +5,7 @@
 {%- set world = sec.world if sec else "navy" %}
 {%- set isFront = sec and cur == "/" + slug %}
 {%- set navItem = nav | findUrl("/" + slug) if slug else null %}
-{%- set showContents = navItem and navItem.children and not isFront %}
+{%- set showContents = navItem and navItem.children %}
 {%- set b = content | splitBanner %}
 <html lang="en-GB" data-world="{{ world }}">
 <head>

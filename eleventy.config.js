@@ -9,6 +9,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/assets/css": "assets/css" });
   eleventyConfig.addPassthroughCopy({ "src/assets/js": "assets/js" });
   eleventyConfig.addPassthroughCopy({ "src/assets/embeds": "assets/embeds" });
+  // The new pictures (web-sized copies, made from the originals kept outside this folder)
+  eleventyConfig.addPassthroughCopy({ "src/assets/pictures": "assets/pictures" });
   eleventyConfig.addPassthroughCopy({ "src/assets/images/site/mouse.svg": "assets/images/site/mouse.svg" });
   eleventyConfig.addPassthroughCopy({ "src/assets/images/site/mouse-white.svg": "assets/images/site/mouse-white.svg" });
   eleventyConfig.ignores.add("src/assets/**");
