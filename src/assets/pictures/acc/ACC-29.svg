@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 400 300"
+     role="img" aria-labelledby="title description">
+  <title id="title">Freytag’s pyramid</title>
+  <desc id="description">The plot rises from exposition through rising action to the climax, then descends through falling action to the resolution.</desc>
+  <rect width="400" height="300" fill="#f6efdf"/>
+  <path d="M 26 209 H 58 L 200 77 L 342 209 H 374"
+        fill="none" stroke="#2b413c" stroke-width="3.8"
+        stroke-linejoin="round" stroke-linecap="round"/>
+  <g fill="#f6efdf" stroke="#2b413c" stroke-width="2.4">
+    <circle cx="58" cy="209" r="5"/>
+    <circle cx="129" cy="143" r="5"/>
+    <circle cx="271" cy="143" r="5"/>
+    <circle cx="342" cy="209" r="5"/>
+  </g>
+  <circle cx="200" cy="77" r="6" fill="#9a2f3f"/>
+  <g fill="#202e29" font-family="Georgia, 'Times New Roman', serif"
+     font-size="20" text-anchor="middle">
+    <text x="58" y="243">Exposition</text>
+    <text x="97" y="118">Rising action</text>
+    <text x="200" y="51" fill="#852837" font-weight="bold">Climax</text>
+    <text x="303" y="118">Falling action</text>
+    <text x="342" y="243">Resolution</text>
+  </g>
+</svg>

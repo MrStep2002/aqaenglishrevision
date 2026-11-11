@@ -8,3 +8,8 @@ _site/
 # Never commit the Google Sites export or form responses here
 AQA English Website/
 *.zip
+
+# Picture drop folders (originals stay out of the public repository)
+new-images/
+Macbeth/
+images-storage-folder/
