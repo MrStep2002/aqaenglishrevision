@@ -299,6 +299,7 @@ div.slot { font-size: 13px; color: var(--ink2); }  /* front-page slots carry the
 div.slot::after { content: none; }
 .content .slot-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 1.2em 0; }
 .slot-link { display: block; text-decoration: none; }
+.slot-link img { display: block; width: 100%; height: auto; border-radius: 6px; }
 .slot-link:hover .slot { border-style: solid; }
 .game-box { margin: 1.2em 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; padding: 16px 20px; border-radius: 10px; background: var(--world); color: #fff; letter-spacing: normal; word-spacing: normal; }
 .game-box .label { margin: 0; font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--glow); }
