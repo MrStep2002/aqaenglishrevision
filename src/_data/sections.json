@@ -25,7 +25,8 @@
     "an-inspector-calls": {
       "label": "An Inspector Calls",
       "eyebrow": "Paper 2 · Section A",
-      "world": "port"
+      "world": "port",
+      "banner": "/assets/pictures/aic/AIC-23.jpg"
     },
     "unseen-poetry": {
       "label": "Unseen Poetry",
