@@ -1,0 +1,62 @@
+[
+  {
+    "question": "What issue did the 1843 parliamentary report that disturbed Dickens investigate?",
+    "choices": ["Child labour", "Prison reform", "Food prices", "Public sanitation"],
+    "themes": ["social-injustice"],
+    "accepted": ["child labor", "working conditions for children", "children's working conditions"]
+  },
+  {
+    "question": "Before writing the story, what kind of publication did Dickens consider writing to speak up for poor children?",
+    "choices": ["A pamphlet", "A newspaper serial", "A school textbook", "A stage play"],
+    "themes": ["social-injustice", "compassion"],
+    "accepted": ["pamphlet", "a political pamphlet"]
+  },
+  {
+    "question": "What were the charitable schools Dickens took an interest in, which offered education to some of the poorest children?",
+    "choices": ["Ragged schools", "Grammar schools", "Boarding schools", "Public schools"],
+    "themes": ["social-injustice", "compassion"],
+    "accepted": ["ragged school"]
+  },
+  {
+    "question": "Which institutions does Scrooge point to when the charity collectors ask him to help the poor, alongside prisons?",
+    "choices": ["Workhouses", "Ragged schools", "Orphanages", "Hospitals"],
+    "themes": ["social-injustice", "compassion"],
+    "accepted": ["workhouse", "union workhouses", "the workhouses"]
+  },
+  {
+    "question": "What does the child named Want represent in Stave Three? Give one word.",
+    "choices": ["Poverty", "Greed", "Envy", "Ambition"],
+    "themes": ["social-injustice"],
+    "accepted": ["deprivation", "need", "destitution"]
+  },
+  {
+    "question": "Which of the two children does the Ghost of Christmas Present tell Scrooge to beware most?",
+    "choices": ["Ignorance", "Want", "Tiny Tim", "Scrooge as a child"],
+    "themes": ["social-injustice", "compassion"],
+    "accepted": []
+  },
+  {
+    "question": "What does Scrooge raise for Bob Cratchit at the end, showing how an employer can improve a family's circumstances?",
+    "choices": ["His wages", "His rent", "His taxes", "His working hours"],
+    "themes": ["change", "social-injustice", "compassion", "family"],
+    "accepted": ["wages", "pay", "salary", "his pay", "his salary", "bob's wages", "bob's salary"]
+  },
+  {
+    "question": "Which character helps Dickens show what poverty and illness can mean for a child in a working family?",
+    "choices": ["Tiny Tim", "Fred", "Belle", "Fezziwig"],
+    "themes": ["social-injustice", "family", "compassion"],
+    "accepted": ["tim", "tim cratchit"]
+  },
+  {
+    "question": "Which character describes Christmas as a time when people open their hearts to others, challenging Scrooge's attitude?",
+    "choices": ["Fred", "Bob Cratchit", "Jacob Marley", "Fezziwig"],
+    "themes": ["christmas", "compassion"],
+    "accepted": ["scrooge's nephew", "his nephew"]
+  },
+  {
+    "question": "Which word does Marley use for what he should have treated as his business during his life?",
+    "choices": ["Mankind", "Profit", "Trade", "Reputation"],
+    "themes": ["compassion", "greed", "change"],
+    "accepted": ["humanity", "humankind"]
+  }
+]

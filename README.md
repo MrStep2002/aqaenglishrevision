@@ -13,15 +13,25 @@ Site illustrations live under `src/assets/pictures/`. Keep full-resolution origi
 
 ## Preview it on your Mac
 
-You need [Node.js](https://nodejs.org/) (version 20 or newer) installed once. Then, in Terminal:
+You need [Node.js](https://nodejs.org/) (version 20 or newer) installed once.
 
-```
-cd ~/Documents/GitHub/aqaenglishrevision
-npm install        # first time only
-npm start -- --output=/private/tmp/aqaenglishrevision-preview
-```
+1. Press **Command + Space**, type **Terminal**, and press **Return**.
+2. Paste this command into Terminal and press **Return** to open the site folder.
 
-Open [localhost:8080](http://localhost:8080), or use the address Eleventy prints. Pages reload when you save. Press `Control+C` to stop. The temporary output path preserves the existing `_site/` folder.
+   ```sh
+   cd ~/Documents/GitHub/aqaenglishrevision
+   ```
+
+3. On your first run, enter `npm install` and wait for it to finish.
+4. Start the preview server.
+
+   ```sh
+   npm start -- --output=/private/tmp/aqaenglishrevision-preview
+   ```
+
+5. Keep Terminal running and open [the site preview](http://localhost:8080/) in your browser. To try the game, open [A Christmas Carol → Key Quotes](http://localhost:8080/a-christmas-carol/key-quotes.html) and click **Play Quote Recall**. If Terminal prints a different port, use the address it prints.
+
+Pages reload when you save. To stop the preview, return to Terminal and press **Control + C**. The temporary output path preserves the existing `_site/` folder.
 
 For a local production build, run `npm run build -- --output=/private/tmp/aqaenglishrevision-build`. The GitHub Actions workflow builds into `_site/` in its own checkout.
 
@@ -69,7 +79,7 @@ The building blocks used across the site:
 - `<section class="sec">` is a band of the page; add `sec-light` (grey) or `sec-dark` (navy) for coloured bands.
 - `<section class="banner" style="--banner:url('/assets/pictures/…');--shade:0.6">` holds the page title. The template lifts it out into the coloured title plate at the top, with the banner picture showing faintly behind it. Each page should have exactly one, at the top.
 - `<div class="row">` with `<div class="col" style="--span:6">` makes columns; the spans in a row add up to 12. They stack on phones.
-- `<details class="drop"><summary><h3>Title</h3></summary><div class="drop-body">…</div></details>` is a drop-down box.
+- `<section class="lesson-section" aria-labelledby="topic"><h2 id="topic" tabindex="-1">Topic</h2>…</section>` is an always-visible section with a link in the Contents menu. Use a unique heading ID on each page.
 - `<p class="sm">` is the smaller body text; `class="tc"` centres text.
 - Headings are bold by default; `class="nb"` makes one not bold.
 

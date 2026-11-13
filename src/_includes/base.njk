@@ -5,7 +5,14 @@
 {%- set world = sec.world if sec else "navy" %}
 {%- set isFront = sec and cur == "/" + slug %}
 {%- set navItem = nav | findUrl("/" + slug) if slug else null %}
-{%- set showContents = navItem and navItem.children %}
+{%- set hasLessonSections = 'class="lesson-section"' in content %}
+{%- set showContents = (navItem and navItem.children) or hasLessonSections %}
+{%- set showPlotGame = cur == "/a-christmas-carol/plot" %}
+{%- set isContextQuiz = cur == "/a-christmas-carol/context" %}
+{%- set topic = cur.split("/")[2] %}
+{%- set isThemeQuiz = slug == "a-christmas-carol" and topic in ["change", "christmas", "compassion", "family", "greed", "social-injustice"] %}
+{%- set showQuoteGame = isThemeQuiz or isContextQuiz or cur == "/a-christmas-carol/key-quotes" %}
+{%- set gameTitle = "Theme Revision" if isThemeQuiz else ("Context Quiz" if isContextQuiz else "Quote Recall") %}
 {%- set b = content | splitBanner %}
 <html lang="en-GB" data-world="{{ world }}">
 <head>
@@ -32,6 +39,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&display=swap">
   <link rel="stylesheet" href="/assets/css/site.css">
+  {% if showQuoteGame or showPlotGame %}<link rel="stylesheet" href="/assets/css/quote-game.css">{% endif %}
+  {% if showPlotGame %}<link rel="stylesheet" href="/assets/css/plot-game.css">{% endif %}
   <link rel="canonical" href="{{ site.url }}{{ cur }}">
   {%- if site.goatcounter %}
   {#- Visitor statistics: GoatCounter (no cookies). Set "goatcounter" in src/_data/site.json. -#}
@@ -129,10 +138,10 @@
     {%- if showContents %}
     {#- Contents column: this text's pages, like the contents page of a book. The page you're on
         opens out to show its own sections ("On this page"), added by src/assets/js/site.js. -#}
-    <nav class="contents" aria-label="{{ navItem.title }}">
+    <nav class="contents" aria-label="{{ navItem.title or 'On this page' }}">
       <button class="contents-toggle" type="button" aria-expanded="false">Contents</button>
       <div class="contents-body">
-        <p class="contents-title"><a href="{{ navItem.url }}">{{ sec.label if sec else navItem.title }}</a></p>
+        {% if navItem %}<p class="contents-title"><a href="{{ navItem.url }}">{{ sec.label if sec else navItem.title }}</a></p>{% endif %}
         <p class="contents-progress" hidden></p>
         <ul>
           {%- for child in navItem.children %}
@@ -164,6 +173,11 @@
         <p class="pi-label">This page</p>
         <p class="pi-time">{{ rt.minutes }} min read</p>
         <button type="button" class="mark-read" aria-pressed="false" hidden><span class="mr-box" aria-hidden="true"></span><span class="mr-text">Mark as read</span></button>
+        {% if showQuoteGame %}
+        <button class="quote-launch" type="button" aria-haspopup="dialog"><span aria-hidden="true">▣</span> Play {{ gameTitle }}</button>
+        {% elif showPlotGame %}
+        <button class="quote-launch" type="button" aria-haspopup="dialog"><span aria-hidden="true">▣</span> Play Plot Order</button>
+        {% endif %}
       </aside>
       {%- endif %}
 {{ b.rest | safe }}
@@ -180,6 +194,13 @@
     </div>
   </footer>
 
+  {% if showQuoteGame %}
+  {% include "quote-game.njk" %}
+  <script src="/assets/js/quote-game.js" defer></script>
+  {% elif showPlotGame %}
+  {% include "plot-game.njk" %}
+  <script src="/assets/js/plot-game.js" defer></script>
+  {% endif %}
   <script src="/assets/js/site.js" defer></script>
 </body>
 </html>

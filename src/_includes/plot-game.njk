@@ -1,0 +1,16 @@
+<dialog class="quote-game plot-game" aria-labelledby="plot-game-title" data-moments="/assets/data/christmas-carol-plot.csv">
+  <form class="quote-close" method="dialog"><button type="submit" aria-label="Close Plot Order">×</button></form>
+  <div class="quote-play">
+    <header>
+      <span class="quote-holly" aria-hidden="true"><i></i></span>
+      <h2 id="plot-game-title">Plot Order</h2>
+      <p>Drag the events or use the arrows to put the earliest first.</p>
+    </header>
+    <ol class="plot-events" aria-label="Plot events"></ol>
+  </div>
+  <footer class="plot-actions">
+    <p class="plot-feedback" role="status"></p>
+    <button class="plot-check" type="button" disabled>Check order</button>
+    <button class="plot-new" type="button" disabled>New round</button>
+  </footer>
+</dialog>

@@ -1,0 +1,37 @@
+<dialog class="quote-game" aria-labelledby="quote-game-title" {% if isContextQuiz or isThemeQuiz %}data-questions="/assets/data/christmas-carol-context.json"{% endif %} {% if not isContextQuiz %}data-quotes="/assets/data/christmas-carol-quotes.csv"{% endif %}{% if isThemeQuiz %} data-theme="{{ topic }}"{% endif %}>
+  <form class="quote-close" method="dialog"><button type="submit" aria-label="Close {{ gameTitle }}">×</button></form>
+  <div class="quote-score">
+    <label for="quote-accuracy">Accuracy <output class="quote-percent" aria-live="polite">—</output></label>
+    <meter id="quote-accuracy" min="0" max="100" value="0"></meter>
+  </div>
+  <div class="quote-play">
+    <header>
+      <span class="quote-holly" aria-hidden="true"><i></i></span>
+      <fieldset class="quote-mode">
+        <legend>Answer mode</legend>
+        <label><input type="radio" name="quote-mode" value="select" checked> Select the {{ "Answer" if isContextQuiz or isThemeQuiz else "word" }}</label>
+        <h2 id="quote-game-title">{{ gameTitle }}</h2>
+        <label><input type="radio" name="quote-mode" value="type"> {% if isContextQuiz or isThemeQuiz %}Type the Answer{% else %}Type the word{% endif %}</label>
+      </fieldset>
+    </header>
+    <p class="quote-status" role="status"></p>
+    <blockquote class="quote-prompt" tabindex="-1" hidden></blockquote>
+    <div class="quote-options" hidden></div>
+    <form class="quote-type" hidden>
+      <label for="quote-answer">{{ "Your answer" if isContextQuiz or isThemeQuiz else "Missing word" }}</label>
+      <input id="quote-answer" required autocomplete="off" spellcheck="false">
+      <button type="submit">Check</button>
+    </form>
+    <div class="quote-result">
+      <p class="quote-feedback" role="status"></p>
+      <button class="quote-next" type="button" hidden></button>
+    </div>
+  </div>
+  {% if not isContextQuiz and not isThemeQuiz %}
+  <div class="quote-pools" role="group" aria-label="Quote pool">
+    <button type="button" data-pool="10" aria-pressed="true" disabled>Top 10</button>
+    <button type="button" data-pool="25" aria-pressed="false" disabled>25 for Advent</button>
+    <button type="button" data-pool="50" aria-pressed="false" disabled>The Big 50</button>
+  </div>
+  {% endif %}
+</dialog>

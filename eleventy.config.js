@@ -8,6 +8,9 @@ module.exports = function (eleventyConfig) {
   // the Google Sites version) are no longer used or published; only the mouse logo in images/site/ is.
   eleventyConfig.addPassthroughCopy({ "src/assets/css": "assets/css" });
   eleventyConfig.addPassthroughCopy({ "src/assets/js": "assets/js" });
+  eleventyConfig.addPassthroughCopy("src/assets/data/christmas-carol-quotes.csv");
+  eleventyConfig.addPassthroughCopy("src/assets/data/christmas-carol-context.json");
+  eleventyConfig.addPassthroughCopy("src/assets/data/christmas-carol-plot.csv");
   // The new pictures (web-sized copies, made from the originals kept outside this folder)
   eleventyConfig.addPassthroughCopy({ "src/assets/pictures": "assets/pictures" });
   eleventyConfig.addPassthroughCopy({ "src/assets/images/site/mouse.svg": "assets/images/site/mouse.svg" });

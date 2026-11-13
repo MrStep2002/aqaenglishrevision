@@ -94,33 +94,38 @@
       ct.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
 
-    // "On this page": the page's own headings and drop-down titles, listed under the current page.
-    var here = contents.querySelector('li li.is-current') || contents.querySelector('li.is-current');
+    // "On this page": the page's headings, listed under the current page when possible.
+    var currentPage = contents.querySelector('li li.is-current') || contents.querySelector('li.is-current');
+    var here = currentPage || contents.querySelector('.contents-body');
     var main = document.getElementById('main');
     if (here && main) {
       var found = [];
-      main.querySelectorAll('h2, h3, details.drop > summary').forEach(function (el) {
-        if (el.closest('.card, .plate, .cards, .acts, .link-rows, aside, .tiles, .card-grid, .sec-dark')) return;
-        if (el.tagName === 'SUMMARY') { if (!el.textContent.trim()) return; }
-        else if (el.closest('summary')) return;
+      main.querySelectorAll('h2, h3').forEach(function (el) {
+        var lessonHeading = el.matches('.lesson-section > h2');
+        if (!lessonHeading && (!currentPage || el.closest('.card, .plate, .cards, .acts, .link-rows, aside, .tiles, .card-grid, .sec-dark'))) return;
         var text = el.textContent.replace(/\s+/g, ' ').trim().replace(/[:.]+$/, '');
-        if (!text || text.length > 48) return;
-        found.push({ el: el, text: text, level: el.tagName === 'H3' ? 3 : 2 });
+        if (!text || (!lessonHeading && text.length > 48)) return;
+        found.push({ el: el, text: text, lessonHeading: lessonHeading });
       });
-      if (found.length > 14) found = found.filter(function (f) { return f.level === 2 || f.el.tagName === 'SUMMARY'; });
-      if (found.length >= 2 && found.length <= 18) {
+      if (found.length > 14) found = found.filter(function (f) { return f.el.tagName === 'H2'; });
+      var hasLessonHeading = found.some(function (f) { return f.lessonHeading; });
+      if (hasLessonHeading && found.length > 18) found = found.filter(function (f) { return f.lessonHeading; });
+      if (hasLessonHeading || (found.length >= 2 && found.length <= 18)) {
         var ul = document.createElement('ul');
         ul.className = 'otp';
         ul.setAttribute('aria-label', 'On this page');
         found.forEach(function (f, i) {
-          var target = f.el.tagName === 'SUMMARY' ? f.el.parentElement : f.el;
-          if (!target.id) target.id = 'section-' + (i + 1);
+          var target = f.el;
+          if (!target.id) {
+            var id = 'section-' + (i + 1);
+            while (document.getElementById(id)) id += '-heading';
+            target.id = id;
+          }
           var li = document.createElement('li');
           var a = document.createElement('a');
           a.href = '#' + target.id;
           a.textContent = f.text;
           a.addEventListener('click', function () {
-            if (target.tagName === 'DETAILS') target.open = true;
             contents.classList.remove('is-open');
             if (ct) ct.setAttribute('aria-expanded', 'false');
           });
@@ -149,17 +154,6 @@
     }
   }
 
-  // Following a link to a section inside a closed drop-down opens it.
-  function openTarget() {
-    if (!location.hash) return;
-    var t = document.getElementById(decodeURIComponent(location.hash.slice(1)));
-    if (t && t.tagName === 'DETAILS') t.open = true;
-    var d = t && t.closest && t.closest('details');
-    if (d) d.open = true;
-  }
-  window.addEventListener('hashchange', openTarget);
-  openTarget();
-
   /* ---------- 3. Reading progress and the opening paragraph ---------- */
   var bar = document.querySelector('.progress span');
   var mainEl = document.getElementById('main');
@@ -180,7 +174,7 @@
     var paras = mainEl.querySelectorAll('p');
     for (var i = 0; i < paras.length; i++) {
       var p = paras[i];
-      if (p.closest('aside, details, .sec-dark, .sec-light, .tile, .card')) continue;
+      if (p.closest('aside, .lesson-section, .sec-dark, .sec-light, .tile, .card')) continue;
       var t = p.textContent.trim();
       if (t.length > 140 && /^[A-Za-z]/.test(t)) { p.classList.add('lede'); }
       break;
@@ -200,7 +194,7 @@
     });
     var prog = document.querySelector('.contents-progress');
     if (prog) {
-      var links = document.querySelectorAll('.contents-body > ul > li > a');
+      var links = document.querySelectorAll('.contents-body > ul:not(.otp) > li > a');
       var n = 0;
       links.forEach(function (a) { if (read[(a.getAttribute('href') || '').replace(/\/$/, '')]) n++; });
       if (n) { prog.textContent = n + ' of ' + links.length + ' pages read'; prog.hidden = false; } else { prog.hidden = true; }

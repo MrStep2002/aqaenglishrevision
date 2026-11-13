@@ -217,16 +217,16 @@ mark, .mark { background: var(--mark); color: var(--mark-ink); }
 .content .sec-light { margin: 1.4em 0; padding: 14px 20px; border: 1px solid var(--rule); border-left: 4px solid var(--accent); border-radius: 8px; background: var(--card); }
 .content .sec-light > .wrap > :last-child { margin-bottom: 0; }
 .content .sec-light h2 { border-top: 0; padding-top: 0; margin-top: .3em; }
-/* drop-downs */
-.content details.drop { margin: .9em 0; border: 1px solid var(--rule); border-radius: 10px; background: var(--card); }
-.content details.drop > summary { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 11px 16px 11px 18px; cursor: pointer; border-radius: 10px; }
-.content details.drop > summary::-webkit-details-marker { display: none; }
-.content details.drop > summary:hover { background: var(--slot); }
-.content details.drop > summary :is(h2, h3, h4, p) { margin: 0; padding: 0; border: 0; font-family: var(--head); font-weight: var(--hw); font-size: 1.12em; line-height: 1.3; }
-.content details.drop > summary::after { content: "+"; flex: none; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--ink2); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 16px; line-height: 1; }
-.content details.drop[open] > summary::after { content: "−"; background: var(--ink); color: var(--bg); border-color: var(--ink); }
-.content details.drop[open] > summary { border-bottom: 1px solid var(--rule); border-radius: 10px 10px 0 0; }
-.content .drop-body { padding: 14px 18px 4px; }
+.content .lesson-section { display: flow-root; margin: 1.7em 0; }
+.content .lesson-section > h2 { margin-top: 0; }
+/* Article illustrations sit beside the text, which continues beneath them. */
+.content .wrap:has(> .article-image) { display: flow-root; }
+.content .article-image { float: right; width: 48%; margin: 0 0 .8em 1em; }
+.content .article-image img { display: block; width: 100%; height: auto; border-radius: 6px; }
+.content .article-image figcaption { margin-top: 6px; font-size: 13px; color: var(--muted); }
+@media (max-width: 480px) {
+  .content .article-image { float: none; width: 100%; margin: 0 0 1em; }
+}
 /* embedded players and games */
 .content .embed { position: relative; width: 100%; aspect-ratio: var(--ratio, 16 / 9); margin: 1.2em 0; border-radius: 10px; overflow: hidden; background: var(--slot); }
 .content .embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
@@ -490,5 +490,4 @@ div.slot::after { content: none; }
   .plate::before, .plate::after { display: none; }
   .plate h1, .plate p, .plate-eyebrow { color: #000 !important; }
   .page.has-margin { display: block; }
-  details.drop > .drop-body { display: block; }
 }
