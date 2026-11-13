@@ -214,3 +214,55 @@
   }
   showRead();
 })();
+
+// Keep the notes in the page so the extract is readable without scripting.
+document.querySelectorAll('.annotated-extract').forEach(function (extract) {
+  var panel = extract.querySelector('.extract-notes');
+  var display = panel.querySelector('.extract-note-display');
+  var list = extract.querySelector('.extract-note-list');
+  var pinned = null;
+
+  function show(button) {
+    var note = button && document.getElementById(button.dataset.note);
+    if (!note) {
+      display.textContent = 'Choose an underlined phrase.';
+      return;
+    }
+    var title = document.createElement('strong');
+    title.textContent = note.previousElementSibling.textContent;
+    display.replaceChildren(title, document.createTextNode(note.textContent));
+  }
+
+  extract.querySelectorAll('[data-note]').forEach(function (phrase) {
+    var button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'extract-phrase';
+    button.dataset.note = phrase.dataset.note;
+    button.textContent = phrase.textContent;
+    button.setAttribute('aria-pressed', 'false');
+    button.setAttribute('aria-controls', display.id);
+    phrase.replaceWith(button);
+
+    button.addEventListener('pointerenter', function (event) {
+      if (event.pointerType !== 'touch') show(button);
+    });
+    button.addEventListener('pointerleave', function () {
+      show(document.activeElement === button ? button : pinned);
+    });
+    button.addEventListener('focus', function () { show(button); });
+    button.addEventListener('blur', function () { show(pinned); });
+    button.addEventListener('click', function () {
+      var wasPinned = pinned === button;
+      if (pinned) pinned.setAttribute('aria-pressed', 'false');
+      pinned = wasPinned ? null : button;
+      if (pinned) pinned.setAttribute('aria-pressed', 'true');
+      show(button);
+    });
+  });
+
+  show(null);
+  display.hidden = false;
+  list.hidden = true;
+  panel.classList.add('is-ready');
+  extract.querySelector('.extract-instructions').hidden = false;
+});
