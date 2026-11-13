@@ -9,9 +9,7 @@ the contents column on the left, the text in the middle, and a right-hand margin
 definitions and pictures. Readers can change the font, size, spacing and page colour, and tick
 pages off as read; their browser remembers both.
 
-**Pictures:** the old pictures (other people's, from the Google Sites version) have all been taken
-out of the pages and are no longer published. Each one is now a "picture to come" space. The files are
-still in `src/assets/images/` for reference and can be deleted.
+Site illustrations live under `src/assets/pictures/`. Keep full-resolution originals separately and publish web-sized copies. The mouse logo lives under `src/assets/images/site/`.
 
 ## Preview it on your Mac
 
@@ -20,10 +18,12 @@ You need [Node.js](https://nodejs.org/) (version 20 or newer) installed once. Th
 ```
 cd ~/Documents/GitHub/aqaenglishrevision
 npm install        # first time only
-npm start          # then open http://localhost:8080
+npm start -- --output=/private/tmp/aqaenglishrevision-preview
 ```
 
-Pages reload automatically when you save a file. Press `Ctrl+C` to stop.
+Open [localhost:8080](http://localhost:8080), or use the address Eleventy prints. Pages reload when you save. Press `Control+C` to stop. The temporary output path preserves the existing `_site/` folder.
+
+For a local production build, run `npm run build -- --output=/private/tmp/aqaenglishrevision-build`. The GitHub Actions workflow builds into `_site/` in its own checkout.
 
 ## Where things live
 
@@ -37,12 +37,12 @@ Pages reload automatically when you save a file. Press `Ctrl+C` to stop.
 | Shared page template (header, reading settings, title plate, contents, footer) | `src/_includes/base.njk` |
 | Styles / reading settings and contents script | `src/assets/css/site.css`, `src/assets/js/site.js` |
 | The mouse logo | `src/assets/images/site/mouse.svg` (and `mouse-white.svg` for the dark page colour) |
-| Images | Only the mouse logo (`src/assets/images/site/`) is published; the old pictures are no longer used |
+| Images | Publishable illustrations in `src/assets/pictures/`, organised by section |
 | Publishing workflow | `.github/workflows/deploy.yml` |
 
 ### Addresses
 
-Page addresses match the old Google Site exactly: no `.html` and no slash at the end
+Page addresses use the original format, with no `.html` and no slash at the end
 (`/macbeth/plot`). Each page's `permalink:` says where it's saved (`/macbeth/plot.html`); GitHub Pages
 serves it at the address without `.html`. When linking between pages, use the address, e.g.
 `<a href="/macbeth/plot">`.
@@ -67,7 +67,7 @@ permalink: /macbeth/plot.html   # address: /macbeth/plot
 The building blocks used across the site:
 
 - `<section class="sec">` is a band of the page; add `sec-light` (grey) or `sec-dark` (navy) for coloured bands.
-- `<section class="banner" style="--banner:url('/assets/images/…');--shade:0.6">` holds the page title. The template lifts it out into the coloured title plate at the top, with the banner picture showing faintly behind it. Each page should have exactly one, at the top.
+- `<section class="banner" style="--banner:url('/assets/pictures/…');--shade:0.6">` holds the page title. The template lifts it out into the coloured title plate at the top, with the banner picture showing faintly behind it. Each page should have exactly one, at the top.
 - `<div class="row">` with `<div class="col" style="--span:6">` makes columns; the spans in a row add up to 12. They stack on phones.
 - `<details class="drop"><summary><h3>Title</h3></summary><div class="drop-body">…</div></details>` is a drop-down box.
 - `<p class="sm">` is the smaller body text; `class="tc"` centres text.
@@ -76,24 +76,26 @@ The building blocks used across the site:
 New blocks for the redesign (use them as pages get reworked). Anything below that's marked "margin" floats into the right-hand margin, beside the paragraph that comes after it:
 
 - `<aside class="note">…</aside>` puts an annotation in the right-hand margin, next to the paragraph that follows it. `<aside class="note word"><b>sovereign</b> a king or queen</aside>` is a word definition. `<figure class="margin"><img …><figcaption>…</figcaption></figure>` is a small margin picture. On narrower screens these become small boxes in the text instead.
-- `<figure class="slot margin" data-caption="What the picture should show"></figure>` is a picture space in the margin; `<figure class="slot wide" …>` is one across the text column. When your picture is ready, swap it for `<figure class="margin"><img src="/assets/images/…" alt="…"></figure>` (and add that folder to the build in `eleventy.config.js`).
+- `<figure class="slot margin" data-caption="What the picture should show"></figure>` is a picture space in the margin; `<figure class="slot wide" …>` is one across the text column. When your picture is ready, swap it for `<figure class="margin"><img src="/assets/pictures/…" alt="…"></figure>`.
 - `<aside class="note quote"><p>“A quotation”</p><p class="note-ref">Act 1, Scene 5</p></aside>` is a key quote in the margin (see Macbeth › Lady Macbeth for examples).
 - `<aside class="margin-card">` holds a link card in the margin; `<aside class="listen">` holds an audio player.
-- `<div class="tiles">` with `<div class="tile">`s is a grid of pages, each with a picture space; `<div class="card-grid">` is a grid of game cards.
+- `<div class="tiles">` with `<div class="tile">`s is a grid of pages, each with a picture space; `<div class="card-grid">` is a grid of link cards.
 
 The front pages (`src/index.html` and each text's `index.html`) use a few more: `front-facts` (the line of facts in the title plate), `front-split` with `main` and `side` (text with a side column), `side-quote`, `acts` (the plot strip), `cards big` / `cards small` (picture links), `link-rows` (links with a line of description), `toc` (the home page contents), `panel` and `signoff`. Copy from an existing front page rather than starting from nothing.
+
+Add new Unseen Poetry resource links to the Practice section in `src/unseen-poetry/index.html`. The contents menu is in `src/_data/nav.json`. Staff Room uses the existing `/teachers-corner` address.
 
 ### The colour worlds
 
 Each section has a world colour, set in `src/_data/sections.json`: fog (A Christmas Carol), blood
 (Macbeth), port (An Inspector Calls), ink (Unseen Poetry), moss (Language Paper 1), slate
-(Language Paper 2), navy (How to Revise and Who am I?) and study (Teachers' Corner). The colours
+(Language Paper 2), navy (How to Revise and Who am I?) and study (Staff Room). The colours
 themselves are near the top of `src/assets/css/site.css`.
 
 ### Pages that aren't in the menu
 
 Some pages are deliberately left out of the menu (as they were on Google Sites) but are still
-published and reachable by their address, e.g. `/unseen-poetry/time`. Pages nothing links to have
+published and reachable by their address, e.g. `/unseen-poetry/growing-up`. Pages nothing links to have
 `sitemap: false` in their header, which keeps them out of the sitemap given to search engines.
 
 Pages with `draft: true` in their header (the old test pages under `src/drafts/`) only appear when

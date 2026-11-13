@@ -4,7 +4,7 @@
     "url": "/"
   },
   {
-    "title": "Teachers' Corner",
+    "title": "Staff Room",
     "url": "/teachers-corner",
     "children": [
       {
@@ -238,6 +238,10 @@
         "url": "/unseen-poetry/time"
       },
       {
+        "title": "Seasons",
+        "url": "/unseen-poetry/seasons"
+      },
+      {
         "title": "Rorschach Test",
         "url": "/unseen-poetry/rorschach-test"
       }
@@ -358,10 +362,6 @@
       {
         "title": "Literature AOs",
         "url": "/how-to-revise/literature-aos"
-      },
-      {
-        "title": "Classroom links",
-        "url": "/how-to-revise/classroom-links"
       }
     ]
   }

@@ -235,7 +235,6 @@ mark, .mark { background: var(--mark); color: var(--mark-ink); }
 .content a.card:hover { border-color: var(--accent); transform: translateY(-1px); }
 .content a.card::before { content: "Link"; font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
 .content a.card[href*="wordwall"]::before { content: "Game · opens Wordwall"; }
-.content a.card[href*="classroom.google"]::before { content: "Google Classroom"; }
 .content a.card[href*="youtube"]::before { content: "Video"; }
 .content .card-text { display: flex; flex-direction: column; gap: 3px; }
 .content .card-title { font-family: var(--head); font-weight: var(--hw); font-size: 1.05em; line-height: 1.25; color: var(--ink); }
