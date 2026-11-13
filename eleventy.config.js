@@ -3,12 +3,11 @@
 // `npm start` previews the site at http://localhost:8080 ; `npm run build` writes it to _site/.
 
 module.exports = function (eleventyConfig) {
-  // Images, styles, scripts and the quiz/game pages are copied across untouched.
+  // Images, styles and scripts are copied across untouched.
   // Only our own files are published. The old pictures in src/assets/images/ (other people's, from
   // the Google Sites version) are no longer used or published; only the mouse logo in images/site/ is.
   eleventyConfig.addPassthroughCopy({ "src/assets/css": "assets/css" });
   eleventyConfig.addPassthroughCopy({ "src/assets/js": "assets/js" });
-  eleventyConfig.addPassthroughCopy({ "src/assets/embeds": "assets/embeds" });
   // The new pictures (web-sized copies, made from the originals kept outside this folder)
   eleventyConfig.addPassthroughCopy({ "src/assets/pictures": "assets/pictures" });
   eleventyConfig.addPassthroughCopy({ "src/assets/images/site/mouse.svg": "assets/images/site/mouse.svg" });

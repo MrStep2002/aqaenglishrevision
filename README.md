@@ -6,7 +6,7 @@ and one shared template adds the header, menu, title plate, contents column and 
 
 The look ("the Annotated Edition", November 2026) is written-first and laid out like a newspaper page:
 the contents column on the left, the text in the middle, and a right-hand margin for notes, word
-definitions, pictures and games. Readers can change the font, size, spacing and page colour, and tick
+definitions and pictures. Readers can change the font, size, spacing and page colour, and tick
 pages off as read; their browser remembers both.
 
 **Pictures:** the old pictures (other people's, from the Google Sites version) have all been taken
@@ -38,7 +38,6 @@ Pages reload automatically when you save a file. Press `Ctrl+C` to stop.
 | Styles / reading settings and contents script | `src/assets/css/site.css`, `src/assets/js/site.js` |
 | The mouse logo | `src/assets/images/site/mouse.svg` (and `mouse-white.svg` for the dark page colour) |
 | Images | Only the mouse logo (`src/assets/images/site/`) is published; the old pictures are no longer used |
-| Custom quizzes and games | `src/assets/embeds/` (each is a self-contained HTML file shown in a frame) |
 | Publishing workflow | `.github/workflows/deploy.yml` |
 
 ### Addresses
@@ -79,9 +78,8 @@ New blocks for the redesign (use them as pages get reworked). Anything below tha
 - `<aside class="note">…</aside>` puts an annotation in the right-hand margin, next to the paragraph that follows it. `<aside class="note word"><b>sovereign</b> a king or queen</aside>` is a word definition. `<figure class="margin"><img …><figcaption>…</figcaption></figure>` is a small margin picture. On narrower screens these become small boxes in the text instead.
 - `<figure class="slot margin" data-caption="What the picture should show"></figure>` is a picture space in the margin; `<figure class="slot wide" …>` is one across the text column. When your picture is ready, swap it for `<figure class="margin"><img src="/assets/images/…" alt="…"></figure>` (and add that folder to the build in `eleventy.config.js`).
 - `<aside class="note quote"><p>“A quotation”</p><p class="note-ref">Act 1, Scene 5</p></aside>` is a key quote in the margin (see Macbeth › Lady Macbeth for examples).
-- `<aside class="margin-card">` holds a game or link card in the margin; `<aside class="listen">` holds an audio player.
+- `<aside class="margin-card">` holds a link card in the margin; `<aside class="listen">` holds an audio player.
 - `<div class="tiles">` with `<div class="tile">`s is a grid of pages, each with a picture space; `<div class="card-grid">` is a grid of game cards.
-- `<div class="game-box">…</div>` is a space for a game or quiz.
 
 The front pages (`src/index.html` and each text's `index.html`) use a few more: `front-facts` (the line of facts in the title plate), `front-split` with `main` and `side` (text with a side column), `side-quote`, `acts` (the plot strip), `cards big` / `cards small` (picture links), `link-rows` (links with a line of description), `toc` (the home page contents), `panel` and `signoff`. Copy from an existing front page rather than starting from nothing.
 
