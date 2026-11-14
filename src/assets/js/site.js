@@ -102,6 +102,7 @@
       var found = [];
       main.querySelectorAll('h2, h3').forEach(function (el) {
         var lessonHeading = el.matches('.lesson-section > h2');
+        if (el.closest('dialog')) return;
         if (!lessonHeading && (!currentPage || el.closest('.card, .plate, .cards, .acts, .link-rows, aside, .tiles, .card-grid, .sec-dark'))) return;
         var text = el.textContent.replace(/\s+/g, ' ').trim().replace(/[:.]+$/, '');
         if (!text || (!lessonHeading && text.length > 48)) return;

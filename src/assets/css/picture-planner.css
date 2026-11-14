@@ -1,0 +1,132 @@
+body:has(.picture-planner[open]) { overflow: hidden; }
+
+.picture-planner {
+  width: min(1200px, calc(100% - 24px));
+  max-height: calc(100dvh - 24px);
+  padding: 0;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: var(--size);
+  letter-spacing: normal;
+  word-spacing: normal;
+}
+.picture-planner::backdrop { background: rgb(0 0 0 / 68%); }
+.planner-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 20px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--rule);
+}
+.content .planner-header h2 { margin: 0; padding: 0; border: 0; font-size: 1.35em; }
+.planner-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  grid-template-areas: "picture fields" "status .";
+  gap: 0 24px;
+  padding: 16px 20px 22px;
+}
+.planner-picture { grid-area: picture; }
+.planner-status { grid-area: status; }
+.planner-tools, .planner-sense-buttons { display: flex; flex-wrap: wrap; gap: 6px; }
+.picture-planner button {
+  min-height: 40px;
+  padding: 5px 10px;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: var(--card);
+  color: inherit;
+  font: inherit;
+  font-size: .9em;
+  cursor: pointer;
+}
+.picture-planner button[aria-pressed="true"] { background: var(--world); color: #fff; }
+.picture-planner button:disabled { opacity: .55; cursor: default; }
+.planner-stage { position: relative; margin-top: 10px; overflow: hidden; border-radius: 6px; }
+.planner-stage img { display: block; width: 100%; aspect-ratio: 4 / 3; }
+.planner-picture:has([data-circle-toggle][aria-pressed="true"]) .planner-stage { cursor: crosshair; }
+.planner-grid, .planner-marks { position: absolute; inset: 0; pointer-events: none; }
+.planner-grid {
+  background-image:
+    linear-gradient(to right, #fff, #fff), linear-gradient(to right, #fff, #fff),
+    linear-gradient(to bottom, #fff, #fff), linear-gradient(to bottom, #fff, #fff);
+  background-size: 2px 100%, 2px 100%, 100% 2px, 100% 2px;
+  background-position: 33.333% 0, 66.667% 0, 0 33.333%, 0 66.667%;
+  background-repeat: no-repeat;
+  filter: drop-shadow(0 0 2px #000);
+}
+.planner-marks span, .planner-cursor {
+  position: absolute;
+  width: min(3cm, 24%);
+  aspect-ratio: 1;
+  border: 3px solid #ffe263;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px #1d1b16;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.planner-cursor { border-style: dashed; border-color: #fff; }
+.content .planner-hint, .content .planner-status { margin: .35em 0; font-size: .85em; }
+.planner-fields { grid-area: fields; display: grid; align-content: start; gap: 4px; }
+.planner-fields label, .planner-senses legend { font-weight: 600; }
+.planner-fields :is(input, textarea) {
+  width: 100%;
+  padding: 6px 9px;
+  border: 1px solid var(--rule);
+  border-radius: 5px;
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  line-height: 1.35;
+}
+.planner-fields textarea { resize: vertical; }
+.planner-senses { min-width: 0; margin: .3em 0; padding: 0; border: 0; }
+.planner-sense-buttons span { font-variant-numeric: tabular-nums; font-weight: 600; }
+.content #planner-techniques {
+  min-height: 14em;
+  max-height: 17em;
+  overflow: auto;
+  list-style: none;
+  margin: 0;
+  padding: 4px 6px;
+  border: 1px solid var(--rule);
+  border-radius: 5px;
+  background: var(--card);
+}
+.content #planner-techniques li { margin: 0; }
+#planner-techniques button {
+  width: 100%;
+  min-height: 26px;
+  text-align: left;
+  border-color: transparent;
+  padding: 2px 5px;
+}
+#planner-techniques button:hover, #planner-techniques button[aria-expanded="true"] {
+  border-color: var(--rule);
+}
+.content .planner-example {
+  margin: 0 4px 5px;
+  padding: 5px 8px;
+  background: var(--bg);
+  font-size: .9em;
+}
+@media (min-width: 761px) {
+  .planner-fields {
+    contain: size;
+    grid-template-rows: repeat(5, auto) minmax(4em, 1fr);
+    align-content: stretch;
+    overflow: auto;
+  }
+  .content #planner-techniques { min-height: 0; max-height: none; }
+}
+@media (max-width: 760px) {
+  .planner-workspace { grid-template-columns: 1fr; grid-template-areas: "picture" "status" "fields"; gap: 0; }
+  .planner-header, .planner-workspace { padding-inline: 12px; }
+}

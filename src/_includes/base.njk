@@ -7,6 +7,7 @@
 {%- set navItem = nav | findUrl("/" + slug) if slug else null %}
 {%- set hasLessonSections = 'class="lesson-section"' in content %}
 {%- set showContents = (navItem and navItem.children) or hasLessonSections %}
+{%- set showPicturePlanner = cur == "/lang-paper-1/p1-description/6-pics-tips" %}
 {%- set showPlotGame = cur == "/a-christmas-carol/plot" %}
 {%- set isContextQuiz = cur == "/a-christmas-carol/context" %}
 {%- set topic = cur.split("/")[2] %}
@@ -40,6 +41,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&display=swap">
   <link rel="stylesheet" href="/assets/css/site.css">
   {% if showQuoteGame or showPlotGame %}<link rel="stylesheet" href="/assets/css/quote-game.css">{% endif %}
+  {% if showPicturePlanner %}<link rel="stylesheet" href="/assets/css/picture-planner.css">{% endif %}
   {% if showPlotGame %}<link rel="stylesheet" href="/assets/css/plot-game.css">{% endif %}
   <link rel="canonical" href="{{ site.url }}{{ cur }}">
   {%- if site.goatcounter %}
@@ -171,8 +173,10 @@
       {#- The right-hand margin: this box sits at its top; notes, pictures and games for the page float beside their paragraphs. -#}
       <aside class="page-info" aria-label="About this page">
         <p class="pi-label">This page</p>
-        <p class="pi-time">{{ rt.minutes }} min read</p>
-        <button type="button" class="mark-read" aria-pressed="false" hidden><span class="mr-box" aria-hidden="true"></span><span class="mr-text">Mark as read</span></button>
+        <div class="pi-reading">
+          <p class="pi-time">{{ rt.minutes }} min read</p>
+          <button type="button" class="mark-read" aria-pressed="false" hidden><span class="mr-box" aria-hidden="true"></span><span class="mr-text">Mark as read</span></button>
+        </div>
         {% if showQuoteGame %}
         <button class="quote-launch" type="button" aria-haspopup="dialog"><span aria-hidden="true">▣</span> Play {{ gameTitle }}</button>
         {% elif showPlotGame %}
@@ -202,5 +206,6 @@
   <script src="/assets/js/plot-game.js" defer></script>
   {% endif %}
   <script src="/assets/js/site.js" defer></script>
+  {% if showPicturePlanner %}<script src="/assets/js/picture-planner.js" defer></script>{% endif %}
 </body>
 </html>
