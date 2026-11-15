@@ -1,0 +1,43 @@
+.quote-game.analysis-gaps.word-formation {
+  width: min(60rem, calc(100% - 1.25rem));
+  height: fit-content;
+}
+
+@media (min-width: 35rem) {
+  .word-formation .analysis-gaps-passage {
+    font-size: 1.55em;
+    line-height: 1.6;
+  }
+}
+
+.word-formation-gap {
+  display: inline-flex;
+  max-width: 100%;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .25em;
+  vertical-align: baseline;
+}
+.word-formation-stem {
+  border: 1px solid var(--rule);
+  border-radius: .3em;
+  padding: .05em .3em;
+  font-family: ui-monospace, monospace;
+  font-size: .65em;
+  font-weight: 600;
+}
+.word-formation-gap input {
+  box-sizing: border-box;
+  width: 11ch;
+  max-width: 100%;
+  border: 0;
+  border-bottom: 2px dashed var(--ink);
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  line-height: 1.25;
+}
+.word-formation-gap input:focus {
+  background: var(--slot);
+  border-bottom-style: solid;
+}

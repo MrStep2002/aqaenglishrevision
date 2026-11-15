@@ -1,0 +1,85 @@
+.quote-game.analysis-gaps {
+  width: min(73rem, calc(100% - 1.25rem));
+  height: auto;
+  max-height: calc(100dvh - 1.25rem);
+  overflow-y: auto;
+}
+
+.analysis-gaps [hidden] { display: none; }
+
+.analysis-gaps-levels,
+.analysis-gaps-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  margin-block: .75rem;
+}
+
+.analysis-gaps-levels button[aria-pressed="true"] {
+  background: var(--pine);
+  color: #fff;
+}
+
+.analysis-gaps-instructions,
+.analysis-gaps-bank,
+.analysis-gaps-actions,
+.analysis-gaps-corrections { font-size: 1.2em; }
+
+.analysis-gaps-instructions { margin: .5rem 0 .8rem; text-align: center; }
+
+.analysis-gaps-board {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(8rem, 24%, 14rem);
+  gap: clamp(.65rem, 2.5vw, 1.5rem);
+  align-items: start;
+}
+
+.analysis-gaps-passage {
+  margin: 0;
+  padding: clamp(.7rem, 2vw, 1.25rem);
+  border: 1px solid var(--rule);
+  border-radius: .75rem;
+  background: var(--card);
+  overflow-wrap: anywhere;
+  font-size: 1.45em;
+  line-height: 1.65;
+}
+
+.analysis-gaps .analysis-gaps-passage button {
+  min-width: 2.4em;
+  min-height: 32px;
+  padding: 0 .35em;
+  border-radius: .35rem;
+  line-height: 1.35;
+}
+
+.analysis-gaps-passage button[aria-pressed="true"] {
+  background: var(--pine);
+  color: #fff;
+}
+
+.analysis-gaps-bank { display: grid; gap: .3rem; }
+.analysis-gaps-bank button { text-align: left; overflow-wrap: anywhere; }
+.analysis-gaps button:disabled { opacity: .48; cursor: default; }
+.analysis-gaps-feedback { margin: 0; }
+.analysis-gaps-corrections { margin: .5rem 0 0; padding-inline-start: 1.5rem; }
+.analysis-gaps-corrections li + li { margin-top: .35rem; }
+
+.analysis-gap-right, .analysis-gap-wrong {
+  border-radius: .2rem;
+  padding: 0 .15em;
+  font-weight: 600;
+}
+
+.analysis-gap-right { background: #dcf3e1; color: #193f2c; }
+.analysis-gap-wrong { background: #fae7e8; color: #732334; }
+.analysis-gaps-success .analysis-gaps-passage { background: #dcf3e1; color: #193f2c; border-color: #407958; }
+
+@media (max-width: 35rem) {
+  .analysis-gaps-board { grid-template-columns: 1fr; }
+  .analysis-gaps-passage { font-size: 1.25em; }
+  .analysis-gaps-bank { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .analysis-gaps-bank button { padding-inline: .35em; }
+}

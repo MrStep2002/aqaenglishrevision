@@ -12,6 +12,8 @@
 {%- set isContextQuiz = cur == "/a-christmas-carol/context" %}
 {%- set topic = cur.split("/")[2] %}
 {%- set isThemeQuiz = slug == "a-christmas-carol" and topic in ["change", "christmas", "compassion", "family", "greed", "social-injustice"] %}
+{%- set showWordFormation = cur == "/a-christmas-carol/essays" %}
+{%- set showAnalysisGaps = isThemeQuiz or cur == "/a-christmas-carol/essays" %}
 {%- set showQuoteGame = isThemeQuiz or isContextQuiz or cur == "/a-christmas-carol/key-quotes" %}
 {%- set gameTitle = "Theme Revision" if isThemeQuiz else ("Context Quiz" if isContextQuiz else "Quote Recall") %}
 {%- set b = content | splitBanner %}
@@ -40,9 +42,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&display=swap">
   <link rel="stylesheet" href="/assets/css/site.css">
-  {% if showQuoteGame or showPlotGame %}<link rel="stylesheet" href="/assets/css/quote-game.css">{% endif %}
+  {% if showQuoteGame or showPlotGame or showAnalysisGaps %}<link rel="stylesheet" href="/assets/css/quote-game.css">{% endif %}
   {% if showPicturePlanner %}<link rel="stylesheet" href="/assets/css/picture-planner.css">{% endif %}
   {% if showPlotGame %}<link rel="stylesheet" href="/assets/css/plot-game.css">{% endif %}
+  {% if showAnalysisGaps %}<link rel="stylesheet" href="/assets/css/analysis-gaps.css">{% endif %}
+  {% if showWordFormation %}<link rel="stylesheet" href="/assets/css/word-formation.css">{% endif %}
   <link rel="canonical" href="{{ site.url }}{{ cur }}">
   {%- if site.goatcounter %}
   {#- Visitor statistics: GoatCounter (no cookies). Set "goatcounter" in src/_data/site.json. -#}
@@ -182,6 +186,12 @@
         {% elif showPlotGame %}
         <button class="quote-launch" type="button" aria-haspopup="dialog"><span aria-hidden="true">▣</span> Play Plot Order</button>
         {% endif %}
+        {% if showAnalysisGaps %}
+        <button id="play-analysis-gaps" class="quote-launch" type="button" aria-haspopup="dialog"><span aria-hidden="true">▣</span> Play Analysis Gaps</button>
+        {% endif %}
+        {% if showWordFormation %}
+        <button id="play-word-formation" class="quote-launch" type="button" aria-haspopup="dialog"><span aria-hidden="true">▣</span> Play Word Formation</button>
+        {% endif %}
       </aside>
       {%- endif %}
 {{ b.rest | safe }}
@@ -204,6 +214,14 @@
   {% elif showPlotGame %}
   {% include "plot-game.njk" %}
   <script src="/assets/js/plot-game.js" defer></script>
+  {% endif %}
+  {% if showAnalysisGaps %}
+  {% include "analysis-gaps.njk" %}
+  <script src="/assets/js/analysis-gaps.js?v=2" defer></script>
+  {% endif %}
+  {% if showWordFormation %}
+  {% include "word-formation.njk" %}
+  <script src="/assets/js/word-formation.js" defer></script>
   {% endif %}
   <script src="/assets/js/site.js" defer></script>
   {% if showPicturePlanner %}<script src="/assets/js/picture-planner.js" defer></script>{% endif %}

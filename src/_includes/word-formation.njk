@@ -1,0 +1,22 @@
+<dialog class="quote-game analysis-gaps word-formation" aria-labelledby="word-formation-title">
+  <form class="quote-close" method="dialog"><button type="submit" aria-label="Close Word Formation">×</button></form>
+  <header>
+    <span class="quote-holly" aria-hidden="true"><i></i></span>
+    <h2 id="word-formation-title">Word Formation</h2>
+  </header>
+  <div class="analysis-gaps-levels" role="group" aria-label="Level">
+    {% for level in ["Foundation", "Intermediate", "Advanced"] %}
+    <button type="button" data-level="{{ level }}" aria-pressed="{{ 'true' if loop.first else 'false' }}">{{ level }}</button>
+    {% endfor %}
+  </div>
+  <p class="analysis-gaps-instructions">Change each word in capitals so it fits the sentence. Type your answers, then check them.</p>
+  <form class="word-formation-form">
+    <p class="analysis-gaps-passage" aria-label="Analysis paragraph"></p>
+    <div class="analysis-gaps-actions">
+      <p class="analysis-gaps-feedback" role="status"></p>
+      <button type="submit" class="word-formation-check" disabled>Check answers</button>
+      <button type="button" class="word-formation-next" hidden>Next paragraph</button>
+    </div>
+  </form>
+</dialog>
+<script id="word-formation-data" type="application/json">{{ wordFormationBank | safe }}</script>

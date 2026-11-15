@@ -1,0 +1,24 @@
+<dialog class="quote-game analysis-gaps" aria-labelledby="analysis-gaps-title">
+  <form class="quote-close" method="dialog"><button type="submit" aria-label="Close Analysis Gaps">×</button></form>
+  <header>
+    <span class="quote-holly" aria-hidden="true"><i></i></span>
+    <h2 id="analysis-gaps-title">Analysis Gaps</h2>
+  </header>
+  <div class="analysis-gaps-levels" role="group" aria-label="Level">
+    {% for level in ["Foundation", "Intermediate", "Advanced"] %}
+    <button type="button" data-level="{{ level }}" aria-pressed="{{ 'true' if loop.first else 'false' }}">{{ level }}</button>
+    {% endfor %}
+  </div>
+  <p class="analysis-gaps-instructions">Fill five gaps. Two words are extra. Select a filled gap to change it before checking.</p>
+  <div class="analysis-gaps-board">
+    <p class="analysis-gaps-passage" aria-label="Analysis paragraph"></p>
+    <div class="analysis-gaps-bank" role="group" aria-label="Word bank"></div>
+  </div>
+  <div class="analysis-gaps-actions">
+    <p class="analysis-gaps-feedback" role="status"></p>
+    <button type="button" class="analysis-gaps-check" disabled>Check words</button>
+    <button type="button" class="analysis-gaps-next" hidden>Next paragraph</button>
+  </div>
+  <ul class="analysis-gaps-corrections" aria-label="Corrections" hidden></ul>
+</dialog>
+<script id="analysis-gaps-data" type="application/json">{{ analysisGapsBanks[topic] | safe }}</script>
