@@ -8,14 +8,15 @@
 {%- set hasLessonSections = 'class="lesson-section"' in content %}
 {%- set showContents = (navItem and navItem.children) or hasLessonSections %}
 {%- set showPicturePlanner = cur == "/lang-paper-1/p1-description/6-pics-tips" %}
-{%- set showPlotGame = cur == "/a-christmas-carol/plot" %}
-{%- set isContextQuiz = cur == "/a-christmas-carol/context" %}
+{%- set showPlotGame = 'id="play-plot-order"' in content %}
+{%- set showContextQuiz = 'id="play-context-quiz"' in content %}
 {%- set topic = cur.split("/")[2] %}
 {%- set isThemeQuiz = slug == "a-christmas-carol" and topic in ["change", "christmas", "compassion", "family", "greed", "social-injustice"] %}
 {%- set showWordFormation = cur == "/a-christmas-carol/essays" or 'id="play-word-formation"' in content %}
 {%- set showAnalysisGaps = isThemeQuiz or cur == "/a-christmas-carol/essays" %}
-{%- set showQuoteGame = isThemeQuiz or isContextQuiz or cur == "/a-christmas-carol/key-quotes" %}
-{%- set gameTitle = "Theme Revision" if isThemeQuiz else ("Context Quiz" if isContextQuiz else "Quote Recall") %}
+{%- set showQuoteRecall = 'id="play-quote-recall"' in content %}
+{%- set showThemeRevision = isThemeQuiz and 'id="play-theme-revision"' in content %}
+{%- set showQuoteGame = showQuoteRecall or showContextQuiz or showThemeRevision %}
 {%- set b = content | splitBanner %}
 <html lang="en-GB" data-world="{{ world }}">
 <head>
@@ -199,9 +200,13 @@
   </footer>
 
   {% if showQuoteGame %}
-  {% include "quote-game.njk" %}
+  {% from "quote-game.njk" import quiz %}
+  {% if showQuoteRecall %}{{ quiz("quote-recall", "Quote Recall") }}{% endif %}
+  {% if showContextQuiz %}{{ quiz("context-quiz", "Context Quiz") }}{% endif %}
+  {% if showThemeRevision %}{{ quiz("theme-revision", "Theme Revision", topic) }}{% endif %}
   <script src="/assets/js/quote-game.js" defer></script>
-  {% elif showPlotGame %}
+  {% endif %}
+  {% if showPlotGame %}
   {% include "plot-game.njk" %}
   <script src="/assets/js/plot-game.js" defer></script>
   {% endif %}
