@@ -9,6 +9,13 @@
   font: inherit;
   cursor: pointer;
 }
+.game-promos .quote-launch:has(img) {
+  width: min(100%, 270px);
+  padding: 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.game-promos .quote-launch img { display: block; width: 100%; height: auto; }
 .quote-game {
   --pine: #235144;
   --berry: #a12743;

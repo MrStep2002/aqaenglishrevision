@@ -7,6 +7,7 @@
   const inputs = [...form.querySelectorAll("input")];
   const results = [...game.querySelectorAll("[data-target]")];
   const options = [...dialog.querySelectorAll(".earnings-options button")];
+  const gallery = game.querySelector(".earnings-portraits");
   const feedback = document.getElementById("earnings-feedback");
   const numbers = new Intl.NumberFormat("en-GB");
   let source = inputs[0];
@@ -48,7 +49,6 @@
     const active = options.filter(option => option.getAttribute("aria-pressed") === "true");
     const monthlyCosts = active.reduce((total, option) => total + BigInt(option.dataset.cost || 0), 0n);
     const applyTax = active.some(option => option.hasAttribute("data-tax"));
-    // Work with exact fractions through to the final rounding to a whole day.
     const availablePay = pay * 30n - monthlyCosts * period;
     feedback.textContent = availablePay <= 0n ? "These costs leave no earnings to put towards the targets." : "";
     feedback.hidden = availablePay > 0n;
@@ -60,12 +60,10 @@
       }
       const target = BigInt(result.dataset.target) * 100n * period * 30n;
       const numerator = applyTax ? target * 6n : target;
-      const denominator = applyTax ? availablePay * 5n : availablePay;
-      const days = (numerator + denominator - 1n) / denominator;
-      const years = days / 365n;
-      const remaining = days % 365n;
-      result.textContent = numbers.format(years) + (years === 1n ? " year" : " years") +
-        " and " + numbers.format(remaining) + (remaining === 1n ? " day" : " days");
+      const denominator = (applyTax ? availablePay * 5n : availablePay) * 365n;
+      const years = numerator / denominator;
+      result.textContent = years === 0n ? "Less than 1 year" :
+        numbers.format(years) + (years === 1n ? " year" : " years");
     }
   }
 
@@ -90,5 +88,6 @@
 
     for (const option of options) option.disabled = false;
     showResults(pay);
+    gallery.hidden = false;
   });
 })();

@@ -12,7 +12,7 @@
 {%- set isContextQuiz = cur == "/a-christmas-carol/context" %}
 {%- set topic = cur.split("/")[2] %}
 {%- set isThemeQuiz = slug == "a-christmas-carol" and topic in ["change", "christmas", "compassion", "family", "greed", "social-injustice"] %}
-{%- set showWordFormation = cur == "/a-christmas-carol/essays" %}
+{%- set showWordFormation = cur == "/a-christmas-carol/essays" or 'id="play-word-formation"' in content %}
 {%- set showAnalysisGaps = isThemeQuiz or cur == "/a-christmas-carol/essays" %}
 {%- set showQuoteGame = isThemeQuiz or isContextQuiz or cur == "/a-christmas-carol/key-quotes" %}
 {%- set gameTitle = "Theme Revision" if isThemeQuiz else ("Context Quiz" if isContextQuiz else "Quote Recall") %}
@@ -182,20 +182,6 @@
           <p class="pi-time">{{ rt.minutes }} min read</p>
           <button type="button" class="mark-read" aria-pressed="false" hidden><span class="mr-box" aria-hidden="true"></span><span class="mr-text">Mark as read</span></button>
         </div>
-        {% if showQuoteGame %}
-        <button class="quote-launch" type="button" aria-haspopup="dialog"><span aria-hidden="true">▣</span> Play {{ gameTitle }}</button>
-        {% elif showPlotGame %}
-        <button class="quote-launch" type="button" aria-haspopup="dialog"><span aria-hidden="true">▣</span> Play Plot Order</button>
-        {% endif %}
-        {% if showAnalysisGaps %}
-        <button id="play-analysis-gaps" class="quote-launch" type="button" aria-haspopup="dialog"><span aria-hidden="true">▣</span> Play Analysis Gaps</button>
-        {% endif %}
-        {% if showWordFormation %}
-        <button id="play-word-formation" class="quote-launch" type="button" aria-haspopup="dialog"><span aria-hidden="true">▣</span> Play Word Formation</button>
-        {% endif %}
-        {% if earningsGame %}
-        <button id="play-earnings-game" class="quote-launch" type="button" aria-haspopup="dialog"><span aria-hidden="true">▣</span> Play How long to earn it?</button>
-        {% endif %}
       </aside>
       {%- endif %}
 {{ b.rest | safe }}

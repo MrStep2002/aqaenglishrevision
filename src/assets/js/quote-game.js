@@ -1,6 +1,6 @@
 (() => {
   const dialog = document.querySelector('.quote-game');
-  const launch = document.querySelector('.quote-launch');
+  const launchers = document.querySelectorAll('#play-quote-game, [data-launch-quote-game]');
   const status = dialog.querySelector('.quote-status');
   const meter = dialog.querySelector('#quote-accuracy');
   const percent = dialog.querySelector('.quote-percent');
@@ -186,11 +186,12 @@
     }
   }
 
-  launch.addEventListener('click', () => {
+  function openGame() {
     dialog.showModal();
     if (!quotes && !status.textContent) loadRound();
     else if (quotes) showAnswerMode();
-  });
+  }
+  launchers.forEach(button => button.addEventListener('click', openGame));
 
   for (const button of poolButtons) {
     button.addEventListener('click', () => {

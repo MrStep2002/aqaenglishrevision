@@ -121,7 +121,7 @@
   },
   {
     "question": "Why were workhouse conditions meant to be worse than the lives of the poorest workers outside?",
-    "choices": ["To discourage people from seeking workhouse relief unless they were desperate", "To prepare inmates to join the army", "To reward people for moving to industrial towns", "To make workhouses more attractive than paid work"],
+    "choices": ["To discourage people from seeking workhouse relief", "To prepare inmates to join the army", "To reward people for moving to industrial towns", "To make workhouses more attractive than paid work"],
     "themes": ["social-injustice"],
     "accepted": ["to discourage people from entering", "to deter people from applying for relief", "to discourage people from applying for relief", "to deter applicants", "deterrence"]
   },
@@ -130,6 +130,17 @@
     "choices": ["Food and a place to sleep", "Wages and a pension", "Schooling and an allowance", "Land and tools"],
     "themes": ["social-injustice"],
     "accepted": ["food and shelter", "shelter and food", "food and a bed", "a bed and food", "board and lodging"]
+  },
+    {
+    "question": "What could a separated mother ask a court for under the Custody of Infants Act of 1839?",
+    "choices": [
+      "Custody of her children up to the age of seven",
+      "Automatic custody of all her children",
+      "The power to deny the father any contact with the children",
+      "A share of her husband's property simply because she had children"
+    ],
+    "themes": [],
+    "accepted": ["custody of children up to seven", "custody of her young children", "custody of children under seven", "the right to apply for custody of her young children"]
   },
   {
     "question": "What punishment does the Context page describe as sending convicted people to colonies such as Australia?",
@@ -162,28 +173,10 @@
     "accepted": ["charity and forgiveness", "forgiveness and generosity", "generosity and forgiveness"]
   },
   {
-    "question": "Which Act reorganised poor relief in England and Wales in 1834?",
-    "choices": ["The Poor Law Amendment Act", "The Public Health Act", "The Ballot Act", "The Elementary Education Act"],
-    "themes": ["social-injustice"],
-    "accepted": ["poor law amendment act", "1834 poor law amendment act", "new poor law", "poor law"]
-  },
-  {
-    "question": "What were the groups of parishes that administered poor relief under the 1834 reforms called?",
-    "choices": ["Poor Law unions", "School boards", "Trade unions", "Sanitary districts"],
-    "themes": ["social-injustice"],
-    "accepted": ["poor law union", "poor law unions", "unions"]
-  },
-  {
     "question": "In the textile mills covered by the 1833 Factory Act, what was the minimum age for most child workers?",
     "choices": ["Nine", "Six", "Twelve", "Sixteen"],
     "themes": ["social-injustice"],
     "accepted": ["9", "9 years old", "nine years old"]
-  },
-  {
-    "question": "What did Parliament appoint to check that the 1833 Factory Act was being followed?",
-    "choices": ["Factory inspectors", "Poor Law guardians", "School governors", "Parish constables"],
-    "themes": ["social-injustice"],
-    "accepted": ["factory inspector", "inspectors", "inspectors of factories"]
   },
   {
     "question": "What kind of work did the 1842 Mines and Collieries Act ban for women and girls?",
@@ -192,47 +185,18 @@
     "accepted": ["underground mining", "underground work", "working underground", "working in mines underground"]
   },
   {
-    "question": "Which disease helped prompt Parliament to pass the Public Health Act of 1848 after a severe outbreak?",
-    "choices": ["Cholera", "Measles", "Smallpox", "Scarlet fever"],
-    "themes": ["social-injustice"],
-    "accepted": []
-  },
-  {
-    "question": "What was one common health problem in rapidly growing Victorian industrial towns?",
-    "choices": ["Poor drainage and sanitation", "Too few paved roads for motor cars", "Shortages of electric lighting", "Lack of underground railway stations"],
-    "themes": ["social-injustice"],
-    "accepted": ["poor drainage", "poor sanitation", "inadequate sanitation", "bad sanitation", "open sewers"]
-  },
-  {
-    "question": "Under the 1875 Public Health Act, what were local authorities required to maintain?",
-    "choices": ["Sewers", "Railway stations", "Textile mills", "Post offices"],
-    "themes": ["social-injustice"],
-    "accepted": ["sewer", "the sewers", "sewer systems"]
-  },
-  {
-    "question": "What did the 1870 Education Act allow areas without enough school places to set up?",
-    "choices": ["School boards", "Factory unions", "Public libraries", "Poor Law commissions"],
-    "themes": [],
-    "accepted": ["school board", "local school boards", "boards of education"]
-  },
-  {
-    "question": "Which Act made school attendance compulsory for children aged five to ten in England and Wales?",
-    "choices": ["The 1880 Education Act", "The 1833 Factory Act", "The 1842 Mines and Collieries Act", "The 1875 Public Health Act"],
-    "themes": [],
-    "accepted": ["1880 education act", "education act 1880", "1880 elementary education act", "elementary education act 1880", "1880"]
-  },
-  {
-    "question": "What was the main political aim of the Chartists’ call for universal male suffrage?",
-    "choices": ["To give all adult men the vote", "To let employers choose MPs for their workers", "To abolish parliamentary elections", "To give property owners more than one vote"],
+    "question": "The 1839 Chartists’ Act failed to gain what?",
+    "choices": ["The chance for all men to vote", "To let employers choose MPs for their workers", "To abolish parliamentary elections", "To give property owners more than one vote"],
     "themes": [],
     "accepted": ["votes for all men", "universal male suffrage", "the vote for all men", "all men could vote"]
   },
-  {
-    "question": "What did the 1872 Ballot Act introduce at parliamentary elections?",
-    "choices": ["The secret ballot", "Postal voting", "Compulsory voting", "Votes for women"],
+   {
+    "question": "When did all men, even those who didn't own property, gain the right to vote?",
+    "choices": ["1918", "1865", "1873", "1895"],
     "themes": [],
-    "accepted": ["secret ballots", "voting in secret", "secret voting"]
+    "accepted": ["1918", "the year 1918", "in 1918"]
   },
+
   {
     "question": "Which group gained the vote in larger numbers in towns under the 1867 Reform Act?",
     "choices": ["Urban working-class men meeting the qualifications", "All adult women", "Children working in textile mills", "All farm labourers regardless of where they lived"],
@@ -257,28 +221,12 @@
     "themes": [],
     "accepted": ["crystal palace"]
   },
-  {
-    "question": "What did the Great Exhibition of 1851 chiefly put on display?",
-    "choices": ["Manufactured goods and industrial inventions", "Parliamentary election results", "Factory inspection reports", "Workhouse admission records"],
-    "themes": [],
-    "accepted": ["industrial products", "manufactured goods", "industry and inventions", "industrial inventions", "design and manufacturing"]
-  },
+
   {
     "question": "What was Britain’s first adhesive postage stamp, issued in 1840, called?",
     "choices": ["The Penny Black", "The Penny Red", "The Twopenny Blue", "The Penny Lilac"],
     "themes": [],
     "accepted": ["penny black"]
-  },
-  {
-    "question": "What did the Uniform Penny Post base the standard charge for a letter on?",
-    "choices": ["Its weight", "The sender’s income", "The distance travelled", "The number of pages"],
-    "themes": [],
-    "accepted": ["weight", "the weight of the letter"]
-  },
-  {
-    "question": "Which information did the 1841 census record alongside items such as a person’s name and age?",
-    "choices": ["Their occupation", "Their weekly income", "Their political party", "Their school exam results"],
-    "themes": [],
-    "accepted": ["occupation", "job", "their job", "profession", "their profession"]
   }
+
 ]

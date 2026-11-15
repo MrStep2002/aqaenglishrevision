@@ -1,6 +1,6 @@
 (() => {
   const dialog = document.querySelector('.plot-game');
-  const launch = document.querySelector('.quote-launch');
+  const launch = document.getElementById('play-plot-order');
   const list = dialog.querySelector('.plot-events');
   const feedback = dialog.querySelector('.plot-feedback');
   const check = dialog.querySelector('.plot-check');
