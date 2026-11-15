@@ -1,0 +1,47 @@
+<dialog class="quote-game earnings-dialog" aria-labelledby="earnings-game-title">
+  <form class="quote-close" method="dialog"><button type="submit" aria-label="Close How long to earn it?">×</button></form>
+  <header class="earnings-header">
+    <h2 id="earnings-game-title">How long to earn it?</h2>
+    <div class="earnings-options" role="group" aria-label="Adjust earnings times">
+      <button type="button" data-tax aria-pressed="false" disabled>Pax 20% Tax</button>
+      <button type="button" data-cost="50000" aria-pressed="false" disabled>Pay £500 p/m rent.</button>
+      <button type="button" data-cost="40000" aria-pressed="false" disabled>£400p/m food</button>
+    </div>
+  </header>
+  <div class="earnings-game">
+    <p class="earnings-intro">How long would it take to earn a million pounds? What about a trillion?</p>
+    <dl class="earnings-targets" aria-label="Time to reach each amount" aria-live="polite" aria-atomic="true">
+      <div><dt>£1 million</dt><dd data-target="1000000">—</dd></div>
+      <div><dt>£1 billion</dt><dd data-target="1000000000">—</dd></div>
+      <div><dt>£100 billion</dt><dd data-target="100000000000">—</dd></div>
+      <div><dt>£1 trillion</dt><dd data-target="1000000000000">—</dd></div>
+    </dl>
+    <div class="earnings-body">
+      <form class="earnings-form" novalidate>
+        <fieldset aria-describedby="earnings-rules">
+          <legend>Your earnings</legend>
+          <div class="earnings-fields">
+            <label>Per day
+              <span><b aria-hidden="true">£</b><input type="text" inputmode="decimal" maxlength="24" data-days="1" placeholder="1,000" aria-label="Pay per day in pounds"></span>
+            </label>
+            <label>Per month
+              <span><b aria-hidden="true">£</b><input type="text" inputmode="decimal" maxlength="24" data-days="30" aria-label="Pay per month in pounds"></span>
+            </label>
+            <label>Per year
+              <span><b aria-hidden="true">£</b><input type="text" inputmode="decimal" maxlength="24" data-days="365" aria-label="Pay per year in pounds"></span>
+            </label>
+          </div>
+        </fieldset>
+        <p id="earnings-feedback" role="status" hidden></p>
+        <button type="submit">Calculate times</button>
+      </form>
+      <div class="earnings-portraits" aria-hidden="true">
+        <div class="earnings-portrait"></div>
+        <div class="earnings-portrait"></div>
+        <div class="earnings-portrait"></div>
+        <div class="earnings-portrait"></div>
+      </div>
+    </div>
+    <p id="earnings-rules">The game uses 30-day months and 365-day years. Times round up to the next whole day when needed.</p>
+  </div>
+</dialog>

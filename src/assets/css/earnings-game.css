@@ -1,0 +1,185 @@
+.quote-game.earnings-dialog {
+  width: min(66rem, calc(100% - 2rem));
+  height: fit-content;
+  padding-block-end: .75rem;
+  max-height: calc(100dvh - 2rem);
+  overflow: auto;
+}
+
+.quote-game .earnings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .5rem 1rem;
+  padding-inline-end: 3rem;
+}
+
+.earnings-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin-inline-start: auto;
+}
+
+.earnings-options button {
+  border: 1px solid var(--muted);
+  border-radius: 2rem;
+  padding: .35rem .7rem;
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-size: .85em;
+  cursor: pointer;
+}
+
+.earnings-options button:disabled {
+  border-color: var(--rule);
+  background: var(--slot);
+  color: var(--muted);
+  cursor: default;
+}
+
+.earnings-options button[aria-pressed="true"]:not(:disabled) {
+  background: var(--world);
+  color: white;
+  border-color: var(--world);
+}
+
+.earnings-game {
+  container-type: inline-size;
+}
+
+.earnings-game .earnings-intro {
+  font-size: 1.2em;
+  margin: 0 0 1.1rem;
+}
+
+.earnings-targets {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .5rem;
+  margin: 0 0 1.5rem;
+}
+
+.earnings-targets > div {
+  background: var(--deep);
+  border-radius: .6rem;
+  padding: .9rem .75rem;
+  color: white;
+}
+
+.earnings-targets dt {
+  font-family: var(--head);
+  font-size: clamp(1rem, 2.5cqi, 1.45rem);
+  line-height: 1.25;
+  color: var(--glow);
+}
+
+.earnings-targets dd {
+  margin: .55rem 0 0;
+  font: .8em/1.45 var(--mono);
+  overflow-wrap: anywhere;
+}
+
+.earnings-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+  gap: 1rem;
+}
+
+.earnings-portraits {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: .75rem;
+}
+
+.earnings-portrait {
+  border: 1px dashed var(--muted);
+  border-radius: .4rem;
+}
+
+.earnings-form {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: .8rem;
+  padding: clamp(1rem, 3cqi, 2rem);
+}
+
+.earnings-form fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-inline-size: 0;
+}
+
+.earnings-form legend {
+  padding: 0;
+  font: var(--hw) 1.45em/1.25 var(--head);
+}
+
+.earnings-fields {
+  margin-top: .65rem;
+  display: grid;
+  gap: .65rem;
+}
+
+.earnings-fields label {
+  font-weight: 600;
+}
+
+.earnings-fields label span {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: .25rem;
+  margin-top: .25rem;
+  border: 1px solid var(--muted);
+  border-radius: .4rem;
+  background: var(--bg);
+  padding-inline: .6rem;
+  font-family: var(--mono);
+  color: var(--ink);
+}
+
+.earnings-fields input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  padding: .55rem .15rem;
+  color: inherit;
+  font: inherit;
+}
+
+.earnings-form button {
+  margin-top: 1rem;
+  border: 1px solid transparent;
+  border-radius: .4rem;
+  padding: .55rem 1rem;
+  font: inherit;
+  font-weight: 600;
+  background: var(--world);
+  color: white;
+  cursor: pointer;
+}
+
+.earnings-form button:hover {
+  background: var(--deep);
+}
+
+.earnings-game #earnings-rules {
+  margin: .85rem 0 0;
+  color: var(--muted);
+  font-size: .78em;
+}
+
+@container (max-width: 46rem) {
+  .earnings-body { grid-template-columns: minmax(0, 1fr); }
+  .earnings-portrait { aspect-ratio: 16 / 9; }
+}
+
+@container (max-width: 27rem) {
+  .earnings-targets { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

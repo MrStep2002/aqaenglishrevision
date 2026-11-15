@@ -42,11 +42,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&display=swap">
   <link rel="stylesheet" href="/assets/css/site.css">
-  {% if showQuoteGame or showPlotGame or showAnalysisGaps %}<link rel="stylesheet" href="/assets/css/quote-game.css">{% endif %}
+  {% if showQuoteGame or showPlotGame or showAnalysisGaps or earningsGame %}<link rel="stylesheet" href="/assets/css/quote-game.css">{% endif %}
   {% if showPicturePlanner %}<link rel="stylesheet" href="/assets/css/picture-planner.css">{% endif %}
   {% if showPlotGame %}<link rel="stylesheet" href="/assets/css/plot-game.css">{% endif %}
   {% if showAnalysisGaps %}<link rel="stylesheet" href="/assets/css/analysis-gaps.css">{% endif %}
   {% if showWordFormation %}<link rel="stylesheet" href="/assets/css/word-formation.css">{% endif %}
+  {% if earningsGame %}<link rel="stylesheet" href="/assets/css/earnings-game.css">{% endif %}
   <link rel="canonical" href="{{ site.url }}{{ cur }}">
   {%- if site.goatcounter %}
   {#- Visitor statistics: GoatCounter (no cookies). Set "goatcounter" in src/_data/site.json. -#}
@@ -192,6 +193,9 @@
         {% if showWordFormation %}
         <button id="play-word-formation" class="quote-launch" type="button" aria-haspopup="dialog"><span aria-hidden="true">▣</span> Play Word Formation</button>
         {% endif %}
+        {% if earningsGame %}
+        <button id="play-earnings-game" class="quote-launch" type="button" aria-haspopup="dialog"><span aria-hidden="true">▣</span> Play How long to earn it?</button>
+        {% endif %}
       </aside>
       {%- endif %}
 {{ b.rest | safe }}
@@ -222,6 +226,10 @@
   {% if showWordFormation %}
   {% include "word-formation.njk" %}
   <script src="/assets/js/word-formation.js" defer></script>
+  {% endif %}
+  {% if earningsGame %}
+  {% include "earnings-game.njk" %}
+  <script src="/assets/js/earnings-game.js" defer></script>
   {% endif %}
   <script src="/assets/js/site.js" defer></script>
   {% if showPicturePlanner %}<script src="/assets/js/picture-planner.js" defer></script>{% endif %}

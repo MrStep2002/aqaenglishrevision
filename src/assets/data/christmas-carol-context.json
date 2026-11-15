@@ -58,5 +58,227 @@
     "choices": ["Mankind", "Profit", "Trade", "Reputation"],
     "themes": ["compassion", "greed", "change"],
     "accepted": ["humanity", "humankind"]
+  },
+  {
+    "question": "Why was Charles Dickens’s father sent to prison?",
+    "choices": ["He could not repay his debts", "He organised a factory strike", "He had escaped from a workhouse", "He refused to publish a newspaper"],
+    "themes": ["family", "social-injustice"],
+    "accepted": ["debt", "debts", "unpaid debts", "he could not pay his debts", "he was in debt"]
+  },
+  {
+    "question": "How old was Dickens when his father was sent to debtors’ prison?",
+    "choices": ["Twelve", "Seven", "Sixteen", "Twenty-one"],
+    "themes": ["family"],
+    "accepted": ["12", "12 years old", "twelve years old"]
+  },
+  {
+    "question": "What job did young Dickens do in the shoe-polish warehouse?",
+    "choices": ["Pasting labels on bottles", "Mending workers’ boots", "Making cardboard boxes", "Delivering parcels around London"],
+    "themes": ["social-injustice"],
+    "accepted": ["pasting labels", "putting labels on bottles", "labelling bottles", "labeling bottles", "sticking labels on bottles"]
+  },
+  {
+    "question": "Where did Charles live while his father was in debtors’ prison?",
+    "choices": ["Outside the prison, apart from his family", "In the prison with his father", "At the boarding school he had attended", "In a workhouse with his brothers"],
+    "themes": ["family"],
+    "accepted": ["outside the prison", "outside prison", "away from his family", "apart from his family"]
+  },
+  {
+    "question": "What did Dickens return to after his father was released from prison?",
+    "choices": ["School", "The shoe-polish warehouse", "A publisher’s office", "A family shop"],
+    "themes": ["family"],
+    "accepted": ["education", "his education", "he went back to school"]
+  },
+  {
+    "question": "What kind of clerk did Dickens become before working as a court reporter?",
+    "choices": ["A law clerk", "A bank clerk", "A shipping clerk", "A parish clerk"],
+    "themes": [],
+    "accepted": ["law clerk", "legal clerk", "a legal clerk"]
+  },
+  {
+    "question": "Which early novel brought Dickens great success before he wrote A Christmas Carol?",
+    "choices": ["The Pickwick Papers", "Martin Chuzzlewit", "Bleak House", "Little Dorrit"],
+    "themes": [],
+    "accepted": ["pickwick papers", "pickwick"]
+  },
+  {
+    "question": "What personal pressure gave Dickens a reason to write a book that would sell well?",
+    "choices": ["Financial difficulties", "A deadline set by Parliament", "A promise to a schoolteacher", "A dispute over his father’s inheritance"],
+    "themes": [],
+    "accepted": ["money troubles", "money problems", "financial problems", "he needed money", "he needed to earn money"]
+  },
+  {
+    "question": "Roughly how long did Dickens take to write A Christmas Carol?",
+    "choices": ["Six weeks", "Six days", "Six months", "Six years"],
+    "themes": [],
+    "accepted": ["6 weeks", "about six weeks", "about 6 weeks"]
+  },
+  {
+    "question": "Which inequality does the Context page say Dickens used the novella to draw attention to?",
+    "choices": ["The gap between rich and poor", "The difference between city and country accents", "The divide between rival political parties", "The difference between British and American schools"],
+    "themes": ["social-injustice", "greed"],
+    "accepted": ["the gap between the rich and the poor", "the rich-poor gap", "wealth inequality", "economic inequality", "inequality between rich and poor"]
+  },
+  {
+    "question": "Why were workhouse conditions meant to be worse than the lives of the poorest workers outside?",
+    "choices": ["To discourage people from seeking workhouse relief unless they were desperate", "To prepare inmates to join the army", "To reward people for moving to industrial towns", "To make workhouses more attractive than paid work"],
+    "themes": ["social-injustice"],
+    "accepted": ["to discourage people from entering", "to deter people from applying for relief", "to discourage people from applying for relief", "to deter applicants", "deterrence"]
+  },
+  {
+    "question": "What two basic things did the Context page say people received in the workhouse in return for hard work?",
+    "choices": ["Food and a place to sleep", "Wages and a pension", "Schooling and an allowance", "Land and tools"],
+    "themes": ["social-injustice"],
+    "accepted": ["food and shelter", "shelter and food", "food and a bed", "a bed and food", "board and lodging"]
+  },
+  {
+    "question": "What punishment does the Context page describe as sending convicted people to colonies such as Australia?",
+    "choices": ["Transportation", "A fine", "Hard labour in a local prison", "Public whipping"],
+    "themes": ["social-injustice"],
+    "accepted": ["penal transportation", "transportation to australia", "deportation"]
+  },
+  {
+    "question": "How do the charity collectors respond to poverty differently from Scrooge?",
+    "choices": ["They collect donations to help people in need", "They ask Parliament to build more prisons", "They argue that people should receive help only through paid work", "They suggest that poor families should emigrate"],
+    "themes": ["compassion", "social-injustice"],
+    "accepted": ["they collect donations", "charity", "they raise money for the poor", "they ask for donations"]
+  },
+  {
+    "question": "How does the Context page interpret Dickens’s decision to give Scrooge a second chance?",
+    "choices": ["It suggests that selfish people can change", "It shows that Scrooge’s wealth proves his virtue", "It suggests that poverty can be solved by punishment", "It shows that Dickens wanted Scrooge to become poorer than Bob"],
+    "themes": ["change", "compassion"],
+    "accepted": ["redemption", "selfish people can change", "people can change", "he can be redeemed"]
+  },
+  {
+    "question": "What idea does the Context page draw from Fred’s image of people as fellow passengers to the grave?",
+    "choices": ["People share a common humanity, whatever their wealth", "Wealth gives people a greater claim to kindness", "People with different incomes should live apart", "A person’s greatest duty is to earn a living"],
+    "themes": ["christmas", "compassion"],
+    "accepted": ["shared humanity", "common humanity", "we are all human", "everyone dies", "we all die"]
+  },
+  {
+    "question": "Which values does the Context page link to the novella’s picture of Christmas?",
+    "choices": ["Forgiveness and charity", "Competition and thrift", "Obedience and ambition", "Luxury and status"],
+    "themes": ["christmas", "compassion"],
+    "accepted": ["charity and forgiveness", "forgiveness and generosity", "generosity and forgiveness"]
+  },
+  {
+    "question": "Which Act reorganised poor relief in England and Wales in 1834?",
+    "choices": ["The Poor Law Amendment Act", "The Public Health Act", "The Ballot Act", "The Elementary Education Act"],
+    "themes": ["social-injustice"],
+    "accepted": ["poor law amendment act", "1834 poor law amendment act", "new poor law", "poor law"]
+  },
+  {
+    "question": "What were the groups of parishes that administered poor relief under the 1834 reforms called?",
+    "choices": ["Poor Law unions", "School boards", "Trade unions", "Sanitary districts"],
+    "themes": ["social-injustice"],
+    "accepted": ["poor law union", "poor law unions", "unions"]
+  },
+  {
+    "question": "In the textile mills covered by the 1833 Factory Act, what was the minimum age for most child workers?",
+    "choices": ["Nine", "Six", "Twelve", "Sixteen"],
+    "themes": ["social-injustice"],
+    "accepted": ["9", "9 years old", "nine years old"]
+  },
+  {
+    "question": "What did Parliament appoint to check that the 1833 Factory Act was being followed?",
+    "choices": ["Factory inspectors", "Poor Law guardians", "School governors", "Parish constables"],
+    "themes": ["social-injustice"],
+    "accepted": ["factory inspector", "inspectors", "inspectors of factories"]
+  },
+  {
+    "question": "What kind of work did the 1842 Mines and Collieries Act ban for women and girls?",
+    "choices": ["Working underground in mines", "Working on farms", "Working in textile mills", "Working in domestic service"],
+    "themes": ["social-injustice"],
+    "accepted": ["underground mining", "underground work", "working underground", "working in mines underground"]
+  },
+  {
+    "question": "Which disease helped prompt Parliament to pass the Public Health Act of 1848 after a severe outbreak?",
+    "choices": ["Cholera", "Measles", "Smallpox", "Scarlet fever"],
+    "themes": ["social-injustice"],
+    "accepted": []
+  },
+  {
+    "question": "What was one common health problem in rapidly growing Victorian industrial towns?",
+    "choices": ["Poor drainage and sanitation", "Too few paved roads for motor cars", "Shortages of electric lighting", "Lack of underground railway stations"],
+    "themes": ["social-injustice"],
+    "accepted": ["poor drainage", "poor sanitation", "inadequate sanitation", "bad sanitation", "open sewers"]
+  },
+  {
+    "question": "Under the 1875 Public Health Act, what were local authorities required to maintain?",
+    "choices": ["Sewers", "Railway stations", "Textile mills", "Post offices"],
+    "themes": ["social-injustice"],
+    "accepted": ["sewer", "the sewers", "sewer systems"]
+  },
+  {
+    "question": "What did the 1870 Education Act allow areas without enough school places to set up?",
+    "choices": ["School boards", "Factory unions", "Public libraries", "Poor Law commissions"],
+    "themes": [],
+    "accepted": ["school board", "local school boards", "boards of education"]
+  },
+  {
+    "question": "Which Act made school attendance compulsory for children aged five to ten in England and Wales?",
+    "choices": ["The 1880 Education Act", "The 1833 Factory Act", "The 1842 Mines and Collieries Act", "The 1875 Public Health Act"],
+    "themes": [],
+    "accepted": ["1880 education act", "education act 1880", "1880 elementary education act", "elementary education act 1880", "1880"]
+  },
+  {
+    "question": "What was the main political aim of the Chartists’ call for universal male suffrage?",
+    "choices": ["To give all adult men the vote", "To let employers choose MPs for their workers", "To abolish parliamentary elections", "To give property owners more than one vote"],
+    "themes": [],
+    "accepted": ["votes for all men", "universal male suffrage", "the vote for all men", "all men could vote"]
+  },
+  {
+    "question": "What did the 1872 Ballot Act introduce at parliamentary elections?",
+    "choices": ["The secret ballot", "Postal voting", "Compulsory voting", "Votes for women"],
+    "themes": [],
+    "accepted": ["secret ballots", "voting in secret", "secret voting"]
+  },
+  {
+    "question": "Which group gained the vote in larger numbers in towns under the 1867 Reform Act?",
+    "choices": ["Urban working-class men meeting the qualifications", "All adult women", "Children working in textile mills", "All farm labourers regardless of where they lived"],
+    "themes": [],
+    "accepted": ["urban working class men", "working class men in towns", "working-class men in towns", "urban working men"]
+  },
+  {
+    "question": "What did the 1870 Married Women’s Property Act allow married women to keep as their own property?",
+    "choices": ["Money they earned", "All of their husband’s wages", "Their landlord’s rent", "Their children’s savings"],
+    "themes": ["family"],
+    "accepted": ["their earnings", "their wages", "money they had earned", "their own earnings", "their own wages"]
+  },
+  {
+    "question": "What did the 1882 Married Women’s Property Act extend married women’s control over?",
+    "choices": ["Their own property", "Their husband’s voting rights", "Their children’s choice of school", "The property of the local parish"],
+    "themes": ["family"],
+    "accepted": ["their property", "all their property", "all their own property"]
+  },
+  {
+    "question": "What was the glass-and-iron building that housed the Great Exhibition of 1851 called?",
+    "choices": ["The Crystal Palace", "The Royal Albert Hall", "The Houses of Parliament", "Alexandra Palace"],
+    "themes": [],
+    "accepted": ["crystal palace"]
+  },
+  {
+    "question": "What did the Great Exhibition of 1851 chiefly put on display?",
+    "choices": ["Manufactured goods and industrial inventions", "Parliamentary election results", "Factory inspection reports", "Workhouse admission records"],
+    "themes": [],
+    "accepted": ["industrial products", "manufactured goods", "industry and inventions", "industrial inventions", "design and manufacturing"]
+  },
+  {
+    "question": "What was Britain’s first adhesive postage stamp, issued in 1840, called?",
+    "choices": ["The Penny Black", "The Penny Red", "The Twopenny Blue", "The Penny Lilac"],
+    "themes": [],
+    "accepted": ["penny black"]
+  },
+  {
+    "question": "What did the Uniform Penny Post base the standard charge for a letter on?",
+    "choices": ["Its weight", "The sender’s income", "The distance travelled", "The number of pages"],
+    "themes": [],
+    "accepted": ["weight", "the weight of the letter"]
+  },
+  {
+    "question": "Which information did the 1841 census record alongside items such as a person’s name and age?",
+    "choices": ["Their occupation", "Their weekly income", "Their political party", "Their school exam results"],
+    "themes": [],
+    "accepted": ["occupation", "job", "their job", "profession", "their profession"]
   }
 ]
