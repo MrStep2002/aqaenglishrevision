@@ -12,4 +12,5 @@ AQA English Website/
 # Picture drop folders (originals stay out of the public repository)
 new-images/
 Macbeth/
+!/src/assets/pictures/macbeth/
 images-storage-folder/
