@@ -1,0 +1,48 @@
+<dialog id="quote-auction" class="quote-auction" aria-labelledby="quote-auction-title">
+  <header class="auction-header">
+    <h2 id="quote-auction-title">Quote Auction</h2>
+    <form method="dialog"><button>Close</button></form>
+  </header>
+  <p class="auction-instructions">You have two coins. Each quote costs one coin. Buy the two that give you the most direct evidence for the question.</p>
+  <div class="auction-round">
+    <p class="auction-progress"></p>
+    <h3 class="auction-question" tabindex="-1"></h3>
+    <div class="auction-lots"></div>
+    <p class="auction-budget" role="status"></p>
+    <button type="button" class="auction-reveal" disabled>Check my evidence</button>
+    <p class="auction-result" role="status" tabindex="-1" hidden></p>
+    <button type="button" class="auction-next" hidden>Next question</button>
+  </div>
+</dialog>
+
+<dialog id="extract-evidence" class="quote-auction" aria-labelledby="extract-evidence-title">
+  <header class="auction-header">
+    <h2 id="extract-evidence-title">Extract Challenge</h2>
+    <form method="dialog"><button>Close</button></form>
+  </header>
+  <h3 class="auction-question" tabindex="-1">How does Dickens present Scrooge as someone who keeps others at a distance?</h3>
+  <p>Choose two underlined phrases you would analyse. Select a phrase again to swap it out.</p>
+  <figure class="evidence-extract">
+    <blockquote>
+      <p>Oh! But he was a <button type="button" data-score="0" aria-pressed="false">tight-fisted hand at the grindstone</button>, Scrooge! a squeezing, wrenching, grasping, scraping, clutching, covetous, old sinner! <button type="button" data-score="1" aria-pressed="false">Hard and sharp as flint</button>, from which no steel had ever struck out generous fire; secret, and self-contained, and <button type="button" data-score="2" aria-pressed="false">solitary as an oyster</button>. The cold within him froze his old features, nipped his pointed nose, shrivelled his cheek, stiffened his gait; <button type="button" data-score="0" aria-pressed="false">made his eyes red, his thin lips blue</button>; and spoke out shrewdly in his grating voice. A frosty rime was on his head, and on his eyebrows, and his wiry chin. He carried his own low temperature always about with him; <button type="button" data-score="1" aria-pressed="false">he iced his office in the dog-days</button>; and didn’t thaw it one degree at Christmas.</p>
+      <p>[…]</p>
+      <p>But what did Scrooge care! It was the very thing he liked. To edge his way along the crowded paths of life, <button type="button" data-score="2" aria-pressed="false">warning all human sympathy to keep its distance</button>, was what the knowing ones call “nuts” to Scrooge.</p>
+    </blockquote>
+    <figcaption>Charles Dickens, <cite>A Christmas Carol</cite>, Stave One</figcaption>
+  </figure>
+  <p class="evidence-count" role="status">0 of 2 phrases selected</p>
+  <button type="button" class="auction-reveal" disabled>Check my choices</button>
+  <section class="evidence-feedback" hidden>
+    <h3 tabindex="-1"></h3>
+    <p>These scores reflect how directly each phrase answers this question.</p>
+    <ul>
+      <li><strong>“tight-fisted hand at the grindstone”</strong> (0/2). This describes Scrooge’s meanness with money. You’d need another detail to explain how he keeps people away.</li>
+      <li><strong>“Hard and sharp as flint”</strong> (1/2). You could connect the stone’s hardness and sharpness to why people find him unapproachable.</li>
+      <li><strong>“solitary as an oyster”</strong> (2/2). “Solitary” points straight to his isolation. The oyster’s shell gives you an image of how he shuts others out.</li>
+      <li><strong>“made his eyes red, his thin lips blue”</strong> (0/2). This gives you details about his appearance. On its own it tells you little about how he keeps others away.</li>
+      <li><strong>“he iced his office in the dog-days”</strong> (1/2). You could argue that Scrooge makes the room feel unwelcoming, even in summer. The link to relationships needs explaining.</li>
+      <li><strong>“warning all human sympathy to keep its distance”</strong> (2/2). “Warning” makes the distance deliberate. Scrooge actively pushes away connection and fellow feeling.</li>
+    </ul>
+    <button type="button" class="evidence-retry">Try again</button>
+  </section>
+</dialog>

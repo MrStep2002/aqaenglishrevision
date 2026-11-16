@@ -24,7 +24,7 @@
     "accepted": ["workhouse", "union workhouses", "the workhouses"]
   },
   {
-    "question": "What does the child named Want represent in Stave Three? Give one word.",
+    "question": "What do the children from Stave Three represent?",
     "choices": ["Poverty", "Greed", "Envy", "Ambition"],
     "themes": ["social-injustice"],
     "accepted": ["deprivation", "need", "destitution"]
@@ -149,19 +149,13 @@
     "accepted": ["penal transportation", "transportation to australia", "deportation"]
   },
   {
-    "question": "How do the charity collectors respond to poverty differently from Scrooge?",
+    "question": "How do the Portly Gentlement respond to poverty differently from Scrooge?",
     "choices": ["They collect donations to help people in need", "They ask Parliament to build more prisons", "They argue that people should receive help only through paid work", "They suggest that poor families should emigrate"],
     "themes": ["compassion", "social-injustice"],
     "accepted": ["they collect donations", "charity", "they raise money for the poor", "they ask for donations"]
   },
   {
-    "question": "How does the Context page interpret Dickens’s decision to give Scrooge a second chance?",
-    "choices": ["It suggests that selfish people can change", "It shows that Scrooge’s wealth proves his virtue", "It suggests that poverty can be solved by punishment", "It shows that Dickens wanted Scrooge to become poorer than Bob"],
-    "themes": ["change", "compassion"],
-    "accepted": ["redemption", "selfish people can change", "people can change", "he can be redeemed"]
-  },
-  {
-    "question": "What idea does the Context page draw from Fred’s image of people as fellow passengers to the grave?",
+    "question": "What idea is supported by Fred’s image of people as fellow passengers to the grave?",
     "choices": ["People share a common humanity, whatever their wealth", "Wealth gives people a greater claim to kindness", "People with different incomes should live apart", "A person’s greatest duty is to earn a living"],
     "themes": ["christmas", "compassion"],
     "accepted": ["shared humanity", "common humanity", "we are all human", "everyone dies", "we all die"]
@@ -173,60 +167,191 @@
     "accepted": ["charity and forgiveness", "forgiveness and generosity", "generosity and forgiveness"]
   },
   {
-    "question": "In the textile mills covered by the 1833 Factory Act, what was the minimum age for most child workers?",
+    "question": "In the textile mills, what was the minimum age for most child workers?",
     "choices": ["Nine", "Six", "Twelve", "Sixteen"],
     "themes": ["social-injustice"],
     "accepted": ["9", "9 years old", "nine years old"]
   },
   {
-    "question": "What kind of work did the 1842 Mines and Collieries Act ban for women and girls?",
+    "question": "What kind of work was banned for women and girls in 1842?",
     "choices": ["Working underground in mines", "Working on farms", "Working in textile mills", "Working in domestic service"],
     "themes": ["social-injustice"],
     "accepted": ["underground mining", "underground work", "working underground", "working in mines underground"]
   },
   {
-    "question": "The 1839 Chartists’ Act failed to gain what?",
-    "choices": ["The chance for all men to vote", "To let employers choose MPs for their workers", "To abolish parliamentary elections", "To give property owners more than one vote"],
+    "question": "In 1839 a petition was put before parliament to give men what?",
+    "choices": ["The chance to vote", "A two-day weekend", "Twenty-days paid holiday", "Free healthcare"],
     "themes": [],
     "accepted": ["votes for all men", "universal male suffrage", "the vote for all men", "all men could vote"]
   },
-   {
-    "question": "When did all men, even those who didn't own property, gain the right to vote?",
-    "choices": ["1918", "1865", "1873", "1895"],
-    "themes": [],
-    "accepted": ["1918", "the year 1918", "in 1918"]
-  },
-
-  {
-    "question": "Which group gained the vote in larger numbers in towns under the 1867 Reform Act?",
-    "choices": ["Urban working-class men meeting the qualifications", "All adult women", "Children working in textile mills", "All farm labourers regardless of where they lived"],
-    "themes": [],
-    "accepted": ["urban working class men", "working class men in towns", "working-class men in towns", "urban working men"]
-  },
-  {
-    "question": "What did the 1870 Married Women’s Property Act allow married women to keep as their own property?",
-    "choices": ["Money they earned", "All of their husband’s wages", "Their landlord’s rent", "Their children’s savings"],
-    "themes": ["family"],
-    "accepted": ["their earnings", "their wages", "money they had earned", "their own earnings", "their own wages"]
-  },
-  {
-    "question": "What did the 1882 Married Women’s Property Act extend married women’s control over?",
-    "choices": ["Their own property", "Their husband’s voting rights", "Their children’s choice of school", "The property of the local parish"],
-    "themes": ["family"],
-    "accepted": ["their property", "all their property", "all their own property"]
-  },
-  {
-    "question": "What was the glass-and-iron building that housed the Great Exhibition of 1851 called?",
-    "choices": ["The Crystal Palace", "The Royal Albert Hall", "The Houses of Parliament", "Alexandra Palace"],
-    "themes": [],
-    "accepted": ["crystal palace"]
-  },
-
   {
     "question": "What was Britain’s first adhesive postage stamp, issued in 1840, called?",
     "choices": ["The Penny Black", "The Penny Red", "The Twopenny Blue", "The Penny Lilac"],
     "themes": [],
     "accepted": ["penny black"]
+  },
+  {
+    "question": "In what year did Dickens write A Christmas Carol?",
+    "choices": ["1843", "1837", "1851", "1865"],
+    "themes": ["christmas"],
+    "accepted": []
+  },
+  {
+    "question": "Who was on the British throne when Dickens wrote A Christmas Carol?",
+    "choices": ["Queen Victoria", "Queen Elizabeth I", "King George III", "King Edward VII"],
+    "themes": ["christmas"],
+    "accepted": ["Victoria"]
+  },
+  {
+    "question": "What name is given to the period in which A Christmas Carol was published?",
+    "choices": ["The Victorian era", "The Tudor era", "The Georgian era", "The Elizabethan era"],
+    "themes": ["christmas"],
+    "accepted": ["Victorian", "Victorian period", "Victorian age"]
+  },
+  {
+    "question": "What kind of pen did Dickens use to write the original manuscript?",
+    "choices": ["A goose quill pen", "A ballpoint pen", "A felt-tip pen", "A fountain pen"],
+    "themes": ["christmas"],
+    "accepted": ["quill", "quill pen", "goose quill", "a quill"]
+  },
+  {
+    "question": "In which month was A Christmas Carol first published?",
+    "choices": ["December", "March", "July", "October"],
+    "themes": ["christmas"],
+    "accepted": ["Dec"]
+  },
+  {
+    "question": "In which city was A Christmas Carol first published?",
+    "choices": ["London", "Manchester", "Edinburgh", "Dublin"],
+    "themes": ["christmas"],
+    "accepted": []
+  },
+  {
+    "question": "Who was the first illustrator of A Christmas Carol?",
+    "choices": ["John Leech", "Charles Dickens", "William Shakespeare", "Jane Austen"],
+    "themes": ["christmas"],
+    "accepted": ["Leech"]
+  },
+  {
+    "question": "Which firm first published A Christmas Carol?",
+    "choices": ["Chapman & Hall", "Penguin Books", "Oxford University Press", "Faber & Faber"],
+    "themes": ["christmas"],
+    "accepted": ["Chapman and Hall"]
+  },
+  {
+    "question": "Which words in the original subtitle tell readers to expect something supernatural?",
+    "choices": ["A Ghost Story", "A Family History", "A Christmas Song", "A London Diary"],
+    "themes": ["christmas"],
+    "accepted": ["ghost story", "a ghost story of christmas"]
+  },
+  {
+    "question": "What does the word ‘carol’ in the title usually mean at Christmas?",
+    "choices": ["A Christmas song", "A winter coat", "A church bell", "A holiday meal"],
+    "themes": ["christmas"],
+    "accepted": ["song", "a song", "christmas song"]
+  },
+  {
+    "question": "What musical term also gives Dickens the name for the book’s sections?",
+    "choices": ["Stave", "Chorus", "Tempo", "Duet"],
+    "themes": ["christmas"],
+    "accepted": ["staves"]
+  },
+  {
+    "question": "What was a ‘counting-house’, like the place where Scrooge and Bob work?",
+    "choices": ["A business office", "A school classroom", "A prison cell", "A shop selling clocks"],
+    "themes": ["greed"],
+    "accepted": ["office", "an office", "a place for keeping accounts", "an accounting office"]
+  },
+  {
+    "question": "What did a clerk like Bob Cratchit typically do?",
+    "choices": ["Kept records", "Built houses", "Treated patients", "Drove a coach"],
+    "themes": ["greed"],
+    "accepted": ["kept records", "did office work", "wrote letters", "kept accounts"]
+  },
+  {
+    "question": "Which fuel would Bob Cratchit put on the office fire to keep warm?",
+    "choices": ["Coal", "Petrol", "Natural gas", "Electricity"],
+    "themes": ["greed"],
+    "accepted": []
+  },
+  {
+    "question": "What did it mean to be ‘in debt’ in Dickens’s day?",
+    "choices": ["You owed money", "You owned a factory", "You had retired", "You received a salary"],
+    "themes": ["family"],
+    "accepted": ["owing money", "you owed someone money", "owed money"]
+  },
+  {
+    "question": "What was ‘blacking’, the product made at the factory where young Dickens worked?",
+    "choices": ["Shoe polish", "Printing ink", "Candle wax", "Laundry soap"],
+    "themes": ["family", "social-injustice"],
+    "accepted": ["boot polish", "polish for shoes", "shoe blacking"]
+  },
+  {
+    "question": "Which novel by Dickens follows an orphan who asks for more food in a workhouse?",
+    "choices": ["Oliver Twist", "Jane Eyre", "Frankenstein", "Treasure Island"],
+    "themes": ["social-injustice"],
+    "accepted": ["Oliver"]
+  },
+  {
+    "question": "Which Dickens novel follows a boy called Pip?",
+    "choices": ["Great Expectations", "Wuthering Heights", "Dracula", "Black Beauty"],
+    "themes": ["change"],
+    "accepted": []
+  },
+  {
+    "question": "Which Dickens novel is partly set during the French Revolution?",
+    "choices": ["A Tale of Two Cities", "Bleak House", "Little Dorrit", "Hard Times"],
+    "themes": ["social-injustice"],
+    "accepted": ["Tale of Two Cities"]
+  },
+  {
+    "question": "Which Dickens novel is set in the industrial town of Coketown?",
+    "choices": ["Hard Times", "Great Expectations", "Barnaby Rudge", "Dombey and Son"],
+    "themes": ["social-injustice"],
+    "accepted": []
+  },
+  {
+    "question": "Which of these is another Christmas book by Dickens?",
+    "choices": ["Great Expectations", "The Snow Queen", "The Nutcracker and the Mouse King", "The Little Match Girl"],
+    "themes": ["christmas"],
+    "accepted": ["Chimes"]
+  },
+  {
+    "question": "What does it mean when a Victorian novel was published ‘in instalments’?",
+    "choices": ["It came out in separate parts", "It was sold only to schools", "It was printed without chapters", "It was read aloud before it was written"],
+    "themes": ["change"],
+    "accepted": ["published in parts", "released in parts", "it came out in parts", "in parts"]
+  },
+  {
+    "question": "What was the Industrial Revolution?",
+    "choices": ["A period when machines changed how goods were made", "A campaign to close all factories", "A war between factory owners and workers", "A law stopping people moving to cities"],
+    "themes": ["social-injustice"],
+    "accepted": ["the growth of factories and machines", "the shift to machine and factory production"]
+  },
+  {
+    "question": "Why did many people move to industrial towns in Dickens’s lifetime?",
+    "choices": ["To find work", "To get away from all shops", "To work on farms", "To live near the seaside"],
+    "themes": ["social-injustice"],
+    "accepted": ["for work", "for jobs", "to find jobs", "to get a job"]
+  },
+  {
+    "question": "Why did many poor Victorian children work?",
+    "choices": ["Their families needed the money", "All children had to train to run factories", "Working was the only way to join a school", "They were saving to buy factories"],
+    "themes": ["family", "social-injustice"],
+    "accepted": ["to help support their families", "to earn money for their families", "their families needed money"]
+  },
+
+  {
+    "question": "What date is Boxing Day, when some workers traditionally received Christmas gifts or money?",
+    "choices": ["26 December", "24 December", "25 December", "1 January"],
+    "themes": ["christmas", "compassion"],
+    "accepted": ["December 26", "26th December", "December 26th", "26/12"]
+  },
+  {
+    "question": "What is a novella?",
+    "choices": ["A short novel", "A novel about Christmas", "A play", "A biography"],
+    "themes": ["literature"],
+    "accepted": ["A short novel"]
   }
 
 ]

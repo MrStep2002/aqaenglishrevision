@@ -224,6 +224,9 @@ mark, .mark { background: var(--mark); color: var(--mark-ink); }
 .content .article-image { float: right; width: 48%; margin: 0 0 .8em 1em; }
 .content .article-image img { display: block; width: 100%; height: auto; border-radius: 6px; }
 .content .article-image figcaption { margin-top: 6px; font-size: 13px; color: var(--muted); }
+@media (min-width: 481px) {
+  .content .article-image-left { float: left; margin: 0 1rem .8em 0; }
+}
 @media (max-width: 480px) {
   .content .article-image { float: none; width: 100%; margin: 0 0 1em; }
 }
@@ -273,6 +276,17 @@ mark, .mark { background: var(--mark); color: var(--mark-ink); }
 .content aside.note.quote > p:first-of-type { font-family: var(--head); font-weight: var(--hw); font-size: 18px; line-height: 1.3; color: var(--ink); }
 .content figure.margin img { width: 100%; display: block; border-radius: 6px; }
 .content aside.note .note-ref { margin: 4px 0 0; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.content aside.note.carol-quote { text-align: center; padding-inline: 4px; }
+.content aside.note.carol-quote::before { content: none; }
+.content aside.note.carol-quote > p:first-of-type {
+  font-family: "Germania One", Georgia, serif;
+  font-size: clamp(28px, 2.6vw, 40px);
+  font-weight: 400;
+  line-height: 1.12;
+  overflow-wrap: anywhere;
+}
+[data-font="clear"] .content aside.note.carol-quote > p:first-of-type,
+[data-font="lexend"] .content aside.note.carol-quote > p:first-of-type { font-family: var(--head); }
 /* margin items inside a drop-down or a boxed band: reach past the box's padding to the same margin line */
 @media (min-width: 1181px) {
   .has-margin .content .drop-body :is(aside.note, figure.margin, .slot-link.margin, aside.margin-card, aside.listen) { margin-right: calc(-1 * (var(--margin-w) + var(--gap)) - 19px); }

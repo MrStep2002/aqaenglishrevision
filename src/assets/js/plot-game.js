@@ -1,5 +1,5 @@
 (() => {
-  const dialog = document.querySelector('.plot-game');
+  const dialog = document.querySelector('.plot-game[data-moments]');
   const launch = document.getElementById('play-plot-order');
   const list = dialog.querySelector('.plot-events');
   const feedback = dialog.querySelector('.plot-feedback');
