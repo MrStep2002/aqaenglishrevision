@@ -1,4 +1,4 @@
-document.querySelectorAll('.quote-game').forEach(dialog => {
+document.querySelectorAll('.quote-game[data-quotes], .quote-game[data-questions]').forEach(dialog => {
   const launcher = document.getElementById('play-' + dialog.id);
   const status = dialog.querySelector('.quote-status');
   const meter = dialog.querySelector('meter');

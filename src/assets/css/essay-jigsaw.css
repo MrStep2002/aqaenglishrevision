@@ -1,0 +1,292 @@
+.quote-game.essay-jigsaw {
+  --jigsaw-gap: .55rem;
+  --jigsaw-edge: color-mix(in srgb, var(--ink) 21%, var(--rule));
+  --jigsaw-green: #2b614b;
+  --jigsaw-green-bg: #edf6eb;
+  --jigsaw-review: #995421;
+  position: fixed;
+  /* Use the visible viewport even when the lesson behind the dialog overflows. */
+  inset: 0 calc(100% - 100vw) calc(100% - 100vh) 0;
+  bottom: calc(100% - 100dvh);
+  width: min(55rem, calc(100vw - 1.25rem));
+  height: min(42rem, calc(100vh - 1.25rem));
+  height: min(42rem, calc(100dvh - 1.25rem));
+  max-width: none;
+  max-height: calc(100vh - 1.25rem);
+  max-height: calc(100dvh - 1.25rem);
+  overflow: hidden;
+}
+
+[data-page="dark"] .essay-jigsaw {
+  --jigsaw-green: #ade0c2;
+  --jigsaw-green-bg: #24362f;
+  --jigsaw-review: #f6bb86;
+}
+
+.essay-jigsaw .jigsaw-header {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(.35rem, 1.5vw, .85rem);
+  margin: 0 0 .65rem;
+  padding-inline: 2.45rem;
+}
+
+.essay-jigsaw .jigsaw-header > .quote-holly {
+  flex: 0 0 4rem;
+  margin-inline: 0;
+}
+
+.jigsaw-question {
+  margin: 0 0 .45rem;
+  font: var(--hw) clamp(1.2rem, calc(var(--size) * 1.3), 1.875rem) / 1.23 var(--head);
+  text-wrap: pretty;
+  overflow-wrap: anywhere;
+}
+
+.jigsaw-guide {
+  margin: 0 0 .75rem;
+  color: var(--muted);
+  line-height: 1.38;
+}
+
+.jigsaw-actions button {
+  min-height: 44px;
+  min-width: 44px;
+  padding: .35rem .9rem;
+  border: 1px solid var(--jigsaw-edge);
+  border-radius: .65rem;
+  background: var(--card);
+  font: 600 .95rem / 1.2 var(--body);
+  cursor: pointer;
+}
+
+.jigsaw-actions button:hover:not(:disabled) {
+  border-color: var(--jigsaw-green);
+}
+
+.essay-jigsaw button:focus-visible {
+  outline: 2px solid var(--jigsaw-green);
+  outline-offset: 2px;
+}
+
+.jigsaw-stage {
+  flex: 1;
+  min-height: 0;
+  padding: .25rem .25rem .85rem;
+  overflow: auto;
+  overflow-anchor: none;
+  overscroll-behavior: contain;
+  scroll-padding-block: .45rem;
+  scrollbar-color: var(--jigsaw-edge) transparent;
+  scrollbar-gutter: stable both-edges;
+}
+
+.jigsaw-workbench { display: grid; gap: .8rem; }
+
+.jigsaw-zone {
+  padding: var(--jigsaw-gap);
+  border: 2px dashed color-mix(in srgb, var(--muted) 67%, var(--rule));
+  border-radius: .85rem;
+  background: color-mix(in srgb, var(--jigsaw-green) 5%, var(--bg));
+}
+
+.jigsaw-zone[data-drop] {
+  border-color: var(--jigsaw-green);
+  background: var(--jigsaw-green-bg);
+}
+
+.jigsaw-placeholder {
+  display: grid;
+  min-height: 3.5rem;
+  place-items: center;
+  margin: 0;
+  color: var(--muted);
+  text-align: center;
+}
+
+.jigsaw-answer:not(:empty) + .jigsaw-placeholder {
+  min-height: 2.1rem;
+  margin-top: .35rem;
+}
+
+.jigsaw-zone[data-append] .jigsaw-placeholder { color: var(--jigsaw-green); }
+
+.jigsaw-answer,
+.jigsaw-bank {
+  display: grid;
+  gap: var(--jigsaw-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jigsaw-bank:empty { display: none; }
+
+.jigsaw-tile { position: relative; }
+
+.essay-jigsaw .jigsaw-piece {
+  display: grid;
+  width: 100%;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  padding: .32rem .75rem .32rem 0;
+  border: 1px solid var(--jigsaw-edge);
+  border-radius: .6rem;
+  background: var(--jigsaw-piece-bg, var(--card));
+  color: var(--ink);
+  box-shadow: 0 2px var(--rule);
+  font: var(--size) / calc(var(--lh) - .15) var(--body);
+  letter-spacing: var(--ls);
+  word-spacing: var(--ws);
+  text-align: left;
+  overflow-wrap: anywhere;
+  user-select: none;
+  cursor: grab;
+}
+
+.essay-jigsaw .jigsaw-piece:hover {
+  border-color: var(--jigsaw-green);
+  background: var(--jigsaw-piece-bg, var(--card));
+}
+
+.jigsaw-grip {
+  display: grid;
+  width: 44px;
+  min-height: 44px;
+  align-self: stretch;
+  place-items: center;
+  color: var(--muted);
+  touch-action: none;
+}
+
+.jigsaw-grip::before {
+  width: 12px;
+  height: 18px;
+  background: radial-gradient(circle, currentColor 1.25px, transparent 1.55px) 0 0 / 6px 6px;
+  content: "";
+}
+
+.jigsaw-answer .jigsaw-piece {
+  --jigsaw-piece-bg: var(--jigsaw-green-bg);
+  border-color: color-mix(in srgb, var(--jigsaw-green) 47%, var(--jigsaw-edge));
+}
+
+.jigsaw-tile[data-review] .jigsaw-piece {
+  border-color: var(--jigsaw-review);
+  box-shadow: 0 0 0 1px var(--jigsaw-review);
+}
+
+.jigsaw-tile[data-dragging] .jigsaw-piece { opacity: .35; cursor: grabbing; }
+
+.jigsaw-tile[data-before]::before,
+.jigsaw-zone[data-append]:has(.jigsaw-placeholder[hidden]) .jigsaw-tile:last-child::after {
+  position: absolute;
+  z-index: 1;
+  inset: calc(var(--jigsaw-gap) / -2 - 1px) 0 auto;
+  height: 3px;
+  border-radius: .25rem;
+  background: var(--jigsaw-green);
+  pointer-events: none;
+  content: "";
+}
+
+.jigsaw-zone[data-append] .jigsaw-tile:last-child::after { inset: auto 0 calc(var(--jigsaw-gap) / -2 - 1px); }
+
+.essay-jigsaw .jigsaw-ghost {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  display: block;
+  padding: .55rem .85rem;
+  border-color: var(--jigsaw-green);
+  box-shadow: 0 .55rem 1.5rem #16201b3b;
+  pointer-events: none;
+}
+
+.jigsaw-model {
+  margin: 0;
+  padding: clamp(.8rem, 3vw, 1.35rem);
+  border: 1px solid var(--jigsaw-green);
+  border-radius: .8rem;
+  background: var(--jigsaw-green-bg);
+  font-size: var(--size);
+  line-height: var(--lh);
+  letter-spacing: var(--ls);
+  word-spacing: var(--ws);
+  overflow-wrap: anywhere;
+}
+
+.jigsaw-explanation {
+  margin: .65rem 0 0;
+  color: var(--ink2);
+  font-size: var(--size);
+  line-height: 1.45;
+}
+
+.jigsaw-footer {
+  flex: none;
+  padding-top: .6rem;
+  border-top: 1px solid var(--rule);
+}
+
+.jigsaw-feedback {
+  margin: 0 0 .55rem;
+  padding: .5rem .75rem;
+  border-left: 3px solid var(--jigsaw-review);
+  border-radius: .25rem;
+  background: var(--slot);
+  color: var(--ink);
+  line-height: 1.35;
+}
+
+.jigsaw-actions { display: flex; gap: .5rem; flex-wrap: wrap; }
+
+.jigsaw-actions .jigsaw-primary {
+  margin-left: auto;
+  border-color: var(--jigsaw-green);
+  background: var(--jigsaw-green);
+  color: var(--bg);
+}
+
+.jigsaw-actions .jigsaw-primary:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--jigsaw-green) 87%, var(--bg));
+}
+
+.jigsaw-actions .jigsaw-primary:disabled {
+  border-color: var(--rule);
+  background: var(--slot);
+  color: var(--muted);
+  cursor: default;
+}
+
+.jigsaw-next span { margin-left: .4em; }
+
+.jigsaw-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (max-width: 36rem) {
+  .quote-game.essay-jigsaw {
+    width: calc(100vw - .75rem);
+    height: calc(100dvh - .75rem);
+    max-height: calc(100dvh - .75rem);
+  }
+  .essay-jigsaw .jigsaw-header > .quote-holly {
+    margin-inline: -.8rem;
+    transform: scale(.62);
+  }
+  .essay-jigsaw .jigsaw-header h2 {
+    font-size: clamp(1rem, 5.45vw, 1.5rem);
+  }
+  .jigsaw-question { font-size: clamp(1.04rem, var(--size), 1.4rem); }
+  .jigsaw-placeholder { min-height: 2.6rem; }
+}

@@ -275,16 +275,16 @@
     "accepted": []
   },
   {
-    "question": "What did it mean to be ‘in debt’ in Dickens’s day?",
-    "choices": ["You owed money", "You owned a factory", "You had retired", "You received a salary"],
-    "themes": ["family"],
-    "accepted": ["owing money", "you owed someone money", "owed money"]
-  },
-  {
     "question": "What was ‘blacking’, the product made at the factory where young Dickens worked?",
     "choices": ["Shoe polish", "Printing ink", "Candle wax", "Laundry soap"],
     "themes": ["family", "social-injustice"],
     "accepted": ["boot polish", "polish for shoes", "shoe blacking"]
+  },
+    {
+    "question": "Who was put into prison when Dickens's father couldn't pay a debt?",
+    "choices": ["The whole family, except Dickens", "The father and mother", "The children", "The person who sold them the debt"],
+    "themes": ["family", "social-injustice"],
+    "accepted": ["The whole family", "the entire family", "the whole family, except dickens"]
   },
   {
     "question": "Which novel by Dickens follows an orphan who asks for more food in a workhouse?",
@@ -309,12 +309,6 @@
     "choices": ["Hard Times", "Great Expectations", "Barnaby Rudge", "Dombey and Son"],
     "themes": ["social-injustice"],
     "accepted": []
-  },
-  {
-    "question": "Which of these is another Christmas book by Dickens?",
-    "choices": ["Great Expectations", "The Snow Queen", "The Nutcracker and the Mouse King", "The Little Match Girl"],
-    "themes": ["christmas"],
-    "accepted": ["Chimes"]
   },
   {
     "question": "What does it mean when a Victorian novel was published ‘in instalments’?",

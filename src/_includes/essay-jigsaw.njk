@@ -1,16 +1,49 @@
-<dialog id="essay-jigsaw" class="quote-game plot-game" aria-labelledby="essay-jigsaw-title">
-  <form class="quote-close" method="dialog"><button type="submit" aria-label="Close Essay Jigsaw">×</button></form>
-  <div class="quote-play">
-    <header>
-      <h2 id="essay-jigsaw-title">Essay Jigsaw</h2>
-      <p class="jigsaw-question" tabindex="-1"></p>
-      <p>Use the arrows to put the sentences in order. Look for words that refer back to an earlier sentence.</p>
-    </header>
-    <ol class="plot-events" aria-label="Paragraph sentences"></ol>
+<dialog id="essay-jigsaw" class="quote-game essay-jigsaw" aria-labelledby="essay-jigsaw-title">
+  <form class="quote-close" method="dialog">
+    <button type="submit" aria-label="Close Essay Jigsaw">×</button>
+  </form>
+  <header class="jigsaw-header">
+    <span class="quote-holly" aria-hidden="true"><i></i></span>
+    <h2 id="essay-jigsaw-title">Essay Jigsaw</h2>
+    <span class="quote-holly" aria-hidden="true"><i></i></span>
+  </header>
+
+  <div class="jigsaw-stage">
+    <h3 id="jigsaw-question" class="jigsaw-question" tabindex="-1"></h3>
+    <p class="jigsaw-guide">Drag or tap sentences in order. Tap a placed sentence to return it.</p>
+    <div class="jigsaw-workbench">
+      <div class="jigsaw-zone" role="group" aria-label="Your paragraph">
+        <ol class="jigsaw-answer" role="list" aria-label="Placed sentences"></ol>
+        <p class="jigsaw-placeholder">Drop sentences here</p>
+      </div>
+      <ul class="jigsaw-bank" role="list" aria-label="Available sentences"></ul>
+    </div>
+
+    <div class="jigsaw-solved" hidden>
+      <p class="jigsaw-model" tabindex="-1"></p>
+      <p class="jigsaw-explanation"></p>
+    </div>
   </div>
-  <footer class="plot-actions">
-    <p class="plot-feedback" role="status"></p>
-    <button class="plot-check" type="button">Check order</button>
-    <button class="jigsaw-next" type="button" hidden>Next paragraph</button>
+
+  <footer class="jigsaw-footer">
+    <p class="jigsaw-feedback" hidden></p>
+    <div class="jigsaw-actions">
+      <button class="jigsaw-hint" type="button">Hint</button>
+      <button class="jigsaw-primary jigsaw-check" type="button" disabled>Check order</button>
+      <button class="jigsaw-primary jigsaw-next" type="button" hidden>Next paragraph <span aria-hidden="true">→</span></button>
+    </div>
   </footer>
+
+  <p class="jigsaw-sr-only" role="status"></p>
+  <span id="jigsaw-place" hidden>Add to paragraph</span>
+  <span id="jigsaw-return" hidden>Return to available sentences</span>
+
+  <template id="jigsaw-tile">
+    <li class="jigsaw-tile">
+      <button class="jigsaw-piece" type="button" aria-describedby="jigsaw-place">
+        <span class="jigsaw-grip" aria-hidden="true"></span>
+        <span class="jigsaw-text"></span>
+      </button>
+    </li>
+  </template>
 </dialog>
