@@ -95,6 +95,28 @@ The front pages (`src/index.html` and each text's `index.html`) use a few more: 
 
 Add new Unseen Poetry resource links to the Practice section in `src/unseen-poetry/index.html`. The contents menu is in `src/_data/nav.json`. Staff Room uses the existing `/teachers-corner` address.
 
+### Paragraph games
+
+Edit [the A Christmas Carol bank](src/assets/data/paragraph-games/christmas-carol.csv) in a spreadsheet or text editor. Each row is one paragraph. Enter the question and put the sentences in their correct order across `sentence1`, `sentence2` and the following columns. Leave unused sentence cells blank. Add `sentence7` and further numbered columns for longer paragraphs. The corresponding `hint1`, `hint2` and other hint cells are optional, as is `explanation`, which appears after a solve. Save the file as UTF-8 CSV. Eleventy reads the bank when it builds the page.
+
+For another text or game, copy the CSV in `src/assets/data/paragraph-games/` and add an entry to the page's front matter.
+
+```yaml
+paragraphGames:
+  - id: macbeth-paragraphs
+    title: Macbeth Paragraph Builder
+    bank: macbeth.csv
+```
+
+Add a launch button whose ID starts with `play-` followed by that game's ID.
+
+```html
+<button id="play-macbeth-paragraphs" class="quote-launch" type="button"
+        aria-haspopup="dialog" aria-controls="macbeth-paragraphs">Play Macbeth Paragraph Builder</button>
+```
+
+The frame uses the section's colours by default. Add `skin: christmas` for the red and green border with holly. The dialog uses the configured ID, so you can target it with CSS for a custom skin. Multiple games can share a page by giving each entry and launch button its own ID.
+
 ### The colour worlds
 
 Each section has a world colour, set in `src/_data/sections.json`: fog (A Christmas Carol), blood

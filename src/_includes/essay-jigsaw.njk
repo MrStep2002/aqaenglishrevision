@@ -1,15 +1,23 @@
-<dialog id="essay-jigsaw" class="quote-game essay-jigsaw" aria-labelledby="essay-jigsaw-title">
+{% macro paragraphGame(game, bank) %}
+{% set id = game.id | escape %}
+{% set title = game.title | escape %}
+{% set skin = game.skin or "section" %}
+<dialog id="{{ id }}" class="quote-game essay-jigsaw" data-paragraph-game data-jigsaw-skin="{{ skin | escape }}" aria-labelledby="{{ id }}-title">
   <form class="quote-close" method="dialog">
-    <button type="submit" aria-label="Close Essay Jigsaw">×</button>
+    <button type="submit" aria-label="Close {{ title }}">×</button>
   </form>
   <header class="jigsaw-header">
+    {% if skin == "christmas" %}
     <span class="quote-holly" aria-hidden="true"><i></i></span>
-    <h2 id="essay-jigsaw-title">Essay Jigsaw</h2>
+    {% endif %}
+    <h2 id="{{ id }}-title">{{ title }}</h2>
+    {% if skin == "christmas" %}
     <span class="quote-holly" aria-hidden="true"><i></i></span>
+    {% endif %}
   </header>
 
   <div class="jigsaw-stage">
-    <h3 id="jigsaw-question" class="jigsaw-question" tabindex="-1"></h3>
+    <h3 class="jigsaw-question" tabindex="-1"></h3>
     <p class="jigsaw-guide">Drag or tap sentences in order. Tap a placed sentence to return it.</p>
     <div class="jigsaw-workbench">
       <div class="jigsaw-zone" role="group" aria-label="Your paragraph">
@@ -35,15 +43,17 @@
   </footer>
 
   <p class="jigsaw-sr-only" role="status"></p>
-  <span id="jigsaw-place" hidden>Add to paragraph</span>
-  <span id="jigsaw-return" hidden>Return to available sentences</span>
+  <span id="{{ id }}-place" hidden>Add to paragraph</span>
+  <span id="{{ id }}-return" hidden>Return to available sentences</span>
 
-  <template id="jigsaw-tile">
+  <template class="jigsaw-tile-template">
     <li class="jigsaw-tile">
-      <button class="jigsaw-piece" type="button" aria-describedby="jigsaw-place">
+      <button class="jigsaw-piece" type="button" aria-describedby="{{ id }}-place">
         <span class="jigsaw-grip" aria-hidden="true"></span>
         <span class="jigsaw-text"></span>
       </button>
     </li>
   </template>
+  <script type="application/json" class="jigsaw-data">{{ bank | safe }}</script>
 </dialog>
+{% endmacro %}

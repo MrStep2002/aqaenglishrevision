@@ -2,8 +2,12 @@
 // Pages live in src/ as plain HTML with a short header ("front matter") on top.
 // `npm start` previews the site at http://localhost:8080 ; `npm run build` writes it to _site/.
 
+const readParagraphBank = require("./tools/read-paragraph-bank");
+
 module.exports = function (eleventyConfig) {
   eleventyConfig.addWatchTarget("src/assets/data/christmas-carol-analysis-gaps.csv");
+  eleventyConfig.addWatchTarget("src/assets/data/paragraph-games/*.csv");
+  eleventyConfig.addFilter("paragraphBank", readParagraphBank);
   // Images, styles and scripts are copied across untouched.
   // Only our own files are published. The old pictures in src/assets/images/ (other people's, from
   // the Google Sites version) are no longer used or published; only the mouse logo in images/site/ is.

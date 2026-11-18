@@ -1,5 +1,6 @@
 const { readFileSync } = require('node:fs');
 const path = require('node:path');
+const readCsv = require('../../tools/read-csv');
 
 const bank = path.join(__dirname, '../assets/data/christmas-carol-analysis-gaps.csv');
 const levels = ['Foundation', 'Intermediate', 'Advanced'];
@@ -14,26 +15,8 @@ const themes = {
 const sentences = new Intl.Segmenter('en-GB', { granularity: 'sentence' });
 const normalise = word => word.toLowerCase().replaceAll('’', "'");
 
-function readRows(text) {
-  const pattern = /("(?:[^"]|"")*"|[^",\r\n]*)(,|\r?\n|$)/gy;
-  const rows = [];
-  let row = [];
-  text = text.replace(/^\uFEFF/, '').trimEnd() + '\n';
-  while (pattern.lastIndex < text.length) {
-    const field = pattern.exec(text);
-    if (!field || !field[0].length) throw new Error('Invalid paragraph bank CSV');
-    const [, value, separator] = field;
-    row.push(value.startsWith('"') ? value.slice(1, -1).replaceAll('""', '"') : value);
-    if (separator !== ',') {
-      rows.push(row);
-      row = [];
-    }
-  }
-  return rows;
-}
-
 module.exports = function () {
-  const [header, ...rows] = readRows(readFileSync(bank, 'utf8'));
+  const [header, ...rows] = readCsv(readFileSync(bank, 'utf8'));
   if (header.join(',') !== 'level,paragraph,extra1,extra2,themes,formation') throw new Error('Invalid Analysis Gaps header');
 
   const items = rows.map(([level, paragraph, extra1, extra2, themeTags, formation, ...unexpected], index) => {

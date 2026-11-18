@@ -9,7 +9,7 @@
 {%- set showContents = (navItem and navItem.children) or hasLessonSections %}
 {%- set showPicturePlanner = cur == "/lang-paper-1/p1-description/6-pics-tips" %}
 {%- set showQuoteAuction = 'id="play-quote-auction"' in content %}
-{%- set showEssayJigsaw = 'id="play-essay-jigsaw"' in content %}
+{%- set showParagraphGames = paragraphGames and (paragraphGames | length) %}
 {%- set showPlotGame = 'id="play-plot-order"' in content %}
 {%- set showContextQuiz = 'id="play-context-quiz"' in content %}
 {%- set topic = cur.split("/")[2] %}
@@ -46,11 +46,11 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&display=swap">
   {% if 'carol-quote' in content %}<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Germania+One&display=swap">{% endif %}
   <link rel="stylesheet" href="/assets/css/site.css">
-  {% if showQuoteGame or showQuoteAuction or showPlotGame or showEssayJigsaw or showAnalysisGaps or earningsGame %}<link rel="stylesheet" href="/assets/css/quote-game.css">{% endif %}
+  {% if showQuoteGame or showQuoteAuction or showPlotGame or showParagraphGames or showAnalysisGaps or earningsGame %}<link rel="stylesheet" href="/assets/css/quote-game.css">{% endif %}
   {% if showPicturePlanner %}<link rel="stylesheet" href="/assets/css/picture-planner.css">{% endif %}
   {% if showQuoteAuction %}<link rel="stylesheet" href="/assets/css/quote-auction.css">{% endif %}
   {% if showPlotGame %}<link rel="stylesheet" href="/assets/css/plot-game.css">{% endif %}
-  {% if showEssayJigsaw %}<link rel="stylesheet" href="/assets/css/essay-jigsaw.css?v=4">{% endif %}
+  {% if showParagraphGames %}<link rel="stylesheet" href="/assets/css/essay-jigsaw.css?v=5">{% endif %}
   {% if showAnalysisGaps %}<link rel="stylesheet" href="/assets/css/analysis-gaps.css">{% endif %}
   {% if showWordFormation %}<link rel="stylesheet" href="/assets/css/word-formation.css">{% endif %}
   {% if earningsGame %}<link rel="stylesheet" href="/assets/css/earnings-game.css">{% endif %}
@@ -219,9 +219,12 @@
   {% include "plot-game.njk" %}
   <script src="/assets/js/plot-game.js" defer></script>
   {% endif %}
-  {% if showEssayJigsaw %}
-  {% include "essay-jigsaw.njk" %}
-  <script src="/assets/js/essay-jigsaw.js?v=3" defer></script>
+  {% if showParagraphGames %}
+  {% from "essay-jigsaw.njk" import paragraphGame %}
+  {% for game in paragraphGames %}
+  {{ paragraphGame(game, game.bank | paragraphBank) }}
+  {% endfor %}
+  <script src="/assets/js/essay-jigsaw.js?v=4" defer></script>
   {% endif %}
   {% if showAnalysisGaps %}
   {% include "analysis-gaps.njk" %}

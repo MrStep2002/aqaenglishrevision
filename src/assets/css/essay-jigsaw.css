@@ -1,8 +1,8 @@
 .quote-game.essay-jigsaw {
   --jigsaw-gap: .55rem;
   --jigsaw-edge: color-mix(in srgb, var(--ink) 21%, var(--rule));
-  --jigsaw-green: #2b614b;
-  --jigsaw-green-bg: #edf6eb;
+  --jigsaw-accent: #2b614b;
+  --jigsaw-placed: #edf6eb;
   --jigsaw-review: #995421;
   position: fixed;
   /* Use the visible viewport even when the lesson behind the dialog overflows. */
@@ -18,9 +18,17 @@
 }
 
 [data-page="dark"] .essay-jigsaw {
-  --jigsaw-green: #ade0c2;
-  --jigsaw-green-bg: #24362f;
+  --jigsaw-accent: #ade0c2;
+  --jigsaw-placed: #24362f;
   --jigsaw-review: #f6bb86;
+}
+
+.essay-jigsaw[data-jigsaw-skin="section"] {
+  --pine: var(--world);
+  --berry: var(--deep);
+  --gold: var(--glow);
+  --jigsaw-accent: var(--accent);
+  --jigsaw-placed: color-mix(in srgb, var(--accent) 11%, var(--bg));
 }
 
 .essay-jigsaw .jigsaw-header {
@@ -63,11 +71,11 @@
 }
 
 .jigsaw-actions button:hover:not(:disabled) {
-  border-color: var(--jigsaw-green);
+  border-color: var(--jigsaw-accent);
 }
 
 .essay-jigsaw button:focus-visible {
-  outline: 2px solid var(--jigsaw-green);
+  outline: 2px solid var(--jigsaw-accent);
   outline-offset: 2px;
 }
 
@@ -89,12 +97,12 @@
   padding: var(--jigsaw-gap);
   border: 2px dashed color-mix(in srgb, var(--muted) 67%, var(--rule));
   border-radius: .85rem;
-  background: color-mix(in srgb, var(--jigsaw-green) 5%, var(--bg));
+  background: color-mix(in srgb, var(--jigsaw-accent) 5%, var(--bg));
 }
 
 .jigsaw-zone[data-drop] {
-  border-color: var(--jigsaw-green);
-  background: var(--jigsaw-green-bg);
+  border-color: var(--jigsaw-accent);
+  background: var(--jigsaw-placed);
 }
 
 .jigsaw-placeholder {
@@ -111,7 +119,7 @@
   margin-top: .35rem;
 }
 
-.jigsaw-zone[data-append] .jigsaw-placeholder { color: var(--jigsaw-green); }
+.jigsaw-zone[data-append] .jigsaw-placeholder { color: var(--jigsaw-accent); }
 
 .jigsaw-answer,
 .jigsaw-bank {
@@ -147,7 +155,7 @@
 }
 
 .essay-jigsaw .jigsaw-piece:hover {
-  border-color: var(--jigsaw-green);
+  border-color: var(--jigsaw-accent);
   background: var(--jigsaw-piece-bg, var(--card));
 }
 
@@ -169,8 +177,8 @@
 }
 
 .jigsaw-answer .jigsaw-piece {
-  --jigsaw-piece-bg: var(--jigsaw-green-bg);
-  border-color: color-mix(in srgb, var(--jigsaw-green) 47%, var(--jigsaw-edge));
+  --jigsaw-piece-bg: var(--jigsaw-placed);
+  border-color: color-mix(in srgb, var(--jigsaw-accent) 47%, var(--jigsaw-edge));
 }
 
 .jigsaw-tile[data-review] .jigsaw-piece {
@@ -187,7 +195,7 @@
   inset: calc(var(--jigsaw-gap) / -2 - 1px) 0 auto;
   height: 3px;
   border-radius: .25rem;
-  background: var(--jigsaw-green);
+  background: var(--jigsaw-accent);
   pointer-events: none;
   content: "";
 }
@@ -201,7 +209,7 @@
   left: 0;
   display: block;
   padding: .55rem .85rem;
-  border-color: var(--jigsaw-green);
+  border-color: var(--jigsaw-accent);
   box-shadow: 0 .55rem 1.5rem #16201b3b;
   pointer-events: none;
 }
@@ -209,9 +217,9 @@
 .jigsaw-model {
   margin: 0;
   padding: clamp(.8rem, 3vw, 1.35rem);
-  border: 1px solid var(--jigsaw-green);
+  border: 1px solid var(--jigsaw-accent);
   border-radius: .8rem;
-  background: var(--jigsaw-green-bg);
+  background: var(--jigsaw-placed);
   font-size: var(--size);
   line-height: var(--lh);
   letter-spacing: var(--ls);
@@ -246,13 +254,13 @@
 
 .jigsaw-actions .jigsaw-primary {
   margin-left: auto;
-  border-color: var(--jigsaw-green);
-  background: var(--jigsaw-green);
+  border-color: var(--jigsaw-accent);
+  background: var(--jigsaw-accent);
   color: var(--bg);
 }
 
 .jigsaw-actions .jigsaw-primary:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--jigsaw-green) 87%, var(--bg));
+  background: color-mix(in srgb, var(--jigsaw-accent) 87%, var(--bg));
 }
 
 .jigsaw-actions .jigsaw-primary:disabled {
