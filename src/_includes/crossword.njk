@@ -1,0 +1,20 @@
+<dialog class="quote-game crossword" id="crossword" aria-labelledby="crossword-title" tabindex="-1">
+  <form class="quote-close" method="dialog"><button type="submit" aria-label="Close Crossword">×</button></form>
+  <div class="crossword-board">
+    <div class="crossword-grid" role="grid" aria-label="Crossword grid"></div>
+    <div class="crossword-side">
+      <h2 id="crossword-title">Crossword</h2>
+      <p class="crossword-status" aria-live="polite"></p>
+      <div class="crossword-actions">
+        <button type="button" class="crossword-check">Check</button>
+        <button type="button" class="crossword-reveal" aria-label="Reveal a letter">Letter</button>
+        <button type="button" class="crossword-new">New</button>
+      </div>
+      <h3>Across</h3>
+      <div class="crossword-clues" data-clues="across"></div>
+      <h3>Down</h3>
+      <div class="crossword-clues" data-clues="down"></div>
+    </div>
+  </div>
+  <script type="application/json" class="quiz-bank">{{ crosswordBank | safe }}</script>
+</dialog>

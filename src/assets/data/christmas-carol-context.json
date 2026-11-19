@@ -131,19 +131,8 @@
     "themes": ["social-injustice"],
     "accepted": ["food and shelter", "shelter and food", "food and a bed", "a bed and food", "board and lodging"]
   },
-    {
-    "question": "What could a separated mother ask a court for under the Custody of Infants Act of 1839?",
-    "choices": [
-      "Custody of her children up to the age of seven",
-      "Automatic custody of all her children",
-      "The power to deny the father any contact with the children",
-      "A share of her husband's property simply because she had children"
-    ],
-    "themes": [],
-    "accepted": ["custody of children up to seven", "custody of her young children", "custody of children under seven", "the right to apply for custody of her young children"]
-  },
   {
-    "question": "What punishment does the Context page describe as sending convicted people to colonies such as Australia?",
+    "question": "What was the name for sending convicted people to colonies such as Australia?",
     "choices": ["Transportation", "A fine", "Hard labour in a local prison", "Public whipping"],
     "themes": ["social-injustice"],
     "accepted": ["penal transportation", "transportation to australia", "deportation"]

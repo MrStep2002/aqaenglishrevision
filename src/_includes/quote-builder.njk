@@ -1,0 +1,27 @@
+<dialog class="quote-game quote-builder" id="quote-builder" aria-labelledby="builder-title" aria-describedby="builder-guide">
+  <form class="quote-close" method="dialog">
+    <button type="submit" aria-label="Close Quote Builder">×</button>
+  </form>
+  <header>
+    <h2 id="builder-title" tabindex="-1">Quote Builder</h2>
+    <p id="builder-guide">Choose the tiles in order to build Dickens’s quotation.</p>
+  </header>
+  <div class="builder-board">
+    <section class="builder-work">
+      <div class="builder-label">
+        <h3>Your quotation</h3>
+        <span class="builder-count"></span>
+      </div>
+      <div class="builder-answer" role="list" aria-label="Tiles in quotation order"></div>
+    </section>
+    <section class="builder-choices" aria-label="Available tiles">
+      <h3>Word tiles</h3>
+      <div class="builder-bank"></div>
+    </section>
+  </div>
+  <footer class="builder-footer">
+    <p class="builder-status" role="status" aria-atomic="true"></p>
+    <button class="builder-retry" type="button" hidden>Try again</button>
+  </footer>
+  <script type="application/json" class="builder-data">{{ quoteBuilderBank | safe }}</script>
+</dialog>

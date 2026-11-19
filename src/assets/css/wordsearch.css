@@ -1,0 +1,83 @@
+.quote-game.wordsearch {
+  position: fixed;
+  inset: 0 calc(100% - 100vw) calc(100% - 100vh) 0;
+  bottom: calc(100% - 100dvh);
+  translate: var(--wordsearch-view-left, 0px) var(--wordsearch-view-top, 0px);
+  width: min(58rem, calc(100vw - .75rem));
+  height: min(37rem, calc(100dvh - .75rem));
+  max-width: none;
+  max-height: none;
+  overflow: hidden;
+  --wordsearch-good: #235144;
+}
+.wordsearch:focus { outline: none; }
+.quote-game .wordsearch-header { flex: none; display: flex; justify-content: center; align-items: center; gap: .5rem; margin: .1rem 0 .5rem; padding-inline: 2rem; }
+.wordsearch .wordsearch-header > .quote-holly { flex: 0 0 3.25rem; margin-inline: -.25rem; transform: scale(.75); }
+.wordsearch .wordsearch-header h2 { font-size: clamp(1.4rem, 4vw, 2.1rem); }
+.wordsearch-toolbar { flex: none; display: flex; align-items: center; justify-content: space-between; gap: .7rem; min-height: 2.8rem; }
+.wordsearch-toolbar p { margin: 0; font-size: .95rem; line-height: 1.35; }
+.wordsearch-toolbar > p { flex: 1; min-width: 0; }
+.wordsearch-tools { flex: none; display: flex; align-items: center; gap: .5rem; }
+.wordsearch .wordsearch-clue { min-height: 44px; padding: .35em .65em; }
+.wordsearch .wordsearch-clue:disabled { opacity: .45; cursor: default; }
+.wordsearch-count { white-space: nowrap; font: 600 1rem / 1.35 var(--mono); color: var(--wordsearch-good); font-variant-numeric: tabular-nums; }
+.wordsearch-layout { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(11rem, .75fr) minmax(0, 1fr); gap: clamp(1rem, 3vw, 2rem); }
+.wordsearch-sidebar { display: flex; flex-direction: column; gap: .65rem; min-width: 0; min-height: 0; }
+.wordsearch .wordsearch-reveal { flex: none; min-height: 44px; background: var(--card); color: var(--ink); }
+.wordsearch .wordsearch-reveal:disabled { opacity: .45; cursor: default; }
+.wordsearch-words { flex: 1; min-height: 0; display: grid; grid-template-rows: repeat(8, minmax(1.6rem, 1fr)); list-style: none; margin: 0; padding: .35rem .65rem; overflow: auto; border: 1px solid var(--rule); border-radius: .5rem; background: var(--card); }
+.wordsearch-word { display: flex; align-items: center; justify-content: space-between; gap: .35rem; min-width: 0; padding: .2rem .45rem; border-bottom: 1px solid var(--rule); color: var(--ink); font: 600 1rem / 1.2 var(--mono); }
+.wordsearch-word:last-child { border-bottom: 0; }
+.wordsearch-word.is-unrevealed { color: var(--muted); }
+.wordsearch-word.is-found { color: var(--wordsearch-good); }
+.wordsearch-word.is-found > span:first-child { text-decoration: line-through; }
+.wordsearch-play { min-width: 0; min-height: 0; display: grid; place-items: center; container-type: size; }
+.wordsearch-board { position: relative; width: min(100cqw, 100cqh, 28rem); height: min(100cqw, 100cqh, 28rem); container-type: size; overflow: hidden; border-radius: .5rem; background: var(--card); box-shadow: 0 0 0 1px var(--rule); transition: box-shadow .2s; }
+.wordsearch-board.is-complete { box-shadow: 0 0 0 3px var(--wordsearch-good); }
+.wordsearch-grid, .wordsearch-lines { position: absolute; inset: 0; width: 100%; height: 100%; }
+.wordsearch-grid { display: grid; grid-template-rows: repeat(10, minmax(0, 1fr)); z-index: 2; touch-action: none; user-select: none; -webkit-user-select: none; }
+.wordsearch-row { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); min-height: 0; }
+.wordsearch .wordsearch-cell { display: grid; place-items: center; min-width: 0; min-height: 0; padding: 0; border: 0; border-radius: 0; background: transparent; color: var(--ink); font: 600 clamp(.85rem, 6cqw, 1.4rem) / 1 var(--mono); box-shadow: inset 0 0 0 .5px var(--rule); cursor: crosshair; touch-action: none; }
+.wordsearch .wordsearch-cell:hover { background: color-mix(in srgb, var(--ink) 5%, transparent); }
+.wordsearch .wordsearch-cell:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.wordsearch .wordsearch-cell.is-clue { background: #f4d592; color: #302814; box-shadow: inset 0 0 0 2px #ad7929; }
+.wordsearch-lines { z-index: 1; pointer-events: none; }
+.wordsearch-lines line { stroke-width: .72; stroke-linecap: round; opacity: .65; }
+.wordsearch-footer { flex: none; display: flex; align-items: center; justify-content: space-between; gap: .7rem; height: 3.25rem; min-height: 3.25rem; margin-top: .6rem; }
+.wordsearch-status { flex: 1; margin: 0; color: var(--wordsearch-good); font-size: .95rem; line-height: 1.3; }
+.wordsearch .wordsearch-new { flex: none; min-height: 44px; background: var(--wordsearch-good); color: white; }
+.wordsearch .wordsearch-new:hover { background: #163a30; color: white; }
+.wordsearch-sr { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+[data-page="dark"] .wordsearch { --wordsearch-good: #afd9bd; }
+[data-page="dark"] .wordsearch .wordsearch-new { background: #235144; }
+[data-page="dark"] .wordsearch-lines line { opacity: .27; }
+@media (max-width: 30rem) {
+  .quote-game.wordsearch { padding: .75rem; }
+  .quote-game .wordsearch-header { gap: .25rem; }
+  .wordsearch .wordsearch-header > .quote-holly { flex-basis: 2.7rem; margin-inline: -.6rem; transform: scale(.58); }
+  .wordsearch-toolbar { height: 3rem; min-height: 3rem; }
+  .wordsearch-toolbar p { font-size: .88rem; }
+}
+@media (max-width: 40rem) and (orientation: portrait) {
+  .quote-game.wordsearch { height: min(46rem, calc(100dvh - .75rem), calc(100vw + 18rem)); }
+  .wordsearch-layout { grid-template-columns: 1fr; grid-template-rows: 9rem minmax(0, 1fr); gap: .7rem; }
+  .wordsearch-sidebar { gap: .35rem; }
+  .wordsearch-words { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(4, minmax(0, 1fr)); gap: 0 .5rem; padding: .2rem .4rem; }
+  .wordsearch-word { padding: .1rem .25rem; font-size: .85rem; }
+  .wordsearch-word:nth-last-child(-n+2) { border-bottom: 0; }
+}
+@media (max-height: 30rem) {
+  .quote-game.wordsearch { padding-block: .5rem; }
+  .quote-game .wordsearch-header { margin-bottom: .15rem; }
+  .wordsearch .wordsearch-header h2 { font-size: 1.4rem; }
+  .wordsearch-toolbar { min-height: 2.75rem; height: 2.75rem; }
+  .wordsearch-tools { margin-right: 2.75rem; }
+  .wordsearch-footer { height: 2.8rem; min-height: 2.8rem; margin-top: .35rem; }
+}
+@media (max-width: 23rem) { .quote-game .wordsearch-header { padding-inline: 0 2.5rem; } }
+@media (min-width: 48rem) and (max-height: 30rem) {
+  .wordsearch-words { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(4, minmax(1.4rem, 1fr)); gap: 0 .35rem; padding-inline: .35rem; }
+  .wordsearch-word { padding-inline: .2rem; font-size: .85rem; }
+  .wordsearch-word:nth-last-child(-n+2) { border-bottom: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .wordsearch-board { transition: none; } }

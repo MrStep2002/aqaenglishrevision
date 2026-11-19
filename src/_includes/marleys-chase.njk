@@ -1,0 +1,44 @@
+<dialog class="marley-chase" id="marleys-chase" aria-label="Marley’s Chase">
+  <section class="chase-question" aria-labelledby="chase-label">
+    <h3 class="chase-eyebrow" id="chase-label">Find the missing word</h3>
+    <p class="chase-phrase" aria-live="polite" aria-atomic="true"></p>
+  </section>
+  <div class="chase-playfield">
+    <div class="chase-map" role="img" aria-label="Snowy London street maze with Scrooge’s red nightcap, two haunted cash boxes and vocabulary words in the streets.">
+      <canvas class="chase-roofs" width="660" height="484" aria-hidden="true"></canvas>
+      <div class="chase-pickups" aria-hidden="true"></div>
+      <canvas class="chase-piece chase-cap" width="48" height="48" aria-hidden="true"></canvas>
+      <canvas class="chase-piece chase-box" width="48" height="48" aria-hidden="true"></canvas>
+      <canvas class="chase-piece chase-box" width="48" height="48" aria-hidden="true"></canvas>
+    </div>
+    <div class="chase-cover">
+      <section class="chase-card">
+        <h3 class="chase-message"></h3>
+        <p class="chase-detail"></p>
+        <label class="chase-level">Vocabulary level
+          <select><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
+        </label>
+        <button type="button" class="chase-action">Play chase</button>
+      </section>
+    </div>
+  </div>
+  <aside class="chase-rail" aria-label="Game controls and score">
+    <div class="chase-tools">
+      <button type="button" class="chase-pause" aria-label="Pause" title="Pause" hidden><span aria-hidden="true">Ⅱ</span></button>
+      <form method="dialog"><button class="chase-close" aria-label="Close Marley’s Chase" title="Close">×</button></form>
+    </div>
+    <div class="chase-score"><span class="chase-eyebrow">Words</span><strong class="chase-count">0</strong></div>
+    <div class="chase-life-panel"><span class="chase-eyebrow">Lives</span>
+      <div class="chase-lives" role="img" aria-label="3 lives remaining">
+        {% for i in [1, 2, 3] %}<canvas width="48" height="48" aria-hidden="true"></canvas>{% endfor %}
+      </div>
+    </div>
+    <div class="chase-pad" aria-label="Steering controls" role="group">
+      {% for direction in ["up", "left", "down", "right"] %}
+      <button type="button" data-dir="{{ direction }}" aria-label="Steer {{ direction }}"><span aria-hidden="true"></span></button>
+      {% endfor %}
+    </div>
+  </aside>
+  <p class="chase-status" role="status"></p>
+  <script type="application/json" class="chase-data">{{ vocabularyBank | safe }}</script>
+</dialog>

@@ -5,6 +5,14 @@
 const readParagraphBank = require("./tools/read-paragraph-bank");
 
 module.exports = function (eleventyConfig) {
+  eleventyConfig.addWatchTarget("assets-folder-bank/A Christmas Carol - Vocabulary.csv");
+  eleventyConfig.addWatchTarget("src/assets/data/christmas-carol-quotes.csv");
+  eleventyConfig.addWatchTarget("src/assets/data/plot-quiz.csv");
+  eleventyConfig.addWatchTarget("src/assets/data/christmas-carol-vocabulary.csv");
+  eleventyConfig.addWatchTarget("src/assets/data/fog-run.csv");
+  eleventyConfig.addWatchTarget("src/assets/data/christmas-carol-hangman.csv");
+  eleventyConfig.addWatchTarget("src/assets/data/christmas-carol-crossword.csv");
+  eleventyConfig.addWatchTarget("src/assets/data/christmas-carol-wall.csv");
   eleventyConfig.addWatchTarget("src/assets/data/christmas-carol-analysis-gaps.csv");
   eleventyConfig.addWatchTarget("src/assets/data/paragraph-games/*.csv");
   eleventyConfig.addFilter("paragraphBank", readParagraphBank);

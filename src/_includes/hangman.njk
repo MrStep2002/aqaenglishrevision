@@ -1,0 +1,48 @@
+<dialog class="quote-game hangman" id="hangman" aria-labelledby="hangman-title" aria-describedby="hangman-instructions" tabindex="-1">
+  <form class="quote-close" method="dialog"><button type="submit" aria-label="Close Hangman">×</button></form>
+  <header class="hangman-header">
+    <div class="hangman-difficulty">
+      <p id="hangman-difficulty-label">Level</p>
+      <div class="hangman-levels" role="group" aria-labelledby="hangman-difficulty-label">
+        {% for level in [1, 2, 3] %}
+        <button type="button" data-level="{{ level }}" aria-pressed="{{ 'true' if loop.first else 'false' }}" aria-label="Level {{ level }}">{{ level }}</button>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="hangman-title">
+      <span class="quote-holly" aria-hidden="true"><i></i></span>
+      <h2 id="hangman-title">Hangman</h2>
+      <span class="quote-holly" aria-hidden="true"><i></i></span>
+    </div>
+    <p class="hangman-saved" role="status">Saved 0</p>
+  </header>
+  <div class="hangman-body">
+    <div class="hangman-stage">
+      <figure class="hangman-mascot">
+        <div class="hangman-portrait">
+          <img class="hangman-mouse" src="/assets/pictures/acc/mouse-nightcap.png" alt="The site mouse wearing a Victorian nightcap" width="1254" height="1254" loading="lazy" decoding="async" draggable="false">
+          <div class="hangman-fog" aria-hidden="true"></div>
+        </div>
+        <figcaption>
+          <p class="hangman-chances">7 chances left</p>
+          <div class="hangman-lives" aria-hidden="true">
+            {% for life in [1, 2, 3, 4, 5, 6, 7] %}<span class="hangman-life"></span>{% endfor %}
+          </div>
+        </figcaption>
+      </figure>
+      <div class="hangman-play">
+        <p id="hangman-instructions" class="hangman-instructions">Choose letters to save the mouse from the fog.</p>
+        <p class="hangman-word" role="group" aria-live="polite" aria-atomic="true"></p>
+        <div class="hangman-clue">
+          <button class="hangman-hint" type="button" aria-controls="hangman-hint-text">Show hint</button>
+          <p id="hangman-hint-text" class="hangman-hint-text" hidden></p>
+        </div>
+        <p class="hangman-feedback" role="status"></p>
+        <button class="hangman-next" type="button" hidden>Next word <span aria-hidden="true">→</span></button>
+      </div>
+    </div>
+  </div>
+  <div class="hangman-keys" role="group" aria-label="Letters. Choose a button or type on your keyboard."></div>
+  <p class="hangman-status" role="status"></p>
+  <script class="quiz-bank" type="application/json">{{ hangmanBank | safe }}</script>
+</dialog>

@@ -1,18 +1,20 @@
-document.querySelectorAll('.quote-game[data-quotes], .quote-game[data-questions]').forEach(dialog => {
+document.querySelectorAll('.quote-game[data-quotes], .quote-game[data-questions], .quote-game[data-question-bank]').forEach(dialog => {
   const launcher = document.getElementById('play-' + dialog.id);
-  const status = dialog.querySelector('.quote-status');
+  const status = dialog.querySelector('.quote-status[role="status"]');
   const meter = dialog.querySelector('meter');
   const percent = dialog.querySelector('.quote-percent');
   const prompt = dialog.querySelector('.quote-prompt');
   const options = dialog.querySelector('.quote-options');
+  const mode = dialog.querySelector('.quote-mode');
   const form = dialog.querySelector('.quote-type');
-  const input = form.querySelector('input');
+  const input = form?.querySelector('input');
   const feedback = dialog.querySelector('.quote-feedback');
   const next = dialog.querySelector('.quote-next');
+  const questionBank = dialog.querySelector('.quiz-bank');
 
   const { theme } = dialog.dataset;
-  const useQuotePools = !theme && !dialog.dataset.questions;
   const poolButtons = [...dialog.querySelectorAll('[data-pool]')];
+  const useQuotePools = poolButtons.length > 0;
   let pool = 10;
   let advanceTimer;
 
@@ -38,15 +40,16 @@ document.querySelectorAll('.quote-game[data-quotes], .quote-game[data-questions]
   function readQuotes(csv) {
     // Each quote occupies one line. CSV double quotes inside fields are escaped as "".
     const [header, ...lines] = csv.trim().split(/\r?\n/);
-    if (header.replaceAll('"', '') !== 'quote,blanks,themes,characters,pool') throw new Error('Unexpected quote CSV header');
+    const columns = header.replaceAll('"', '').split(',');
+    if (columns.slice(0, 5).join(',') !== 'quote,blanks,themes,characters,pool') throw new Error('Unexpected quote CSV header');
 
     return lines.filter(line => line.trim()).map(line => {
-      const fields = line.match(/("(?:[^"]|"")*"|[^",]+)(,|$)/g);
-      if (!fields || fields.join('') !== line || fields.length !== 5) {
+      const fields = [...line.matchAll(/(?:^|,)("(?:[^"]|"")*"|[^",]*)(?=,|$)/g)];
+      if (fields.length !== columns.length || fields.map(match => match[0]).join('') !== line) {
         throw new Error('Invalid quote CSV row');
       }
-      const [quote, blankGroups, themes, characters, tier] = fields.map(field =>
-        field.replace(/,$/, '').replace(/^"|"$/g, '').replaceAll('""', '"')
+      const [quote, blankGroups, themes, characters, tier] = fields.map(([, value]) =>
+        value.replace(/^"|"$/g, '').replaceAll('""', '"')
       );
       const words = [...quote.matchAll(/\p{L}+(?:[’'-]\p{L}+)*/gu)];
       const blanks = blankGroups.split(';').map(group => {
@@ -70,10 +73,12 @@ document.querySelectorAll('.quote-game[data-quotes], .quote-game[data-questions]
 
   function showAnswerMode() {
     const takingTurn = Boolean(round[index]) && !answered;
-    const typed = dialog.querySelector('.quote-mode input:checked').value === 'type';
+    const typed = mode?.querySelector('input:checked')?.value === 'type';
     options.hidden = !takingTurn || typed;
-    form.hidden = !takingTurn || !typed;
-    if (!form.hidden && dialog.open) input.focus();
+    if (form) {
+      form.hidden = !takingTurn || !typed;
+      if (!form.hidden && dialog.open) input.focus();
+    }
   }
 
   function showQuestion() {
@@ -90,9 +95,9 @@ document.querySelectorAll('.quote-game[data-quotes], .quote-game[data-questions]
       button.addEventListener('click', () => check(choice));
       return button;
     }));
-    input.value = '';
+    if (input) input.value = '';
     showAnswerMode();
-    if (form.hidden && dialog.open) prompt.focus();
+    if ((!form || form.hidden) && dialog.open) prompt.focus();
   }
 
   function startRound(previousQuote) {
@@ -119,7 +124,7 @@ document.querySelectorAll('.quote-game[data-quotes], .quote-game[data-questions]
 
   function check(guess) {
     if (answered || !round[index]) return;
-    const { answer, accepted = [], quote, isContext } = round[index];
+    const { answer, accepted = [], quote, isContext, explanation } = round[index];
     const correct = [answer, ...accepted].some(value => normalise(value) === normalise(guess));
     attempts++;
     if (correct) correctCount++;
@@ -131,10 +136,11 @@ document.querySelectorAll('.quote-game[data-quotes], .quote-game[data-questions]
     if (!isContext) prompt.textContent = '“' + quote + '”';
     feedback.textContent = correct ? 'Correct!' :
       isContext ? `The answer was “${answer}”.` : `The missing word was “${answer}”.`;
+    if (!correct && explanation) feedback.textContent += ' ' + explanation;
     showAnswerMode();
     if (correct) {
       prompt.focus();
-      advanceTimer = setTimeout(advance, 1000);
+      advanceTimer = setTimeout(advance, Number(dialog.dataset.advanceDelay || 1000));
     } else {
       next.textContent = isContext ? 'Next question' : 'Next quote';
       next.hidden = false;
@@ -153,18 +159,17 @@ document.querySelectorAll('.quote-game[data-quotes], .quote-game[data-questions]
     status.textContent = 'Loading questions…';
     next.hidden = true;
     try {
-      const [quoteItems, contextItems] = await Promise.all([
+      const [quoteItems, questions] = await Promise.all([
         loadBank(dialog.dataset.quotes, async response => readQuotes(await response.text())),
-        loadBank(dialog.dataset.questions, async response => (await response.json()).map(
-          ({ question, choices, accepted, themes }) => ({
-            quote: question,
-            isContext: true,
-            themes,
-            blanks: [{ answer: choices[0], choices, accepted }],
-          })
-        )),
+        questionBank ? JSON.parse(questionBank.textContent) : loadBank(dialog.dataset.questions, response => response.json()),
       ]);
-      const loaded = [...quoteItems, ...contextItems].filter(item => !theme || item.themes?.includes(theme));
+      const questionItems = questions.map(({ question, choices, accepted, themes, explanation }) => ({
+        quote: question,
+        isContext: true,
+        themes,
+        blanks: [{ answer: choices[0], choices, accepted, explanation }],
+      }));
+      const loaded = [...quoteItems, ...questionItems].filter(item => !theme || item.themes?.includes(theme));
       if (!loaded.length) throw new Error('No matching questions');
       if (useQuotePools) {
         for (const size of [10, 25, 50]) {
@@ -186,6 +191,7 @@ document.querySelectorAll('.quote-game[data-quotes], .quote-game[data-questions]
   }
 
   function openGame() {
+    launcher.focus({ preventScroll: true });
     dialog.showModal();
     if (!quotes && !status.textContent) loadRound();
     else if (quotes) showAnswerMode();
@@ -205,8 +211,8 @@ document.querySelectorAll('.quote-game[data-quotes], .quote-game[data-questions]
     });
   }
 
-  dialog.querySelector('.quote-mode').addEventListener('change', showAnswerMode);
-  form.addEventListener('submit', event => {
+  mode?.addEventListener('change', showAnswerMode);
+  form?.addEventListener('submit', event => {
     event.preventDefault();
     if (input.value.trim()) check(input.value);
   });

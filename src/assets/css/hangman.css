@@ -1,0 +1,257 @@
+.quote-game.hangman {
+  position: fixed;
+  inset: 0 calc(100% - 100vw) calc(100% - 100vh) 0;
+  bottom: calc(100% - 100dvh);
+  width: min(55rem, calc(100vw - 1.25rem));
+  height: min(33rem, calc(100dvh - 1.25rem));
+  max-width: none;
+  max-height: calc(100dvh - 1.25rem);
+  overflow: hidden;
+  --hangman-mist: #e8f0eb;
+  --hangman-scene: #f7faf6;
+  --hangman-good: #235144;
+  --hangman-good-text: #fff;
+  --mouse-opacity: 1;
+  --mouse-blur: 0px;
+  --fog-opacity: 0;
+}
+
+.quote-game.hangman:focus { outline: none; }
+
+[data-page="dark"] .hangman {
+  --hangman-mist: #354740;
+  --hangman-scene: #222e2a;
+  --hangman-good: #afd9bd;
+  --hangman-good-text: #18221d;
+}
+
+.quote-game .hangman-header {
+  display: grid;
+  flex: none;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  grid-template-areas: "difficulty title saved";
+  align-items: center;
+  gap: .5rem;
+  margin: .1rem 0 0;
+  padding-bottom: .7rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.hangman-title {
+  grid-area: title;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .35rem;
+}
+
+.hangman-title .quote-holly { flex: 0 0 4rem; margin-inline: -.65rem; transform: scale(.7); }
+.hangman .hangman-title h2 { font-size: clamp(1.6rem, 3.4vw, 2.1rem); }
+.hangman-difficulty { grid-area: difficulty; display: flex; align-items: center; gap: .45rem; }
+.hangman-difficulty p { margin: 0; color: var(--muted); font: .95rem / 1.3 var(--mono); }
+.hangman-levels { display: flex; gap: .25rem; }
+.hangman .hangman-levels button { width: 44px; padding-inline: 0; font-size: 1.05rem; }
+.hangman-levels button[aria-pressed="true"] { background: var(--hangman-good); color: var(--hangman-good-text); border-color: var(--hangman-good); }
+.hangman-saved { grid-area: saved; justify-self: end; margin: 0 2.75rem 0 0; color: var(--hangman-good); font: 600 1.15rem / 1.3 var(--mono); white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+.hangman-body {
+  flex: 1;
+  min-height: 0;
+  padding-block: 1rem;
+  overflow: auto;
+  overflow-anchor: none;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable both-edges;
+  scroll-padding-block: .5rem;
+}
+
+.hangman-stage {
+  display: grid;
+  grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr);
+  gap: clamp(1rem, 3vw, 2rem);
+  align-items: center;
+  min-height: 100%;
+}
+
+.hangman-mascot { min-width: 0; margin: 0; text-align: center; }
+
+.hangman-portrait {
+  position: relative;
+  isolation: isolate;
+  width: min(13rem, 100%);
+  margin-inline: auto;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--hangman-good) 22%, var(--rule));
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 20%, var(--hangman-scene) 35%, var(--hangman-mist));
+  box-shadow: inset 0 0 2.5rem color-mix(in srgb, var(--hangman-good) 5%, transparent);
+  transition: border-color .35s, box-shadow .35s;
+}
+
+.hangman-mouse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 110%;
+  height: 110%;
+  max-width: none;
+  object-fit: contain;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: multiply;
+  opacity: var(--mouse-opacity);
+  filter: blur(var(--mouse-blur));
+  transition: opacity .6s ease, filter .6s ease;
+  user-select: none;
+  pointer-events: none;
+}
+
+[data-page="dark"] .hangman-mouse {
+  mix-blend-mode: screen;
+  filter: invert(1) blur(var(--mouse-blur));
+}
+
+.hangman-fog {
+  position: absolute;
+  inset: -15%;
+  overflow: hidden;
+  opacity: var(--fog-opacity);
+  pointer-events: none;
+  transition: opacity .65s ease;
+}
+
+.hangman-fog::before,
+.hangman-fog::after {
+  position: absolute;
+  inset: 0 -35%;
+  background:
+    radial-gradient(ellipse at 20% 65%, var(--hangman-mist) 10%, transparent 58%),
+    radial-gradient(ellipse at 75% 30%, var(--hangman-mist) 5%, transparent 55%),
+    radial-gradient(ellipse at 60% 95%, var(--hangman-mist) 15%, transparent 62%);
+  filter: blur(12px);
+  animation: hangman-fog-drift 9s ease-in-out infinite alternate;
+  content: "";
+}
+
+.hangman-fog::after { transform: scaleY(-1); animation-duration: 13s; animation-direction: alternate-reverse; }
+.hangman-chances { margin: .7rem 0 .4rem; color: var(--ink2); font-size: .95rem; }
+.hangman-lives { display: flex; justify-content: center; gap: .4rem; }
+.hangman-life { width: .55rem; height: .55rem; border: 1px solid var(--hangman-good); border-radius: 50%; background: var(--hangman-good); transition: background .35s, opacity .35s; }
+.hangman-life.is-spent { background: transparent; opacity: .35; }
+
+.hangman-play {
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  text-align: center;
+}
+
+.hangman-instructions { margin: 0 0 .85rem; color: var(--muted); line-height: 1.4; }
+.hangman-word {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .35rem .85rem;
+  width: 100%;
+  min-height: 2.6rem;
+  margin: 0;
+  font: 600 min(calc(var(--size) * 3.1), calc(94cqw / var(--hangman-word-width, 10))) / 1.3 var(--body);
+}
+
+.hangman-token { display: inline-flex; align-items: center; gap: .14em; }
+.hangman-slot { display: inline-grid; min-width: 1.2em; height: 1.3em; place-items: center; border-bottom: 3px solid var(--muted); color: var(--ink); }
+.hangman-slot.is-revealed { border-bottom-color: var(--hangman-good); color: var(--hangman-good); }
+.hangman-slot.is-new { animation: hangman-letter-in .22s ease-out; }
+.hangman-mark { margin-inline: .02em; }
+.hangman-clue { width: 100%; margin-top: .9rem; }
+.hangman .hangman-hint { padding: .35em .9em; font-size: .95rem; }
+.hangman-hint-text { margin: 0; padding: .7rem .8rem; border: 1px dashed var(--rule); border-radius: .6rem; background: var(--card); font-size: var(--size); line-height: 1.4; }
+.hangman-feedback { margin: .7rem 0 0; font-size: var(--size); line-height: 1.45; overflow-wrap: anywhere; }
+.hangman-feedback:empty { display: none; }
+.hangman .hangman-next { margin-top: .75rem; background: var(--hangman-good); color: var(--hangman-good-text); }
+.hangman .hangman-next:hover { background: color-mix(in srgb, var(--hangman-good) 88%, var(--ink)); color: var(--hangman-good-text); }
+.hangman-next span { margin-left: .4em; }
+.hangman[data-state="won"] .hangman-portrait { border-color: var(--hangman-good); box-shadow: 0 0 0 .3rem color-mix(in srgb, var(--hangman-good) 12%, transparent); }
+.hangman[data-state="won"] .hangman-life { opacity: 1; background: var(--hangman-good); }
+.hangman[data-state="won"] .hangman-chances { color: var(--hangman-good); font-weight: 600; }
+
+.hangman-keys {
+  display: grid;
+  flex: none;
+  grid-template-columns: repeat(13, minmax(0, 1fr));
+  gap: .35rem;
+  padding-top: .75rem;
+  border-top: 1px solid var(--rule);
+}
+
+.hangman .hangman-keys button {
+  position: relative;
+  min-width: 0;
+  min-height: 44px;
+  padding: .35rem 0;
+  font: 500 1.05rem / 1.2 var(--mono);
+  box-shadow: 0 2px var(--rule);
+  transition: background .15s, border-color .15s;
+}
+
+.hangman-keys button:active:not(:disabled) { transform: translateY(2px); box-shadow: none; }
+.hangman .hangman-keys button.is-hit { border-color: var(--hangman-good); background: var(--hangman-good); color: var(--hangman-good-text); box-shadow: none; }
+.hangman .hangman-keys button.is-miss { border-color: var(--rule); background: var(--slot); color: var(--muted); box-shadow: none; text-decoration: line-through; }
+.hangman-keys button:disabled:not(.is-hit):not(.is-miss) { opacity: .45; }
+.hangman-status { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+@keyframes hangman-fog-drift {
+  from { translate: -8% 5%; }
+  to { translate: 8% -5%; }
+}
+
+@keyframes hangman-letter-in {
+  from { opacity: 0; transform: translateY(.15em); }
+}
+
+@media (max-width: 40rem) {
+  .quote-game.hangman { width: calc(100vw - .75rem); height: min(42rem, calc(100dvh - .75rem)); max-height: calc(100dvh - .75rem); }
+  .hangman-body { padding-block: .5rem; }
+  .hangman-stage { grid-template-columns: minmax(0, 1fr); gap: .85rem; align-content: center; }
+  .hangman-portrait { width: min(6rem, 100%); }
+  .hangman-instructions { margin-bottom: .55rem; font-size: .9rem; }
+  .hangman-clue { margin-top: .6rem; }
+  .hangman .hangman-keys { grid-template-columns: repeat(7, minmax(0, 1fr)); gap: .3rem; }
+}
+
+@media (max-width: 46rem) {
+  .quote-game .hangman-header { grid-template-columns: 1fr 1fr; grid-template-areas: "title title" "difficulty saved"; gap: .55rem; }
+  .hangman-title { padding-inline: 2rem; }
+  .hangman-title .quote-holly { margin-inline: -1rem; transform: scale(.58); }
+  .hangman .hangman-title h2 { font-size: clamp(1.35rem, 5vw, 1.75rem); }
+  .hangman-saved { margin-right: 0; }
+}
+
+@media (max-width: 23rem) {
+  .hangman-difficulty p { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); }
+  .hangman-saved { font-size: 1.05rem; }
+  .hangman .hangman-keys { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+}
+
+@media (max-height: 40rem) {
+  .hangman-portrait { width: min(6rem, 100%); margin-inline: auto; }
+  .hangman-body { padding-block: .65rem; }
+  .hangman-instructions { margin-bottom: .5rem; font-size: .9rem; }
+  .hangman-word { font-size: min(calc(var(--size) * 2.65), calc(94cqw / var(--hangman-word-width, 10))); }
+  .hangman-clue { margin-top: .6rem; }
+}
+
+@media (max-width: 40rem) and (max-height: 40rem) {
+  .hangman-stage { grid-template-columns: minmax(0, .6fr) minmax(0, 1fr); gap: .7rem; }
+  .hangman-instructions { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); }
+  .hangman-chances { margin-top: .45rem; font-size: .8rem; line-height: 1.25; }
+  .hangman-lives { gap: .2rem; }
+  .hangman-life { width: .45rem; height: .45rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hangman-mouse, .hangman-fog, .hangman-life, .hangman-portrait, .hangman-keys button { transition: none; }
+  .hangman-fog::before, .hangman-fog::after, .hangman-slot.is-new { animation: none; }
+}

@@ -7,7 +7,8 @@
     "lang-paper-1",
     "lang-paper-2",
     "how-to-revise",
-    "teachers-corner"
+    "teachers-corner",
+    "games"
   ],
   "list": {
     "a-christmas-carol": {
@@ -60,6 +61,11 @@
       "eyebrow": "About this site",
       "world": "navy",
       "banner": "/assets/pictures/home/HOME-08.jpg"
+    },
+    "games": {
+      "label": "Games",
+      "eyebrow": "Revision activities",
+      "world": "navy"
     }
   }
 }

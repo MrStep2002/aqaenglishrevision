@@ -8,17 +8,26 @@
 {%- set hasLessonSections = 'class="lesson-section"' in content %}
 {%- set showContents = (navItem and navItem.children) or hasLessonSections %}
 {%- set showPicturePlanner = cur == "/lang-paper-1/p1-description/6-pics-tips" %}
-{%- set showQuoteAuction = 'id="play-quote-auction"' in content %}
+{%- set showMarleysChase = 'id="play-marleys-chase"' in content %}
+{%- set showFogRun = 'id="play-fog-run"' in content %}
+{%- set showQuoteBuilder = 'id="play-quote-builder"' in content %}
+{%- set showExtractEvidence = 'id="play-extract-evidence"' in content %}
 {%- set showParagraphGames = paragraphGames and (paragraphGames | length) %}
 {%- set showPlotGame = 'id="play-plot-order"' in content %}
 {%- set showContextQuiz = 'id="play-context-quiz"' in content %}
+{%- set showPlotQuiz = 'id="play-plot-quiz"' in content %}
 {%- set topic = cur.split("/")[2] %}
 {%- set isThemeQuiz = slug == "a-christmas-carol" and topic in ["change", "christmas", "compassion", "family", "greed", "social-injustice"] %}
 {%- set showWordFormation = cur == "/a-christmas-carol/essays" or 'id="play-word-formation"' in content %}
 {%- set showAnalysisGaps = isThemeQuiz or cur == "/a-christmas-carol/essays" %}
+{%- set showWordInContext = 'id="play-word-in-context"' in content %}
+{%- set showHangman = 'id="play-hangman"' in content %}
+{%- set showCrossword = 'id="play-crossword"' in content %}
+{%- set showWordsearch = 'id="play-wordsearch"' in content %}
+{%- set showConnectingWall = 'id="play-connecting-wall"' in content %}
 {%- set showQuoteRecall = 'id="play-quote-recall"' in content %}
 {%- set showThemeRevision = isThemeQuiz and 'id="play-theme-revision"' in content %}
-{%- set showQuoteGame = showQuoteRecall or showContextQuiz or showThemeRevision %}
+{%- set showQuoteGame = showQuoteRecall or showContextQuiz or showThemeRevision or showPlotQuiz %}
 {%- set b = content | splitBanner %}
 <html lang="en-GB" data-world="{{ world }}">
 <head>
@@ -46,13 +55,20 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&display=swap">
   {% if 'carol-quote' in content %}<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Germania+One&display=swap">{% endif %}
   <link rel="stylesheet" href="/assets/css/site.css">
-  {% if showQuoteGame or showQuoteAuction or showPlotGame or showParagraphGames or showAnalysisGaps or earningsGame %}<link rel="stylesheet" href="/assets/css/quote-game.css">{% endif %}
+  {% if showQuoteGame or showQuoteBuilder or showExtractEvidence or showPlotGame or showParagraphGames or showAnalysisGaps or showWordInContext or showHangman or showCrossword or showWordsearch or showConnectingWall or earningsGame %}<link rel="stylesheet" href="/assets/css/quote-game.css">{% endif %}
   {% if showPicturePlanner %}<link rel="stylesheet" href="/assets/css/picture-planner.css">{% endif %}
-  {% if showQuoteAuction %}<link rel="stylesheet" href="/assets/css/quote-auction.css">{% endif %}
+  {% if showMarleysChase %}<link rel="stylesheet" href="/assets/css/marleys-chase.css?v=2">{% endif %}
+  {% if showFogRun %}<link rel="stylesheet" href="/assets/css/fog-run.css?v=6">{% endif %}
+  {% if showQuoteBuilder %}<link rel="stylesheet" href="/assets/css/quote-builder.css">{% endif %}
+  {% if showExtractEvidence %}<link rel="stylesheet" href="/assets/css/extract-evidence.css">{% endif %}
   {% if showPlotGame %}<link rel="stylesheet" href="/assets/css/plot-game.css">{% endif %}
-  {% if showParagraphGames %}<link rel="stylesheet" href="/assets/css/essay-jigsaw.css?v=5">{% endif %}
+  {% if showParagraphGames %}<link rel="stylesheet" href="/assets/css/essay-jigsaw.css?v=6">{% endif %}
   {% if showAnalysisGaps %}<link rel="stylesheet" href="/assets/css/analysis-gaps.css">{% endif %}
   {% if showWordFormation %}<link rel="stylesheet" href="/assets/css/word-formation.css">{% endif %}
+  {% if showHangman %}<link rel="stylesheet" href="/assets/css/hangman.css?v=4">{% endif %}
+  {% if showCrossword %}<link rel="stylesheet" href="/assets/css/crossword.css">{% endif %}
+  {% if showWordsearch %}<link rel="stylesheet" href="/assets/css/wordsearch.css?v=3">{% endif %}
+  {% if showConnectingWall %}<link rel="stylesheet" href="/assets/css/connecting-wall.css">{% endif %}
   {% if earningsGame %}<link rel="stylesheet" href="/assets/css/earnings-game.css">{% endif %}
   <link rel="canonical" href="{{ site.url }}{{ cur }}">
   {%- if site.goatcounter %}
@@ -204,16 +220,29 @@
     </div>
   </footer>
 
-  {% if showQuoteAuction %}
-  {% include "quote-auction.njk" %}
-  <script src="/assets/js/quote-auction.js" defer></script>
+  {% if showExtractEvidence %}
+  {% include "extract-evidence.njk" %}
+  <script src="/assets/js/extract-evidence.js" defer></script>
+  {% endif %}
+  {% if showMarleysChase %}
+  {% include "marleys-chase.njk" %}
+  <script type="module" src="/assets/js/marleys-chase.js?v=2"></script>
+  {% endif %}
+  {% if showFogRun %}
+  {% include "fog-run.njk" %}
+  <script type="module" src="/assets/js/fog-run.js?v=6"></script>
+  {% endif %}
+  {% if showQuoteBuilder %}
+  {% include "quote-builder.njk" %}
+  <script src="/assets/js/quote-builder.js" defer></script>
   {% endif %}
   {% if showQuoteGame %}
   {% from "quote-game.njk" import quiz %}
   {% if showQuoteRecall %}{{ quiz("quote-recall", "Quote Recall") }}{% endif %}
   {% if showContextQuiz %}{{ quiz("context-quiz", "Context Quiz") }}{% endif %}
   {% if showThemeRevision %}{{ quiz("theme-revision", "Theme Revision", topic) }}{% endif %}
-  <script src="/assets/js/quote-game.js?v=2" defer></script>
+  {% if showPlotQuiz %}{% include "plot-quiz.njk" %}{% endif %}
+  <script src="/assets/js/quote-game.js?v=5" defer></script>
   {% endif %}
   {% if showPlotGame %}
   {% include "plot-game.njk" %}
@@ -224,7 +253,7 @@
   {% for game in paragraphGames %}
   {{ paragraphGame(game, game.bank | paragraphBank) }}
   {% endfor %}
-  <script src="/assets/js/essay-jigsaw.js?v=4" defer></script>
+  <script src="/assets/js/essay-jigsaw.js?v=5" defer></script>
   {% endif %}
   {% if showAnalysisGaps %}
   {% include "analysis-gaps.njk" %}
@@ -234,9 +263,29 @@
   {% include "word-formation.njk" %}
   <script src="/assets/js/word-formation.js" defer></script>
   {% endif %}
+  {% if showWordInContext %}
+  {% include "word-in-context.njk" %}
+  <script src="/assets/js/word-in-context.js" defer></script>
+  {% endif %}
+  {% if showHangman %}
+  {% include "hangman.njk" %}
+  <script src="/assets/js/hangman.js?v=5" defer></script>
+  {% endif %}
+  {% if showCrossword %}
+  {% include "crossword.njk" %}
+  <script src="/assets/js/crossword.js" defer></script>
+  {% endif %}
+  {% if showWordsearch %}
+  {% include "wordsearch.njk" %}
+  <script type="module" src="/assets/js/wordsearch.js?v=4"></script>
+  {% endif %}
   {% if earningsGame %}
   {% include "earnings-game.njk" %}
   <script src="/assets/js/earnings-game.js" defer></script>
+  {% endif %}
+  {% if showConnectingWall %}
+  {% include "connecting-wall.njk" %}
+  <script type="module" src="/assets/js/connecting-wall.js"></script>
   {% endif %}
   <script src="/assets/js/site.js" defer></script>
   {% if showPicturePlanner %}<script src="/assets/js/picture-planner.js" defer></script>{% endif %}

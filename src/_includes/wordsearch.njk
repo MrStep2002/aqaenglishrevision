@@ -1,0 +1,33 @@
+<dialog class="quote-game wordsearch" id="wordsearch" aria-labelledby="wordsearch-title" aria-describedby="wordsearch-instructions" tabindex="-1">
+  <form class="quote-close" method="dialog"><button type="submit" aria-label="Close Wordsearch">×</button></form>
+  <header class="wordsearch-header">
+    <span class="quote-holly" aria-hidden="true"><i></i></span>
+    <h2 id="wordsearch-title">Wordsearch</h2>
+    <span class="quote-holly" aria-hidden="true"><i></i></span>
+  </header>
+  <div class="wordsearch-toolbar">
+    <p id="wordsearch-instructions">Drag across a word in any direction.</p>
+    <div class="wordsearch-tools">
+      <p class="wordsearch-count">0 / 8</p>
+      <button class="wordsearch-clue" type="button">Clue</button>
+    </div>
+  </div>
+  <div class="wordsearch-layout">
+    <aside class="wordsearch-sidebar" aria-label="Words in this puzzle">
+      <button class="wordsearch-reveal" type="button" aria-controls="wordsearch-words">Reveal</button>
+      <ul class="wordsearch-words" id="wordsearch-words" aria-label="Puzzle words"></ul>
+    </aside>
+    <div class="wordsearch-play">
+      <div class="wordsearch-board">
+        <svg class="wordsearch-lines" viewBox="0 0 10 10" preserveAspectRatio="none" aria-hidden="true"></svg>
+        <div class="wordsearch-grid" role="grid" aria-label="Wordsearch. Ten rows and ten columns." aria-rowcount="10" aria-colcount="10" aria-describedby="wordsearch-keyboard"></div>
+      </div>
+    </div>
+  </div>
+  <footer class="wordsearch-footer">
+    <p class="wordsearch-status" role="status" aria-live="polite" aria-atomic="true"></p>
+    <button class="wordsearch-new" type="button">New grid</button>
+  </footer>
+  <p id="wordsearch-keyboard" class="wordsearch-sr">Use the arrow keys to move. Press Space or Enter to start a word, move to its last letter, then press Space or Enter again. Escape cancels a selection.</p>
+  <script type="application/json" class="wordsearch-bank">{{ wordsearchBank | safe }}</script>
+</dialog>

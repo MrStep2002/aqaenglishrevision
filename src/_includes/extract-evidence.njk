@@ -1,26 +1,9 @@
-<dialog id="quote-auction" class="quote-auction" aria-labelledby="quote-auction-title">
-  <header class="auction-header">
-    <h2 id="quote-auction-title">Quote Auction</h2>
-    <form method="dialog"><button>Close</button></form>
-  </header>
-  <p class="auction-instructions">You have two coins. Each quote costs one coin. Buy the two that give you the most direct evidence for the question.</p>
-  <div class="auction-round">
-    <p class="auction-progress"></p>
-    <h3 class="auction-question" tabindex="-1"></h3>
-    <div class="auction-lots"></div>
-    <p class="auction-budget" role="status"></p>
-    <button type="button" class="auction-reveal" disabled>Check my evidence</button>
-    <p class="auction-result" role="status" tabindex="-1" hidden></p>
-    <button type="button" class="auction-next" hidden>Next question</button>
-  </div>
-</dialog>
-
-<dialog id="extract-evidence" class="quote-auction" aria-labelledby="extract-evidence-title">
-  <header class="auction-header">
+<dialog id="extract-evidence" class="extract-evidence" aria-labelledby="extract-evidence-title">
+  <header class="evidence-header">
     <h2 id="extract-evidence-title">Extract Challenge</h2>
     <form method="dialog"><button>Close</button></form>
   </header>
-  <h3 class="auction-question" tabindex="-1">How does Dickens present Scrooge as someone who keeps others at a distance?</h3>
+  <h3 class="evidence-question" tabindex="-1">How does Dickens present Scrooge as someone who keeps others at a distance?</h3>
   <p>Choose two underlined phrases you would analyse. Select a phrase again to swap it out.</p>
   <figure class="evidence-extract">
     <blockquote>
@@ -31,7 +14,7 @@
     <figcaption>Charles Dickens, <cite>A Christmas Carol</cite>, Stave One</figcaption>
   </figure>
   <p class="evidence-count" role="status">0 of 2 phrases selected</p>
-  <button type="button" class="auction-reveal" disabled>Check my choices</button>
+  <button type="button" class="evidence-check" disabled>Check my choices</button>
   <section class="evidence-feedback" hidden>
     <h3 tabindex="-1"></h3>
     <p>These scores reflect how directly each phrase answers this question.</p>

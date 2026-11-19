@@ -26,6 +26,10 @@
       {
         "title": "Siege of Troy",
         "url": "/teachers-corner/siege-of-troy"
+      },
+      {
+        "title": "Games",
+        "url": "/games"
       }
     ]
   },
@@ -84,6 +88,10 @@
       {
         "title": "Key Quotes",
         "url": "/a-christmas-carol/key-quotes"
+      },
+      {
+        "title": "Games",
+        "url": "/games"
       }
     ]
   },
@@ -138,6 +146,10 @@
       {
         "title": "Key Quotes",
         "url": "/an-inspector-calls/key-quotes"
+      },
+      {
+        "title": "Games",
+        "url": "/games"
       }
     ]
   },
@@ -230,6 +242,10 @@
       {
         "title": "Challenges to the readings",
         "url": "/macbeth/challenges-to-the-readings"
+      },
+      {
+        "title": "Games",
+        "url": "/games"
       }
     ]
   },
@@ -248,6 +264,10 @@
       {
         "title": "Rorschach Test",
         "url": "/unseen-poetry/rorschach-test"
+      },
+      {
+        "title": "Games",
+        "url": "/games"
       }
     ]
   },
@@ -330,6 +350,10 @@
             "url": "/lang-paper-1/p1-short-story/the-garden"
           }
         ]
+      },
+      {
+        "title": "Games",
+        "url": "/games"
       }
     ]
   },
@@ -356,6 +380,10 @@
       {
         "title": "P2 - Creative Writing",
         "url": "/lang-paper-2/p2-creative-writing"
+      },
+      {
+        "title": "Games",
+        "url": "/games"
       }
     ]
   },
@@ -366,7 +394,15 @@
       {
         "title": "Literature AOs",
         "url": "/how-to-revise/literature-aos"
+      },
+      {
+        "title": "Games",
+        "url": "/games"
       }
     ]
+  },
+  {
+    "title": "Games",
+    "url": "/games"
   }
 ]

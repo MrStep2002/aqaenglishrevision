@@ -95,9 +95,49 @@ The front pages (`src/index.html` and each text's `index.html`) use a few more: 
 
 Add new Unseen Poetry resource links to the Practice section in `src/unseen-poetry/index.html`. The contents menu is in `src/_data/nav.json`. Staff Room uses the existing `/teachers-corner` address.
 
+### Plot Quiz
+
+Edit `src/assets/data/plot-quiz.csv` to add or change multiple-choice plot questions. Each row has a unique `id`, a `question`, the correct `answer`, three different wrong answers in `wrong1` to `wrong3`, and an optional `explanation`. The game shuffles the four choices.
+
+Separate multiple tags with semicolons in `themes`, `staves` and `characters`. Theme tags match the page addresses, using `change`, `christmas`, `compassion`, `family`, `greed` and `social-injustice`. Staves use numbers 1–5. Character tags use names such as `scrooge` and `bob-cratchit`. The `source` column records where to check each question in Dickens's text.
+
+The Plot page offers the full bank. The six theme pages use matching theme tags. Correct answers advance after three quarters of a second. Wrong answers show the explanation and wait for Next question. The game refills its shuffled question deck when it reaches the end. To add it to another page, use a launch button with `id="play-plot-quiz"`, `class="quote-launch"`, `type="button"`, `aria-haspopup="dialog"` and `aria-controls="plot-quiz"`.
+
+### Word in Context
+
+Edit `src/assets/data/christmas-carol-vocabulary.csv` to add or change vocabulary questions. Each row has a unique `word`, a `level` of 1, 2 or 3, a `definition`, and an `example` sentence that uses that word once. The game turns the word into a gap and offers three other words from the same level, chosen at random each time. Save the file as UTF-8 CSV. A comma inside a sentence is fine when the cell is quoted.
+
+Each level needs at least four words. A phrase such as `direct address` is one answer, and the button shows the whole phrase. The build names the row if the word is missing, repeated, or written in a different form from the example. Correct answers advance after three quarters of a second. Wrong answers show the definition and wait for Next question. The Essays page launches the game. To add it to another page, use a launch button with `id="play-word-in-context"`, `class="quote-launch"`, `type="button"`, `aria-haspopup="dialog"` and `aria-controls="word-in-context"`.
+
+### Fog Run
+
+Edit `src/assets/data/fog-run.csv` to change Fog Run's words and clues. It is separate from Word in Context and Marley's Chase, which keep their longer sentences. Each row has a `word` to collect, a `level` (1 = Easy, 2 = Medium, 3 = Hard), a `type` (`definition`, `character` or `quote`), and a short `clue`. Put one `____` gap in a quotation clue. The optional `source` column is for reference and does not appear in the game. An answer can have several different clues. Each level needs at least ten different answers. The bank contains 90 short definitions, 16 character clues and clues drawn from all 50 quotations in the site's quote bank. Save edits as UTF-8 CSV; the local development server rebuilds when this file changes.
+
+Each run chooses ten different answers and places them at fixed, shuffled positions. The clues use a separate order, with a mixture of the available clue types. Scrooge moves with Left/Right, jumps with Up/Space or a tap on the street, and can revisit any part of the street. There is no timer or automatic scrolling. A wrong collection leaves the clue and word in place. Collected words become ticks. After all ten are collected, run to Fred's door at the far right to enter the party.
+
+### Hangman
+
+Edit `src/assets/data/christmas-carol-hangman.csv`. This is a separate list from Word in Context. Each row has a `word`, a `level` of 1, 2 or 3, and an optional `definition`. The word column is what the player spells. A short quotation goes in that same column: add the line and it is included. Letters are guessed. Spaces, hyphens and punctuation stay on screen. Each level needs at least one row. Each wrong letter draws more fog over the nightcap mouse. Seven wrong guesses lose the round. Solving the word clears the fog and restores the mouse. Hint shows the definition for the current row, when that cell has one. The build names the row if the word is missing, repeated, or has no letters. The Essays page launches the game. To add it to another page, use a launch button with `id="play-hangman"`, `class="quote-launch"`, `type="button"`, `aria-haspopup="dialog"` and `aria-controls="hangman"`.
+
+### Crossword
+
+Edit `src/assets/data/christmas-carol-crossword.csv`. This is a separate list from the vocabulary bank. Each row is a `word` and a `clue`. Use letters only, with no spaces or hyphens, because each letter is one square. Opening the game deals a crossword of up to eight words from that list, and New deals another. Letter fills one missing letter in the selected word. The build names a row if the word is missing, repeated, or shares no letters with the rest of the list. The Essays page launches the game. To add it to another page, use a launch button with `id="play-crossword"`, `class="quote-launch"`, `type="button"`, `aria-haspopup="dialog"` and `aria-controls="crossword"`.
+
+### Connecting Wall
+
+Edit `src/assets/data/christmas-carol-wall.csv` to add categories. Each row has a unique `id`, a `level` (1 = Easy, 2 = Mid, 3 = Hard), a `group` name, at least four numbered word columns (`word1`, `word2`, and so on), and an optional `explanation`. Larger pools provide different four-word samples. Words may appear in several categories; the generator selects four compatible pools and displays only words belonging to exactly one of them. The selected level comes first, with nearby levels used if needed. The build reports invalid rows or a bank that cannot supply a complete wall.
+
+Select four tiles to check a group automatically. Correct groups reveal their names and move to the top; wrong guesses allow another attempt. The last group completes automatically after three are found. Shuffle moves the remaining tiles, Show a group reveals one, Restart resets the same wall, and New wall draws another. The optional three-minute timer can be paused and does not end play when time expires. Completing a wall makes its explanations available. The Essays page and Games page launch the game. To add it elsewhere, use `id="play-connecting-wall"`, `class="quote-launch"`, `type="button"`, `aria-haspopup="dialog"` and `aria-controls="connecting-wall"` on its launch button.
+
+Run `node --test tools/connecting-wall.test.mjs` to check generation, overlapping memberships and level selection.
+
+### Wordsearch
+
+Wordsearch uses the Level 1 entries in `src/assets/data/christmas-carol-crossword.csv`. Words must have 2–10 letters to fit the 10 × 10 board. Each new grid chooses eight different answers and uses horizontal, vertical and diagonal placements in both directions. The generator balances direction families and favours placements that cross at shared letters, trying new layouts for a connected puzzle. The landscape popup puts the grid on the right and a word box on the left. Reveal adds one puzzle word at a time to that box without marking it as found. Found words appear there automatically with a tick. New grid clears the box. On narrow phones the box sits above the grid. Clue highlights the first letter of a word still to find and gives its row and column. The hint stays until that word is found, another clue is requested, or a new grid is dealt. Drag across a word with a mouse or finger; found words stay highlighted. With a keyboard, use the arrow keys and press Space or Enter at the first and last letters. Escape cancels a selection. New grid deals another puzzle. The generator avoids creating extra unselected words from the eligible bank in the filler letters, and recognisable embedded words such as BELL in BELLE are included in the eight answers. The Essays page launches the game, and the Games page links to it. To add it elsewhere, include a button with `id="play-wordsearch"`, `class="quote-launch"`, `type="button"`, `aria-haspopup="dialog"` and `aria-controls="wordsearch"`.
+
 ### Paragraph games
 
-Edit [the A Christmas Carol bank](src/assets/data/paragraph-games/christmas-carol.csv) in a spreadsheet or text editor. Each row is one paragraph. Enter the question and put the sentences in their correct order across `sentence1`, `sentence2` and the following columns. Leave unused sentence cells blank. Add `sentence7` and further numbered columns for longer paragraphs. The corresponding `hint1`, `hint2` and other hint cells are optional, as is `explanation`, which appears after a solve. Save the file as UTF-8 CSV. Eleventy reads the bank when it builds the page.
+Edit [the Build the Paragraph bank](src/assets/data/paragraph-games/build-the-paragraph.csv) in a spreadsheet or text editor. Each row is one paragraph. Enter the question and put the sentences in their correct order across `sentence1`, `sentence2` and the following columns. Leave unused sentence cells blank. Add `sentence7` and further numbered columns for longer paragraphs. The corresponding `hint1`, `hint2` and other hint cells are optional, as is `explanation`, which appears after a solve. Save the file as UTF-8 CSV. Eleventy reads the bank when it builds the page.
 
 For another text or game, copy the CSV in `src/assets/data/paragraph-games/` and add an entry to the page's front matter.
 
