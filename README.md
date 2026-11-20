@@ -254,35 +254,11 @@ Visits are estimates, not an exact count of different people; repeat visits and 
 Do not add up individual page counts to calculate the number of people visiting the whole site.
 
 To exclude your own browsing while editing, open `/privacy` on the live site and select
-"Exclude my visits from both services". Do this in each browser you use. Visitors have the same
+"Exclude my visits from visitor statistics". Do this in each browser you use. Visitors have the same
 choice through the footer's privacy link. Clearing site data resets this browser preference.
 
 After publishing, open a revision page once in a browser that is not excluded and check that its visit
 appears in GoatCounter. If it does not, check whether an ad blocker is blocking the statistics script.
-
-### Google Analytics 4
-
-GA4 can run alongside GoatCounter. Put the site's real `G-...` Measurement ID in
-`googleAnalyticsId` in `src/_data/site.json`; an empty value disables the Google integration,
-including its notice. Never copy an example or another site's ID into the live configuration.
-
-In the owner's Analytics account, use Admin → Data streams to find or create the website's Web stream.
-Use `https://www.aqaenglishrevision.com` as its URL and turn off Enhanced measurement for this basic
-setup; this avoids automatically adding form, search, outbound-click and video events. Page views,
-sessions and standard engagement measurement still work. Leave Google signals and advertising
-personalisation off. Do not enable user-provided data collection or collect student identifiers.
-
-The local `google-analytics.js` loader implements basic consent mode: the Google tag is not requested
-until the visitor allows analytics. Advertising consent remains denied. Consent is stored for 180 days
-without an identifier, and can be changed at `/privacy#google-analytics`. Withdrawal disables the tag,
-clears GA analytics cookies and reloads any page where the tag was already loaded. Excluding visits
-with the existing browser checkbox blocks both analytics services. Local previews, frames, privacy
-and 404 pages do not send visits. URLs sent in the initial configuration omit query strings and fragments.
-
-After adding the ID and publishing, allow Google Analytics in a non-excluded browser, open a revision
-page and check Analytics → Realtime. Check again in normal reports after processing. Google only
-counts visitors who allow it, while GoatCounter's cookie-free counts may cover more visits, so totals
-will differ. Neither tool reconstructs visits made before its tag was published.
 
 ## How this was made
 

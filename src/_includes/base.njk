@@ -75,10 +75,6 @@
   <link rel="canonical" href="{{ site.url }}{{ cur }}">
   {#- The local loader respects the visitor's choice and only counts on the live domain. -#}
   <script src="/assets/js/analytics.js" data-goatcounter-code="{{ site.goatcounter | escape }}" data-site-url="{{ site.url | escape }}"{% if analytics === false or cur == "/404" %} data-analytics-disabled{% endif %} defer></script>
-  {% if site.googleAnalyticsId %}
-  <link rel="stylesheet" href="/assets/css/analytics-consent.css">
-  <script src="/assets/js/google-analytics.js" data-ga-id="{{ site.googleAnalyticsId | escape }}" data-site-url="{{ site.url | escape }}"{% if analytics === false or cur == "/404" %} data-analytics-disabled{% endif %} defer></script>
-  {% endif %}
 </head>
 <body class="{% if cur == '/' %}is-home{% elif isFront %}is-front{% else %}is-article{% endif %}{% if layoutClass %} {{ layoutClass }}{% endif %}">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -215,7 +211,6 @@
   </div>
 
   {#- The footer text lives in src/_data/site.json -#}
-  {% if site.googleAnalyticsId %}{% include "analytics-consent.njk" %}{% endif %}
   <footer class="site-footer">
     <div class="footer-inner">
       <img src="/assets/images/site/mouse.svg" alt="" width="36" height="30" class="brand-mouse">
