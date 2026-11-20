@@ -1,0 +1,15 @@
+/* Optional Google Analytics: accept and decline have equal emphasis. */
+.analytics-notice { position: fixed; inset: auto 0 0; z-index: 900; max-height: 60vh; overflow-y: auto; background: var(--card); color: var(--ink); border-top: 2px solid var(--ink); box-shadow: 0 -4px 20px #0002; }
+.analytics-notice-inner { max-width: 1100px; margin: auto; padding: 18px 24px; display: flex; align-items: center; gap: 18px 28px; }
+.analytics-notice h2 { margin: 0 0 5px; font: 600 18px var(--body); }
+.analytics-notice p { margin: 0; max-width: 66ch; font-size: 16px; line-height: 1.45; }
+.analytics-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.analytics-notice .analytics-actions { flex-shrink: 0; }
+.analytics-actions button { min-height: 44px; padding: 8px 14px; background: var(--bg); color: var(--ink); border: 1px solid var(--ink); border-radius: 6px; cursor: pointer; font: inherit; font-size: 16px; }
+.analytics-actions button:hover { text-decoration: underline; text-underline-offset: 3px; }
+.analytics-actions button:disabled { cursor: default; opacity: .65; text-decoration: none; }
+@media (max-width: 800px) {
+  .analytics-notice-inner { display: block; padding: 14px 18px; }
+  .analytics-notice .analytics-actions { margin-top: 12px; }
+}
+@media print { .analytics-notice { display: none !important; } }
