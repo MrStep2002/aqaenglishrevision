@@ -2,6 +2,9 @@ document.querySelectorAll('dialog[data-paragraph-game]').forEach(game => {
   const launch = document.getElementById('play-' + game.id);
   if (!launch) return;
   const puzzles = JSON.parse(game.querySelector('.jigsaw-data').textContent);
+  const levelGroup = game.querySelector('.jigsaw-levels');
+  const levelControls = [...game.querySelectorAll('[data-jigsaw-level]')];
+  const levels = ['Foundation', 'Intermediate', 'Advanced'].filter(level => puzzles.some(puzzle => puzzle.level === level));
   const stage = game.querySelector('.jigsaw-stage');
   const workbench = game.querySelector('.jigsaw-workbench');
   const answer = game.querySelector('.jigsaw-answer');
@@ -9,7 +12,6 @@ document.querySelectorAll('dialog[data-paragraph-game]').forEach(game => {
   const placeholder = game.querySelector('.jigsaw-placeholder');
   const template = game.querySelector('.jigsaw-tile-template');
   const question = game.querySelector('.jigsaw-question');
-  const guide = game.querySelector('.jigsaw-guide');
   const feedback = game.querySelector('.jigsaw-feedback');
   const status = game.querySelector('[role="status"]');
   const solved = game.querySelector('.jigsaw-solved');
@@ -22,6 +24,16 @@ document.querySelectorAll('dialog[data-paragraph-game]').forEach(game => {
 
   let deck = [];
   let puzzle;
+  let level = levels[0] || null;
+
+  function updateLevels() {
+    if (levelGroup) levelGroup.hidden = !levels.length;
+    levelControls.forEach(control => {
+      control.hidden = !levels.includes(control.dataset.jigsawLevel);
+      control.setAttribute('aria-pressed', String(control.dataset.jigsawLevel === level));
+    });
+  }
+  updateLevels();
 
   function shuffle(items) {
     const result = [...items];
@@ -43,7 +55,7 @@ document.querySelectorAll('dialog[data-paragraph-game]').forEach(game => {
     const complete = !bank.childElementCount;
     check.disabled = !complete;
     placeholder.hidden = complete;
-    placeholder.textContent = answer.childElementCount ? 'Select the next sentence below' : 'Select a sentence below to start';
+    placeholder.textContent = answer.childElementCount ? 'Select the next piece below' : 'Select a piece below to start';
   }
 
   function clearFeedback() {
@@ -65,7 +77,7 @@ document.querySelectorAll('dialog[data-paragraph-game]').forEach(game => {
   function showPuzzle() {
     // As in Build the sentence, refill the shuffled deck at the end of each pass.
     if (!deck.length) {
-      deck = shuffle(puzzles);
+      deck = shuffle(level ? puzzles.filter(puzzle => puzzle.level === level) : puzzles);
       if (deck.length > 1 && deck[0] === puzzle) deck.push(deck.shift());
     }
     puzzle = deck.shift();
@@ -78,7 +90,6 @@ document.querySelectorAll('dialog[data-paragraph-game]').forEach(game => {
     bank.replaceChildren(...order.map(makeTile));
     clearFeedback();
     status.textContent = '';
-    guide.hidden = false;
     solved.hidden = true;
     workbench.hidden = false;
     hint.hidden = false;
@@ -98,14 +109,14 @@ document.querySelectorAll('dialog[data-paragraph-game]').forEach(game => {
     updateControls();
     if (placed) {
       const position = [...answer.children].indexOf(tile) + 1;
-      status.textContent = `Sentence placed at position ${position}.`;
+      status.textContent = `Piece placed at position ${position}.`;
       if (!reducedMotion.matches) {
         tile.getAnimations().forEach(animation => animation.cancel());
         tile.animate([{ opacity: .65, transform: 'translateY(3px)' }, { opacity: 1, transform: 'none' }],
           { duration: 180, easing: 'ease-out' });
       }
     } else {
-      status.textContent = 'Sentence returned.';
+      status.textContent = 'Piece returned.';
     }
   }
 
@@ -126,9 +137,9 @@ document.querySelectorAll('dialog[data-paragraph-game]').forEach(game => {
   }
 
   function hintFor(position) {
-    if (position === puzzle.sentences.length) return 'The sentences are in order. Press Check order.';
-    return puzzle.hints[position] || (position === 0 ? 'Which sentence introduces the main idea?' :
-      'Look for the sentence that follows on from the one before it.');
+    if (position === puzzle.sentences.length) return 'The pieces are in order. Press Check order.';
+    return puzzle.hints[position] || (position === 0 ? 'Which piece introduces the main idea?' :
+      'Look for the piece that follows on from the one before it.');
   }
 
   hint.addEventListener('click', () => {
@@ -140,7 +151,7 @@ document.querySelectorAll('dialog[data-paragraph-game]').forEach(game => {
   check.addEventListener('click', () => {
     const mismatch = mismatchPosition();
     if (mismatch !== -1) {
-      showFeedback(`Try sentence ${mismatch + 1} again. ${hintFor(mismatch)}`, answer.children[mismatch]);
+      showFeedback(`Try piece ${mismatch + 1} again. ${hintFor(mismatch)}`, answer.children[mismatch]);
       return;
     }
     model.textContent = puzzle.sentences.join(' ');
@@ -148,7 +159,6 @@ document.querySelectorAll('dialog[data-paragraph-game]').forEach(game => {
     explanation.hidden = !puzzle.explanation;
     clearFeedback();
     status.textContent = 'Paragraph complete.';
-    guide.hidden = true;
     workbench.hidden = true;
     solved.hidden = false;
     hint.hidden = true;
@@ -160,4 +170,12 @@ document.querySelectorAll('dialog[data-paragraph-game]').forEach(game => {
 
   launch.addEventListener('click', showPuzzle);
   next.addEventListener('click', showPuzzle);
+  levelControls.forEach(control => control.addEventListener('click', () => {
+    const selected = control.dataset.jigsawLevel;
+    if (selected === level || !levels.includes(selected)) return;
+    level = selected;
+    deck = [];
+    updateLevels();
+    showPuzzle();
+  }));
 });

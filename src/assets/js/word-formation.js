@@ -86,13 +86,16 @@
     if (check.disabled || check.hidden) return;
     const { forms } = deck[position];
     let score = 0;
-    forms.forEach(({ answer, stem }, index) => {
+    forms.forEach(({ answer, stem, alternatives = [] }, index) => {
       const { label, input } = fields[index];
-      const right = normalise(input.value) === normalise(answer);
+      const right = [answer, ...alternatives].some(value => normalise(input.value) === normalise(value));
       const mark = document.createElement('span');
       mark.className = right ? 'analysis-gap-right' : 'analysis-gap-wrong';
       if (right) {
         score++;
+        if (normalise(input.value) !== normalise(answer)) {
+          mark.title = `${input.value.trim()} also fits. The model paragraph uses ${answer}.`;
+        }
       } else {
         const wrong = document.createElement('del');
         wrong.textContent = input.value.trim();

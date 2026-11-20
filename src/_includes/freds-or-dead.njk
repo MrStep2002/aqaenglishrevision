@@ -13,9 +13,9 @@
       <h3 id="freds-choose">Choose your ghost</h3>
       <p>Explore a street with ten words. Use each clue to collect the next word, then find Fred’s door. Take your time and remember where the words are.</p>
       <div class="freds-ghosts">
-        {% for name, difficulty, portrait in [["Past","Easy",51],["Present","Medium",52],["Yet to Come","Hard",53]] %}
+        {% for name, difficulty, portrait in [["Past", "Easy", "past"], ["Present", "Medium", "present"], ["Yet to Come", "Hard", "yet-to-come"]] %}
         <button type="button" class="freds-ghost" data-level="{{ loop.index }}">
-          <img src="/assets/pictures/acc/ACC-{{ portrait }}.jpg" alt="" width="480" height="480" loading="lazy">
+          <img src="/assets/pictures/acc/ghost-{{ portrait }}.jpg" alt="" width="256" height="256" decoding="async" draggable="false">
           <span class="freds-plate">
             <small>Ghost of Christmas</small>
             <strong>{{ name }}</strong>

@@ -15,6 +15,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addWatchTarget("src/assets/data/christmas-carol-crossword.csv");
   eleventyConfig.addWatchTarget("src/assets/data/christmas-carol-wall.csv");
   eleventyConfig.addWatchTarget("src/assets/data/christmas-carol-analysis-gaps.csv");
+  eleventyConfig.addWatchTarget("src/assets/data/christmas-carol-word-formation.csv");
   eleventyConfig.addWatchTarget("src/assets/data/paragraph-games/*.csv");
   eleventyConfig.addFilter("paragraphBank", readParagraphBank);
   // Images, styles and scripts are copied across untouched.

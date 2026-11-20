@@ -13,7 +13,7 @@
 }
 .fog-run::backdrop { background: #07151dd6; }
 .fog-run [hidden] { display: none !important; }
-.fog-run button, .fog-run select { font: inherit; cursor: pointer; }
+.fog-run button { font: inherit; cursor: pointer; }
 .fog-run :focus-visible { outline: 3px solid #f1ad43; outline-offset: 1px; }
 .fog-run-eyebrow {
   margin: 0; color: var(--brass); text-transform: uppercase;
@@ -81,8 +81,7 @@
 }
 .fog-run-card h3 { margin: 0; font: var(--hw) clamp(1.15rem,3vw,1.55rem)/1.12 var(--head); }
 .fog-run-detail { margin: .45rem 0 .7rem; font-size: 1.04rem; line-height: 1.25; }
-.fog-run-level { display: inline-flex; gap: .4rem; align-items: center; margin: 0 .35rem .25rem 0; }
-.fog-run-level select { min-height: 38px; padding: .2rem; color: white; background: #254957; border: 1px solid #889e9f; border-radius:.3rem; }
+.fog-run .fog-run-change { min-height: 42px; margin: .4rem 0 0 .35rem; padding: .35rem .8rem; border: 1px solid var(--brass); border-radius: .35rem; background: transparent; color: var(--paper); }
 .fog-run .fog-run-action { min-height: 42px; border: 0; border-radius:.35rem; padding:.4rem .9rem; color: #292617; background: var(--brass); font-weight: 700; }
 @media (max-width: 38rem) and (orientation: portrait) {
   /* Keep controls to the right of the clue so the maze can use the full screen width. */
@@ -105,4 +104,59 @@
   .fog-run-question { padding-block: .3rem; }
   .fog-run-rail { gap: .4rem; }
   .fog-run-card { padding: .5rem; }
+}
+
+/* Match Fred’s or Dead while choosing a ghost; the maze keeps its own layout. */
+.fog-run[data-phase="start"] {
+  width: min(60rem,calc(100vw - .75rem)); height: min(39rem,calc(100dvh - .75rem));
+  border: 5px solid transparent; border-radius: 1rem;
+  background: linear-gradient(#fcf5e6,#fcf5e6) padding-box,
+    repeating-linear-gradient(125deg,#245547 0 17px,#ebcb8f 17px 20px,#873c48 20px 37px,#ebcb8f 37px 40px) border-box;
+  box-shadow: 0 1.5rem 4rem #08151980; color: #1c2b28; color-scheme: light;
+}
+.fog-run[open][data-phase="start"] { display: flex; flex-direction: column; }
+.fog-run[data-phase="start"]::backdrop { background: #0a181acc; }
+.fog-run[data-phase="start"] :focus-visible { outline: 3px solid #bf7823; outline-offset: 2px; }
+.fog-run-header {
+  display: flex; flex: none; align-items: center; gap: .65rem;
+  padding: .6rem clamp(.6rem,2.5vw,1.4rem); background: #133337; color: #fcf5e6;
+}
+.fog-run-header h2 { margin: 0 auto 0 0; font: var(--hw) clamp(1.5rem,4vw,2.1rem)/1.05 var(--head); }
+.fog-run-header form { margin: 0; }
+.fog-run .fog-run-intro-close {
+  min-width: 44px; min-height: 42px; border: 1px solid #94aaa3; border-radius: 50%;
+  background: transparent; color: #fcf5e6; font-size: 1.45rem;
+}
+.fog-run-intro { display: flex; flex-direction: column; flex: 1; min-height: 0; overflow: auto; overscroll-behavior: contain; }
+.fog-run-start { box-sizing: border-box; width: min(100%,53rem); margin: auto; padding: clamp(1rem,3.2vw,2rem); }
+.fog-run-start h3 { margin: 0; font: var(--hw) clamp(1.8rem,4.5vw,2.75rem)/1.08 var(--head); }
+.fog-run-start > p { margin: .55rem 0 1.25rem; line-height: 1.4; color: #42554d; }
+.fog-run-ghosts { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: clamp(.55rem,2vw,1.1rem); }
+.fog-run .fog-run-ghost {
+  display: grid; grid-template-rows: auto 1fr; text-align: left; padding: 0;
+  border: 1px solid #a88f66; border-radius: .45rem; overflow: hidden; background: #203e3d; color: #fcf5e6;
+}
+.fog-run-ghost:hover, .fog-run-ghost:focus-visible { box-shadow: 0 0 0 2px #bc924e; }
+.fog-run-ghost img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
+.fog-run-plate { display: grid; gap: .18rem; padding: .8rem .9rem; border-top: 2px solid #bc924e; }
+.fog-run-plate small { font: .74rem/1.35 var(--mono); color: #efdfbf; }
+.fog-run-plate strong { font: var(--hw) clamp(1.35rem,3vw,1.9rem)/1.1 var(--head); }
+.fog-run-difficulty { margin-top: .3rem; color: #f5d190; font: 600 .83rem/1.4 var(--mono); }
+@media (max-width: 34rem) {
+  .fog-run[data-phase="start"] { height: min(calc(100dvh - .55rem),calc(56vw + 19rem)); }
+  .fog-run-header { gap: .4rem; padding: .4rem .6rem; }
+  .fog-run-start { padding: .8rem; }
+  .fog-run-start > p { margin: .4rem 0 .7rem; }
+  .fog-run-ghosts { grid-template-columns: 1fr; gap: .5rem; }
+  .fog-run .fog-run-ghost { grid-template-columns: 5rem 1fr; grid-template-rows: auto; }
+  .fog-run-plate { align-content: center; gap: .06rem; padding: .35rem .8rem; border-top: 0; border-left: 2px solid #bc924e; }
+  .fog-run-difficulty { margin-top: .08rem; }
+}
+@media (min-width: 34.01rem) and (max-height: 30rem) {
+  .fog-run-header { padding-block: .22rem; }
+  .fog-run-start { padding: .65rem 1rem; }
+  .fog-run-start h3 { font-size: 1.6rem; }
+  .fog-run-start > p { margin: .25rem 0 .5rem; }
+  .fog-run-ghost img { max-height: 28dvh; object-position: center 27%; }
+  .fog-run-plate { padding: .25rem .65rem; }
 }

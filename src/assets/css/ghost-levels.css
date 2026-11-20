@@ -1,0 +1,82 @@
+/* Shared ghost difficulty controls for games with three levels. */
+.quote-game .ghost-game-header {
+  display: grid;
+  flex: none;
+  grid-template-columns: minmax(8.75rem, 1fr) auto minmax(0, 1fr);
+  grid-template-areas: "levels title meta";
+  align-items: center;
+  gap: .65rem;
+  margin: .1rem 0 .6rem;
+  padding: 0 2.5rem .65rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.quote-game .ghost-levels {
+  grid-area: levels;
+  display: grid;
+  grid-template-columns: repeat(3, 2.75rem);
+  align-items: center;
+  justify-self: start;
+  width: max-content;
+  gap: .25rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.quote-game .ghost-levels .ghost-level-button {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  margin: 0;
+  padding: .125rem;
+  border: 2px solid var(--rule);
+  border-radius: .45rem;
+  background: var(--card);
+  color: var(--ink);
+}
+.quote-game .ghost-levels .ghost-level-button:not([aria-pressed="true"]):hover {
+  border-color: var(--accent);
+  background: var(--slot);
+}
+.quote-game .ghost-levels .ghost-level-button[aria-pressed="true"] {
+  border-color: var(--pine);
+  background: var(--pine);
+  color: #fff;
+}
+.quote-game .ghost-levels[hidden],
+.quote-game .ghost-levels .ghost-level-button[hidden] { display: none; }
+.ghost-level-face {
+  display: block;
+  flex: none;
+  width: 2.25rem;
+  height: 2.25rem;
+  object-fit: cover;
+  border-radius: .3rem;
+}
+.quote-game .ghost-game-title {
+  grid-area: title;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  gap: .3rem;
+}
+.quote-game .ghost-game-title h2 { margin: 0; min-width: 0; }
+.quote-game .ghost-game-title .quote-holly { flex: 0 0 2rem; width: 2rem; margin: 0; transform: scale(.7); }
+.quote-game .ghost-game-meta { grid-area: meta; justify-self: end; margin: 0; }
+
+@media (max-width: 40rem) {
+  .quote-game .ghost-game-header {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "title title" "levels meta";
+    gap: .5rem .65rem;
+    padding-right: 0;
+  }
+  .quote-game .ghost-game-title { padding-inline: 2rem; }
+}
+@media (max-width: 26rem) {
+  .quote-game .ghost-game-title { padding-inline: 1.5rem; }
+  .quote-game .ghost-game-title .quote-holly { display: none; }
+}

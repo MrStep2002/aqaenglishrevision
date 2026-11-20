@@ -10,12 +10,15 @@ const clue=find('.fog-run-clue'), status=find('.fog-run-status');
 const map=find('.fog-run-map'), cap=find('.fog-run-cap');
 const boxes=[...dialog.querySelectorAll('.fog-run-box')];
 const cover=find('.fog-run-cover'), action=find('.fog-run-action');
-const pause=find('.fog-run-pause'), level=find('.fog-run-level select');
+const pause=find('.fog-run-pause'), change=find('.fog-run-change');
+const intro=find('.fog-run-intro'), header=find('.fog-run-header');
+const question=find('.fog-run-question'), playfield=find('.fog-run-playfield'), rail=find('.fog-run-rail');
+let selected=find('.fog-run-ghost');
 const lifeDisplay=find('.fog-run-lives');
 const hats=[...lifeDisplay.querySelectorAll('canvas')];
 const step=1/60;
 const keys={ArrowUp:'up',ArrowDown:'down',ArrowLeft:'left',ArrowRight:'right',w:'up',s:'down',a:'left',d:'right'};
-let game, pool, deck, entry, phase='setup', resumePhase, tokenNodes=[];
+let game, pool, deck, entry, phase='start', resumePhase, tokenNodes=[];
 let frame, previousTime, carry=0, wordTimer;
 
 drawLondon(find('.fog-run-roofs'));
@@ -26,6 +29,10 @@ boxes.forEach((box,i)=>drawPiece(box,i===0?'iron':'brass'));
 function setPhase(value) {
   phase=value;
   dialog.dataset.phase=value;
+  const choosing=value==='start';
+  intro.hidden=header.hidden=!choosing;
+  question.hidden=playfield.hidden=rail.hidden=choosing;
+  change.hidden=value!=='lost';
   pause.hidden=!['playing','ready'].includes(value);
 }
 function locate(element,x,y) {
@@ -43,11 +50,10 @@ function updateHud() {
   lifeDisplay.setAttribute('aria-label',game.lives+(game.lives===1?' life remaining':' lives remaining'));
   hats.forEach((hat,i)=>hat.classList.toggle('is-lost',i>=game.lives));
 }
-function showCard(title,body,button,showLevel=false) {
+function showCard(title,body,button) {
   cover.hidden=false;
   find('.fog-run-message').textContent=title;
   find('.fog-run-detail').textContent=body;
-  find('.fog-run-level').hidden=!showLevel;
   action.textContent=button;
   if(dialog.open) action.focus({preventScroll:true});
 }
@@ -103,16 +109,24 @@ function ready(message='Read the clue, then steer to collect the answer.') {
   status.textContent=message;
   map.focus({preventScroll:true});
 }
+function showStart() {
+  stopClock();
+  game=null;entry=null;resumePhase=null;swipe=null;
+  cover.hidden=true;
+  setPhase('start');
+  status.textContent='';
+  if(dialog.open) selected.focus({preventScroll:true});
+}
 function setup() {
+  stopClock();
+  resumePhase=null;swipe=null;
   game=new FogRunMaze();
-  pool=bank.filter(e=>e.level===Number(level.value));
+  pool=bank.filter(e=>e.level===Number(selected.dataset.level));
   deck=[];
   entry=null;
   updateHud();
   nextClue();
-  setPhase('setup');
-  showCard('Fog Run','Read the clue and collect the matching answer. A wrong answer or a cash box costs one life.','Play Fog Run',true);
-  status.textContent='';
+  ready();
 }
 function stopClock() {
   cancelAnimationFrame(frame);
@@ -180,17 +194,19 @@ function pauseGame() {
   status.textContent='The streets are still.';
 }
 action.addEventListener('click',()=>{
-  if(phase==='setup')ready();
-  else if(phase==='caught'){game.resetPositions();drawActors();ready('Steer to try again. The cash boxes will give you a head start.');}
+  if(phase==='caught'){game.resetPositions();drawActors();ready('Steer to try again. The cash boxes will give you a head start.');}
   else if(phase==='paused') {
     if(resumePhase==='word') {cover.hidden=true;setPhase('word');afterWord();}
     else ready('Steer when you’re ready to resume.');
   } else if(phase==='lost')setup();
 });
-level.addEventListener('change',()=>{setup();level.focus();});
+for(const ghost of dialog.querySelectorAll('.fog-run-ghost')) {
+  ghost.addEventListener('click',()=>{selected=ghost;setup();});
+}
+change.addEventListener('click',showStart);
 pause.addEventListener('click',pauseGame);
 dialog.addEventListener('keydown',event=>{
-  if(event.altKey || event.ctrlKey || event.metaKey || event.target===level) return;
+  if(event.altKey || event.ctrlKey || event.metaKey) return;
   const key=event.key.length===1?event.key.toLowerCase():event.key;
   if(keys[key] && ['playing','ready'].includes(phase)){
     event.preventDefault();if(!event.repeat) steer(keys[key]);
@@ -222,7 +238,7 @@ window.addEventListener('blur',()=>{if(dialog.open)pauseGame();});
 launcher.addEventListener('click',()=>{
   if(dialog.open)return;
   dialog.showModal();
-  if(!game)setup();
+  if(!game)showStart();
   else if(!cover.hidden)action.focus({preventScroll:true});
   else map.focus({preventScroll:true});
 });

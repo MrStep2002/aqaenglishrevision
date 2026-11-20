@@ -10,8 +10,8 @@
   window.addEventListener('unhandledrejection', () => { if (!ready) send('error'); });
   if (!game) return send('error');
 
-  // The outer dialog handles focus trapping. A second modal would trap the
-  // keyboard inside the frame and make the related-lesson link unreachable.
+  // The outer player is already modal. Keep the game non-modal inside
+  // the frame and cycle Tab through its visible controls below.
   game.showModal = () => { if (!game.open) game.show(); };
   game.addEventListener('close', () => send('close'));
   function controls() {
@@ -27,17 +27,16 @@
       const buttons = controls();
       if (event.shiftKey && document.activeElement === buttons[0]) {
         event.preventDefault();
-        send('focus-close');
+        buttons.at(-1).focus();
       } else if (!event.shiftKey && document.activeElement === buttons.at(-1)) {
         event.preventDefault();
-        send('focus-related');
+        buttons[0].focus();
       }
     }
   });
   window.addEventListener('message', event => {
     if (event.source !== window.parent || event.origin !== origin || event.data?.game !== id) return;
     if (event.data.type === 'revision-game-focus-first') controls()[0]?.focus();
-    else if (event.data.type === 'revision-game-focus-last') controls().at(-1)?.focus();
   });
   window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('play-' + id).click();

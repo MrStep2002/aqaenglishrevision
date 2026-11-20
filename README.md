@@ -64,6 +64,8 @@ Each page file starts with a short header, then the content:
 ```html
 ---
 title: "Plot"
+seoTitle: "Macbeth Plot Summary | AQA GCSE Literature"
+description: "Revise Macbeth’s plot and key events for AQA GCSE English Literature."
 permalink: /macbeth/plot.html   # address: /macbeth/plot
 ---
 
@@ -73,6 +75,10 @@ permalink: /macbeth/plot.html   # address: /macbeth/plot
 </div>
 </section>
 ```
+
+The optional `seoTitle` is the complete browser-tab and suggested search-result title. It can be more descriptive than the short `title` and visible banner heading. No extra site-name suffix is added to it. Pages without `seoTitle` keep the usual `Title | AQA English Revision` format. Google may shorten or rewrite search-result titles.
+
+Use an optional `description` for a short, accurate summary of that particular page. Google may use it beneath the search title or choose a different passage from the page. Give each published resource its own description and link to related lessons where they help readers.
 
 The building blocks used across the site:
 
@@ -97,7 +103,7 @@ Add new Unseen Poetry resource links to the Practice section in `src/unseen-poet
 
 ### Placing games anywhere on the site
 
-Normal game clicks open a player over the current page. Closing it keeps the reader's page and scroll position. A labelled **Related lesson** link deliberately opens the lesson used by that game. The player loads only the selected game's markup, data and script; closing it removes the player and stops its timers. Theme-specific links keep the theme's own question bank.
+Normal game clicks open a player over the current page. Use the game’s close button or Escape to return to the same page and scroll position. The player loads only the selected game's markup, data and script; closing it removes the player and stops its timers. Theme-specific links keep the theme's own question bank.
 
 To place an existing game on another page, copy its link from `src/games.html`. For example:
 
@@ -105,14 +111,13 @@ To place an existing game on another page, copy its link from `src/games.html`. 
 <a class="quote-launch" href="/a-christmas-carol/key-quotes#play-fog-run">Play Fog Run</a>
 ```
 
-Use as many links to the same game as you need; links do not need IDs. The lesson address before `#play-…` supplies both the game's content and its related-lesson link. A themed link such as `/a-christmas-carol/greed#play-analysis-gaps` keeps the Greed exercises. Existing lesson-page launch buttons keep working. Modified clicks and opening a link in a new tab retain the original lesson/game address.
+Use as many links to the same game as you need; links do not need IDs. The lesson address before `#play-…` supplies the game's content and the lesson link shown if loading fails. A themed link such as `/a-christmas-carol/greed#play-analysis-gaps` keeps the Greed exercises. Existing lesson-page launch buttons keep working. Modified clicks and opening a link in a new tab retain the original lesson/game address.
 
-To connect a placement to a different lesson without changing the game or its bank, optionally add `data-related-lesson` and `data-related-title`:
+To change the lesson link shown if loading fails without changing the game or its bank, optionally add `data-related-lesson`:
 
 ```html
 <a href="/a-christmas-carol/key-quotes#play-fog-run"
-   data-related-lesson="/a-christmas-carol/greed"
-   data-related-title="A Christmas Carol · Greed">Play Fog Run</a>
+   data-related-lesson="/a-christmas-carol/greed">Play Fog Run</a>
 ```
 
 The shared launcher lives in `src/assets/js/game-launcher.js`, its isolated player bridge in `src/assets/js/game-player.js`, and their styles in `src/assets/css/game-launcher.css`. Register a new game in the launcher's `games` object; most games need only their lesson page, with optional script, dialog selector and external JSON data ID. The existing game templates and scripts remain the source of game behaviour. A loading failure offers retry and an explicit lesson link without changing the current page.
@@ -173,9 +178,21 @@ Run `node --test tools/connecting-wall.test.mjs` to check generation, overlappin
 
 Wordsearch uses the Level 1 entries in `src/assets/data/christmas-carol-crossword.csv`. Words must have 2–10 letters to fit the 10 × 10 board. Each new grid chooses eight different answers and uses horizontal, vertical and diagonal placements in both directions. The generator balances direction families and favours placements that cross at shared letters, trying new layouts for a connected puzzle. The landscape popup puts the grid on the right and a word box on the left. Reveal adds one puzzle word at a time to that box without marking it as found. Found words appear there automatically with a tick. New grid clears the box. On narrow phones the box sits above the grid. Clue highlights the first letter of a word still to find and gives its row and column. The hint stays until that word is found, another clue is requested, or a new grid is dealt. Drag across a word with a mouse or finger; found words stay highlighted. With a keyboard, use the arrow keys and press Space or Enter at the first and last letters. Escape cancels a selection. New grid deals another puzzle. The generator avoids creating extra unselected words from the eligible bank in the filler letters, and recognisable embedded words such as BELL in BELLE are included in the eight answers. The Essays page launches the game, and the Games page links to it. To add it elsewhere, include a button with `id="play-wordsearch"`, `class="quote-launch"`, `type="button"`, `aria-haspopup="dialog"` and `aria-controls="wordsearch"`.
 
+### Word Formation
+
+Edit [the Word Formation bank](src/assets/data/christmas-carol-word-formation.csv) independently of Analysis Gaps and the master paragraph files in `assets-folder-bank/`. The bank contains 486 exercises: 162 at each of `Foundation`, `Intermediate` and `Advanced`, including the 21 original exercises and all 465 levelled master paragraphs. Eleventy validates and embeds this CSV when building the site.
+
+Each row uses `level,paragraph,stem1,stem2,stem3,stem4,alternatives1,alternatives2,alternatives3,alternatives4`. Mark four complete answers within `paragraph` using `[[double brackets]]`, keeping the model paragraph's correct wording. Enter the corresponding prompt words in `stem1` to `stem4`, in the order the marked answers appear. Each prompt must differ from its answer. For example, `his [[kindness]]` can use the stem `kind`. Leave alternative cells blank unless another form also fits that gap; separate multiple accepted single-word forms with semicolons. Answers ignore case, surrounding spaces and straight/curly apostrophe differences. The completed paragraph always displays the model's original wording.
+
+Keep exercises at all three levels and save as UTF-8 CSV. The loader reports invalid levels, missing prompts or markers, partial-word gaps and malformed alternatives with their CSV row numbers. Analysis Gaps now has five columns (`level,paragraph,extra1,extra2,themes`); its former `formation` column has moved into this game's own bank.
+
 ### Paragraph games
 
-Edit [the Build the Paragraph bank](src/assets/data/paragraph-games/build-the-paragraph.csv) in a spreadsheet or text editor. Each row is one paragraph. Enter the question and put the sentences in their correct order across `sentence1`, `sentence2` and the following columns. Leave unused sentence cells blank. Add `sentence7` and further numbered columns for longer paragraphs. The corresponding `hint1`, `hint2` and other hint cells are optional, as is `explanation`, which appears after a solve. Save the file as UTF-8 CSV. Eleventy reads the bank when it builds the page.
+Edit [the Essay Jigsaw bank](src/assets/data/paragraph-games/build-the-paragraph.csv) in a spreadsheet or text editor. Each row is one model paragraph. Set `level` to `Foundation`, `Intermediate` or `Advanced`; the game lets students choose between the levels present in the bank. A bank without a `level` column still runs as a single set.
+
+Enter the question and put the puzzle pieces in their correct order across `sentence1`, `sentence2` and the following columns. A piece can contain more than one sentence: keep related word analysis together where separating it would permit interchangeable orders. Keep a complete quotation within the same piece. Leave unused cells blank and add further numbered columns for longer paragraphs. The matching `hint1`, `hint2` and other hint cells are optional, as is `explanation`, which appears after a solve. Save the file as UTF-8 CSV. Eleventy reads this game’s bank when it builds the page.
+
+The paragraph files in `assets-folder-bank/` remain editable master copies. Essay Jigsaw uses its own CSV, so changing its questions, levels or hints does not alter the master paragraphs or another game’s bank.
 
 For another text or game, copy the CSV in `src/assets/data/paragraph-games/` and add an entry to the page's front matter.
 

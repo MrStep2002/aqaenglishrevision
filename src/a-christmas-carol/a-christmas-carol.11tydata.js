@@ -1,6 +1,7 @@
 const { readFileSync } = require('node:fs');
 const path = require('node:path');
 const readCsv = require('../../tools/read-csv');
+const readWordFormationBank = require('../../tools/read-word-formation-bank');
 
 const bank = path.join(__dirname, '../assets/data/christmas-carol-analysis-gaps.csv');
 const levels = ['Foundation', 'Intermediate', 'Advanced'];
@@ -17,9 +18,9 @@ const normalise = word => word.toLowerCase().replaceAll('’', "'");
 
 module.exports = function () {
   const [header, ...rows] = readCsv(readFileSync(bank, 'utf8'));
-  if (header.join(',') !== 'level,paragraph,extra1,extra2,themes,formation') throw new Error('Invalid Analysis Gaps header');
+  if (header.join(',') !== 'level,paragraph,extra1,extra2,themes') throw new Error('Invalid Analysis Gaps header');
 
-  const items = rows.map(([level, paragraph, extra1, extra2, themeTags, formation, ...unexpected], index) => {
+  const items = rows.map(([level, paragraph, extra1, extra2, themeTags, ...unexpected], index) => {
     const extras = [extra1, extra2];
     const tags = themeTags?.split(';').map(tag => tag.trim()) ?? [];
     const gaps = [];
@@ -39,18 +40,7 @@ module.exports = function () {
     }
     const segments = sentences.segment(analysis);
     for (const gap of gaps) gap.context = segments.containing(gap.start).segment.trim();
-    const forms = formation ? formation.split(';').map(pair => {
-      const [answer, stem] = pair.split('|');
-      const token = [...analysis.matchAll(/\p{L}+(?:[-’']\p{L}+)*/gu)].find(match => match[0] === answer);
-      if (!token || !stem || normalise(stem) === normalise(answer)) {
-        throw new Error(`Invalid Word Formation pair “${pair}” on CSV row ${index + 2}`);
-      }
-      return { start: token.index, answer, stem, context: segments.containing(token.index).segment.trim() };
-    }).sort((a, b) => a.start - b.start) : [];
-    if (forms.length && (forms.length !== 4 || new Set(forms.map(form => form.start)).size !== 4)) {
-      throw new Error(`Word Formation needs four distinct gaps on CSV row ${index + 2}`);
-    }
-    return { exercise: { level, analysis, gaps, extras }, tags, forms };
+    return { exercise: { level, analysis, gaps, extras }, tags };
   });
   const decks = { essays: items.map(item => item.exercise) };
   for (const [slug, theme] of Object.entries(themes)) {
@@ -62,14 +52,8 @@ module.exports = function () {
     }
   }
 
-  const formationDeck = items.filter(item => item.forms.length).map(({ exercise, forms }) =>
-    ({ level: exercise.level, analysis: exercise.analysis, forms }));
-  if (levels.some(level => !formationDeck.some(item => item.level === level))) {
-    throw new Error('Missing Word Formation level');
-  }
-
   return {
-    wordFormationBank: JSON.stringify(formationDeck).replaceAll('<', '\u003c'),
+    wordFormationBank: readWordFormationBank('christmas-carol-word-formation.csv'),
     analysisGapsBanks: Object.fromEntries(Object.entries(decks).map(([slug, deck]) =>
       [slug, JSON.stringify(deck).replaceAll('<', '\u003c')]
     )),

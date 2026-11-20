@@ -23,6 +23,8 @@
   --jigsaw-review: #f6bb86;
 }
 
+.essay-jigsaw [hidden] { display: none; }
+
 .essay-jigsaw[data-jigsaw-skin="section"] {
   --pine: var(--world);
   --berry: var(--deep);
@@ -46,6 +48,16 @@
   margin-inline: 0;
 }
 
+.jigsaw-levels {
+  display: flex;
+  flex: none;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  margin: 0 0 .7rem;
+}
+
 .jigsaw-question {
   margin: 0 0 .45rem;
   font: var(--hw) clamp(1.2rem, calc(var(--size) * 1.3), 1.875rem) / 1.23 var(--head);
@@ -53,13 +65,9 @@
   overflow-wrap: anywhere;
 }
 
-.jigsaw-guide {
-  margin: 0 0 .75rem;
-  color: var(--muted);
-  line-height: 1.38;
-}
 
-.jigsaw-actions button {
+.jigsaw-actions button,
+.jigsaw-levels button {
   min-height: 44px;
   min-width: 44px;
   padding: .35rem .9rem;
@@ -70,8 +78,15 @@
   cursor: pointer;
 }
 
-.jigsaw-actions button:hover:not(:disabled) {
+.jigsaw-actions button:hover:not(:disabled),
+.jigsaw-levels button:hover {
   border-color: var(--jigsaw-accent);
+}
+
+.jigsaw-levels button[aria-pressed="true"] {
+  border-color: var(--jigsaw-accent);
+  background: var(--jigsaw-accent);
+  color: var(--bg);
 }
 
 .essay-jigsaw button:focus-visible {

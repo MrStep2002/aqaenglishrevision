@@ -20,6 +20,7 @@ module.exports = function readParagraphBank(filename) {
   const columns = header.map(value => value.trim().toLowerCase());
   const namedColumns = columns.filter(Boolean);
   const questionColumn = columns.indexOf('question');
+  const levelColumn = columns.indexOf('level');
   const explanationColumn = columns.indexOf('explanation');
   const sentenceColumns = [];
   columns.forEach((name, column) => {
@@ -41,6 +42,10 @@ module.exports = function readParagraphBank(filename) {
       throw new Error(`${location} has extra fields. Quote any cell that contains a comma.`);
     }
     const question = values[questionColumn];
+    const level = levelColumn >= 0 ? values[levelColumn] : undefined;
+    if (levelColumn >= 0 && !['Foundation', 'Intermediate', 'Advanced'].includes(level)) {
+      throw new Error(`${location} needs a level of Foundation, Intermediate or Advanced.`);
+    }
     const sentences = [];
     const hints = [];
     for (const { column, hint } of sentenceColumns) {
@@ -51,7 +56,7 @@ module.exports = function readParagraphBank(filename) {
     if (!question || new Set(sentences).size < 2) {
       throw new Error(`${location} needs a question and at least two different sentences.`);
     }
-    puzzles.push({ question, sentences, hints, explanation: values[explanationColumn] ?? '' });
+    puzzles.push({ question, ...(levelColumn >= 0 ? { level } : {}), sentences, hints, explanation: values[explanationColumn] ?? '' });
   });
 
   if (!puzzles.length) throw new Error(`${filename} needs at least one paragraph.`);

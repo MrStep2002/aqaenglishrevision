@@ -1,14 +1,14 @@
+{% from "ghost-levels.njk" import ghostLevels %}
 <dialog class="quote-game analysis-gaps" aria-labelledby="analysis-gaps-title">
   <form class="quote-close" method="dialog"><button type="submit" aria-label="Close Analysis Gaps">×</button></form>
-  <header>
-    <span class="quote-holly" aria-hidden="true"><i></i></span>
-    <h2 id="analysis-gaps-title">Analysis Gaps</h2>
+  <header class="ghost-game-header">
+    {{ ghostLevels(["Foundation", "Intermediate", "Advanced"], "analysis-gaps-levels") }}
+    <div class="ghost-game-title">
+      <span class="quote-holly" aria-hidden="true"><i></i></span>
+      <h2 id="analysis-gaps-title">Analysis Gaps</h2>
+      <span class="quote-holly" aria-hidden="true"><i></i></span>
+    </div>
   </header>
-  <div class="analysis-gaps-levels" role="group" aria-label="Level">
-    {% for level in ["Foundation", "Intermediate", "Advanced"] %}
-    <button type="button" data-level="{{ level }}" aria-pressed="{{ 'true' if loop.first else 'false' }}">{{ level }}</button>
-    {% endfor %}
-  </div>
   <p class="analysis-gaps-instructions">Fill five gaps. Two words are extra. Select a filled gap to change it before checking.</p>
   <div class="analysis-gaps-board">
     <p class="analysis-gaps-passage" aria-label="Analysis paragraph"></p>

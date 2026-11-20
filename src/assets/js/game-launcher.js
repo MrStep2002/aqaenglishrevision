@@ -23,7 +23,7 @@
     'analysis-gaps': { page: 'essays', selector: '.analysis-gaps:not(.word-formation)', data: 'analysis-gaps-data' },
   };
   const pages = new Map();
-  let shell, frame, status, errorBox, lessonLink, errorLink, heading;
+  let shell, frame, status, errorBox, errorLink, heading;
   let active, request = 0, deadline;
 
   function findGame(doc, id, config) {
@@ -54,7 +54,7 @@
     const relatedUrl = new URL(control.dataset.relatedLesson || url.href, location.href);
     if (relatedUrl.origin !== location.origin) return null;
     if (relatedUrl.hash.startsWith('#play-')) relatedUrl.hash = '';
-    return { id, config, url, relatedUrl, relatedTitle: control.dataset.relatedTitle, control, title };
+    return { id, config, url, relatedUrl, control, title };
   }
 
   function createShell() {
@@ -63,31 +63,20 @@
     shell.id = 'game-launcher';
     shell.setAttribute('aria-labelledby', 'game-launcher-title');
     shell.innerHTML = '<h2 id="game-launcher-title" class="game-launcher-title"></h2>'
-      + '<div class="game-launcher-bar"><a class="game-launcher-lesson"></a>'
-      + '<button type="button" class="game-launcher-close">Close game</button></div>'
-      + '<div class="game-launcher-stage"><p class="game-launcher-status" role="status">Loading game…</p>'
+      + '<div class="game-launcher-stage"><div class="game-launcher-status"><p role="status">Loading game…</p>'
+      + '<button type="button" class="game-launcher-dismiss">Cancel</button></div>'
       + '<div class="game-launcher-error" hidden><p role="alert">The game could not load. Try again or open the related lesson.</p>'
-      + '<button type="button">Try again</button> <a>Open related lesson</a></div></div>';
+      + '<button type="button">Try again</button> <a>Open related lesson</a> '
+      + '<button type="button" class="game-launcher-dismiss">Close game</button></div></div>';
     document.body.append(shell);
     heading = shell.querySelector('h2');
-    lessonLink = shell.querySelector('.game-launcher-lesson');
-    status = shell.querySelector('[role="status"]');
+    status = shell.querySelector('.game-launcher-status');
     errorBox = shell.querySelector('.game-launcher-error');
     errorLink = errorBox.querySelector('a');
-    shell.querySelector('.game-launcher-close').addEventListener('click', () => shell.close());
+    for (const button of shell.querySelectorAll('.game-launcher-dismiss')) {
+      button.addEventListener('click', () => shell.close());
+    }
     errorBox.querySelector('button').addEventListener('click', () => openGame(active));
-    lessonLink.addEventListener('keydown', event => {
-      if (event.key === 'Tab' && event.shiftKey && frame?.classList.contains('is-ready')) {
-        event.preventDefault();
-        frame.contentWindow.postMessage({ type: 'revision-game-focus-last', game: active.id }, location.origin);
-      }
-    });
-    shell.querySelector('.game-launcher-close').addEventListener('keydown', event => {
-      if (event.key === 'Tab' && !event.shiftKey && frame?.classList.contains('is-ready')) {
-        event.preventDefault();
-        frame.contentWindow.postMessage({ type: 'revision-game-focus-first', game: active.id }, location.origin);
-      }
-    });
     shell.addEventListener('close', () => {
       request++;
       clearTimeout(deadline);
@@ -154,7 +143,7 @@
       new URL(script.getAttribute('src'), launch.url).pathname === '/assets/js/' + scriptName);
     if (!engine) throw new Error('Game script is missing');
     const bridge = player.createElement('script');
-    bridge.src = '/assets/js/game-player.js?v=1';
+    bridge.src = '/assets/js/game-player.js?v=2';
     bridge.defer = true;
     const script = engine.cloneNode(true);
     script.src = new URL(engine.getAttribute('src'), launch.url).href;
@@ -170,6 +159,7 @@
     frame = null;
     status.hidden = true;
     errorBox.hidden = false;
+    errorBox.querySelector('button').focus();
     console.error('Could not open revision game:', error);
   }
 
@@ -178,8 +168,7 @@
     const current = ++request;
     active = { ...launch, scrollX: launch.scrollX ?? window.scrollX, scrollY: launch.scrollY ?? window.scrollY };
     heading.textContent = launch.title;
-    lessonLink.href = errorLink.href = launch.relatedUrl.href;
-    lessonLink.textContent = 'Read related lesson';
+    errorLink.href = launch.relatedUrl.href;
     status.hidden = false;
     errorBox.hidden = true;
     frame?.remove();
@@ -193,12 +182,6 @@
       if (current !== request || !shell.open) return;
       const game = findGame(source, launch.id, launch.config);
       if (!game) throw new Error('Game is missing from its lesson');
-      const section = source.querySelector('.plate-eyebrow a')?.textContent.trim();
-      const pageTitle = source.querySelector('.plate h1')?.textContent.trim()
-        || source.title.split(' | ')[0];
-      const lesson = section && section !== pageTitle ? section + ' · ' + pageTitle : pageTitle;
-      lessonLink.textContent = launch.relatedTitle ? 'Related lesson: ' + launch.relatedTitle
-        : launch.relatedUrl.href === launch.url.href ? 'Related lesson: ' + lesson : 'Read related lesson';
       const title = game.querySelector('h2')?.textContent.trim() || game.getAttribute('aria-label') || launch.title;
       heading.textContent = title;
       const content = playerDocument(source, game, launch);
@@ -220,9 +203,8 @@
       clearTimeout(deadline);
       frame.classList.add('is-ready');
       status.hidden = true;
-    } else if (event.data.type === 'revision-game-focus-related') lessonLink.focus();
-    else if (event.data.type === 'revision-game-focus-close') shell.querySelector('.game-launcher-close').focus();
-    else if (event.data.type === 'revision-game-close') shell.close();
+      frame.contentWindow.postMessage({ type: 'revision-game-focus-first', game: active.id }, location.origin);
+    } else if (event.data.type === 'revision-game-close') shell.close();
     else if (event.data.type === 'revision-game-error') fail(new Error('Game could not start'));
   });
 

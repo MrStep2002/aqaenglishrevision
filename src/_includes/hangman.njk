@@ -1,20 +1,14 @@
+{% from "ghost-levels.njk" import ghostLevels %}
 <dialog class="quote-game hangman" id="hangman" aria-labelledby="hangman-title" aria-describedby="hangman-instructions" tabindex="-1">
   <form class="quote-close" method="dialog"><button type="submit" aria-label="Close Hangman">×</button></form>
-  <header class="hangman-header">
-    <div class="hangman-difficulty">
-      <p id="hangman-difficulty-label">Level</p>
-      <div class="hangman-levels" role="group" aria-labelledby="hangman-difficulty-label">
-        {% for level in [1, 2, 3] %}
-        <button type="button" data-level="{{ level }}" aria-pressed="{{ 'true' if loop.first else 'false' }}" aria-label="Level {{ level }}">{{ level }}</button>
-        {% endfor %}
-      </div>
-    </div>
-    <div class="hangman-title">
+  <header class="hangman-header ghost-game-header">
+    {{ ghostLevels([1, 2, 3], "hangman-difficulty hangman-levels") }}
+    <div class="hangman-title ghost-game-title">
       <span class="quote-holly" aria-hidden="true"><i></i></span>
       <h2 id="hangman-title">Hangman</h2>
       <span class="quote-holly" aria-hidden="true"><i></i></span>
     </div>
-    <p class="hangman-saved" role="status">Saved 0</p>
+    <p class="hangman-saved ghost-game-meta" role="status">Saved 0</p>
   </header>
   <div class="hangman-body">
     <div class="hangman-stage">

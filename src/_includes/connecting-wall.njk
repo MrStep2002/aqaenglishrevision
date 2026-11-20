@@ -1,18 +1,15 @@
+{% from "ghost-levels.njk" import ghostLevels %}
 <dialog class="quote-game connecting-wall" id="connecting-wall" aria-labelledby="connecting-wall-title" aria-describedby="connecting-wall-instructions" tabindex="-1">
   <form class="quote-close" method="dialog"><button type="submit" aria-label="Close Connecting Wall">×</button></form>
-  <header class="wall-heading">
-    <span class="quote-holly" aria-hidden="true"><i></i></span>
-    <h2 id="connecting-wall-title">Connecting Wall</h2>
-    <span class="quote-holly" aria-hidden="true"><i></i></span>
-  </header>
-  <div class="wall-settings">
-    <div class="wall-levels" role="group" aria-label="Difficulty">
-      <button type="button" data-wall-level="1" aria-pressed="true">Easy</button>
-      <button type="button" data-wall-level="2" aria-pressed="false">Mid</button>
-      <button type="button" data-wall-level="3" aria-pressed="false">Hard</button>
+  <header class="wall-heading ghost-game-header">
+    {{ ghostLevels([1, 2, 3], "wall-levels", "data-wall-level") }}
+    <div class="ghost-game-title">
+      <span class="quote-holly" aria-hidden="true"><i></i></span>
+      <h2 id="connecting-wall-title">Connecting Wall</h2>
+      <span class="quote-holly" aria-hidden="true"><i></i></span>
     </div>
-    <p class="wall-progress">0 of 4 groups</p>
-  </div>
+    <p class="wall-progress ghost-game-meta">0 of 4 groups</p>
+  </header>
   <p class="wall-instructions" id="connecting-wall-instructions">Select four words that belong together.</p>
   <div class="wall-stage">
     <div class="wall-board" role="group" aria-label="Four groups of four words"></div>

@@ -1,0 +1,9 @@
+{% macro ghostLevels(values, className="", attribute="data-level", hidden=false) %}
+<div class="ghost-levels {{ className }}" role="group" aria-label="Difficulty"{% if hidden %} hidden{% endif %}>
+  {% for ghost, name, difficulty in [["past", "Past", "easy"], ["present", "Present", "medium"], ["yet-to-come", "Yet-to-Come", "hard"]] %}
+  <button class="ghost-level-button" type="button" {{ attribute }}="{{ values[loop.index0] }}" aria-pressed="{{ 'true' if loop.first else 'false' }}" aria-label="{{ name }} ({{ difficulty }})" title="{{ name }} ({{ difficulty }})">
+    <img class="ghost-level-face" src="/assets/pictures/acc/ghost-{{ ghost }}.jpg" alt="" width="256" height="256" decoding="async" draggable="false">
+  </button>
+  {% endfor %}
+</div>
+{% endmacro %}

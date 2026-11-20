@@ -33,7 +33,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% if cur != "/" %}{{ title }} | {% endif %}{{ site.title }}</title>
+  <title>{% if seoTitle %}{{ seoTitle | escape }}{% else %}{% if cur != "/" %}{{ title }} | {% endif %}{{ site.title }}{% endif %}</title>
   <meta name="description" content="{{ description or site.description }}">
   <link rel="icon" href="/assets/images/site/mouse.svg" type="image/svg+xml">
   {#- Reading settings (font, size, spacing, page colour) are applied before the page draws, so it never flashes. -#}
@@ -55,15 +55,15 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&display=swap">
   {% if 'carol-quote' in content %}<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Germania+One&display=swap">{% endif %}
   <link rel="stylesheet" href="/assets/css/site.css">
-  <link rel="stylesheet" href="/assets/css/game-launcher.css?v=1">
+  <link rel="stylesheet" href="/assets/css/game-launcher.css?v=2">
   {% if showQuoteGame or showQuoteBuilder or showExtractEvidence or showPlotGame or showParagraphGames or showAnalysisGaps or showWordInContext or showHangman or showCrossword or showWordsearch or showConnectingWall or earningsGame %}<link rel="stylesheet" href="/assets/css/quote-game.css">{% endif %}
   {% if showPicturePlanner %}<link rel="stylesheet" href="/assets/css/picture-planner.css">{% endif %}
-  {% if showFogRun %}<link rel="stylesheet" href="/assets/css/fog-run.css?v=7">{% endif %}
+  {% if showFogRun %}<link rel="stylesheet" href="/assets/css/fog-run.css?v=8">{% endif %}
   {% if showFredsOrDead %}<link rel="stylesheet" href="/assets/css/freds-or-dead.css?v=1">{% endif %}
   {% if showQuoteBuilder %}<link rel="stylesheet" href="/assets/css/quote-builder.css">{% endif %}
   {% if showExtractEvidence %}<link rel="stylesheet" href="/assets/css/extract-evidence.css">{% endif %}
   {% if showPlotGame %}<link rel="stylesheet" href="/assets/css/plot-game.css">{% endif %}
-  {% if showParagraphGames %}<link rel="stylesheet" href="/assets/css/essay-jigsaw.css?v=6">{% endif %}
+  {% if showParagraphGames %}<link rel="stylesheet" href="/assets/css/essay-jigsaw.css?v=8">{% endif %}
   {% if showAnalysisGaps %}<link rel="stylesheet" href="/assets/css/analysis-gaps.css">{% endif %}
   {% if showWordFormation %}<link rel="stylesheet" href="/assets/css/word-formation.css">{% endif %}
   {% if showHangman %}<link rel="stylesheet" href="/assets/css/hangman.css?v=4">{% endif %}
@@ -71,6 +71,7 @@
   {% if showWordsearch %}<link rel="stylesheet" href="/assets/css/wordsearch.css?v=3">{% endif %}
   {% if showConnectingWall %}<link rel="stylesheet" href="/assets/css/connecting-wall.css">{% endif %}
   {% if earningsGame %}<link rel="stylesheet" href="/assets/css/earnings-game.css">{% endif %}
+  {% if showHangman or showAnalysisGaps or showWordFormation or showWordInContext or showConnectingWall or showParagraphGames %}<link rel="stylesheet" href="/assets/css/ghost-levels.css?v=3">{% endif %}
   <link rel="canonical" href="{{ site.url }}{{ cur }}">
   {%- if site.goatcounter %}
   {#- Visitor statistics: GoatCounter (no cookies). Set "goatcounter" in src/_data/site.json. -#}
@@ -227,7 +228,7 @@
   {% endif %}
   {% if showFogRun %}
   {% include "fog-run.njk" %}
-  <script type="module" src="/assets/js/fog-run.js?v=7"></script>
+  <script type="module" src="/assets/js/fog-run.js?v=8"></script>
   {% endif %}
   {% if showFredsOrDead %}
   {% include "freds-or-dead.njk" %}
@@ -254,7 +255,7 @@
   {% for game in paragraphGames %}
   {{ paragraphGame(game, game.bank | paragraphBank) }}
   {% endfor %}
-  <script src="/assets/js/essay-jigsaw.js?v=5" defer></script>
+  <script src="/assets/js/essay-jigsaw.js?v=7" defer></script>
   {% endif %}
   {% if showAnalysisGaps %}
   {% include "analysis-gaps.njk" %}
@@ -262,7 +263,7 @@
   {% endif %}
   {% if showWordFormation %}
   {% include "word-formation.njk" %}
-  <script src="/assets/js/word-formation.js" defer></script>
+  <script src="/assets/js/word-formation.js?v=2" defer></script>
   {% endif %}
   {% if showWordInContext %}
   {% include "word-in-context.njk" %}
@@ -288,7 +289,7 @@
   {% include "connecting-wall.njk" %}
   <script type="module" src="/assets/js/connecting-wall.js"></script>
   {% endif %}
-  <script src="/assets/js/game-launcher.js?v=1" defer></script>
+  <script src="/assets/js/game-launcher.js?v=2" defer></script>
   <script src="/assets/js/site.js" defer></script>
   {% if showPicturePlanner %}<script src="/assets/js/picture-planner.js" defer></script>{% endif %}
 </body>
