@@ -1,4 +1,4 @@
-import { streets, width, height } from './marley-maze.js';
+import { streets, width, height } from './fog-run-maze.js?v=1';
 
 function polygon(ctx,points,colour) {
   ctx.fillStyle=colour;

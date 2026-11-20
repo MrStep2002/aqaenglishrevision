@@ -1,55 +1,44 @@
-<dialog class="fog-run" id="fog-run" aria-labelledby="fog-title" data-phase="start">
-  <header class="fog-header">
-    <h2 id="fog-title">Fog Run</h2>
-    <div class="fog-hud" hidden>
-      <span class="fog-level"></span>
-      <strong class="fog-count"></strong>
+<dialog class="fog-run" id="fog-run" aria-label="Fog Run">
+  <section class="fog-run-question" aria-labelledby="fog-run-label">
+    <h3 class="fog-run-eyebrow" id="fog-run-label">Find the answer</h3>
+    <p class="fog-run-clue" aria-live="polite" aria-atomic="true"></p>
+  </section>
+  <div class="fog-run-playfield">
+    <div class="fog-run-map" role="img" aria-label="Snowy London street maze with Scrooge’s red nightcap, two haunted cash boxes and answers in the streets.">
+      <canvas class="fog-run-roofs" width="660" height="484" aria-hidden="true"></canvas>
+      <div class="fog-run-pickups" aria-hidden="true"></div>
+      <canvas class="fog-run-piece fog-run-cap" width="48" height="48" aria-hidden="true"></canvas>
+      <canvas class="fog-run-piece fog-run-box" width="48" height="48" aria-hidden="true"></canvas>
+      <canvas class="fog-run-piece fog-run-box" width="48" height="48" aria-hidden="true"></canvas>
     </div>
-    <button type="button" class="fog-pause" hidden>Pause</button>
-    <form method="dialog"><button class="fog-close" aria-label="Close Fog Run">×</button></form>
-  </header>
-  <div class="fog-body">
-    <section class="fog-start" aria-labelledby="fog-choose">
-      <h3 id="fog-choose">Choose your ghost</h3>
-      <p>Explore a street with ten words. Use each clue to collect the next word, then find Fred’s door. Take your time and remember where the words are.</p>
-      <div class="fog-ghosts">
-        {% for name, difficulty, portrait in [["Past","Easy",51],["Present","Medium",52],["Yet to Come","Hard",53]] %}
-        <button type="button" class="fog-ghost" data-level="{{ loop.index }}">
-          <img src="/assets/pictures/acc/ACC-{{ portrait }}.jpg" alt="" width="480" height="480" loading="lazy">
-          <span class="fog-plate">
-            <small>Ghost of Christmas</small>
-            <strong>{{ name }}</strong>
-            <span class="fog-difficulty">{{ difficulty }}</span>
-          </span>
-        </button>
-        {% endfor %}
-      </div>
-    </section>
-    <section class="fog-question" hidden>
-      <p class="fog-prompt-type"></p>
-      <h3 id="fog-clue" aria-live="polite" aria-atomic="true"></h3>
-      <p class="fog-message" role="status"></p>
-    </section>
-    <div class="fog-street" hidden>
-      <canvas aria-hidden="true"></canvas>
-      <div class="fog-signs" aria-hidden="true"></div>
-      <button type="button" class="fog-jump-zone" aria-label="Jump to collect a word" hidden></button>
+    <div class="fog-run-cover">
+      <section class="fog-run-card">
+        <h3 class="fog-run-message"></h3>
+        <p class="fog-run-detail"></p>
+        <label class="fog-run-level">Difficulty
+          <select><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
+        </label>
+        <button type="button" class="fog-run-action">Play Fog Run</button>
+      </section>
     </div>
-    <div class="fog-controls" hidden>
-      <div class="fog-steer">
-        <button type="button" data-direction="-1" aria-label="Run left">←</button>
-        <button type="button" data-direction="1" aria-label="Run right">→</button>
-        <span>Explore</span>
-      </div>
-      <span class="fog-jump-help"><kbd>↑</kbd> or <kbd>Space</kbd> to jump</span>
-      <span class="fog-tap-help">Tap the street to jump</span>
-    </div>
-    <section class="fog-result" hidden>
-      <h3 tabindex="-1"></h3>
-      <p></p>
-      <button class="fog-action fog-again" type="button">Play again</button>
-      <button class="fog-change" type="button">Change ghost</button>
-    </section>
   </div>
-  <script type="application/json" class="fog-data">{{ fogRunBank | safe }}</script>
+  <aside class="fog-run-rail" aria-label="Game controls and score">
+    <div class="fog-run-tools">
+      <button type="button" class="fog-run-pause" aria-label="Pause" title="Pause" hidden><span aria-hidden="true">Ⅱ</span></button>
+      <form method="dialog"><button class="fog-run-close" aria-label="Close Fog Run" title="Close">×</button></form>
+    </div>
+    <div class="fog-run-score"><span class="fog-run-eyebrow">Words</span><strong class="fog-run-count">0</strong></div>
+    <div class="fog-run-life-panel"><span class="fog-run-eyebrow">Lives</span>
+      <div class="fog-run-lives" role="img" aria-label="3 lives remaining">
+        {% for i in [1, 2, 3] %}<canvas width="48" height="48" aria-hidden="true"></canvas>{% endfor %}
+      </div>
+    </div>
+    <div class="fog-run-pad" aria-label="Steering controls" role="group">
+      {% for direction in ["up", "left", "down", "right"] %}
+      <button type="button" data-dir="{{ direction }}" aria-label="Steer {{ direction }}"><span aria-hidden="true"></span></button>
+      {% endfor %}
+    </div>
+  </aside>
+  <p class="fog-run-status" role="status"></p>
+  <script type="application/json" class="fog-run-data">{{ fogRunBank | safe }}</script>
 </dialog>

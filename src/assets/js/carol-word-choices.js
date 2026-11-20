@@ -27,11 +27,22 @@ export function shuffle(items) {
 }
 
 export function wordChoices(entry, bank) {
-  const groups = choiceGroups.filter(group => group.includes(entry.word));
+  const key = word => word.trim().toLowerCase().replaceAll('’', "'");
+  const answer = key(entry.word);
+  const groups = choiceGroups.filter(group => group.includes(answer));
   const related = new Set(groups.flat());
-  const pool = bank.filter(item => item.level === entry.level && item !== entry);
-  const candidates = shuffle(pool.filter(item => related.has(item.word)));
+  // A bank can contain many clues for one answer. Only display that answer once.
+  const unique = new Map();
+  for (const item of bank) {
+    const word = key(item.word);
+    if (item.level !== entry.level || word === answer
+      || (entry.clue && item.clue === entry.clue)) continue;
+    if (!unique.has(word)) unique.set(word, item);
+  }
+  const pool = [...unique.values()];
+  const candidates = shuffle(pool.filter(item => related.has(key(item.word))));
   // Newly added CSV entries can play immediately, even before a group is chosen.
-  if (candidates.length < 2) candidates.push(...shuffle(pool.filter(item => !related.has(item.word))));
+  if (candidates.length < 2) candidates.push(...shuffle(pool.filter(item => !related.has(key(item.word)))));
+  if (candidates.length < 2) throw new Error('Fog Run needs three different answers at this level.');
   return shuffle([entry, ...candidates.slice(0, 2)]);
 }

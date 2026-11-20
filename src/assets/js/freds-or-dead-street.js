@@ -1,4 +1,4 @@
-import { pitch, signY, ground, wreathRadius } from './fog-course.js?v=6';
+import { pitch, signY, ground, wreathRadius } from './freds-or-dead-course.js?v=1';
 
 // Draw in low-resolution street coordinates so the lamps, cobbles and runner
 // share the same pixel grid on a phone and a large screen.

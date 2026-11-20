@@ -95,6 +95,30 @@ The front pages (`src/index.html` and each text's `index.html`) use a few more: 
 
 Add new Unseen Poetry resource links to the Practice section in `src/unseen-poetry/index.html`. The contents menu is in `src/_data/nav.json`. Staff Room uses the existing `/teachers-corner` address.
 
+### Placing games anywhere on the site
+
+Normal game clicks open a player over the current page. Closing it keeps the reader's page and scroll position. A labelled **Related lesson** link deliberately opens the lesson used by that game. The player loads only the selected game's markup, data and script; closing it removes the player and stops its timers. Theme-specific links keep the theme's own question bank.
+
+To place an existing game on another page, copy its link from `src/games.html`. For example:
+
+```html
+<a class="quote-launch" href="/a-christmas-carol/key-quotes#play-fog-run">Play Fog Run</a>
+```
+
+Use as many links to the same game as you need; links do not need IDs. The lesson address before `#play-…` supplies both the game's content and its related-lesson link. A themed link such as `/a-christmas-carol/greed#play-analysis-gaps` keeps the Greed exercises. Existing lesson-page launch buttons keep working. Modified clicks and opening a link in a new tab retain the original lesson/game address.
+
+To connect a placement to a different lesson without changing the game or its bank, optionally add `data-related-lesson` and `data-related-title`:
+
+```html
+<a href="/a-christmas-carol/key-quotes#play-fog-run"
+   data-related-lesson="/a-christmas-carol/greed"
+   data-related-title="A Christmas Carol · Greed">Play Fog Run</a>
+```
+
+The shared launcher lives in `src/assets/js/game-launcher.js`, its isolated player bridge in `src/assets/js/game-player.js`, and their styles in `src/assets/css/game-launcher.css`. Register a new game in the launcher's `games` object; most games need only their lesson page, with optional script, dialog selector and external JSON data ID. The existing game templates and scripts remain the source of game behaviour. A loading failure offers retry and an explicit lesson link without changing the current page.
+
+Picture Planner is part of the Pics & Tips lesson and retains an explicitly labelled lesson link on the Games page.
+
 ### Plot Quiz
 
 Edit `src/assets/data/plot-quiz.csv` to add or change multiple-choice plot questions. Each row has a unique `id`, a `question`, the correct `answer`, three different wrong answers in `wrong1` to `wrong3`, and an optional `explanation`. The game shuffles the four choices.
@@ -111,9 +135,23 @@ Each level needs at least four words. A phrase such as `direct address` is one a
 
 ### Fog Run
 
-Edit `src/assets/data/fog-run.csv` to change Fog Run's words and clues. It is separate from Word in Context and Marley's Chase, which keep their longer sentences. Each row has a `word` to collect, a `level` (1 = Easy, 2 = Medium, 3 = Hard), a `type` (`definition`, `character` or `quote`), and a short `clue`. Put one `____` gap in a quotation clue. The optional `source` column is for reference and does not appear in the game. An answer can have several different clues. Each level needs at least ten different answers. The bank contains 90 short definitions, 16 character clues and clues drawn from all 50 quotations in the site's quote bank. Save edits as UTF-8 CSV; the local development server rebuilds when this file changes.
+Edit `src/assets/data/fog-run.csv` for the snowy maze game. Its controller, maze, artwork, styles and template all use the `fog-run` name. Links use `#play-fog-run`.
 
-Each run chooses ten different answers and places them at fixed, shuffled positions. The clues use a separate order, with a mixture of the available clue types. Scrooge moves with Left/Right, jumps with Up/Space or a tap on the street, and can revisit any part of the street. There is no timer or automatic scrolling. A wrong collection leaves the clue and word in place. Collected words become ticks. After all ten are collected, run to Fred's door at the far right to enter the party.
+Each row contains `word`, `level`, `type`, `clue`, optional `definition` and `source`. Levels are 1–3. The maze keeps its 100 original sentence exercises and adds Crossword clues and quotation gaps. A `sentence` or `quote` clue contains one `____` gap; a `crossword` clue can be a direct question or contain one gap. The player collects the answer while avoiding the cash boxes. Answer choices are distinct even when the bank has several clues for the same answer. Each level needs at least three different answers.
+
+The CSV is independent of Word in Context. The optional definition is used when pausing a sentence exercise. The source column records where the content came from and is not shown in play.
+
+### Fred’s or Dead
+
+Edit `src/assets/data/freds-or-dead.csv` for the street game. Its controller, street, course, styles and template use `freds-or-dead`. Links use `#play-freds-or-dead`.
+
+Each row has `word`, `level` (1 = Easy, 2 = Medium, 3 = Hard), `type` (`definition`, `character`, `quote` or `crossword`), `clue` and an optional `source`. Put one `____` gap in a quotation clue. Crossword letter counts are omitted from imported clues. An answer can have several different clues; duplicate answer/clue combinations at the same level are skipped when importing. Each level needs at least ten different answers.
+
+The bank keeps the original 156 clues and adds Crossword clues and the remaining gap variants from the quotation bank. No additional Vocabulary definitions were imported. Both games have their own CSV, so content can be edited independently.
+
+Each run chooses ten different answers and places them at shuffled positions. The clues use a separate order with a mixture of available clue types. Scrooge moves with Left/Right, jumps with Up/Space or a tap on the street, and can revisit any part of the street. There is no timer or automatic scrolling. A wrong collection leaves the clue and word in place. After all ten are collected, run to Fred’s door at the far right to enter the party.
+
+Historical duplicate game files are preserved under `archive/game-renames/`, outside the published source. Edit the current files under `src/`.
 
 ### Hangman
 

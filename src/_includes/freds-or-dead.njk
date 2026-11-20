@@ -1,0 +1,55 @@
+<dialog class="freds-or-dead" id="freds-or-dead" aria-labelledby="freds-title" data-phase="start">
+  <header class="freds-header">
+    <h2 id="freds-title">Fred’s or Dead</h2>
+    <div class="freds-hud" hidden>
+      <span class="freds-level"></span>
+      <strong class="freds-count"></strong>
+    </div>
+    <button type="button" class="freds-pause" hidden>Pause</button>
+    <form method="dialog"><button class="freds-close" aria-label="Close Fred’s or Dead">×</button></form>
+  </header>
+  <div class="freds-body">
+    <section class="freds-start" aria-labelledby="freds-choose">
+      <h3 id="freds-choose">Choose your ghost</h3>
+      <p>Explore a street with ten words. Use each clue to collect the next word, then find Fred’s door. Take your time and remember where the words are.</p>
+      <div class="freds-ghosts">
+        {% for name, difficulty, portrait in [["Past","Easy",51],["Present","Medium",52],["Yet to Come","Hard",53]] %}
+        <button type="button" class="freds-ghost" data-level="{{ loop.index }}">
+          <img src="/assets/pictures/acc/ACC-{{ portrait }}.jpg" alt="" width="480" height="480" loading="lazy">
+          <span class="freds-plate">
+            <small>Ghost of Christmas</small>
+            <strong>{{ name }}</strong>
+            <span class="freds-difficulty">{{ difficulty }}</span>
+          </span>
+        </button>
+        {% endfor %}
+      </div>
+    </section>
+    <section class="freds-question" hidden>
+      <p class="freds-prompt-type"></p>
+      <h3 id="freds-clue" aria-live="polite" aria-atomic="true"></h3>
+      <p class="freds-message" role="status"></p>
+    </section>
+    <div class="freds-or-dead-street" hidden>
+      <canvas aria-hidden="true"></canvas>
+      <div class="freds-signs" aria-hidden="true"></div>
+      <button type="button" class="freds-jump-zone" aria-label="Jump to collect a word" hidden></button>
+    </div>
+    <div class="freds-controls" hidden>
+      <div class="freds-steer">
+        <button type="button" data-direction="-1" aria-label="Run left">←</button>
+        <button type="button" data-direction="1" aria-label="Run right">→</button>
+        <span>Explore</span>
+      </div>
+      <span class="freds-jump-help"><kbd>↑</kbd> or <kbd>Space</kbd> to jump</span>
+      <span class="freds-tap-help">Tap the street to jump</span>
+    </div>
+    <section class="freds-result" hidden>
+      <h3 tabindex="-1"></h3>
+      <p></p>
+      <button class="freds-action freds-again" type="button">Play again</button>
+      <button class="freds-change" type="button">Change ghost</button>
+    </section>
+  </div>
+  <script type="application/json" class="freds-data">{{ fredsOrDeadBank | safe }}</script>
+</dialog>

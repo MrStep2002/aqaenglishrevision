@@ -243,6 +243,40 @@ mark, .mark { background: var(--mark); color: var(--mark-ink); }
 .content .card-title { font-family: var(--head); font-weight: var(--hw); font-size: 1.05em; line-height: 1.25; color: var(--ink); }
 .content .card-desc { font-size: .85em; line-height: 1.4; color: var(--muted); }
 .content .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; margin: 1.2em 0; }
+/* Games page: activity groups and cards with a choice of themes. */
+.games-page .content { max-width: 72rem; margin-inline: auto; }
+.games-page .content .games-categories { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.25rem 0 2rem; }
+.games-page .games-categories a { padding: .6rem .85rem; border: 1px solid var(--rule); border-radius: 999px; background: var(--card); font-size: 1rem; line-height: 1.4; text-decoration: none; }
+.games-page .games-categories a:hover { border-color: var(--accent); }
+.games-page .content .game-category { margin-block: 2.25rem; }
+.games-page .content .game-category > h3 { margin: 0 0 1rem; padding-bottom: .6rem; border-bottom: 1px solid var(--rule); }
+.games-page .content .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; gap: 1rem; }
+.games-page .content a.card, .games-page .game-choice-card { padding: 1.1rem; font-size: max(1rem, calc(var(--size) * .9)); }
+.games-page .game-choice-card { display: flex; flex-direction: column; gap: 3px; min-width: 0; border: 1px solid var(--rule); border-radius: 10px; background: var(--card); letter-spacing: normal; word-spacing: normal; }
+.games-page .game-choice-label { color: var(--accent); font-family: var(--mono); font-size: .875rem; line-height: inherit; letter-spacing: .06em; text-transform: uppercase; }
+.games-page .content .game-choice-card h4, .games-page .content .game-choice-card p { margin: 0; }
+.games-page .content .game-theme-links { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; padding: 0; margin: .85rem 0 0; }
+.games-page .content .game-theme-links li { margin: 0; }
+.games-page .game-theme-links a { display: flex; align-items: center; min-height: 44px; padding: .45rem .65rem; border: 1px solid var(--rule); border-radius: .4rem; font-size: 1rem; line-height: 1.35; text-decoration: none; }
+.games-page .game-theme-links a:hover { border-color: var(--accent); background: var(--slot); }
+
+/* Each game is one image tile; theme games reveal their choice of banks. */
+.games-page .content :is(a, summary).game-image-card { position: relative; display: block; align-self: start; padding: 0; overflow: hidden; }
+.games-page .content a.game-image-card::before { display: none; }
+.games-page .game-image-card > img { display: block; width: 100%; height: auto; aspect-ratio: 2.35 / 1; object-fit: cover; object-position: center top; }
+.games-page .game-image-choice { min-width: 0; align-self: start; }
+.games-page .game-image-choice > summary { list-style: none; cursor: pointer; border: 1px solid var(--rule); border-radius: 10px; background: var(--card); transition: border-color .15s, transform .15s; }
+.games-page .game-image-choice > summary::-webkit-details-marker { display: none; }
+.games-page .game-image-choice > summary:hover { border-color: var(--accent); transform: translateY(-1px); }
+.games-page .game-image-choice[open] > summary { border-color: var(--accent); }
+.games-page .content .game-image-choice .game-theme-links { margin: .65rem 0 0; padding: .75rem; border: 1px solid var(--rule); border-radius: 10px; background: var(--card); }
+@media (min-width: 64rem) {
+  .games-page .content .card-grid:has(> :nth-child(3)) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 30rem) {
+  .games-page .content .card-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
 /* tiles: a grid of pages, each with a picture space */
 .content .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 22px 20px; margin: 1.4em 0 1.8em; letter-spacing: normal; word-spacing: normal; }
 .content .tile { font-size: .9em; line-height: 1.5; }

@@ -6,7 +6,7 @@ export const goal = 10;
 const jumpSeconds = .96;
 export const wreathRadius = word => Math.min(53, Math.max(22, 7 + word.length * 3.1));
 
-export class FogCourse {
+export class FredsOrDeadCourse {
   constructor(rounds, words) {
     this.rounds = rounds;
     this.houses = words.map(word => ({ word, collected: false }));

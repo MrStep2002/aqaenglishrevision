@@ -1,157 +1,462 @@
-word,level,type,clue,source
-contrast,1,definition,A clear difference between two things.,Vocabulary
-dialogue,1,definition,A conversation between characters.,Vocabulary
-echo,1,definition,"To repeat an earlier sound, word or idea.",Vocabulary
-narrator,1,definition,The voice that tells a story.,Vocabulary
-repetition,1,definition,Using the same word or phrase again.,Vocabulary
-simile,1,definition,A comparison using ‘like’ or ‘as’.,Vocabulary
-tone,1,definition,The attitude conveyed by a speaker’s words.,Vocabulary
-clerk,1,definition,An office worker who keeps records.,Vocabulary
-bleak,1,definition,"Cold, bare and without much hope.",Vocabulary
-cautious,1,definition,Careful to avoid danger or mistakes.,Vocabulary
-eerie,1,definition,Strange and unsettling.,Vocabulary
-generous,1,definition,Willing to give freely to others.,Vocabulary
-isolated,1,definition,Alone and cut off from others.,Vocabulary
-characterisation,2,definition,How a writer creates a character.,Vocabulary
-connotation,2,definition,An idea or feeling suggested by a word.,Vocabulary
-dehumanise,2,definition,To treat people as less than human.,Vocabulary
-direct address,2,definition,Speaking straight to the reader.,Vocabulary
-emphasise,2,definition,To make something stand out.,Vocabulary
-evoke,2,definition,To bring a feeling or image to mind.,Vocabulary
-foreshadow,2,definition,To hint at something that happens later.,Vocabulary
-imagery,2,definition,Language that creates sensory pictures.,Vocabulary
-imply,2,definition,To suggest something without stating it directly.,Vocabulary
-irony,2,definition,A contrast between expectation and reality.,Vocabulary
-metaphor,2,definition,Describing something as if it were something else.,Vocabulary
-personification,2,definition,Giving human qualities to something non-human.,Vocabulary
-redemption,2,definition,Being saved or changed for the better.,Vocabulary
-symbolise,2,definition,To stand for a larger idea.,Vocabulary
-undermine,2,definition,To weaken someone’s power or an argument.,Vocabulary
-charwoman,2,definition,A woman paid to clean houses.,Vocabulary
-comforter,2,definition,An old-fashioned word for a scarf.,Vocabulary
-counting-house,2,definition,An office where financial business is done.,Vocabulary
-gruel,2,definition,"A thin, watery porridge.",Vocabulary
-humbug,2,definition,Scrooge’s word for nonsense or pretence.,Vocabulary
-laundress,2,definition,A woman paid to wash clothes.,Vocabulary
-ledger,2,definition,A book of business accounts.,Vocabulary
-shilling,2,definition,An old British coin worth twelve pennies.,Vocabulary
-undertaker,2,definition,Someone who arranges funerals.,Vocabulary
-want,2,definition,A lack of life’s basic necessities.,Vocabulary
-workhouse,2,definition,An institution offering the poor harsh work and shelter.,Vocabulary
-abundant,2,definition,Existing in large quantities.,Vocabulary
-alienated,2,definition,Feeling disconnected from other people.,Vocabulary
-benevolent,2,definition,Kind and wishing to help others.,Vocabulary
-callous,2,definition,Uncaring about other people’s suffering.,Vocabulary
-communal,2,definition,Shared by a group or community.,Vocabulary
-complacent,2,definition,Self-satisfied and unaware of a need to change.,Vocabulary
-desolate,2,definition,"Empty, lonely and without comfort.",Vocabulary
-destitute,2,definition,Lacking money and basic necessities.,Vocabulary
-dignified,2,definition,Calm and worthy of respect.,Vocabulary
-dismissive,2,definition,Treating something as unworthy of attention.,Vocabulary
-estranged,2,definition,No longer close to a family member.,Vocabulary
-exuberant,2,definition,Full of lively excitement and joy.,Vocabulary
-forbidding,2,definition,"Looking stern, unfriendly or threatening.",Vocabulary
-forlorn,2,definition,"Looking lonely, sad and abandoned.",Vocabulary
-frugal,2,definition,Careful not to waste money or resources.,Vocabulary
-grotesque,2,definition,Strangely distorted or ugly.,Vocabulary
-indifferent,2,definition,Showing no interest or concern.,Vocabulary
-indignant,2,definition,Angry about something unfair.,Vocabulary
-jovial,2,definition,Cheerful and friendly.,Vocabulary
-materialistic,2,definition,Valuing money and possessions above other things.,Vocabulary
-melancholy,2,definition,A feeling of quiet sadness.,Vocabulary
-miserly,2,definition,Unwilling to spend or share money.,Vocabulary
-ominous,2,definition,Suggesting that something bad will happen.,Vocabulary
-oppressive,2,definition,Cruelly restricting people’s freedom.,Vocabulary
-receptive,2,definition,Willing to consider new ideas.,Vocabulary
-remorseful,2,definition,Feeling deep regret for wrongdoing.,Vocabulary
-resilient,2,definition,Able to recover after hardship.,Vocabulary
-sceptical,2,definition,Doubtful that something is true.,Vocabulary
-solemn,2,definition,Serious and thoughtful.,Vocabulary
-allegory,3,definition,A story whose characters represent wider ideas.,Vocabulary
-allusion,3,definition,A brief reference to another text or event.,Vocabulary
-cyclical structure,3,definition,An ending that returns to the beginning.,Vocabulary
-foil,3,definition,A character who highlights another character’s differences.,Vocabulary
-juxtaposition,3,definition,Placing things side by side to reveal a contrast.,Vocabulary
-motif,3,definition,An image or idea repeated through a text.,Vocabulary
-pathos,3,definition,Writing that arouses pity or sadness.,Vocabulary
-semantic field,3,definition,A group of words linked by meaning.,Vocabulary
-copper,3,definition,"An old, low-value coin made from this metal.",Vocabulary
-cravat,3,definition,A strip of cloth worn around the neck.,Vocabulary
-half-a-crown,3,definition,An old coin worth two shillings and sixpence.,Vocabulary
-milliner,3,definition,Someone who makes or sells hats.,Vocabulary
-Poor Law,3,definition,The system governing relief for the Victorian poor.,Vocabulary
-poulterer,3,definition,A seller of birds such as turkeys.,Vocabulary
-stave,3,definition,Dickens’s name for a chapter in this novella.,Vocabulary
-treadmill,3,definition,A prison machine powered by prisoners’ footsteps.,Vocabulary
-avaricious,3,definition,Having an extreme desire for wealth.,Vocabulary
-contrite,3,definition,Deeply sorry for having done wrong.,Vocabulary
-convivial,3,definition,"Enjoyable, friendly and sociable.",Vocabulary
-covetous,3,definition,Strongly wanting what belongs to others.,Vocabulary
-penitent,3,definition,Sorry for sins and seeking forgiveness.,Vocabulary
-precarious,3,definition,Unstable and at risk of collapse.,Vocabulary
-Scrooge,1,character,A miser visited by three Christmas spirits.,A Christmas Carol
-Bob,1,character,Scrooge’s clerk and Tiny Tim’s father.,A Christmas Carol
-Tiny Tim,1,character,"The Cratchits’ youngest son, who uses a crutch.",A Christmas Carol
-Fred,1,character,"Scrooge’s cheerful nephew, who hosts the party.",A Christmas Carol
-Marley,1,character,"Scrooge’s dead partner, burdened by chains.",A Christmas Carol
-Belle,2,character,"Scrooge’s former fiancée, displaced by a golden idol.",A Christmas Carol
-Fezziwig,2,character,Scrooge’s generous former employer.,A Christmas Carol
-Fan,2,character,Scrooge’s sister and Fred’s mother.,A Christmas Carol
-Mrs Cratchit,2,character,"Bob’s wife, who criticises Scrooge at Christmas.",A Christmas Carol
-Martha,2,character,"The eldest Cratchit daughter, a milliner’s apprentice.",A Christmas Carol
-Past,3,character,The Christmas spirit who shows Scrooge his schooldays.,A Christmas Carol
-Present,3,character,The Christmas spirit who reveals Ignorance and Want.,A Christmas Carol
-Yet to Come,3,character,The silent spirit who points towards Scrooge’s grave.,A Christmas Carol
-Ignorance,3,character,The ragged boy beneath the second spirit’s robe.,A Christmas Carol
-Want,3,character,The ragged girl beneath the second spirit’s robe.,A Christmas Carol
-Old Joe,3,character,Receives the belongings stolen from Scrooge’s deathbed.,A Christmas Carol
-oyster,1,quote,"secret, and self-contained, and solitary as an ____.","secret, and self-contained, and solitary as an oyster."
-workhouses,1,quote,And the Union ____?,And the Union workhouses?
-population,1,quote,decrease the surplus ____.,decrease the surplus population.
-chain,1,quote,I wear the ____ I forged in life.,I wear the chain I forged in life.
-business,1,quote,Mankind was my ____.,Mankind was my business.
-neglected,1,quote,"A solitary child, ____ by his friends, is left there still.","A solitary child, neglected by his friends, is left there still."
-idol,1,quote,Another ____ has displaced me,Another idol has displaced me
-Ignorance,1,quote,This boy is ____. This girl is Want.,This boy is Ignorance. This girl is Want.
-heart,1,quote,"… will honour Christmas in my ____, and try to keep it all …","I will honour Christmas in my heart, and try to keep it all the year."
-feather,1,quote,"… am as light as a ____, I am as happy as an …","I am as light as a feather, I am as happy as an angel, I am as merry as a schoolboy."
-dead,2,quote,Marley was ____: to begin with.,Marley was dead: to begin with.
-flint,2,quote,Hard and sharp as ____,Hard and sharp as flint
-covetous,2,quote,"a squeezing, wrenching, grasping, scraping, clutching, ____, old sinner!","a squeezing, wrenching, grasping, scraping, clutching, covetous, old sinner!"
-froze,2,quote,The cold within him ____ his old features,The cold within him froze his old features
-poor,2,quote,What reason have you to be merry? You’re ____ enough.,What reason have you to be merry? You’re poor enough.
-charitable,2,quote,"a kind, forgiving, ____, pleasant time","a kind, forgiving, charitable, pleasant time"
-prisons,2,quote,Are there no ____?,Are there no prisons?
-bless,2,quote,"God ____ Us, Every One!","God bless Us, Every One!"
-shadows,2,quote,Are these the ____ of the things that Will be,Are these the shadows of the things that Will be
-idle,2,quote,I can’t afford to make ____ people merry.,I can’t afford to make idle people merry.
-sympathy,2,quote,warning all human ____ to keep its distance,warning all human sympathy to keep its distance
-influence,2,quote,External heat and cold had little ____ on Scrooge.,External heat and cold had little influence on Scrooge.
-Humbug,2,quote,Scrooge: “____!”,Humbug!
-dismal,2,quote,What right have you to be ____?,What right have you to be dismal?
-rich,2,quote,Fred to Scrooge: “You’re ____ enough.”,You’re rich enough.
-fortune,3,quote,"The happiness he gives, is quite as great as if it cost a ____.","The happiness he gives, is quite as great as if it cost a fortune."
-Feast,3,quote,"I’ll give you Mr. Scrooge, the Founder of the ____!","I’ll give you Mr. Scrooge, the Founder of the Feast!"
-grave,3,quote,Upon the stone of the neglected ____,Upon the stone of the neglected grave
-death,3,quote,it is condemned to do so after ____.,it is condemned to do so after death.
-forgotten,3,quote,wept to see his poor ____ self as he used to be.,wept to see his poor forgotten self as he used to be.
-clerk,3,quote,… able to say a word or two to my ____ just now.,I should like to be able to say a word or two to my clerk just now.
-world,3,quote,You fear the ____ too much,You fear the world too much
-Gain,3,quote,"… aspirations fall off one by one, until the master-passion, ____, engrosses you.","I have seen your nobler aspirations fall off one by one, until the master-passion, Gain, engrosses you."
-gold,3,quote,"As good as ____, and better!","As good as gold, and better!"
-ribbons,3,quote,"dressed out but poorly in a twice-turned gown, but brave in ____","dressed out but poorly in a twice-turned gown, but brave in ribbons"
-Doom,3,quote,"… boy, for on his brow I see that written which is ____","Beware them both, and all of their degree, but most of all beware this boy, for on his brow I see that written which is Doom"
-refuge,3,quote,Have they no ____ or resource?,Have they no refuge or resource?
-pity,3,quote,"… every year, whether he likes it or not, for I ____ him.","I mean to give him the same chance every year, whether he likes it or not, for I pity him."
-precious,3,quote,"… is waning fast, and it is ____ time to me, I know.","Lead on! The night is waning fast, and it is precious time to me, I know."
-funeral,3,quote,It’s likely to be a very cheap ____,It’s likely to be a very cheap funeral
-happier,3,quote,It was a ____ house for this man’s death!,It was a happier house for this man’s death!
-another,3,quote,I hope to live to be ____ man from what I was,I hope to live to be another man from what I was
-baby,3,quote,Scrooge: “I’m quite a ____.”,I’m quite a baby.
-father,3,quote,"to Tiny Tim, who did not die, he was a second ____.","to Tiny Tim, who did not die, he was a second father."
-curtains,3,quote,"The ____ of his bed were drawn aside, I tell you, by a hand.","The curtains of his bed were drawn aside, I tell you, by a hand."
-hands,3,quote,He put them every one aside with his own ____,He put them every one aside with his own hands
-strength,3,quote,as if its hold were of uncommon ____.,as if its hold were of uncommon strength.
-white,3,quote,a tunic of the purest ____,a tunic of the purest white
-hearts,3,quote,to open their shut-up ____ freely,to open their shut-up hearts freely
-fellow-passengers,3,quote,____ to the grave,fellow-passengers to the grave
+word,level,type,clue,definition,source
+challenge,1,sentence,Fred’s ____ to Scrooge’s belief that Christmas must earn a man money to do him good sets the argument of the story in motion.,To question an idea that people may take for granted.,christmas-carol-vocabulary.csv: challenge
+contrast,1,sentence,The ____ between Fezziwig’s dance floor and Bob’s cold corner shows how differently two employers use their power.,A difference a writer draws attention to by putting things side by side.,christmas-carol-vocabulary.csv: contrast
+criticise,1,sentence,"Through the businessmen who joke about a dead man’s funeral, Dickens can ____ a society that values a free meal more than a neighbour.",To show what is harmful or wrong about something.,christmas-carol-vocabulary.csv: criticise
+dialogue,1,sentence,Belle’s ____ lets us hear what Scrooge’s pursuit of wealth has cost the person who loves him.,The words characters say to one another.,christmas-carol-vocabulary.csv: dialogue
+echo,1,sentence,The Spirit’s questions about prisons and workhouses ____ Scrooge’s own words just as he wants the children to be helped.,"To repeat an earlier word, image or idea in a way that gives it fresh meaning.",christmas-carol-vocabulary.csv: echo
+narrator,1,sentence,"The ____ jokes about door-nails before Marley appears, so the reader meets a playful voice before encountering the ghost.",The voice that tells a story.,christmas-carol-vocabulary.csv: narrator
+repetition,1,sentence,"Fred keeps trying to talk, but Scrooge’s ____ of the same farewell closes down each attempt.","The deliberate use of a word, sound or pattern more than once.",christmas-carol-vocabulary.csv: repetition
+simile,1,sentence,The ____ comparing Scrooge to a feather on Christmas morning makes his relief feel almost weightless.,A comparison that uses “like” or “as”.,christmas-carol-vocabulary.csv: simile
+tone,1,sentence,Mrs Cratchit’s sharp ____ when Bob proposes the toast shows how hard it is for her to praise the man who pays him so little.,The attitude or feeling conveyed by a speaker’s or writer’s choice of words.,christmas-carol-vocabulary.csv: tone
+apprentice,1,sentence,Remembering himself as Fezziwig’s ____ helps Scrooge see the office through Bob’s eyes.,Someone who learns a trade by working for an experienced person.,christmas-carol-vocabulary.csv: apprentice
+bed-curtains,1,sentence,"When Scrooge sees his ____ on Christmas morning, an ordinary furnishing reassures him that he can still change his future.",Curtains hung around a bed for warmth and privacy.,christmas-carol-vocabulary.csv: bed-curtains
+clerk,1,sentence,Bob’s work as a ____ requires him to copy letters even when his hands are cold.,"An office worker who keeps records, writes letters or manages accounts.",christmas-carol-vocabulary.csv: clerk
+affectionate,1,sentence,Fan’s ____ rush to embrace her brother shows that the lonely schoolboy has someone who wants him home.,Openly showing fondness or love.,christmas-carol-vocabulary.csv: affectionate
+appalled,1,sentence,"Scrooge is ____ by the children beneath the Spirit’s robe, yet he has already defended the institutions offered as their only refuge.",Shocked and upset by something that seems terrible or wrong.,christmas-carol-vocabulary.csv: appalled
+bleak,1,sentence,The school is especially ____ after the other boys leave because its empty rooms make one child’s loneliness visible.,"Cold, bare or without much hope.",christmas-carol-vocabulary.csv: bleak
+cautious,1,sentence,Bob’s ____ apology for being late shows that his old experience of Scrooge still shapes what he expects of his employer.,Careful about what one says or does because something might go wrong.,christmas-carol-vocabulary.csv: cautious
+compassionate,1,sentence,Fred’s offer of help to Bob in the vision of the future is ____ because he takes the family’s grief seriously.,Able to recognise another person’s suffering and moved to help.,christmas-carol-vocabulary.csv: compassionate
+defensive,1,sentence,Scrooge’s jokes about indigestion sound ____ as he tries to explain away a ghost who knows him well.,Quick to protect oneself against criticism or an uncomfortable truth.,christmas-carol-vocabulary.csv: defensive
+eerie,1,sentence,The door knocker is ____ because Scrooge recognises Marley’s face in an object he has handled countless times.,Strange in a way that makes a familiar place or object feel unsettling.,christmas-carol-vocabulary.csv: eerie
+generous,1,sentence,Fred is ____ long before Scrooge changes because he keeps a place for his uncle at dinner despite repeated refusals.,"Willing to give time, money or care freely.",christmas-carol-vocabulary.csv: generous
+isolated,1,sentence,"While his neighbours make Christmas visits, Scrooge eats alone and goes home alone, making his ____ routine unmistakable.",Separated from other people or lacking contact with them.,christmas-carol-vocabulary.csv: isolated
+tender,1,sentence,Bob’s promise to visit Tiny Tim’s resting place each Sunday is ____ because it keeps a place for his child in the pattern of his week.,Showing gentle care or affection.,christmas-carol-vocabulary.csv: tender
+vulnerable,1,sentence,Showing the miser as a ____ schoolboy gives the reader a reason to care whether he can change.,Open to harm because one has little protection or power.,christmas-carol-vocabulary.csv: vulnerable
+characterisation,2,sentence,Dickens begins Bob’s ____ with a small action. Warming himself at a candle shows how little power he has in the office.,The ways a writer builds a picture of what a character is like.,christmas-carol-vocabulary.csv: characterisation
+connotation,2,sentence,The ____ of worship in Belle’s word “idol” suggests that money now commands the devotion Scrooge once gave her.,An idea or feeling a word brings to mind beyond its literal meaning.,christmas-carol-vocabulary.csv: connotation
+dehumanise,2,sentence,Scrooge’s talk of a surplus population works to ____ people by reducing them to a number.,To describe or treat people as though their individual lives do not matter.,christmas-carol-vocabulary.csv: dehumanise
+direct address,2,sentence,The narrator’s ____ in the opening makes the reader feel like someone being told a ghost story by the fire.,A way of speaking or writing that turns directly to the listener or reader.,christmas-carol-vocabulary.csv: direct address
+emphasise,2,sentence,Tiny Tim’s carefully preserved crutch and his empty seat ____ his absence from the family.,To give an idea extra weight or draw particular attention to it.,christmas-carol-vocabulary.csv: emphasise
+evoke,2,sentence,The fiddle music and stamping feet at Fezziwig’s party ____ the pleasure of being swept into a dance.,"To bring a feeling, memory or image to mind.",christmas-carol-vocabulary.csv: evoke
+foreshadow,2,sentence,Marley’s chain serves to ____ the reckoning that Scrooge faces when he sees his own grave.,To give an early hint of something that happens later.,christmas-carol-vocabulary.csv: foreshadow
+imagery,2,sentence,"The heat, steam and smells in the Cratchits’ kitchen create ____ that makes the reader feel like another guest at dinner.",Language that helps a reader picture something or experience it through the senses.,christmas-carol-vocabulary.csv: imagery
+imply,2,sentence,"When Scrooge keeps the coal-box in his own room, the scene lets Dickens ____ that even Bob’s warmth is under his employer’s control.",To suggest something without saying it directly.,christmas-carol-vocabulary.csv: imply
+irony,2,sentence,There is ____ in Bob expecting punishment for arriving late on the very morning Scrooge intends to raise his pay.,A gap between what is said or expected and what is actually true or happens.,christmas-carol-vocabulary.csv: irony
+metaphor,2,sentence,The ____ of cold inside Scrooge turns his lack of human warmth into something that seems to freeze his very features.,A description that speaks of one thing as though it were another.,christmas-carol-vocabulary.csv: metaphor
+personification,2,sentence,"The ____ of the weather makes the rain seem generous beside Scrooge, who will give nothing away.",Giving a human action or quality to something that is not human.,christmas-carol-vocabulary.csv: personification
+redemption,2,sentence,"Scrooge’s ____ becomes convincing when he raises Bob’s pay, because Bob will feel the benefit long after Christmas Day.",The process of making amends for past wrongs and changing the way one lives.,christmas-carol-vocabulary.csv: redemption
+symbolise,2,sentence,Tiny Tim’s empty seat can ____ the place a child holds in family life.,To stand for an idea beyond the thing itself.,christmas-carol-vocabulary.csv: symbolise
+undermine,2,sentence,The Cratchits’ careful preparations ____ Scrooge’s assumption that poor people are idle.,To make an idea or claim seem less convincing.,christmas-carol-vocabulary.csv: undermine
+charwoman,2,sentence,"The ____ claims the first turn at Old Joe’s, as if selling a dead man’s belongings were an ordinary piece of business.","A woman paid to do cleaning jobs, often by the day.",christmas-carol-vocabulary.csv: charwoman
+comforter,2,sentence,"Bob has to wear his ____ indoors, a detail that makes Scrooge’s control of the coal feel especially mean.","In this setting, a long scarf worn for warmth.",christmas-carol-vocabulary.csv: comforter
+counting-house,2,sentence,"Scrooge leaves the ____ door open so he can watch Bob, making the office feel more like a place of surveillance than trust.","A business office where money, accounts and correspondence are handled.",christmas-carol-vocabulary.csv: counting-house
+gruel,2,sentence,Scrooge’s solitary bowl of ____ makes a quiet contrast with the meals that bring people together elsewhere in the story.,"A thin food made by cooking grain, often oats, in water or milk.",christmas-carol-vocabulary.csv: gruel
+humbug,2,sentence,Calling Christmas a ____ tells us that Scrooge distrusts the goodwill Fred offers him.,"A sham or deception, also used to dismiss something as insincere nonsense.",christmas-carol-vocabulary.csv: humbug
+laundress,2,sentence,"At Old Joe’s, the ____ can turn a dead man’s linen into cash, showing what his possessions are worth when affection is absent.",A woman who earned money by washing clothes and household linen.,christmas-carol-vocabulary.csv: laundress
+ledger,2,sentence,"A ____ normally records what someone owes in money, but the ledgers in Marley’s chain suggest a different kind of debt.",A book in which a business records money paid and received.,christmas-carol-vocabulary.csv: ledger
+shilling,2,sentence,"Bob supports his family on a wage counted out in the ____, fifteen of them a week, so even a modest Christmas dinner represents a considerable expense.","A unit of British money worth twelve old pence, with twenty shillings to a pound.",christmas-carol-vocabulary.csv: shilling
+undertaker,2,sentence,"The ____ signs the record of Marley’s burial, giving the narrator a practical reason to insist that Marley really is dead.",A person whose work is to arrange funerals and care for the dead.,christmas-carol-vocabulary.csv: undertaker
+want,2,sentence,"By naming the girl ____, Dickens gives hunger and material need the face of a child.","In the sense used for the child’s name, a severe lack of basic necessities.",christmas-carol-vocabulary.csv: want
+workhouse,2,sentence,"Scrooge treats the ____ as an answer to hunger, but the charity collector tells him that some people would sooner die than go there.","An institution where people in poverty received food and shelter under strict rules, with work required of those able to do it.",christmas-carol-vocabulary.csv: workhouse
+abundant,2,sentence,The food heaped around the Ghost of Christmas Present is so ____ that the reader has to ask why anyone in the city goes hungry.,"Present in large amounts, with plenty to spare.",christmas-carol-vocabulary.csv: abundant
+alienated,2,sentence,The schoolboy left behind at Christmas looks painfully ____ once we see how eagerly the other boys set off for home.,Feeling cut off from other people or from a group.,christmas-carol-vocabulary.csv: alienated
+benevolent,2,sentence,Fezziwig is a ____ employer because he spends his own time and money making the apprentices feel welcome.,Wanting to help others and acting on that wish.,christmas-carol-vocabulary.csv: benevolent
+callous,2,sentence,Scrooge’s remark about reducing the population sounds particularly ____ once the reader knows a child whose life is at risk.,Showing little concern for the pain or feelings of others.,christmas-carol-vocabulary.csv: callous
+communal,2,sentence,"The lighthouse keepers toast each other before the older man strikes up a song, making Christmas feel ____ even out at sea.",Shared by a group or done together.,christmas-carol-vocabulary.csv: communal
+complacent,2,sentence,Scrooge sounds ____ when he learns that the workhouses are still operating and asks nothing about life inside them.,So satisfied with oneself or an arrangement that its faults go unnoticed.,christmas-carol-vocabulary.csv: complacent
+desolate,2,sentence,The young Scrooge’s schoolroom feels ____ because its one remaining pupil has no one with whom to share the holiday.,Empty or lonely in a way that causes sadness.,christmas-carol-vocabulary.csv: desolate
+destitute,2,sentence,"The charity collectors ask for food and warmth for ____ people, bringing the conversation back to what it takes to survive a winter night.",Without enough money or resources to meet basic needs.,christmas-carol-vocabulary.csv: destitute
+dignified,2,sentence,"Mrs Cratchit gives the small pudding a ____ entrance, carrying it in with a sprig of holly as though it were a grand centrepiece.",Showing a sense of personal worth that deserves respect.,christmas-carol-vocabulary.csv: dignified
+dismissive,2,sentence,Scrooge’s repeated farewells are ____ because each one cuts short Fred’s invitation to talk.,Treating a person or idea as unworthy of serious attention.,christmas-carol-vocabulary.csv: dismissive
+estranged,2,sentence,Scrooge’s surprise at the welcome he receives from Fred shows how long he has been ____ from his nephew.,No longer close to someone with whom there is a family or personal connection.,christmas-carol-vocabulary.csv: estranged
+exuberant,2,sentence,Scrooge’s ____ laughter on Christmas morning gives us an audible sign of a change that began in private.,So full of energy or joy that it shows in a person’s movements or voice.,christmas-carol-vocabulary.csv: exuberant
+forbidding,2,sentence,Scrooge cuts such a ____ figure in the street that even people who need directions leave him alone.,So severe or unwelcoming that people are reluctant to approach.,christmas-carol-vocabulary.csv: forbidding
+forlorn,2,sentence,Seeing his ____ younger self moves Scrooge to think about the carol singer he sent away.,"Sad and lonely, especially after being left behind.",christmas-carol-vocabulary.csv: forlorn
+frugal,2,sentence,"Mrs Cratchit’s ribbons make her old dress festive, showing how a ____ household can still take pleasure in an occasion.",Careful to make money or supplies go as far as possible.,christmas-carol-vocabulary.csv: frugal
+grotesque,2,sentence,The ____ appearance of Ignorance and Want makes it difficult for the reader to look away from what neglect has done to them.,So distorted or unnatural in appearance that it is disturbing.,christmas-carol-vocabulary.csv: grotesque
+indifferent,2,sentence,The businessmen are so ____ to the dead man that the possibility of lunch matters more to them than his funeral.,Showing no particular interest or concern.,christmas-carol-vocabulary.csv: indifferent
+indignant,2,sentence,Mrs Cratchit is ____ when Bob praises Scrooge at dinner because she knows whose labour has paid for their meal.,Angry because something seems unfair or insulting.,christmas-carol-vocabulary.csv: indignant
+jovial,2,sentence,"The ____ Ghost of Christmas Present invites Scrooge closer, making this first encounter feel more like a welcome than a haunting.",Cheerful and ready to share a joke or a good time.,christmas-carol-vocabulary.csv: jovial
+materialistic,2,sentence,Belle identifies a ____ turn in Scrooge when she realises that he now measures their future together by its financial risks.,Giving money and possessions more importance than love or other values.,christmas-carol-vocabulary.csv: materialistic
+melancholy,2,sentence,There is a ____ gap between Scrooge’s delight at seeing Fan again and his knowledge that his sister is dead.,A quiet sadness that tends to linger.,christmas-carol-vocabulary.csv: melancholy
+miserly,2,sentence,The tiny fire in Bob’s office makes Scrooge’s ____ habits visible in a way that a figure in an account book could not.,"Unwilling to spend or share money, even when one can afford to.",christmas-carol-vocabulary.csv: miserly
+ominous,2,sentence,The bell that starts moving in Scrooge’s room is ____ because it rings without anyone touching it.,Suggesting that something threatening is about to happen.,christmas-carol-vocabulary.csv: ominous
+oppressive,2,sentence,"The threat of losing his job makes Bob’s workplace ____, since even asking for another shovel of coal carries a risk.",So harsh or controlling that people lose freedom or hope.,christmas-carol-vocabulary.csv: oppressive
+receptive,2,sentence,"By the time the last Spirit appears, Scrooge is ____ enough to ask for guidance even though he fears what he will see.",Willing to listen to an idea or learn from an experience.,christmas-carol-vocabulary.csv: receptive
+remorseful,2,sentence,Marley is ____ because he can now see the suffering he once had the freedom to relieve.,Feeling deep regret for harm one has caused.,christmas-carol-vocabulary.csv: remorseful
+resilient,2,sentence,"The Cratchits are ____ in the vision of grief, finding ways to comfort Bob even as each child misses Tiny Tim.",Able to carry on or recover when life is difficult.,christmas-carol-vocabulary.csv: resilient
+sceptical,2,sentence,"Scrooge remains ____ when Marley first appears, testing a frightening sight against the ordinary possibility of a bad supper.",Inclined to doubt something until there is convincing evidence.,christmas-carol-vocabulary.csv: sceptical
+solemn,2,sentence,The last Spirit’s ____ silence makes Scrooge supply the questions that he has avoided asking himself.,Serious and thoughtful in a way that suits an important moment.,christmas-carol-vocabulary.csv: solemn
+allegory,3,sentence,The episode with Ignorance and Want works as an ____ because each child gives a social problem a human face.,A story in which people or events also stand for wider ideas.,christmas-carol-vocabulary.csv: allegory
+allusion,3,sentence,The narrator’s ____ to the ghost in Hamlet prepares readers for a dead man’s return.,"A brief reference to a story, person or event the reader may recognise.",christmas-carol-vocabulary.csv: allusion
+cyclical structure,3,sentence,Bob and Scrooge meet in the same office again in the final stave. This ____ lets us measure the change in their relationship.,A pattern in which the ending returns to a detail or situation from the beginning.,christmas-carol-vocabulary.csv: cyclical structure
+foil,3,sentence,Fred acts as a ____ to his uncle when he greets Bob warmly on his way out of the counting-house.,A character whose differences bring out qualities in another character.,christmas-carol-vocabulary.csv: foil
+juxtaposition,3,sentence,The ____ of the Spirit’s feast and the hungry children beneath his robe makes their deprivation harder to ignore.,The placing of two details or scenes close together so the reader notices a connection or difference.,christmas-carol-vocabulary.csv: juxtaposition
+motif,3,sentence,"Fire is a ____ that links kindness to Bob’s working conditions, from his tiny flame to Scrooge’s promise of more coal.","A detail, image or idea that keeps returning and gathers meaning.",christmas-carol-vocabulary.csv: motif
+pathos,3,sentence,There is ____ in Bob trying to speak steadily about Tiny Tim’s grave while his family listen.,A quality in a scene that makes the reader feel pity or sorrow.,christmas-carol-vocabulary.csv: pathos
+semantic field,3,sentence,"The keys, padlocks and ledgers form a ____ of business and security that makes Marley a prisoner of his old priorities.",A group of words connected by a topic or idea.,christmas-carol-vocabulary.csv: semantic field
+copper,3,sentence,"The Cratchits boil their pudding in the ____, bringing the work of a wash-house into their Christmas feast.","In a Victorian home, a large vessel used for heating water or boiling things.",christmas-carol-vocabulary.csv: copper
+cravat,3,sentence,"Scrooge takes off his ____ and puts on his nightcap before Marley appears, so the haunting interrupts a familiar bedtime routine.",A length of cloth tied around the neck and worn with a shirt.,christmas-carol-vocabulary.csv: cravat
+half-a-crown,3,sentence,"Scrooge offers the boy ____ for a quick return with the poulterer’s man, turning an errand into a chance to be generous.",A British coin worth two shillings and sixpence in the money of Dickens’s day.,christmas-carol-vocabulary.csv: half-a-crown
+milliner,3,sentence,"As an apprentice to a ____, Martha works long hours, which helps explain why Christmas morning offers a rare chance to rest.","Someone who makes or sells hats, especially women’s hats.",christmas-carol-vocabulary.csv: milliner
+Poor Law,3,sentence,"Scrooge invokes the ____ to justify refusing a donation, as though paying for public institutions settled what he owed his neighbours.",The system of laws that organised relief for poor people and their families in England and Wales.,christmas-carol-vocabulary.csv: Poor Law
+poulterer,3,sentence,"Scrooge sends the boy to the ____ for the turkey, which gives him a way to help the Cratchits before he finds the words to speak to Bob.","A trader who sells birds such as chickens, geese and turkeys for food.",christmas-carol-vocabulary.csv: poulterer
+stave,3,sentence,Calling each chapter a ____ extends the musical idea in the title and invites us to read the five parts as one carol.,"A verse of a song or poem, used by Dickens as the name for a chapter.",christmas-carol-vocabulary.csv: stave
+treadmill,3,sentence,"Scrooge mentions the ____ when asked to help the poor, revealing how closely he links need with punishment.","In this setting, a large wheel that prisoners were forced to turn by stepping on it repeatedly.",christmas-carol-vocabulary.csv: treadmill
+avaricious,3,sentence,"Belle remembers a time before Scrooge became ____, which suggests that his greed grew out of choices he once could have made differently.",Driven by a strong desire to gain more money or possessions.,christmas-carol-vocabulary.csv: avaricious
+contrite,3,sentence,Scrooge is ____ when he meets the charity collector again. He asks to be forgiven before whispering the size of his donation.,Genuinely sorry for a wrong one has done.,christmas-carol-vocabulary.csv: contrite
+convivial,3,sentence,Fezziwig makes the warehouse ____ by clearing space for dancing where his apprentices usually work.,Friendly and lively in a way that makes people enjoy being together.,christmas-carol-vocabulary.csv: convivial
+covetous,3,sentence,"Dickens introduces Scrooge as ____ before we see him with a single coin, so we first encounter greed as a habit of mind.",Eager to acquire or keep things for oneself.,christmas-carol-vocabulary.csv: covetous
+penitent,3,sentence,A ____ Scrooge approaches the charity collector he once dismissed and offers to make up for years of missed donations.,Sorry for past wrongdoing and willing to put it right.,christmas-carol-vocabulary.csv: penitent
+precarious,3,sentence,The couple who owe Scrooge money are relieved by his death because even a short delay in repayment matters to their ____ household.,Insecure and liable to be lost or made worse.,christmas-carol-vocabulary.csv: precarious
+Ebenezer,1,crossword,What is Scrooge’s first name?,,christmas-carol-crossword.csv: Ebenezer
+Scrooge,1,crossword,The miser whose visits from three Christmas spirits change his life.,,christmas-carol-crossword.csv: Scrooge
+Jacob,1,crossword,What is Marley’s first name?,,christmas-carol-crossword.csv: Jacob
+Marley,1,crossword,"Scrooge’s dead business partner, who returns wearing a chain.",,christmas-carol-crossword.csv: Marley
+Bob,1,crossword,What is Mr Cratchit’s first name?,,christmas-carol-crossword.csv: Bob
+Cratchit,1,crossword,"Mrs ____, Bob’s wife, is never given a first name.",,christmas-carol-crossword.csv: Cratchit
+Tiny,1,crossword,The word before Tim’s name that emphasises his small size.,,christmas-carol-crossword.csv: Tiny
+Tim,1,crossword,The Cratchit child who walks with a crutch.,,christmas-carol-crossword.csv: Tim
+Fred,1,crossword,Scrooge’s cheerful nephew.,,christmas-carol-crossword.csv: Fred
+Fan,1,crossword,Scrooge’s younger sister and Fred’s mother.,,christmas-carol-crossword.csv: Fan
+Belle,1,crossword,"Scrooge’s former fiancée, who says that an idol has replaced her.",,christmas-carol-crossword.csv: Belle
+Fezziwig,1,crossword,The generous employer who hosts a Christmas party for his apprentices.,,christmas-carol-crossword.csv: Fezziwig
+Past,1,crossword,The first Christmas spirit shows Scrooge this earlier part of his life.,,christmas-carol-crossword.csv: Past
+Present,1,crossword,The second Christmas spirit reveals events happening in this time.,,christmas-carol-crossword.csv: Present
+Future,1,crossword,The final Christmas spirit shows Scrooge this time still to come.,,christmas-carol-crossword.csv: Future
+apprentice,1,crossword,A worker learning a trade from an experienced employer.,,christmas-carol-crossword.csv: apprentice
+curtains,1,crossword,The hangings stolen from around the dead man’s bed: bed-____.,,christmas-carol-crossword.csv: curtains
+clerk,1,crossword,Bob Cratchit’s job in Scrooge’s office.,,christmas-carol-crossword.csv: clerk
+London,1,crossword,The city where Scrooge and the Cratchits live.,,christmas-carol-crossword.csv: London
+warehouse,1,crossword,Fezziwig clears this large storage building to make room for dancing.,,christmas-carol-crossword.csv: warehouse
+schoolroom,1,crossword,The room in which the young Scrooge is left alone with his books.,,christmas-carol-crossword.csv: schoolroom
+church,1,crossword,Bob and Tiny Tim attend this place of worship on Christmas morning.,,christmas-carol-crossword.csv: church
+churchyard,1,crossword,The final spirit leads Scrooge into this burial ground around a place of worship.,,christmas-carol-crossword.csv: churchyard
+prison,1,crossword,A place of confinement for offenders that Scrooge mentions when refusing charity.,,christmas-carol-crossword.csv: prison
+bell,1,crossword,This object begins to ring by itself before Marley’s ghost appears.,,christmas-carol-crossword.csv: bell
+candle,1,crossword,Bob tries to warm himself at this small source of light.,,christmas-carol-crossword.csv: candle
+chain,1,crossword,"Marley wears this burden, which he says he forged in life.",,christmas-carol-crossword.csv: chain
+coal,1,crossword,"The fuel Scrooge keeps in his own room, controlling Bob’s fire.",,christmas-carol-crossword.csv: coal
+crutch,1,crossword,The walking aid associated with Tiny Tim.,,christmas-carol-crossword.csv: crutch
+fiddle,1,crossword,The stringed instrument played at Fezziwig’s Christmas party.,,christmas-carol-crossword.csv: fiddle
+goose,1,crossword,The bird the Cratchits eat for their Christmas dinner.,,christmas-carol-crossword.csv: goose
+holly,1,crossword,The Christmas plant used to decorate Mrs Cratchit’s pudding.,,christmas-carol-crossword.csv: holly
+key,1,crossword,A metal object used to open a lock; several appear in Marley’s chain.,,christmas-carol-crossword.csv: key
+knocker,1,crossword,The door fitting that briefly takes the shape of Marley’s face.,,christmas-carol-crossword.csv: knocker
+mistletoe,1,crossword,The Christmas plant with white berries hung with holly and ivy in Scrooge’s transformed room.,,christmas-carol-crossword.csv: mistletoe
+nightcap,1,crossword,"A soft hat worn in bed, like Scrooge’s.",,christmas-carol-crossword.csv: nightcap
+padlock,1,crossword,"A detachable lock with a curved metal loop, included in Marley’s chain.",,christmas-carol-crossword.csv: padlock
+pudding,1,crossword,"Mrs Cratchit’s Christmas dessert, brought in blazing with brandy.",,christmas-carol-crossword.csv: pudding
+purse,1,crossword,A small bag for money; heavy steel versions form part of Marley’s chain.,,christmas-carol-crossword.csv: purse
+ribbon,1,crossword,A strip of decorative fabric Mrs Cratchit uses to brighten her old dress.,,christmas-carol-crossword.csv: ribbon
+torch,1,crossword,"From this light-bearing object, the Ghost of Christmas Present sprinkles blessings.",,christmas-carol-crossword.csv: torch
+turkey,1,crossword,The prize bird Scrooge sends to the Cratchits on Christmas morning.,,christmas-carol-crossword.csv: turkey
+waistcoat,1,crossword,A sleeveless garment worn over a shirt and beneath a coat.,,christmas-carol-crossword.csv: waistcoat
+affectionate,1,crossword,Openly showing fondness or love.,,christmas-carol-crossword.csv: affectionate
+appalled,1,crossword,Shocked and upset by something terrible or wrong.,,christmas-carol-crossword.csv: appalled
+bleak,1,crossword,"Cold and bare, or offering little hope.",,christmas-carol-crossword.csv: bleak
+cautious,1,crossword,Careful because something might go wrong.,,christmas-carol-crossword.csv: cautious
+compassionate,1,crossword,Moved by another person’s suffering and willing to help.,,christmas-carol-crossword.csv: compassionate
+defensive,1,crossword,Quick to protect yourself against criticism or an uncomfortable truth.,,christmas-carol-crossword.csv: defensive
+eerie,1,crossword,Strange in an unsettling or frightening way.,,christmas-carol-crossword.csv: eerie
+generous,1,crossword,"Willing to give money, time or care freely.",,christmas-carol-crossword.csv: generous
+isolated,1,crossword,Cut off from other people or lacking contact with them.,,christmas-carol-crossword.csv: isolated
+tender,1,crossword,Showing gentle care and affection.,,christmas-carol-crossword.csv: tender
+vulnerable,1,crossword,Open to harm because of limited protection or power.,,christmas-carol-crossword.csv: vulnerable
+fire,1,crossword,No steel has yet struck “generous ____” from Scrooge at the start.,,christmas-carol-crossword.csv: fire
+heat,1,crossword,“External ____ and cold had little influence on Scrooge.”,,christmas-carol-crossword.csv: heat
+cold,1,crossword,“The ____ within him froze his old features.”,,christmas-carol-crossword.csv: cold
+population,1,crossword,Scrooge wants the poor to decrease “the surplus ____”.,,christmas-carol-crossword.csv: population
+business,1,crossword,"Marley admits, “Mankind was my ____.”",,christmas-carol-crossword.csv: business
+golden,1,crossword,Belle says the idol that has replaced her is “a ____ one”.,,christmas-carol-crossword.csv: golden
+forgotten,1,crossword,Scrooge weeps over his “poor ____ self” when he sees his childhood.,,christmas-carol-crossword.csv: forgotten
+brave,1,crossword,Mrs Cratchit is described as “____ in ribbons”.,,christmas-carol-crossword.csv: brave
+doom,1,crossword,"The word written on Ignorance’s brow, unless the writing is erased.",,christmas-carol-crossword.csv: doom
+grief,1,crossword,The deep sorrow shown by Bob after Tiny Tim’s imagined death.,,christmas-carol-crossword.csv: grief
+jolly,1,crossword,The Ghost of Christmas Present is introduced as “a ____ Giant”.,,christmas-carol-crossword.csv: jolly
+giant,1,crossword,The Ghost of Christmas Present is introduced as “a jolly ____”.,,christmas-carol-crossword.csv: giant
+shadows,1,crossword,Scrooge asks whether the final spirit’s visions are “____” of what may happen.,,christmas-carol-crossword.csv: shadows
+feather,1,crossword,Scrooge feels “as light as a ____” on Christmas morning.,,christmas-carol-crossword.csv: feather
+angel,1,crossword,Scrooge declares himself “as happy as an ____”.,,christmas-carol-crossword.csv: angel
+salary,1,crossword,The regular pay Scrooge promises to raise for Bob.,,christmas-carol-crossword.csv: salary
+father,1,crossword,"At the end, Scrooge becomes Tiny Tim’s “second ____”.",,christmas-carol-crossword.csv: father
+squeezing,1,crossword,"The first word in the sequence “____, wrenching, grasping”.",,christmas-carol-crossword.csv: squeezing
+scraping,1,crossword,The word between “grasping” and “clutching” in Scrooge’s opening description.,,christmas-carol-crossword.csv: scraping
+darkness,1,crossword,"The narrator observes that this is cheap, and Scrooge likes it.",,christmas-carol-crossword.csv: darkness
+light,1,crossword,"The bright jet from the first spirit’s head, which Scrooge cannot hide.",,christmas-carol-crossword.csv: light
+challenge,1,crossword,To question an idea that people may take for granted.,,christmas-carol-crossword.csv: challenge
+contrast,1,crossword,A difference highlighted by placing people or ideas side by side.,,christmas-carol-crossword.csv: contrast
+criticise,1,crossword,"To point out what is harmful, wrong or weak about something.",,christmas-carol-crossword.csv: criticise
+dialogue,1,crossword,The words characters speak to one another.,,christmas-carol-crossword.csv: dialogue
+echo,1,crossword,To repeat an earlier word or idea so that it gains fresh meaning.,,christmas-carol-crossword.csv: echo
+narrator,1,crossword,The voice that tells a story.,,christmas-carol-crossword.csv: narrator
+repetition,1,crossword,"Deliberately using a word, sound or pattern more than once.",,christmas-carol-crossword.csv: repetition
+simile,1,crossword,A comparison using “like” or “as”.,,christmas-carol-crossword.csv: simile
+tone,1,crossword,The attitude or feeling conveyed by a writer’s choice of words.,,christmas-carol-crossword.csv: tone
+adjective,1,crossword,"A word that describes a noun, such as “solitary”.",,christmas-carol-crossword.csv: adjective
+noun,1,crossword,"A word naming a person, place, thing or idea.",,christmas-carol-crossword.csv: noun
+verb,1,crossword,"A word expressing an action, event or state.",,christmas-carol-crossword.csv: verb
+compare,1,crossword,To examine similarities and differences between things.,,christmas-carol-crossword.csv: compare
+describe,1,crossword,To give an account of what something is like.,,christmas-carol-crossword.csv: describe
+explain,1,crossword,To make clear how or why something happens.,,christmas-carol-crossword.csv: explain
+identify,1,crossword,To name or recognise a particular feature or detail.,,christmas-carol-crossword.csv: identify
+evidence,1,crossword,Details or quotations used to support an argument.,,christmas-carol-crossword.csv: evidence
+quotation,1,crossword,Words taken directly from a text.,,christmas-carol-crossword.csv: quotation
+extract,1,crossword,A short passage selected from a longer text.,,christmas-carol-crossword.csv: extract
+reader,1,crossword,The person who encounters and interprets a written text.,,christmas-carol-crossword.csv: reader
+effect,1,crossword,"The result or impact that a word, image or technique produces.",,christmas-carol-crossword.csv: effect
+language,1,crossword,The words and expressions a writer chooses.,,christmas-carol-crossword.csv: language
+theme,1,crossword,A central idea explored across a text.,,christmas-carol-crossword.csv: theme
+purpose,1,crossword,The aim or reason behind a writer’s choice.,,christmas-carol-crossword.csv: purpose
+Dickens,1,crossword,The surname of the author of A Christmas Carol.,,christmas-carol-crossword.csv: Dickens
+Christmas,1,crossword,The festival Scrooge promises to honour throughout the year.,,christmas-carol-crossword.csv: Christmas
+poverty,1,crossword,The condition of lacking enough money to meet basic needs.,,christmas-carol-crossword.csv: poverty
+wealth,1,crossword,An abundance of money or valuable possessions.,,christmas-carol-crossword.csv: wealth
+greed,1,crossword,An excessive desire to acquire or keep more than one needs.,,christmas-carol-crossword.csv: greed
+generosity,1,crossword,"The quality shown by freely giving money, time or care.",,christmas-carol-crossword.csv: generosity
+charity,1,crossword,"Giving help to people in need, as the collectors ask Scrooge to do.",,christmas-carol-crossword.csv: charity
+family,1,crossword,The group whose love and shared life are represented by the Cratchits.,,christmas-carol-crossword.csv: family
+friendship,1,crossword,A relationship of mutual affection between people who are not necessarily related.,,christmas-carol-crossword.csv: friendship
+regret,1,crossword,Sadness about something one has done or failed to do.,,christmas-carol-crossword.csv: regret
+education,1,crossword,The learning that Dickens sees as protection against ignorance.,,christmas-carol-crossword.csv: education
+memory,1,crossword,"The ability to recall past experiences, explored by the first spirit.",,christmas-carol-crossword.csv: memory
+childhood,1,crossword,The early stage of life revisited by the Ghost of Christmas Past.,,christmas-carol-crossword.csv: childhood
+Martha,2,crossword,The Cratchit daughter who is apprenticed to a milliner.,,christmas-carol-crossword.csv: Martha
+Peter,2,crossword,The Cratchit son who wears his father’s shirt collar at Christmas.,,christmas-carol-crossword.csv: Peter
+Belinda,2,crossword,"The Cratchits’ second daughter, who helps her mother set the table.",,christmas-carol-crossword.csv: Belinda
+Joe,2,crossword,The dealer whose shop receives belongings stolen from the dead man: Old ____.,,christmas-carol-crossword.csv: Joe
+Ignorance,2,crossword,The boy hidden beneath the Ghost of Christmas Present’s robe.,,christmas-carol-crossword.csv: Ignorance
+Want,2,crossword,The girl hidden beneath the Ghost of Christmas Present’s robe.,,christmas-carol-crossword.csv: Want
+charwoman,2,crossword,"A woman paid to clean houses, such as the thief who takes the dead man’s bed-curtains.",,christmas-carol-crossword.csv: charwoman
+laundress,2,crossword,A woman employed to wash clothes and household linen.,,christmas-carol-crossword.csv: laundress
+comforter,2,crossword,"A long scarf, like the one Bob wears while working in the cold.",,christmas-carol-crossword.csv: comforter
+countinghouse,2,crossword,"Scrooge’s business office, where Bob copies letters.",,christmas-carol-crossword.csv: countinghouse
+gruel,2,crossword,The thin food Scrooge eats alone before Marley’s visit.,,christmas-carol-crossword.csv: gruel
+ledger,2,crossword,A book recording a business’s financial transactions.,,christmas-carol-crossword.csv: ledger
+shilling,2,crossword,An old British coin worth twelve pence; Bob earns fifteen a week.,,christmas-carol-crossword.csv: shilling
+undertaker,2,crossword,A person who arranges funerals and cares for the dead.,,christmas-carol-crossword.csv: undertaker
+workhouse,2,crossword,"An institution offering poor people food and shelter under harsh rules, with labour required of those able to work.",,christmas-carol-crossword.csv: workhouse
+Camden,2,crossword,"The Cratchits live in ____ Town, an area of London.",,christmas-carol-crossword.csv: Camden
+Exchange,2,crossword,A meeting place for merchants and businesspeople: London’s Royal ____.,,christmas-carol-crossword.csv: Exchange
+lighthouse,2,crossword,The isolated coastal building whose keepers share a Christmas celebration.,,christmas-carol-crossword.csv: lighthouse
+mine,2,crossword,An underground workplace used to extract coal or minerals.,,christmas-carol-crossword.csv: mine
+cashbox,2,crossword,A box used to store money; steel versions appear in Marley’s chain.,,christmas-carol-crossword.csv: cashbox
+extinguisher,2,crossword,A cap used to put out a flame; Scrooge presses one over the first spirit’s light.,,christmas-carol-crossword.csv: extinguisher
+humbug,2,crossword,Scrooge’s favourite dismissal of Christmas as a sham or deception.,,christmas-carol-crossword.csv: humbug
+abundant,2,crossword,"Present in large quantities, with plenty to spare.",,christmas-carol-crossword.csv: abundant
+alienated,2,crossword,Feeling cut off from a group or a sense of belonging.,,christmas-carol-crossword.csv: alienated
+benevolent,2,crossword,Wishing to do good and help other people.,,christmas-carol-crossword.csv: benevolent
+callous,2,crossword,Showing little concern for another person’s suffering.,,christmas-carol-crossword.csv: callous
+communal,2,crossword,Shared by a group or done together.,,christmas-carol-crossword.csv: communal
+complacent,2,crossword,So satisfied with yourself or a situation that you overlook its faults.,,christmas-carol-crossword.csv: complacent
+desolate,2,crossword,Empty or lonely in a way that causes sadness.,,christmas-carol-crossword.csv: desolate
+destitute,2,crossword,Lacking the resources needed for basic survival.,,christmas-carol-crossword.csv: destitute
+dignified,2,crossword,Showing a sense of personal worth that deserves respect.,,christmas-carol-crossword.csv: dignified
+dismissive,2,crossword,Treating a person or idea as unworthy of serious attention.,,christmas-carol-crossword.csv: dismissive
+estranged,2,crossword,No longer close to someone with whom you once had a family or personal bond.,,christmas-carol-crossword.csv: estranged
+exuberant,2,crossword,"Overflowing with energy, enthusiasm or joy.",,christmas-carol-crossword.csv: exuberant
+forbidding,2,crossword,So stern or unwelcoming that others are reluctant to approach.,,christmas-carol-crossword.csv: forbidding
+forlorn,2,crossword,"Sad and lonely, especially after being abandoned.",,christmas-carol-crossword.csv: forlorn
+frugal,2,crossword,Careful to make money or supplies go as far as possible.,,christmas-carol-crossword.csv: frugal
+grotesque,2,crossword,Distorted or unnatural in a disturbing way.,,christmas-carol-crossword.csv: grotesque
+indifferent,2,crossword,Showing no interest or concern.,,christmas-carol-crossword.csv: indifferent
+indignant,2,crossword,Angry because something seems unfair or insulting.,,christmas-carol-crossword.csv: indignant
+jovial,2,crossword,Cheerful and ready to share a joke or a good time.,,christmas-carol-crossword.csv: jovial
+materialistic,2,crossword,Giving possessions and money greater importance than love or other values.,,christmas-carol-crossword.csv: materialistic
+melancholy,2,crossword,A lingering mood of quiet sadness.,,christmas-carol-crossword.csv: melancholy
+miserly,2,crossword,"Unwilling to spend or share money, even when able to afford it.",,christmas-carol-crossword.csv: miserly
+ominous,2,crossword,Suggesting that something threatening is about to happen.,,christmas-carol-crossword.csv: ominous
+oppressive,2,crossword,So harsh or controlling that people lose freedom or hope.,,christmas-carol-crossword.csv: oppressive
+receptive,2,crossword,Willing to listen to ideas or learn from an experience.,,christmas-carol-crossword.csv: receptive
+remorseful,2,crossword,Feeling deep regret for harm you have caused.,,christmas-carol-crossword.csv: remorseful
+resilient,2,crossword,Able to carry on or recover after difficulty.,,christmas-carol-crossword.csv: resilient
+sceptical,2,crossword,Inclined to doubt something until convincing evidence is provided.,,christmas-carol-crossword.csv: sceptical
+solemn,2,crossword,Serious and thoughtful in a way suited to an important moment.,,christmas-carol-crossword.csv: solemn
+solitary,2,crossword,The adjective before “as an oyster” in Scrooge’s opening description.,,christmas-carol-crossword.csv: solitary
+oyster,2,crossword,The shellfish used in the simile describing Scrooge’s isolation.,,christmas-carol-crossword.csv: oyster
+flint,2,crossword,The hard stone to which Scrooge is compared.,,christmas-carol-crossword.csv: flint
+surplus,2,crossword,The word before “population” that presents poor people as unnecessary extras.,,christmas-carol-crossword.csv: surplus
+mankind,2,crossword,"Marley admits that this, rather than trade alone, should have been his business.",,christmas-carol-crossword.csv: mankind
+forged,2,crossword,"Made or shaped metal, as Marley says he did to his chain in life.",,christmas-carol-crossword.csv: forged
+fortune,2,crossword,Fezziwig’s kindness gives happiness “as if it cost a ____”.,,christmas-carol-crossword.csv: fortune
+idol,2,crossword,Belle’s religious image for what has replaced her in Scrooge’s affections.,,christmas-carol-crossword.csv: idol
+gain,2,crossword,The “master-passion” Belle says now dominates Scrooge.,,christmas-carol-crossword.csv: gain
+neglected,2,crossword,The young Scrooge is described as a child “____ by his friends”.,,christmas-carol-crossword.csv: neglected
+refuge,2,crossword,A safe place or shelter; Scrooge asks whether the children have any.,,christmas-carol-crossword.csv: refuge
+resource,2,crossword,"A source of support or help, paired with “refuge” in Scrooge’s question.",,christmas-carol-crossword.csv: resource
+phantom,2,crossword,The narrator’s name for the silent Ghost of Christmas Yet to Come.,,christmas-carol-crossword.csv: phantom
+sinner,2,crossword,"The moral label at the end of Scrooge’s opening list: “covetous, old ____”.",,christmas-carol-crossword.csv: sinner
+grasping,2,crossword,The word after “wrenching” in the description of Scrooge’s greedy actions.,,christmas-carol-crossword.csv: grasping
+clutching,2,crossword,The word after “scraping” that suggests gripping something tightly.,,christmas-carol-crossword.csv: clutching
+wrenching,2,crossword,The word between “squeezing” and “grasping” in Scrooge’s opening description.,,christmas-carol-crossword.csv: wrenching
+characterisation,2,crossword,The methods a writer uses to build a picture of a person in a story.,,christmas-carol-crossword.csv: characterisation
+connotation,2,crossword,An associated idea or feeling beyond a word’s literal meaning.,,christmas-carol-crossword.csv: connotation
+dehumanise,2,crossword,To treat or describe people as though they lack individual human worth.,,christmas-carol-crossword.csv: dehumanise
+address,2,crossword,Direct ____: speaking straight to the reader or listener.,,christmas-carol-crossword.csv: address
+emphasise,2,crossword,To give an idea extra weight or draw attention to it.,,christmas-carol-crossword.csv: emphasise
+evoke,2,crossword,"To bring a feeling, memory or image to mind.",,christmas-carol-crossword.csv: evoke
+foreshadow,2,crossword,To hint at an event before it happens later in the story.,,christmas-carol-crossword.csv: foreshadow
+imagery,2,crossword,Language that creates pictures or sensory experiences in the reader’s mind.,,christmas-carol-crossword.csv: imagery
+imply,2,crossword,To suggest a meaning without stating it directly.,,christmas-carol-crossword.csv: imply
+irony,2,crossword,A gap between what is said or expected and what is actually true.,,christmas-carol-crossword.csv: irony
+metaphor,2,crossword,Describing one thing as though it were another.,,christmas-carol-crossword.csv: metaphor
+personification,2,crossword,Giving human actions or qualities to something non-human.,,christmas-carol-crossword.csv: personification
+redemption,2,crossword,Making amends for past wrongs through a changed way of living.,,christmas-carol-crossword.csv: redemption
+symbolise,2,crossword,"To stand for an abstract idea, as a chain can stand for guilt.",,christmas-carol-crossword.csv: symbolise
+undermine,2,crossword,"To make an idea, belief or claim seem less convincing.",,christmas-carol-crossword.csv: undermine
+adverb,2,crossword,"Often ending in -ly, this word class can tell us how an action happens.",,christmas-carol-crossword.csv: adverb
+alliteration,2,crossword,The repetition of an initial consonant sound in nearby words.,,christmas-carol-crossword.csv: alliteration
+symbolism,2,crossword,"The use of objects, people or images to represent wider ideas.",,christmas-carol-crossword.csv: symbolism
+analyse,2,crossword,To examine how details work together to create meaning.,,christmas-carol-crossword.csv: analyse
+analysis,2,crossword,A detailed examination of how a text creates meaning.,,christmas-carol-crossword.csv: analysis
+explore,2,crossword,To examine an idea in depth by considering its different possibilities.,,christmas-carol-crossword.csv: explore
+discuss,2,crossword,To develop an explanation of an idea using relevant evidence and viewpoints.,,christmas-carol-crossword.csv: discuss
+infer,2,crossword,To work out an unstated meaning from evidence.,,christmas-carol-crossword.csv: infer
+suggest,2,crossword,To put forward a possible meaning without claiming certainty.,,christmas-carol-crossword.csv: suggest
+portray,2,crossword,To depict someone in a particular way.,,christmas-carol-crossword.csv: portray
+reveal,2,crossword,To make something previously hidden or unknown become clear.,,christmas-carol-crossword.csv: reveal
+illustrate,2,crossword,To make an idea clear through an example.,,christmas-carol-crossword.csv: illustrate
+develop,2,crossword,To build an idea or argument in greater detail.,,christmas-carol-crossword.csv: develop
+reflect,2,crossword,"To mirror or express an attitude, belief or experience.",,christmas-carol-crossword.csv: reflect
+represent,2,crossword,"To portray a person or group, or act on their behalf.",,christmas-carol-crossword.csv: represent
+structure,2,crossword,The order and arrangement of a text’s parts.,,christmas-carol-crossword.csv: structure
+intention,2,crossword,What a writer means to achieve through a choice.,,christmas-carol-crossword.csv: intention
+context,2,crossword,"The social, historical or cultural circumstances surrounding a text.",,christmas-carol-crossword.csv: context
+perspective,2,crossword,A particular viewpoint from which events are understood or presented.,,christmas-carol-crossword.csv: perspective
+Victorian,2,crossword,Belonging to the period of Queen Victoria’s reign.,,christmas-carol-crossword.csv: Victorian
+compassion,2,crossword,"Sympathetic concern for suffering, joined to a wish to help.",,christmas-carol-crossword.csv: compassion
+responsibility,2,crossword,A duty to consider or care for the effects of your actions on others.,,christmas-carol-crossword.csv: responsibility
+isolation,2,crossword,The state of being separated from other people.,,christmas-carol-crossword.csv: isolation
+forgiveness,2,crossword,Letting go of resentment towards someone who has wronged you.,,christmas-carol-crossword.csv: forgiveness
+transformation,2,crossword,A major change in someone’s character or way of living.,,christmas-carol-crossword.csv: transformation
+inequality,2,crossword,"Unfair differences in wealth, power or opportunity.",,christmas-carol-crossword.csv: inequality
+neglect,2,crossword,Failure to give someone the care or attention they need.,,christmas-carol-crossword.csv: neglect
+Christianity,2,crossword,The religion whose teachings about charity and goodwill Dickens draws on.,,christmas-carol-crossword.csv: Christianity
+Dick,3,crossword,"The first name of Wilkins, Scrooge’s fellow apprentice under Fezziwig.",,christmas-carol-crossword.csv: Dick
+Wilkins,3,crossword,"The surname of Dick, Scrooge’s fellow apprentice.",,christmas-carol-crossword.csv: Wilkins
+Topper,3,crossword,Fred’s friend who pursues a guest during blind-man’s buff.,,christmas-carol-crossword.csv: Topper
+Dilber,3,crossword,"Mrs ____, the laundress who sells sheets and towels to Old Joe.",,christmas-carol-crossword.csv: Dilber
+copper,3,crossword,"A large household vessel used to boil water, laundry or the Cratchits’ pudding.",,christmas-carol-crossword.csv: copper
+cravat,3,crossword,"A strip of cloth tied around the neck, worn by Scrooge before he changes for bed.",,christmas-carol-crossword.csv: cravat
+crown,3,crossword,Half-a-____: an old coin worth two shillings and sixpence.,,christmas-carol-crossword.csv: crown
+milliner,3,crossword,"A maker or seller of hats, such as Martha’s employer.",,christmas-carol-crossword.csv: milliner
+law,3,crossword,Poor ____: the system governing relief for people in poverty.,,christmas-carol-crossword.csv: law
+poulterer,3,crossword,"A trader who sells birds such as chickens, geese and turkeys for food.",,christmas-carol-crossword.csv: poulterer
+treadmill,3,crossword,"The wheel prisoners were forced to turn by stepping, mentioned by Scrooge.",,christmas-carol-crossword.csv: treadmill
+Cornhill,3,crossword,The London street where Bob slides on Christmas Eve.,,christmas-carol-crossword.csv: Cornhill
+scabbard,3,crossword,A sheath for a sword; the second spirit carries an empty one.,,christmas-carol-crossword.csv: scabbard
+avaricious,3,crossword,Driven by an intense desire to gain money or possessions.,,christmas-carol-crossword.csv: avaricious
+contrite,3,crossword,"Deeply sorry for wrongdoing, with a sense of guilt.",,christmas-carol-crossword.csv: contrite
+convivial,3,crossword,Friendly and lively in a way that makes a gathering enjoyable.,,christmas-carol-crossword.csv: convivial
+covetous,3,crossword,The adjective just before “old sinner” in Scrooge’s opening description.,,christmas-carol-crossword.csv: covetous
+penitent,3,crossword,Sorry for past wrongdoing and willing to put it right.,,christmas-carol-crossword.csv: penitent
+precarious,3,crossword,"Insecure and liable to collapse, fail or be lost.",,christmas-carol-crossword.csv: precarious
+penitence,3,crossword,Sorrow for wrongdoing and a desire to make amends.,,christmas-carol-crossword.csv: penitence
+allegory,3,crossword,A story in which characters and events also represent wider ideas.,,christmas-carol-crossword.csv: allegory
+allusion,3,crossword,"A brief reference to another story, person or event.",,christmas-carol-crossword.csv: allusion
+cyclical,3,crossword,____ structure: an ending returns to a detail or situation from the beginning.,,christmas-carol-crossword.csv: cyclical
+foil,3,crossword,A character whose differences highlight qualities in another character.,,christmas-carol-crossword.csv: foil
+juxtaposition,3,crossword,Placing contrasting details or scenes beside one another so their differences stand out.,,christmas-carol-crossword.csv: juxtaposition
+motif,3,crossword,"A recurring image, detail or idea that gathers meaning across a text.",,christmas-carol-crossword.csv: motif
+pathos,3,crossword,The quality of a scene that arouses pity or sorrow in the reader.,,christmas-carol-crossword.csv: pathos
+semantic,3,crossword,____ field: a group of words linked by meaning or topic.,,christmas-carol-crossword.csv: semantic
+stave,3,crossword,Dickens’s musical term for each chapter of A Christmas Carol.,,christmas-carol-crossword.csv: stave
+hyperbole,3,crossword,Deliberate exaggeration used for emphasis or effect.,,christmas-carol-crossword.csv: hyperbole
+fallacy,3,crossword,Pathetic ____: weather or nature reflects human feelings.,,christmas-carol-crossword.csv: fallacy
+evaluate,3,crossword,To assess the value or effectiveness of something using evidence.,,christmas-carol-crossword.csv: evaluate
+interpret,3,crossword,To explain what something means or how it can be understood.,,christmas-carol-crossword.csv: interpret
+reinforce,3,crossword,"To strengthen an idea, impression or argument.",,christmas-carol-crossword.csv: reinforce
+mortality,3,crossword,"The condition of being subject to death, explored through Scrooge’s grave.",,christmas-carol-crossword.csv: mortality
+secret,1,quote,"____, and self-contained, and solitary as an oyster.",,"secret, and self-contained, and solitary as an oyster."
+solitary,1,quote,"secret, and self-contained, and ____ as an oyster.",,"secret, and self-contained, and solitary as an oyster."
+oyster,1,quote,"secret, and self-contained, and solitary as an ____.",,"secret, and self-contained, and solitary as an oyster."
+Union,1,quote,And the ____ workhouses?,,And the Union workhouses?
+workhouses,1,quote,And the Union ____?,,And the Union workhouses?
+decrease,1,quote,____ the surplus population.,,decrease the surplus population.
+surplus,1,quote,decrease the ____ population.,,decrease the surplus population.
+population,1,quote,decrease the surplus ____.,,decrease the surplus population.
+wear,1,quote,I ____ the chain I forged in life.,,I wear the chain I forged in life.
+chain,1,quote,I wear the ____ I forged in life.,,I wear the chain I forged in life.
+forged,1,quote,I wear the chain I ____ in life.,,I wear the chain I forged in life.
+Mankind,1,quote,____ was my business.,,Mankind was my business.
+business,1,quote,Mankind was my ____.,,Mankind was my business.
+solitary,1,quote,"A ____ child, neglected by his friends, is left there still.",,"A solitary child, neglected by his friends, is left there still."
+neglected,1,quote,"A solitary child, ____ by his friends, is left there still.",,"A solitary child, neglected by his friends, is left there still."
+friends,1,quote,"A solitary child, neglected by his ____, is left there still.",,"A solitary child, neglected by his friends, is left there still."
+idol,1,quote,Another ____ has displaced me,,Another idol has displaced me
+displaced,1,quote,Another idol has ____ me,,Another idol has displaced me
+Ignorance,1,quote,This boy is ____. This girl is Want.,,This boy is Ignorance. This girl is Want.
+Want,1,quote,This boy is Ignorance. This girl is ____.,,This boy is Ignorance. This girl is Want.
+honour,1,quote,"I will ____ Christmas in my heart, and try to keep it all the year.",,"I will honour Christmas in my heart, and try to keep it all the year."
+heart,1,quote,"I will honour Christmas in my ____, and try to keep it all the year.",,"I will honour Christmas in my heart, and try to keep it all the year."
+keep,1,quote,"I will honour Christmas in my heart, and try to ____ it all the year.",,"I will honour Christmas in my heart, and try to keep it all the year."
+feather,1,quote,"I am as light as a ____, I am as happy as an angel, I am as merry as a schoolboy.",,"I am as light as a feather, I am as happy as an angel, I am as merry as a schoolboy."
+angel,1,quote,"I am as light as a feather, I am as happy as an ____, I am as merry as a schoolboy.",,"I am as light as a feather, I am as happy as an angel, I am as merry as a schoolboy."
+schoolboy,1,quote,"I am as light as a feather, I am as happy as an angel, I am as merry as a ____.",,"I am as light as a feather, I am as happy as an angel, I am as merry as a schoolboy."
+dead,2,quote,Marley was ____: to begin with.,,Marley was dead: to begin with.
+begin,2,quote,Marley was dead: to ____ with.,,Marley was dead: to begin with.
+sharp,2,quote,Hard and ____ as flint,,Hard and sharp as flint
+flint,2,quote,Hard and sharp as ____,,Hard and sharp as flint
+covetous,2,quote,"a squeezing, wrenching, grasping, scraping, clutching, ____, old sinner!",,"a squeezing, wrenching, grasping, scraping, clutching, covetous, old sinner!"
+sinner,2,quote,"a squeezing, wrenching, grasping, scraping, clutching, covetous, old ____!",,"a squeezing, wrenching, grasping, scraping, clutching, covetous, old sinner!"
+cold,2,quote,The ____ within him froze his old features,,The cold within him froze his old features
+froze,2,quote,The cold within him ____ his old features,,The cold within him froze his old features
+merry,2,quote,What reason have you to be ____? You’re poor enough.,,What reason have you to be merry? You’re poor enough.
+poor,2,quote,What reason have you to be merry? You’re ____ enough.,,What reason have you to be merry? You’re poor enough.
+forgiving,2,quote,"a kind, ____, charitable, pleasant time",,"a kind, forgiving, charitable, pleasant time"
+charitable,2,quote,"a kind, forgiving, ____, pleasant time",,"a kind, forgiving, charitable, pleasant time"
+prisons,2,quote,Are there no ____?,,Are there no prisons?
+bless,2,quote,"God ____ Us, Every One!",,"God bless Us, Every One!"
+Every,2,quote,"God bless Us, ____ One!",,"God bless Us, Every One!"
+shadows,2,quote,Are these the ____ of the things that Will be,,Are these the shadows of the things that Will be
+Will,2,quote,Are these the shadows of the things that ____ be,,Are these the shadows of the things that Will be
+afford,2,quote,I can’t ____ to make idle people merry.,,I can’t afford to make idle people merry.
+idle,2,quote,I can’t afford to make ____ people merry.,,I can’t afford to make idle people merry.
+sympathy,2,quote,warning all human ____ to keep its distance,,warning all human sympathy to keep its distance
+distance,2,quote,warning all human sympathy to keep its ____,,warning all human sympathy to keep its distance
+External,2,quote,____ heat and cold had little influence on Scrooge.,,External heat and cold had little influence on Scrooge.
+influence,2,quote,External heat and cold had little ____ on Scrooge.,,External heat and cold had little influence on Scrooge.
+Humbug,2,quote,____!,,Humbug!
+dismal,2,quote,What right have you to be ____?,,What right have you to be dismal?
+rich,2,quote,You’re ____ enough.,,You’re rich enough.
+happiness,3,quote,"The ____ he gives, is quite as great as if it cost a fortune.",,"The happiness he gives, is quite as great as if it cost a fortune."
+fortune,3,quote,"The happiness he gives, is quite as great as if it cost a ____.",,"The happiness he gives, is quite as great as if it cost a fortune."
+Founder,3,quote,"I’ll give you Mr. Scrooge, the ____ of the Feast!",,"I’ll give you Mr. Scrooge, the Founder of the Feast!"
+Feast,3,quote,"I’ll give you Mr. Scrooge, the Founder of the ____!",,"I’ll give you Mr. Scrooge, the Founder of the Feast!"
+neglected,3,quote,Upon the stone of the ____ grave,,Upon the stone of the neglected grave
+grave,3,quote,Upon the stone of the neglected ____,,Upon the stone of the neglected grave
+condemned,3,quote,it is ____ to do so after death.,,it is condemned to do so after death.
+death,3,quote,it is condemned to do so after ____.,,it is condemned to do so after death.
+wept,3,quote,____ to see his poor forgotten self as he used to be.,,wept to see his poor forgotten self as he used to be.
+forgotten,3,quote,wept to see his poor ____ self as he used to be.,,wept to see his poor forgotten self as he used to be.
+clerk,3,quote,I should like to be able to say a word or two to my ____ just now.,,I should like to be able to say a word or two to my clerk just now.
+word,3,quote,I should like to be able to say a ____ or two to my clerk just now.,,I should like to be able to say a word or two to my clerk just now.
+fear,3,quote,You ____ the world too much,,You fear the world too much
+world,3,quote,You fear the ____ too much,,You fear the world too much
+aspirations,3,quote,"I have seen your nobler ____ fall off one by one, until the master-passion, Gain, engrosses you.",,"I have seen your nobler aspirations fall off one by one, until the master-passion, Gain, engrosses you."
+Gain,3,quote,"I have seen your nobler aspirations fall off one by one, until the master-passion, ____, engrosses you.",,"I have seen your nobler aspirations fall off one by one, until the master-passion, Gain, engrosses you."
+engrosses,3,quote,"I have seen your nobler aspirations fall off one by one, until the master-passion, Gain, ____ you.",,"I have seen your nobler aspirations fall off one by one, until the master-passion, Gain, engrosses you."
+gold,3,quote,"As good as ____, and better!",,"As good as gold, and better!"
+poorly,3,quote,"dressed out but ____ in a twice-turned gown, but brave in ribbons",,"dressed out but poorly in a twice-turned gown, but brave in ribbons"
+twice-turned,3,quote,"dressed out but poorly in a ____ gown, but brave in ribbons",,"dressed out but poorly in a twice-turned gown, but brave in ribbons"
+ribbons,3,quote,"dressed out but poorly in a twice-turned gown, but brave in ____",,"dressed out but poorly in a twice-turned gown, but brave in ribbons"
+Doom,3,quote,"Beware them both, and all of their degree, but most of all beware this boy, for on his brow I see that written which is ____",,"Beware them both, and all of their degree, but most of all beware this boy, for on his brow I see that written which is Doom"
+brow,3,quote,"Beware them both, and all of their degree, but most of all beware this boy, for on his ____ I see that written which is Doom",,"Beware them both, and all of their degree, but most of all beware this boy, for on his brow I see that written which is Doom"
+refuge,3,quote,Have they no ____ or resource?,,Have they no refuge or resource?
+resource,3,quote,Have they no refuge or ____?,,Have they no refuge or resource?
+chance,3,quote,"I mean to give him the same ____ every year, whether he likes it or not, for I pity him.",,"I mean to give him the same chance every year, whether he likes it or not, for I pity him."
+pity,3,quote,"I mean to give him the same chance every year, whether he likes it or not, for I ____ him.",,"I mean to give him the same chance every year, whether he likes it or not, for I pity him."
+Lead,3,quote,"____ on! The night is waning fast, and it is precious time to me, I know.",,"Lead on! The night is waning fast, and it is precious time to me, I know."
+waning,3,quote,"Lead on! The night is ____ fast, and it is precious time to me, I know.",,"Lead on! The night is waning fast, and it is precious time to me, I know."
+precious,3,quote,"Lead on! The night is waning fast, and it is ____ time to me, I know.",,"Lead on! The night is waning fast, and it is precious time to me, I know."
+cheap,3,quote,It’s likely to be a very ____ funeral,,It’s likely to be a very cheap funeral
+funeral,3,quote,It’s likely to be a very cheap ____,,It’s likely to be a very cheap funeral
+happier,3,quote,It was a ____ house for this man’s death!,,It was a happier house for this man’s death!
+death,3,quote,It was a happier house for this man’s ____!,,It was a happier house for this man’s death!
+hope,3,quote,I ____ to live to be another man from what I was,,I hope to live to be another man from what I was
+another,3,quote,I hope to live to be ____ man from what I was,,I hope to live to be another man from what I was
+baby,3,quote,I’m quite a ____.,,I’m quite a baby.
+second,3,quote,"to Tiny Tim, who did not die, he was a ____ father.",,"to Tiny Tim, who did not die, he was a second father."
+father,3,quote,"to Tiny Tim, who did not die, he was a second ____.",,"to Tiny Tim, who did not die, he was a second father."
+curtains,3,quote,"The ____ of his bed were drawn aside, I tell you, by a hand.",,"The curtains of his bed were drawn aside, I tell you, by a hand."
+hand,3,quote,"The curtains of his bed were drawn aside, I tell you, by a ____.",,"The curtains of his bed were drawn aside, I tell you, by a hand."
+aside,3,quote,He put them every one ____ with his own hands,,He put them every one aside with his own hands
+hands,3,quote,He put them every one aside with his own ____,,He put them every one aside with his own hands
+uncommon,3,quote,as if its hold were of ____ strength.,,as if its hold were of uncommon strength.
+strength,3,quote,as if its hold were of uncommon ____.,,as if its hold were of uncommon strength.
+tunic,3,quote,a ____ of the purest white,,a tunic of the purest white
+purest,3,quote,a tunic of the ____ white,,a tunic of the purest white
+shut-up,3,quote,to open their ____ hearts freely,,to open their shut-up hearts freely
+freely,3,quote,to open their shut-up hearts ____,,to open their shut-up hearts freely
+fellow-passengers,3,quote,____ to the grave,,fellow-passengers to the grave
+grave,3,quote,fellow-passengers to the ____,,fellow-passengers to the grave

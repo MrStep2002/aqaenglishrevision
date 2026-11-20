@@ -68,7 +68,7 @@ function advance(a, amount, choose) {
   }
 }
 
-export class Chase {
+export class FogRunMaze {
   constructor(random=Math.random) {
     this.random=random;
     this.lives=3;

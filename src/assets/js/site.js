@@ -267,10 +267,3 @@ document.querySelectorAll('.annotated-extract').forEach(function (extract) {
   panel.classList.add('is-ready');
   extract.querySelector('.extract-instructions').hidden = false;
 });
-
-// Game directory links open the matching launcher after every game script is ready.
-window.addEventListener('DOMContentLoaded', function () {
-  if (!location.hash.startsWith('#play-')) return;
-  var launcher = document.getElementById(location.hash.slice(1));
-  if (launcher && launcher.matches('button[aria-haspopup="dialog"]')) launcher.click();
-});

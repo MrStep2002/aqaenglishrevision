@@ -8,8 +8,8 @@
 {%- set hasLessonSections = 'class="lesson-section"' in content %}
 {%- set showContents = (navItem and navItem.children) or hasLessonSections %}
 {%- set showPicturePlanner = cur == "/lang-paper-1/p1-description/6-pics-tips" %}
-{%- set showMarleysChase = 'id="play-marleys-chase"' in content %}
 {%- set showFogRun = 'id="play-fog-run"' in content %}
+{%- set showFredsOrDead = 'id="play-freds-or-dead"' in content %}
 {%- set showQuoteBuilder = 'id="play-quote-builder"' in content %}
 {%- set showExtractEvidence = 'id="play-extract-evidence"' in content %}
 {%- set showParagraphGames = paragraphGames and (paragraphGames | length) %}
@@ -55,10 +55,11 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&display=swap">
   {% if 'carol-quote' in content %}<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Germania+One&display=swap">{% endif %}
   <link rel="stylesheet" href="/assets/css/site.css">
+  <link rel="stylesheet" href="/assets/css/game-launcher.css?v=1">
   {% if showQuoteGame or showQuoteBuilder or showExtractEvidence or showPlotGame or showParagraphGames or showAnalysisGaps or showWordInContext or showHangman or showCrossword or showWordsearch or showConnectingWall or earningsGame %}<link rel="stylesheet" href="/assets/css/quote-game.css">{% endif %}
   {% if showPicturePlanner %}<link rel="stylesheet" href="/assets/css/picture-planner.css">{% endif %}
-  {% if showMarleysChase %}<link rel="stylesheet" href="/assets/css/marleys-chase.css?v=2">{% endif %}
-  {% if showFogRun %}<link rel="stylesheet" href="/assets/css/fog-run.css?v=6">{% endif %}
+  {% if showFogRun %}<link rel="stylesheet" href="/assets/css/fog-run.css?v=7">{% endif %}
+  {% if showFredsOrDead %}<link rel="stylesheet" href="/assets/css/freds-or-dead.css?v=1">{% endif %}
   {% if showQuoteBuilder %}<link rel="stylesheet" href="/assets/css/quote-builder.css">{% endif %}
   {% if showExtractEvidence %}<link rel="stylesheet" href="/assets/css/extract-evidence.css">{% endif %}
   {% if showPlotGame %}<link rel="stylesheet" href="/assets/css/plot-game.css">{% endif %}
@@ -224,13 +225,13 @@
   {% include "extract-evidence.njk" %}
   <script src="/assets/js/extract-evidence.js" defer></script>
   {% endif %}
-  {% if showMarleysChase %}
-  {% include "marleys-chase.njk" %}
-  <script type="module" src="/assets/js/marleys-chase.js?v=2"></script>
-  {% endif %}
   {% if showFogRun %}
   {% include "fog-run.njk" %}
-  <script type="module" src="/assets/js/fog-run.js?v=6"></script>
+  <script type="module" src="/assets/js/fog-run.js?v=7"></script>
+  {% endif %}
+  {% if showFredsOrDead %}
+  {% include "freds-or-dead.njk" %}
+  <script type="module" src="/assets/js/freds-or-dead.js?v=1"></script>
   {% endif %}
   {% if showQuoteBuilder %}
   {% include "quote-builder.njk" %}
@@ -287,6 +288,7 @@
   {% include "connecting-wall.njk" %}
   <script type="module" src="/assets/js/connecting-wall.js"></script>
   {% endif %}
+  <script src="/assets/js/game-launcher.js?v=1" defer></script>
   <script src="/assets/js/site.js" defer></script>
   {% if showPicturePlanner %}<script src="/assets/js/picture-planner.js" defer></script>{% endif %}
 </body>

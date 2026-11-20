@@ -36,13 +36,13 @@ module.exports = function vocabularyBank() {
     }
     seen.add(key);
     counts[level] += 1;
-    // A short example opts a Level 1 word into Fog Run's beginner set.
+    // Preserve optional short examples from earlier vocabulary-bank versions.
     const shortExample = field('fog_easy_example');
     let fogEasy;
     if (level === '1' && shortExample) {
       const shortMatches = occurrences(shortExample, word);
       if (shortMatches.length !== 1) {
-        throw new Error(`Check the Fog Run example on vocabulary row ${index + 2}. It must use the word once.`);
+        throw new Error(`Check the optional short example on vocabulary row ${index + 2}. It must use the word once.`);
       }
       fogEasy = {example: shortExample, start: shortMatches[0].index, length: shortMatches[0][0].length};
     }

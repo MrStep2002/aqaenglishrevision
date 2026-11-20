@@ -267,5 +267,4 @@ if (launch && game) {
     launch.focus({ preventScroll: true });
   });
 
-  if (location.hash === '#play-connecting-wall' && !game.open) launch.click();
 }

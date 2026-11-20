@@ -1,187 +1,229 @@
-import { shuffle } from './carol-word-choices.js';
-import { createStreet } from './fog-street.js?v=6';
-import { FogCourse, goal } from './fog-course.js?v=6';
+import { FogRunMaze, width, height, position } from './fog-run-maze.js?v=1';
+import { drawLondon, drawPiece } from './fog-run-art.js';
+import { shuffle, wordChoices } from './carol-word-choices.js';
 
-const dialog = document.getElementById('fog-run');
-const launcher = document.getElementById('play-fog-run');
-const find = selector => dialog.querySelector(selector);
-const bank = JSON.parse(find('.fog-data').textContent);
-const scene = find('.fog-street');
-const street = createStreet(find('canvas'), find('.fog-signs'));
-const start = find('.fog-start'), result = find('.fog-result');
-const question = find('.fog-question'), clue = find('#fog-clue'), message = find('.fog-message');
-const hud = find('.fog-hud'), pauseButton = find('.fog-pause'), zone = find('.fog-jump-zone');
-const controls = find('.fog-controls');
-const held = new Map();
-let course, paused = false, frame, previousTime;
-let selected = find('.fog-ghost');
-const active = () => course && course.state !== 'won';
+const dialog=document.getElementById('fog-run');
+const find=selector=>dialog.querySelector(selector);
+const launcher=document.getElementById('play-fog-run');
+const bank=JSON.parse(find('.fog-run-data').textContent);
+const clue=find('.fog-run-clue'), status=find('.fog-run-status');
+const map=find('.fog-run-map'), cap=find('.fog-run-cap');
+const boxes=[...dialog.querySelectorAll('.fog-run-box')];
+const cover=find('.fog-run-cover'), action=find('.fog-run-action');
+const pause=find('.fog-run-pause'), level=find('.fog-run-level select');
+const lifeDisplay=find('.fog-run-lives');
+const hats=[...lifeDisplay.querySelectorAll('canvas')];
+const step=1/60;
+const keys={ArrowUp:'up',ArrowDown:'down',ArrowLeft:'left',ArrowRight:'right',w:'up',s:'down',a:'left',d:'right'};
+let game, pool, deck, entry, phase='setup', resumePhase, tokenNodes=[];
+let frame, previousTime, carry=0, wordTimer;
 
-function makeRun() {
-  const pool = bank.filter(entry => entry.level === Number(selected.dataset.level));
-  const chosen = [], used = new Set();
-  function add(entry) {
-    if (!entry || used.has(entry.word.toLowerCase())) return;
-    used.add(entry.word.toLowerCase());
-    chosen.push(entry);
-  }
-  // Include each available clue type, then fill the street with distinct answers.
-  for (const type of shuffle([...new Set(pool.map(entry => entry.type))])) {
-    add(shuffle(pool).find(entry => entry.type === type && !used.has(entry.word.toLowerCase())));
-  }
-  for (const entry of shuffle(pool)) {
-    if (chosen.length === goal) break;
-    add(entry);
-  }
-  const rounds = shuffle(chosen);
-  const words = shuffle(rounds.map(entry => entry.word));
-  // The clue order and the street order are separate, so finding the next word
-  // can mean returning to a place the player has already visited.
-  if (words.every((word, index) => word === rounds[index].word)) words.push(words.shift());
-  return new FogCourse(rounds, words);
+drawLondon(find('.fog-run-roofs'));
+drawPiece(cap,'cap');
+hats.forEach(hat=>drawPiece(hat,'cap'));
+boxes.forEach((box,i)=>drawPiece(box,i===0?'iron':'brass'));
+
+function setPhase(value) {
+  phase=value;
+  dialog.dataset.phase=value;
+  pause.hidden=!['playing','ready'].includes(value);
 }
-function showClue() {
-  const entry = course.rounds[course.score];
-  const types = { definition: 'Find the word', character: 'Find the character', quote: 'Complete the quotation' };
-  find('.fog-prompt-type').textContent = 'Clue ' + (course.score + 1) + ' of ' + goal + ' · ' + types[entry.type];
-  const parts = entry.clue.split('____');
-  if (parts.length === 1) clue.textContent = entry.clue;
-  else {
-    const gap = document.createElement('span');
-    gap.className = 'fog-gap';
-    gap.setAttribute('role', 'img');
-    gap.setAttribute('aria-label', 'missing word');
-    clue.replaceChildren(parts[0], gap, parts[1]);
-  }
+function locate(element,x,y) {
+  element.style.left=(x+.5)*100/width+'%';
+  element.style.top=(y+.5)*100/height+'%';
 }
-function say(text, kind = '') { message.textContent = text; message.dataset.kind = kind; }
-function count() { find('.fog-count').textContent = course.score + ' / ' + goal; }
-function stop() { cancelAnimationFrame(frame); previousTime = null; }
-function finish() {
-  stop();
-  dialog.dataset.phase = 'won';
-  pauseButton.hidden = zone.hidden = controls.hidden = question.hidden = true;
-  result.hidden = false;
-  result.querySelector('h3').textContent = 'You made it to Fred’s party!';
-  result.querySelector('p').textContent = 'All ten words collected in clue order. Fred has saved you a place by the fire.';
-  result.querySelector('h3').focus({ preventScroll: true });
+function drawActors() {
+  [cap,...boxes].forEach((element,i)=>{
+    const {x,y}=position(i===0?game.player:game.boxes[i-1]);
+    locate(element,x,y);
+  });
 }
-function onEvent(event) {
-  dialog.dataset.phase = course.state;
-  if (event === 'score') {
-    count();
-    if (course.partyReady) {
-      find('.fog-prompt-type').textContent = 'Ten words collected';
-      clue.textContent = 'Find Fred’s door at the far right of the street.';
-      say('The party is open. Run right to go in.', 'good');
-    } else {
-      say('“' + course.rounds[course.score - 1].word + '” collected.', 'good');
-      showClue();
+function updateHud() {
+  find('.fog-run-count').textContent=String(game.words);
+  lifeDisplay.setAttribute('aria-label',game.lives+(game.lives===1?' life remaining':' lives remaining'));
+  hats.forEach((hat,i)=>hat.classList.toggle('is-lost',i>=game.lives));
+}
+function showCard(title,body,button,showLevel=false) {
+  cover.hidden=false;
+  find('.fog-run-message').textContent=title;
+  find('.fog-run-detail').textContent=body;
+  find('.fog-run-level').hidden=!showLevel;
+  action.textContent=button;
+  if(dialog.open) action.focus({preventScroll:true});
+}
+function showClue(entry,solved) {
+  const labels={sentence:'Complete the sentence',quote:'Complete the quotation',character:'Find the character',definition:'Find the word',crossword:'Find the answer'};
+  find('#fog-run-label').textContent=labels[entry.type];
+  const parts=entry.clue.split('____');
+  if(parts.length===1) {
+    clue.textContent=entry.clue;
+    if(solved) {
+      const answer=document.createElement('mark');
+      answer.textContent=entry.word;
+      clue.append(' ',answer);
     }
-  } else if (event === 'wrong') say('Try another word for this clue.', 'wrong');
-  else if (event === 'locked') say('Collect all ten words before entering Fred’s party.');
-  else if (event === 'enter') {
-    held.clear();
-    controls.inert = true;
-    zone.hidden = true;
-    say('Fred is waiting. Come in!', 'good');
-  } else if (event === 'won') finish();
-}
-function animate(now) {
-  if (paused || !dialog.open || !active()) return;
-  let remaining = previousTime == null ? 0 : Math.min(.12, (now - previousTime) / 1000);
-  previousTime = now;
-  const direction = Array.from(held.values()).at(-1) || 0;
-  while (remaining > 0 && active()) {
-    const dt = Math.min(remaining, 1 / 60);
-    const event = course.tick(dt, direction);
-    remaining -= dt;
-    if (event) onEvent(event);
+    return;
   }
-  street.draw(course);
-  if (active() && !paused) frame = requestAnimationFrame(animate);
-}
-function run() {
-  stop(); held.clear();
-  course = makeRun();
-  paused = false;
-  dialog.dataset.phase = 'running';
-  start.hidden = result.hidden = true;
-  scene.hidden = hud.hidden = question.hidden = zone.hidden = controls.hidden = pauseButton.hidden = false;
-  controls.inert = false;
-  pauseButton.textContent = 'Pause';
-  hud.querySelector('span').textContent = selected.querySelector('.fog-difficulty').textContent;
-  count(); showClue(); street.draw(course);
-  say('Explore both ways. Jump for the word that fits the clue.');
-  find('.fog-body').scrollTop = 0;
-  zone.focus({ preventScroll: true });
-  frame = requestAnimationFrame(animate);
-}
-function setPaused(value) {
-  held.clear();
-  if (!active() || paused === value) return;
-  stop(); paused = value;
-  dialog.dataset.phase = value ? 'paused' : course.state;
-  pauseButton.textContent = value ? 'Resume' : 'Pause';
-  controls.inert = value || course.state !== 'running';
-  zone.hidden = value || course.state !== 'running';
-  if (!value && dialog.open) {
-    if (!zone.hidden) zone.focus({ preventScroll: true });
-    frame = requestAnimationFrame(animate);
+  const gap=document.createElement(solved?'mark':'span');
+  if(solved) gap.textContent=entry.word;
+  else {
+    gap.className='fog-run-blank';
+    gap.setAttribute('role','img');gap.setAttribute('aria-label','missing word');
   }
+  clue.replaceChildren(parts[0],gap,parts[1]);
 }
-function jump() { if (dialog.open && !paused) course?.jump(); }
-zone.addEventListener('pointerdown', event => {
-  if (event.button !== 0) return;
-  event.preventDefault(); jump();
-});
-zone.addEventListener('click', event => { if (event.detail === 0) jump(); });
-for (const button of controls.querySelectorAll('[data-direction]')) {
-  button.addEventListener('pointerdown', event => {
-    if (event.button !== 0 || paused || course?.state !== 'running') return;
-    event.preventDefault();
-    button.setPointerCapture(event.pointerId);
-    held.set(event.pointerId, Number(button.dataset.direction));
+function nextClue() {
+  if (!deck.length) {
+    deck=shuffle(pool);
+    const last=deck.length-1;
+    if (last>0 && deck[last]===entry) [deck[0],deck[last]]=[deck[last],deck[0]];
+  }
+  entry=deck.pop();
+  showClue(entry,false);
+  game.placeWords(wordChoices(entry,bank),entry);
+  tokenNodes=game.tokens.map(token=>{
+    const marker=document.createElement('span');
+    marker.className='fog-run-token';
+    marker.textContent=token.entry.word;
+    locate(marker,token.cell%width,Math.floor(token.cell/width));
+    return marker;
   });
-  button.addEventListener('lostpointercapture', event => held.delete(event.pointerId));
-  button.addEventListener('click', event => {
-    if (event.detail !== 0 || paused || course?.state !== 'running') return;
-    const result = course.tick(.2, Number(button.dataset.direction));
-    if (result) onEvent(result);
-    street.draw(course);
+  find('.fog-run-pickups').replaceChildren(...tokenNodes);
+  const locations=game.tokens.map((token,i)=>{
+    const row=Math.floor(token.cell/width);
+    const vertical=row<4?'top':row>6?'bottom':'middle';
+    return token.entry.word+' at the '+vertical+' '+['left','centre','right'][i];
   });
+  map.setAttribute('aria-label','Snowy London maze. '+locations.join('. ')+'. Steer with the arrow keys.');
+  drawActors();
 }
-dialog.addEventListener('keydown', event => {
-  if (!active() || event.altKey || event.ctrlKey || event.metaKey) return;
-  if (event.key.toLowerCase() === 'p' && !event.repeat) {
-    event.preventDefault(); setPaused(!paused); return;
+function ready(message='Read the clue, then steer to collect the answer.') {
+  cover.hidden=true;
+  setPhase('ready');
+  status.textContent=message;
+  map.focus({preventScroll:true});
+}
+function setup() {
+  game=new FogRunMaze();
+  pool=bank.filter(e=>e.level===Number(level.value));
+  deck=[];
+  entry=null;
+  updateHud();
+  nextClue();
+  setPhase('setup');
+  showCard('Fog Run','Read the clue and collect the matching answer. A wrong answer or a cash box costs one life.','Play Fog Run',true);
+  status.textContent='';
+}
+function stopClock() {
+  cancelAnimationFrame(frame);
+  clearTimeout(wordTimer);
+  previousTime=null;carry=0;
+}
+function endRun() {
+  setPhase('lost');
+  showCard('Out of lives','You collected '+game.words+(game.words===1?' word.':' words.'),'Play again');
+  status.textContent='Game over.';
+}
+function afterWord() {
+  if(phase!=='word' || !dialog.open) return;
+  nextClue();ready();
+}
+function handleEvent(event) {
+  updateHud();
+  if(event.token) tokenNodes[game.tokens.indexOf(event.token)].hidden=true;
+  if(game.lives===0) { stopClock();endRun();return; }
+  if(event.kind==='miss') {
+    status.textContent='Wrong answer. '+lifeDisplay.getAttribute('aria-label')+'.';
+    return;
   }
-  if (paused || course.state !== 'running') return;
-  if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-    event.preventDefault();
-    if (!event.repeat) held.set(event.key, event.key === 'ArrowLeft' ? -1 : 1);
-  } else if (event.key === 'ArrowUp' || (event.key === ' ' && (event.target === zone || !event.target.closest('button')))) {
-    event.preventDefault(); if (!event.repeat) jump();
+  stopClock();
+  if(event.kind==='caught') {
+    setPhase('caught');
+    showCard('Caught by a cash box!',game.lives+(game.lives===1?' life left.':' lives left.')+' The answer is still in the streets.','Try again');
+    status.textContent='The chase is stopped.';
+    return;
+  }
+  setPhase('word');
+  showClue(event.token.entry,true);
+  status.textContent='Found it! '+event.token.entry.word;
+  wordTimer=setTimeout(afterWord,700);
+}
+function tick(now) {
+  if(!dialog.open || phase!=='playing') return;
+  if(previousTime!==null) carry+=Math.min(.1,(now-previousTime)/1000);
+  previousTime=now;
+  while(carry>=step && phase==='playing') {
+    carry-=step;
+    const event=game.tick(step);
+    if(event)handleEvent(event);
+  }
+  drawActors();
+  if(phase==='playing')frame=requestAnimationFrame(tick);
+}
+function startClock() {
+  stopClock();setPhase('playing');
+  frame=requestAnimationFrame(tick);
+}
+function steer(dir) {
+  if(!['ready','playing'].includes(phase) || !dialog.open) return;
+  const canMove=game.steer(dir);
+  if(phase==='ready' && canMove) {
+    status.textContent='Watch the cash boxes!';
+    startClock();
+  }
+}
+function pauseGame() {
+  if(!['ready','playing','word'].includes(phase)) return;
+  resumePhase=phase;
+  stopClock();setPhase('paused');
+  showCard('Fog Run paused',resumePhase==='word'?'Answer collected.':entry.definition||entry.clue.replace('____','…'),'Resume');
+  status.textContent='The streets are still.';
+}
+action.addEventListener('click',()=>{
+  if(phase==='setup')ready();
+  else if(phase==='caught'){game.resetPositions();drawActors();ready('Steer to try again. The cash boxes will give you a head start.');}
+  else if(phase==='paused') {
+    if(resumePhase==='word') {cover.hidden=true;setPhase('word');afterWord();}
+    else ready('Steer when you’re ready to resume.');
+  } else if(phase==='lost')setup();
+});
+level.addEventListener('change',()=>{setup();level.focus();});
+pause.addEventListener('click',pauseGame);
+dialog.addEventListener('keydown',event=>{
+  if(event.altKey || event.ctrlKey || event.metaKey || event.target===level) return;
+  const key=event.key.length===1?event.key.toLowerCase():event.key;
+  if(keys[key] && ['playing','ready'].includes(phase)){
+    event.preventDefault();if(!event.repeat) steer(keys[key]);
+  } else if(key==='p' && !event.repeat){
+    if(phase==='paused')action.click();else pauseGame();
   }
 });
-window.addEventListener('keyup', event => held.delete(event.key));
-for (const ghost of start.querySelectorAll('.fog-ghost')) ghost.addEventListener('click', () => { selected = ghost; run(); });
-pauseButton.addEventListener('click', () => setPaused(!paused));
-find('.fog-again').addEventListener('click', run);
-find('.fog-change').addEventListener('click', () => {
-  stop(); held.clear(); course = null;
-  start.hidden = false; scene.hidden = result.hidden = hud.hidden = true;
-  dialog.dataset.phase = 'start'; street.draw(null);
-  selected.focus();
+for(const button of dialog.querySelectorAll('[data-dir]')){
+  button.addEventListener('pointerdown',event=>{event.preventDefault();steer(button.dataset.dir);});
+  button.addEventListener('click',event=>{if(event.detail===0)steer(button.dataset.dir);});
+}
+let swipe;
+map.tabIndex=-1;
+map.addEventListener('pointerdown',e=>{
+  if(!['ready','playing'].includes(phase))return;
+  swipe={id:e.pointerId,x:e.clientX,y:e.clientY};
+  map.setPointerCapture(e.pointerId);
 });
-launcher.addEventListener('click', () => {
-  if (dialog.open) return;
+map.addEventListener('pointermove',e=>{
+  if(swipe?.id!==e.pointerId)return;
+  const dx=e.clientX-swipe.x, dy=e.clientY-swipe.y;
+  if(Math.max(Math.abs(dx),Math.abs(dy))<12)return;
+  steer(Math.abs(dx)>Math.abs(dy)?(dx>0?'right':'left'):(dy>0?'down':'up'));
+  swipe.x=e.clientX;swipe.y=e.clientY;
+});
+map.addEventListener('lostpointercapture',()=>{swipe=null;});
+document.addEventListener('visibilitychange',()=>{if(document.hidden && dialog.open)pauseGame();});
+window.addEventListener('blur',()=>{if(dialog.open)pauseGame();});
+launcher.addEventListener('click',()=>{
+  if(dialog.open)return;
   dialog.showModal();
-  street.draw(course || null);
-  if (!course) selected.focus();
-  else if (paused) pauseButton.focus();
-  else if (!active()) result.querySelector('h3').focus();
+  if(!game)setup();
+  else if(!cover.hidden)action.focus({preventScroll:true});
+  else map.focus({preventScroll:true});
 });
-dialog.addEventListener('close', () => { setPaused(true); stop(); });
-window.addEventListener('blur', () => { if (dialog.open) setPaused(true); });
-document.addEventListener('visibilitychange', () => { if (document.hidden) setPaused(true); });
+dialog.addEventListener('close',()=>{pauseGame();stopClock();swipe=null;});
