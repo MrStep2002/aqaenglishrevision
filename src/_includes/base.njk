@@ -27,7 +27,7 @@
 {%- set showConnectingWall = 'id="play-connecting-wall"' in content %}
 {%- set showQuoteRecall = 'id="play-quote-recall"' in content %}
 {%- set showThemeRevision = isThemeQuiz and 'id="play-theme-revision"' in content %}
-{%- set showQuoteGame = showQuoteRecall or showContextQuiz or showThemeRevision or showPlotQuiz %}
+{%- set showQuoteGame = showQuoteRecall or showContextQuiz or showPlotQuiz %}
 {%- set b = content | splitBanner %}
 <html lang="en-GB" data-world="{{ world }}">
 <head>
@@ -56,7 +56,7 @@
   {% if 'carol-quote' in content %}<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Germania+One&display=swap">{% endif %}
   <link rel="stylesheet" href="/assets/css/site.css">
   <link rel="stylesheet" href="/assets/css/game-launcher.css?v=2">
-  {% if showQuoteGame or showQuoteBuilder or showExtractEvidence or showPlotGame or showParagraphGames or showAnalysisGaps or showWordInContext or showHangman or showCrossword or showWordsearch or showConnectingWall or earningsGame %}<link rel="stylesheet" href="/assets/css/quote-game.css">{% endif %}
+  {% if showQuoteGame or showThemeRevision or showQuoteBuilder or showExtractEvidence or showPlotGame or showParagraphGames or showAnalysisGaps or showWordInContext or showHangman or showCrossword or showWordsearch or showConnectingWall or earningsGame %}<link rel="stylesheet" href="/assets/css/quote-game.css">{% endif %}
   {% if showPicturePlanner %}<link rel="stylesheet" href="/assets/css/picture-planner.css">{% endif %}
   {% if showFogRun %}<link rel="stylesheet" href="/assets/css/fog-run.css?v=8">{% endif %}
   {% if showFredsOrDead %}<link rel="stylesheet" href="/assets/css/freds-or-dead.css?v=1">{% endif %}
@@ -64,6 +64,7 @@
   {% if showExtractEvidence %}<link rel="stylesheet" href="/assets/css/extract-evidence.css">{% endif %}
   {% if showPlotGame %}<link rel="stylesheet" href="/assets/css/plot-game.css">{% endif %}
   {% if showParagraphGames %}<link rel="stylesheet" href="/assets/css/essay-jigsaw.css?v=8">{% endif %}
+  {% if showThemeRevision %}<link rel="stylesheet" href="/assets/css/theme-revision.css?v=2">{% endif %}
   {% if showAnalysisGaps %}<link rel="stylesheet" href="/assets/css/analysis-gaps.css">{% endif %}
   {% if showWordFormation %}<link rel="stylesheet" href="/assets/css/word-formation.css">{% endif %}
   {% if showHangman %}<link rel="stylesheet" href="/assets/css/hangman.css?v=4">{% endif %}
@@ -71,7 +72,7 @@
   {% if showWordsearch %}<link rel="stylesheet" href="/assets/css/wordsearch.css?v=3">{% endif %}
   {% if showConnectingWall %}<link rel="stylesheet" href="/assets/css/connecting-wall.css">{% endif %}
   {% if earningsGame %}<link rel="stylesheet" href="/assets/css/earnings-game.css">{% endif %}
-  {% if showHangman or showAnalysisGaps or showWordFormation or showWordInContext or showConnectingWall or showParagraphGames %}<link rel="stylesheet" href="/assets/css/ghost-levels.css?v=3">{% endif %}
+  {% if showHangman or showAnalysisGaps or showWordFormation or showWordInContext or showConnectingWall or showParagraphGames or showThemeRevision %}<link rel="stylesheet" href="/assets/css/ghost-levels.css?v=3">{% endif %}
   <link rel="canonical" href="{{ site.url }}{{ cur }}">
   {#- The local loader respects the visitor's choice and only counts on the live domain. -#}
   <script src="/assets/js/analytics.js" data-goatcounter-code="{{ site.goatcounter | escape }}" data-site-url="{{ site.url | escape }}"{% if analytics === false or cur == "/404" %} data-analytics-disabled{% endif %} defer></script>
@@ -236,13 +237,16 @@
   {% include "quote-builder.njk" %}
   <script src="/assets/js/quote-builder.js" defer></script>
   {% endif %}
+  {% if showThemeRevision %}
+  {% include "theme-revision.njk" %}
+  <script type="module" src="/assets/js/theme-revision.js?v=2"></script>
+  {% endif %}
   {% if showQuoteGame %}
   {% from "quote-game.njk" import quiz %}
   {% if showQuoteRecall %}{{ quiz("quote-recall", "Quote Recall") }}{% endif %}
   {% if showContextQuiz %}{{ quiz("context-quiz", "Context Quiz") }}{% endif %}
-  {% if showThemeRevision %}{{ quiz("theme-revision", "Theme Revision", topic) }}{% endif %}
   {% if showPlotQuiz %}{% include "plot-quiz.njk" %}{% endif %}
-  <script src="/assets/js/quote-game.js?v=5" defer></script>
+  <script src="/assets/js/quote-game.js?v=6" defer></script>
   {% endif %}
   {% if showPlotGame %}
   {% include "plot-game.njk" %}
@@ -287,7 +291,7 @@
   {% include "connecting-wall.njk" %}
   <script type="module" src="/assets/js/connecting-wall.js"></script>
   {% endif %}
-  <script src="/assets/js/game-launcher.js?v=2" defer></script>
+  <script src="/assets/js/game-launcher.js?v=3" defer></script>
   <script src="/assets/js/site.js" defer></script>
   {% if showPicturePlanner %}<script src="/assets/js/picture-planner.js" defer></script>{% endif %}
 </body>

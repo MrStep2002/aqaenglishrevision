@@ -2,6 +2,7 @@ const { readFileSync } = require('node:fs');
 const path = require('node:path');
 const readCsv = require('../../tools/read-csv');
 const readWordFormationBank = require('../../tools/read-word-formation-bank');
+const readThemeRevisionBanks = require('../../tools/read-theme-revision-bank');
 
 const bank = path.join(__dirname, '../assets/data/christmas-carol-analysis-gaps.csv');
 const levels = ['Foundation', 'Intermediate', 'Advanced'];
@@ -52,8 +53,11 @@ module.exports = function () {
     }
   }
 
+  const wordFormationBank = readWordFormationBank('christmas-carol-word-formation.csv');
   return {
-    wordFormationBank: readWordFormationBank('christmas-carol-word-formation.csv'),
+    wordFormationBank,
+    themeRevisionTitles: themes,
+    themeRevisionBanks: readThemeRevisionBanks(decks, JSON.parse(wordFormationBank)),
     analysisGapsBanks: Object.fromEntries(Object.entries(decks).map(([slug, deck]) =>
       [slug, JSON.stringify(deck).replaceAll('<', '\u003c')]
     )),

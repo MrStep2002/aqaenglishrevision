@@ -51,3 +51,16 @@ test('keeps grouped sentences and quotations together as one piece', () => {
   assert.equal(puzzles[0].sentences.length, 3);
   assert.equal(puzzles[0].sentences[1], 'The word “secret” suggests concealment. The word “solitary” suggests loneliness, too.');
 });
+
+test('preserves and normalises explicit theme tags for mixed revision', () => {
+  const [puzzle] = readFixture('level,question,sentence1,sentence2,themes\nFoundation,Why?,First.,Second.,Family; Social Injustice\n');
+  assert.deepEqual(puzzle.themes, ['family', 'social-injustice']);
+  assert.deepEqual(puzzle.sentences, ['First.', 'Second.']);
+  assert.equal(puzzle.level, 'Foundation');
+});
+
+test('rejects blank, unknown and duplicate themes with the CSV row', () => {
+  for (const value of ['', 'Poverty', 'Family; family', 'Change;']) {
+    assert.throws(() => readFixture('level,question,sentence1,sentence2,themes\nFoundation,Why?,First.,Second.,' + value + '\n'), /Row 2.*themes/);
+  }
+});

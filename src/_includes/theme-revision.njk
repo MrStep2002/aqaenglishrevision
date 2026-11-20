@@ -1,0 +1,28 @@
+{% from "ghost-levels.njk" import ghostLevels %}
+<dialog class="quote-game theme-revision" id="theme-revision" aria-labelledby="theme-revision-title" data-theme="{{ topic }}">
+  <form class="quote-close" method="dialog"><button type="submit" aria-label="Close Revise This Theme">×</button></form>
+  <header class="ghost-game-header">
+    {{ ghostLevels([1, 2, 3]) }}
+    <div class="ghost-game-title">
+      <span class="quote-holly" aria-hidden="true"><i></i></span>
+      <h2 id="theme-revision-title"><span class="theme-sr-only">Revise This Theme: </span>{{ themeRevisionTitles[topic] }}</h2>
+      <span class="quote-holly" aria-hidden="true"><i></i></span>
+    </div>
+    <output class="theme-score ghost-game-meta" aria-label="Accuracy: no answers yet" title="Accuracy">—</output>
+  </header>
+  <div class="theme-stage">
+    <section class="theme-card">
+      <p class="theme-kind"></p>
+      <div class="theme-exercise"></div>
+    </section>
+  </div>
+  <footer class="theme-footer">
+    <p class="theme-feedback" role="status" aria-atomic="true"></p>
+    <div class="theme-actions">
+      <button class="theme-hint" type="button" hidden>Hint</button>
+      <button class="theme-check" type="button" hidden disabled>Check</button>
+      <button class="theme-next" type="button">Skip</button>
+    </div>
+  </footer>
+  <script class="theme-revision-data" type="application/json">{{ themeRevisionBanks[topic] | safe }}</script>
+</dialog>

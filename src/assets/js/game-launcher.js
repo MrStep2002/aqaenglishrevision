@@ -19,7 +19,7 @@
     'connecting-wall': { page: 'essays' },
     'essay-jigsaw': { page: 'essays', script: 'essay-jigsaw.js' },
     'earnings-game': { page: 'greed', selector: '.earnings-dialog' },
-    'theme-revision': { page: 'change', script: 'quote-game.js' },
+    'theme-revision': { page: 'change' },
     'analysis-gaps': { page: 'essays', selector: '.analysis-gaps:not(.word-formation)', data: 'analysis-gaps-data' },
   };
   const pages = new Map();

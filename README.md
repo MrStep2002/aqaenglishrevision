@@ -124,9 +124,19 @@ The shared launcher lives in `src/assets/js/game-launcher.js`, its isolated play
 
 Picture Planner is part of the Pics & Tips lesson and retains an explicitly labelled lesson link on the Games page.
 
+### Quotation bank
+
+Quote Recall and Quote Builder share `src/assets/data/christmas-carol-quotes.csv`, containing one entry for each of the 63 Key Quotes master IDs. The first columns remain `quote,blanks,themes,characters,pool,tile_breaks`. Metadata columns record `quote_id`, `stave`, `voice`, `source_url` and any `source_note` needed to explain the game copy's verified wording. The original master is retained unchanged. Each blank is a correct word and three alternatives separated by pipes; separate different gaps with semicolons. An answer must occur once in its quotation. All 63 entries also provide an ordering puzzle.
+
+The pool numbers 10, 25 and 50 are cumulative tier names rather than enforced row counts. The current pools contain 12, 30 and 63 quotations; the existing button labels are retained. Tiers are preserved for matching entries from the earlier game bank. New entries use their master essentiality levels. The mixed Theme Revision player reads this same expanded quotation bank.
+
+### Shared paragraph coverage
+
+Analysis Gaps, Word Formation and Essay Jigsaw each keep their own CSV and now contain the same 678 distinct model paragraphs at their original levels. Existing rows, prepared gaps, prompts, puzzle pieces and hints remain unchanged. The merge adds 150 Analysis Gaps exercises, 192 Word Formation exercises and 108 Jigsaw puzzles. The older 45-row scene-analysis file and all master paragraph files remain unchanged. New Jigsaw pieces keep quotations together and group related observations where useful; the source prose is preserved.
+
 ### Plot Quiz
 
-Edit `src/assets/data/plot-quiz.csv` to add or change multiple-choice plot questions. Each row has a unique `id`, a `question`, the correct `answer`, three different wrong answers in `wrong1` to `wrong3`, and an optional `explanation`. The game shuffles the four choices.
+Edit `src/assets/data/plot-quiz.csv` to add or change multiple-choice plot questions. Each row has a unique `id`, a `question`, the correct `answer`, three different wrong answers in `wrong1` to `wrong3`, and an optional `explanation`. The game shuffles the four choices. Plot questions retain their theme tags and are included in the mixed Theme Revision player at every ghost level.
 
 Separate multiple tags with semicolons in `themes`, `staves` and `characters`. Theme tags match the page addresses, using `change`, `christmas`, `compassion`, `family`, `greed` and `social-injustice`. Staves use numbers 1–5. Character tags use names such as `scrooge` and `bob-cratchit`. The `source` column records where to check each question in Dickens's text.
 
@@ -180,17 +190,21 @@ Wordsearch uses the Level 1 entries in `src/assets/data/christmas-carol-crosswor
 
 ### Word Formation
 
-Edit [the Word Formation bank](src/assets/data/christmas-carol-word-formation.csv) independently of Analysis Gaps and the master paragraph files in `assets-folder-bank/`. The bank contains 486 exercises: 162 at each of `Foundation`, `Intermediate` and `Advanced`, including the 21 original exercises and all 465 levelled master paragraphs. Eleventy validates and embeds this CSV when building the site.
+Edit [the Word Formation bank](src/assets/data/christmas-carol-word-formation.csv) independently of Analysis Gaps and the master paragraph files in `assets-folder-bank/`. The bank contains all 678 shared model paragraphs: 238 at `Foundation`, 249 at `Intermediate` and 191 at `Advanced`, including its original exercises and the older Analysis Gaps, Essay Jigsaw and scene-analysis models. Eleventy validates and embeds this CSV when building the site.
 
-Each row uses `level,paragraph,stem1,stem2,stem3,stem4,alternatives1,alternatives2,alternatives3,alternatives4`. Mark four complete answers within `paragraph` using `[[double brackets]]`, keeping the model paragraph's correct wording. Enter the corresponding prompt words in `stem1` to `stem4`, in the order the marked answers appear. Each prompt must differ from its answer. For example, `his [[kindness]]` can use the stem `kind`. Leave alternative cells blank unless another form also fits that gap; separate multiple accepted single-word forms with semicolons. Answers ignore case, surrounding spaces and straight/curly apostrophe differences. The completed paragraph always displays the model's original wording.
+Each row uses `level,paragraph,stem1,stem2,stem3,stem4,alternatives1,alternatives2,alternatives3,alternatives4,themes`. Mark four complete answers within `paragraph` using `[[double brackets]]`, keeping the model paragraph's correct wording. Enter the corresponding prompt words in `stem1` to `stem4`, in the order the marked answers appear. Each prompt must differ from its answer. For example, `his [[kindness]]` can use the stem `kind`. Leave alternative cells blank unless another form also fits that gap; separate multiple accepted single-word forms with semicolons. Answers ignore case, surrounding spaces and straight/curly apostrophe differences. The completed paragraph always displays the model's original wording.
 
 Keep exercises at all three levels and save as UTF-8 CSV. The loader reports invalid levels, missing prompts or markers, partial-word gaps and malformed alternatives with their CSV row numbers. Analysis Gaps now has five columns (`level,paragraph,extra1,extra2,themes`); its former `formation` column has moved into this game's own bank.
+
+The `themes` column contains one or more of `Change`, `Christmas`, `Compassion`, `Family`, `Greed` and `Social Injustice`, separated by semicolons. The loader also accepts lowercase theme slugs and exports normalised slugs for filtering. It names the row for blank, unknown or repeated tags. Older Word Formation banks without the themes column remain supported.
 
 ### Paragraph games
 
 Edit [the Essay Jigsaw bank](src/assets/data/paragraph-games/build-the-paragraph.csv) in a spreadsheet or text editor. Each row is one model paragraph. Set `level` to `Foundation`, `Intermediate` or `Advanced`; the game lets students choose between the levels present in the bank. A bank without a `level` column still runs as a single set.
 
 Enter the question and put the puzzle pieces in their correct order across `sentence1`, `sentence2` and the following columns. A piece can contain more than one sentence: keep related word analysis together where separating it would permit interchangeable orders. Keep a complete quotation within the same piece. Leave unused cells blank and add further numbered columns for longer paragraphs. The matching `hint1`, `hint2` and other hint cells are optional, as is `explanation`, which appears after a solve. Save the file as UTF-8 CSV. Eleventy reads this game’s bank when it builds the page.
+
+The Jigsaw bank also has a `themes` column, using the same semicolon-separated theme names as Word Formation. Rows can belong to more than one theme. Banks without this column remain supported; when present, every row must have valid theme tags.
 
 The paragraph files in `assets-folder-bank/` remain editable master copies. Essay Jigsaw uses its own CSV, so changing its questions, levels or hints does not alter the master paragraphs or another game’s bank.
 
@@ -211,6 +225,19 @@ Add a launch button whose ID starts with `play-` followed by that game's ID.
 ```
 
 The frame uses the section's colours by default. Add `skin: christmas` for the red and green border with holly. The dialog uses the configured ID, so you can target it with CSS for a custom skin. Multiple games can share a page by giving each entry and launch button its own ID.
+
+### Mixed Theme Revision selection
+
+Revise This Theme mixes the following existing sources in one game window, using the selected theme and ghost:
+
+- Analysis Gaps, Corrections (Word Formation) and Essay Jigsaw: match both theme and level.
+- Vocabulary: match the level; vocabulary is available across all themes. Past uses an existing shorter example when the bank provides one (`fog_easy_example`), falling back to the normal example otherwise. Word levels remain those assigned in the source bank.
+- Quotations: Past uses the Top 10, Present the Top 25, and Yet-to-Come the Big 50, filtered by theme. These are cumulative pools (`pool <= 10`, `pool <= 25`, `pool <= 50`).
+- Plot and context questions: match the theme and allow them at every level.
+
+The session rotates between quote gaps, quotation tiles, plot questions, context questions, Analysis Gaps, Corrections, vocabulary and Essay Jigsaw. It samples each available format once per rotation and draws exercises without replacement within each format before refilling that deck. Check submits an exercise. Fully correct exercises advance automatically after 500 ms; wrong or partially correct exercises remain visible until Next is selected. Skip moves on without scoring an unfinished exercise. The rotation continues indefinitely as each format’s deck refills. Skip, ghost changes and closing the window cancel any pending automatic advance. Accuracy counts checked answers, including individual gaps in multi-gap exercises. Changing ghosts starts a fresh session at that level.
+
+The original CSVs and JSON remain the sources; edits feed both the standalone games and mixed revision. The builder is `tools/read-theme-revision-bank.js`, the window is `src/_includes/theme-revision.njk`, and its controller and rendering modules use the `theme-revision` prefix in `src/assets/js/`. Jigsaw and Corrections keep their theme tags in their own banks. No duplicate question bank is maintained.
 
 ### The colour worlds
 

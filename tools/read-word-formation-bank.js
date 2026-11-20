@@ -1,6 +1,7 @@
 const { readFileSync } = require('node:fs');
 const path = require('node:path');
 const readCsv = require('./read-csv');
+const readThemeTags = require('./read-theme-tags');
 
 const levels = ['Foundation', 'Intermediate', 'Advanced'];
 const columns = ['level', 'paragraph', 'stem1', 'stem2', 'stem3', 'stem4',
@@ -14,13 +15,17 @@ module.exports = function readWordFormationBank(filename) {
     throw new Error('Set Word Formation to a CSV filename from src/assets/data.');
   }
   const [header, ...rows] = readCsv(readFileSync(path.join(__dirname, '../src/assets/data', filename), 'utf8'));
-  if (header.join(',') !== columns.join(',')) throw new Error(`Invalid Word Formation header in ${filename}.`);
+  const hasThemes = header.length === columns.length + 1 && header.at(-1) === 'themes';
+  if (header.slice(0, columns.length).join(',') !== columns.join(',')
+    || (header.length !== columns.length && !hasThemes)) {
+    throw new Error(`Invalid Word Formation header in ${filename}.`);
+  }
 
   const exercises = rows.map((row, index) => {
     const location = `Row ${index + 2} in ${filename}`;
-    const [level, paragraph, ...fields] = row;
-    if (row.length !== columns.length || !levels.includes(level) || !paragraph?.trim()) {
-      throw new Error(`${location} needs all ten fields and a level of Foundation, Intermediate or Advanced.`);
+    const [level, paragraph, ...fields] = row.slice(0, columns.length);
+    if (row.length !== header.length || !levels.includes(level) || !paragraph?.trim()) {
+      throw new Error(`${location} needs all ${hasThemes ? 'eleven' : 'ten'} fields and a level of Foundation, Intermediate or Advanced.`);
     }
     const forms = [];
     let removed = 0;
@@ -51,7 +56,8 @@ module.exports = function readWordFormationBank(filename) {
       form.context = segments.containing(form.start).segment.trim();
       if (alternatives.length) form.alternatives = alternatives;
     });
-    return { level, analysis, forms };
+    const themes = hasThemes ? readThemeTags(row[columns.length], location) : null;
+    return { level, analysis, forms, ...(themes ? { themes } : {}) };
   });
   if (levels.some(level => !exercises.some(exercise => exercise.level === level))) {
     throw new Error(`${filename} needs exercises at all three Word Formation levels.`);

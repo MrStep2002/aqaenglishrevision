@@ -35,7 +35,7 @@ document.querySelectorAll('.quote-game[data-quotes], .quote-game[data-questions]
     return result;
   }
 
-  const normalise = word => word.trim().toLowerCase().replaceAll('’', "'");
+  const normalise = word => word.trim().toLowerCase().replaceAll('’', "'").replaceAll('-', '').replace(/[.!?]+$/u, '');
 
   function readQuotes(csv) {
     // Each quote occupies one line. CSV double quotes inside fields are escaped as "".
@@ -67,6 +67,7 @@ document.querySelectorAll('.quote-game[data-quotes], .quote-game[data-questions]
           masked: quote.slice(0, start) + '_____' + quote.slice(start + matches[0][0].length),
         };
       });
+      if (![10, 25, 50].includes(Number(tier))) throw new Error('Invalid quote pool for ' + quote);
       return { quote, blanks, themes: themes.split(';'), characters: characters.split(';'), tier: Number(tier) };
     });
   }
@@ -173,8 +174,8 @@ document.querySelectorAll('.quote-game[data-quotes], .quote-game[data-questions]
       if (!loaded.length) throw new Error('No matching questions');
       if (useQuotePools) {
         for (const size of [10, 25, 50]) {
-          if (loaded.filter(quote => quote.tier <= size).length !== size) {
-            throw new Error('Unexpected size for quote pool ' + size);
+          if (!loaded.some(quote => quote.tier <= size)) {
+            throw new Error('Empty quote pool ' + size);
           }
         }
       }

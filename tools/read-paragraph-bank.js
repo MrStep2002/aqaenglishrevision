@@ -1,6 +1,7 @@
 const { readFileSync } = require('node:fs');
 const path = require('node:path');
 const readCsv = require('./read-csv');
+const readThemeTags = require('./read-theme-tags');
 
 const bankFolder = path.join(__dirname, '../src/assets/data/paragraph-games');
 
@@ -21,6 +22,7 @@ module.exports = function readParagraphBank(filename) {
   const namedColumns = columns.filter(Boolean);
   const questionColumn = columns.indexOf('question');
   const levelColumn = columns.indexOf('level');
+  const themesColumn = columns.indexOf('themes');
   const explanationColumn = columns.indexOf('explanation');
   const sentenceColumns = [];
   columns.forEach((name, column) => {
@@ -56,7 +58,8 @@ module.exports = function readParagraphBank(filename) {
     if (!question || new Set(sentences).size < 2) {
       throw new Error(`${location} needs a question and at least two different sentences.`);
     }
-    puzzles.push({ question, ...(levelColumn >= 0 ? { level } : {}), sentences, hints, explanation: values[explanationColumn] ?? '' });
+    const themes = themesColumn >= 0 ? readThemeTags(values[themesColumn], location) : null;
+    puzzles.push({ question, ...(levelColumn >= 0 ? { level } : {}), ...(themes ? { themes } : {}), sentences, hints, explanation: values[explanationColumn] ?? '' });
   });
 
   if (!puzzles.length) throw new Error(`${filename} needs at least one paragraph.`);

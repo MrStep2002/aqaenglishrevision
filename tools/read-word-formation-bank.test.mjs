@@ -90,3 +90,21 @@ test('rejects invalid headers, extra fields and filenames outside the data folde
   assert.throws(() => readFixture(csv(rows)), /Row 2.*ten fields/);
   assert.throws(() => readFixture(csv(allLevels()), '../fixture.csv'), /CSV filename/);
 });
+
+test('reads optional theme tags without changing answers or offsets', () => {
+  const text = csv(allLevels().map(values => [...values, 'Change; Social Injustice'])).replace(header, header + ',themes');
+  const items = JSON.parse(readFixture(text));
+  const originals = JSON.parse(readFixture(csv(allLevels())));
+  for (let index = 0; index < items.length; index++) {
+    assert.deepEqual(items[index].themes, ['change', 'social-injustice']);
+    const { themes, ...exercise } = items[index];
+    assert.deepEqual(exercise, originals[index]);
+  }
+});
+
+test('rejects invalid explicit theme tags and names the row', () => {
+  for (const value of ['', 'Poverty', 'Family; family', 'Change;']) {
+    const text = csv(allLevels().map(values => [...values, value])).replace(header, header + ',themes');
+    assert.throws(() => readFixture(text), /Row 2.*themes/);
+  }
+});
