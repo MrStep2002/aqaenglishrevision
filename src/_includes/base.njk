@@ -73,10 +73,8 @@
   {% if earningsGame %}<link rel="stylesheet" href="/assets/css/earnings-game.css">{% endif %}
   {% if showHangman or showAnalysisGaps or showWordFormation or showWordInContext or showConnectingWall or showParagraphGames %}<link rel="stylesheet" href="/assets/css/ghost-levels.css?v=3">{% endif %}
   <link rel="canonical" href="{{ site.url }}{{ cur }}">
-  {%- if site.goatcounter %}
-  {#- Visitor statistics: GoatCounter (no cookies). Set "goatcounter" in src/_data/site.json. -#}
-  <script data-goatcounter="https://{{ site.goatcounter }}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-  {%- endif %}
+  {#- The local loader respects the visitor's choice and only counts on the live domain. -#}
+  <script src="/assets/js/analytics.js" data-goatcounter-code="{{ site.goatcounter | escape }}" data-site-url="{{ site.url | escape }}"{% if analytics === false or cur == "/404" %} data-analytics-disabled{% endif %} defer></script>
 </head>
 <body class="{% if cur == '/' %}is-home{% elif isFront %}is-front{% else %}is-article{% endif %}{% if layoutClass %} {{ layoutClass }}{% endif %}">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -217,7 +215,7 @@
     <div class="footer-inner">
       <img src="/assets/images/site/mouse.svg" alt="" width="36" height="30" class="brand-mouse">
       <img src="/assets/images/site/mouse-white.svg" alt="" width="36" height="30" class="brand-mouse-dark">
-      <p>{{ site.footer | safe }}</p>
+      <p>{{ site.footer | safe }} <a href="/privacy">Privacy and visitor statistics</a>.</p>
       <p class="footer-copy">{{ site.copyright | safe }}</p>
     </div>
   </footer>

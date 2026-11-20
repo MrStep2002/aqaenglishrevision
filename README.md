@@ -239,9 +239,26 @@ address at GitHub's four Pages IP addresses.
 
 ## Visitor statistics
 
-The site is ready for [GoatCounter](https://www.goatcounter.com/), which counts visits without cookies.
-Once you have an account, put its code in `src/_data/site.json`, e.g. `"goatcounter": "aqaenglishrevision"`.
-Leave it empty (`""`) to switch statistics off.
+Visitor statistics use [GoatCounter](https://www.goatcounter.com/) without analytics cookies.
+The dashboard is [mrstep.goatcounter.com](https://mrstep.goatcounter.com/); sign in with the owner's account.
+The site code is `"goatcounter": "mrstep"` in `src/_data/site.json`. Leave it empty (`""`) to switch statistics off.
+
+Statistics start when this configuration is published; earlier visits cannot be recovered.
+The loader (`src/assets/js/analytics.js`) counts pages only on the live domain, skips embedded frames,
+and respects a browser's exclusion choice. Local previews, the privacy page and 404 pages are not counted.
+Games and answers are not tracked as events. In GoatCounter, leave collection of individual pageviews
+disabled so reports remain aggregate statistics.
+
+Use the dashboard's date range and page list to see visits over time and which resources are used.
+Visits are estimates, not an exact count of different people; repeat visits and blocked scripts affect totals.
+Do not add up individual page counts to calculate the number of people visiting the whole site.
+
+To exclude your own browsing while editing, open `/privacy` on the live site and select
+"Exclude my visits from visitor statistics". Do this in each browser you use. Visitors have the same
+choice through the footer's privacy link. Clearing site data resets this browser preference.
+
+After publishing, open a revision page once in a browser that is not excluded and check that its visit
+appears in GoatCounter. If it does not, check whether an ad blocker is blocking the statistics script.
 
 ## How this was made
 
