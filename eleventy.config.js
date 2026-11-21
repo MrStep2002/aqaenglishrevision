@@ -11,6 +11,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addWatchTarget("src/assets/data/christmas-carol-word-formation.csv");
   eleventyConfig.addWatchTarget("src/assets/data/plot-quiz.csv");
   eleventyConfig.addWatchTarget("src/assets/data/christmas-carol-vocabulary.csv");
+  eleventyConfig.addWatchTarget("src/assets/data/christmas-carol-serve-your-sentence.csv");
   eleventyConfig.addWatchTarget("src/assets/data/fog-run.csv");
   eleventyConfig.addWatchTarget("src/assets/data/freds-or-dead.csv");
   eleventyConfig.addWatchTarget("src/assets/data/christmas-carol-hangman.csv");

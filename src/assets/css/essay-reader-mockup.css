@@ -57,7 +57,7 @@ html { scroll-behavior: smooth; scroll-padding-top: calc(var(--reader-header-h) 
 .details-symbol::after { transform: rotate(90deg); }
 .extract-details[open] .details-symbol::after { transform: none; }
 .reader-hint { color: var(--muted); font-size: 16px; margin: 18px 0 20px; }
-.extract-passage { font-style: normal; font-size: inherit; margin: 0; border-left: 2px solid var(--rule); padding-left: 24px; }
+.extract-passage { font-style: normal; font-size: inherit; margin: 0; padding: 24px; background: var(--card); background: color-mix(in srgb, var(--card) 75%, transparent); border: 1px solid var(--rule); border-top: 2px solid var(--accent); border-radius: 2px; }
 .extract-passage p { margin: 0 0 24px; }
 .extract-passage p:last-child { margin-bottom: 0; }
 .extract-phrase { -webkit-box-decoration-break: clone; box-decoration-break: clone; }
@@ -135,6 +135,7 @@ html { scroll-behavior: smooth; scroll-padding-top: calc(var(--reader-header-h) 
 .note-source { font: 12px var(--mono); color: var(--muted); margin: 0 0 15px; }
 .note-quote { margin: 0 0 18px; padding-left: 13px; border-left: 2px solid var(--rule); color: var(--ink2); font-style: italic; font-size: 16px; max-height: 9em; overflow-y: auto; }
 .note-body { margin-bottom: 18px; }
+.guide-source-link { display: block; margin: 12px 0 4px; color: var(--accent); font-size: 14px; text-underline-offset: 3px; }
 .note-chips { display: flex; gap: 6px; flex-wrap: wrap; margin: 0 0 8px; }
 .note-chip { border: 1px solid var(--chip-ink); color: var(--chip-ink); background: var(--chip-bg); padding: 2px 7px; border-radius: 3px; font: 13px/1.5 var(--mono); }
 .ao-note { border-top: 1px solid var(--rule); padding-top: 12px; margin-top: 16px; font-size: 14px; color: var(--muted); }
@@ -182,7 +183,7 @@ html { scroll-behavior: smooth; scroll-padding-top: calc(var(--reader-header-h) 
   .reader-main h2 { font-size: 28px; }
   .question-section h2 { font-size: 24px; }
   .reader-section { margin-bottom: 40px; }
-  .extract-passage { padding-left: 16px; }
+  .extract-passage { padding: 18px 16px; }
   .essay-toolbar { position: static; }
   .view-buttons { gap: 4px; }
   .view-buttons button { padding: 9px 11px; font-size: 15px; flex: 1; }

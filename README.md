@@ -103,9 +103,21 @@ Add new Unseen Poetry resource links to the Practice section in `src/unseen-poet
 
 ### Placing games anywhere on the site
 
+The six Christmas Carol theme pages have numbered banner slots in their HTML, marked
+`<!-- Game slot 01: … -->` and `<aside class="margin-card game-ad-slot" …>`.
+Move the whole aside to reposition a slot, or place other margin pictures and copy around it.
+The script changes the advertised game once per page load; it never moves the slots.
+Slot 01 is always Revise This Theme, using that page's theme. Greed's slot 02 is always
+How Much Work? All other slots use `data-game-slot="random"` and choose without repeats
+from the remaining games. The image and link inside a random slot provide its fallback.
+The catalogue lives in `src/assets/js/game-ads.js`; the portrait and landscape art share
+the same filename with `-landscape` added for narrow screens. Leave the hidden local
+launch buttons in place: they supply the themed Plot Quiz and Analysis Gaps games.
+
+
 Normal game clicks open a player over the current page. Use the game’s close button or Escape to return to the same page and scroll position. The player loads only the selected game's markup, data and script; closing it removes the player and stops its timers. Theme-specific links keep the theme's own question bank.
 
-To place an existing game on another page, copy its link from `src/games.html`. For example:
+To place an existing game on another page, copy its link from `src/a-christmas-carol/games.html`. For example:
 
 ```html
 <a class="quote-launch" href="/a-christmas-carol/key-quotes#play-fog-run">Play Fog Run</a>
@@ -122,7 +134,7 @@ To change the lesson link shown if loading fails without changing the game or it
 
 The shared launcher lives in `src/assets/js/game-launcher.js`, its isolated player bridge in `src/assets/js/game-player.js`, and their styles in `src/assets/css/game-launcher.css`. Register a new game in the launcher's `games` object; most games need only their lesson page, with optional script, dialog selector and external JSON data ID. The existing game templates and scripts remain the source of game behaviour. A loading failure offers retry and an explicit lesson link without changing the current page.
 
-Picture Planner is part of the Pics & Tips lesson and retains an explicitly labelled lesson link on the Games page.
+The Games page is local to A Christmas Carol at `/a-christmas-carol/games`, with that text’s contents menu and only its activities. The old `/games` address redirects there. Picture Planner remains in the Language Paper 1 Pics & Tips lesson.
 
 ### Quotation bank
 
@@ -142,11 +154,58 @@ Separate multiple tags with semicolons in `themes`, `staves` and `characters`. T
 
 The Plot page offers the full bank. The six theme pages use matching theme tags. Correct answers advance after three quarters of a second. Wrong answers show the explanation and wait for Next question. The game refills its shuffled question deck when it reaches the end. To add it to another page, use a launch button with `id="play-plot-quiz"`, `class="quote-launch"`, `type="button"`, `aria-haspopup="dialog"` and `aria-controls="plot-quiz"`.
 
-### Word in Context
+### Serve Your Sentence
 
-Edit `src/assets/data/christmas-carol-vocabulary.csv` to add or change vocabulary questions. Each row has a unique `word`, a `level` of 1, 2 or 3, a `definition`, and an `example` sentence that uses that word once. The game turns the word into a gap and offers three other words from the same level, chosen at random each time. Save the file as UTF-8 CSV. A comma inside a sentence is fine when the cell is quoted.
+Edit `src/assets/data/christmas-carol-serve-your-sentence.csv`. This game has its own bank: 80 short Level 1 essay sentences, 78 Level 2 sentences and 22 Level 3 sentences. The 23 former Level 1 examples are preserved at Level 2. The original `christmas-carol-vocabulary.csv` remains the vocabulary source for Theme Revision.
 
-Each level needs at least four words. A phrase such as `direct address` is one answer, and the button shows the whole phrase. The build names the row if the word is missing, repeated, or written in a different form from the example. Correct answers advance after three quarters of a second. Wrong answers show the definition and wait for Next question. The Essays page launches the game. To add it to another page, use a launch button with `id="play-word-in-context"`, `class="quote-launch"`, `type="button"`, `aria-haspopup="dialog"` and `aria-controls="word-in-context"`.
+Each row has a unique `id`, a `level` of 1, 2 or 3, a `word`, an `example` containing that answer exactly once, and a `definition`. Answers may repeat across different sentences. For Level 1, fill `wrong1`, `wrong2` and `wrong3` with three different single-word alternatives. Choose alternatives using the authoring rules below: meaning and word form may both be tested, with only one choice completing the whole sentence correctly. Level 1 currently uses 12–18 words per sentence. The `focus` column records the main kind of decision for authors reviewing variety; it is not displayed to players. The `source` column records provenance and is not displayed; `fog_easy_example` preserves optional examples from the old vocabulary bank.
+
+#### Authoring sentences and answer choices
+
+The working principle is: every option should be believable before the whole sentence is read, but exactly one should fit its grammar, meaning and natural usage. An option list must not reveal the key by itself. The rule is flexible: questions may test word class, verb agreement, tense, a precise distinction in meaning, or a combination.
+
+1. Write a short, accurate sentence a student could use in an essay. Put the evidence needed to choose the answer after the gap. Keep one word missing at Level 1.
+2. Identify the intended meaning and the grammatical form required by that exact frame. Choose the answer before writing the alternatives.
+3. Start with a useful mixture of alternatives: a related meaning in the wrong form; a form that fits but expresses the wrong idea; and another believable confusion. That third choice can test either meaning or form. It should concern the same scene, feeling, action or essay function, rather than being filler.
+4. Vary the mixture when the sentence supports it. Four grammatically valid choices can work when the evidence distinguishes nearby meanings, such as hope, confidence, gratitude and pride. Do not force a noun/adjective pair or a tense error into every question.
+5. Avoid giveaways in the option list. The key must not be the only positive or negative word, the only word of its class, the only sensible topic word, or the conspicuously formal or long option. For questions with form errors, keep at least two options that fit the grammar before the evidence is read. Balance related meanings so that grammatical elimination still leaves a real choice.
+6. Substitute every option into the complete sentence. Check actual usage, rather than just a dictionary label: words such as `care` can be nouns or verbs, and `caring` can function as a noun after `with`. A supposedly wrong form that works in this frame must be replaced. Reject a set with a second reasonable answer; revise the clue or alternatives instead of depending on an unstated interpretation.
+7. Run two final checks: cover the sentence and try to spot the answer from the options alone; then read only up to the gap and check that more than one option remains plausible. In the complete sentence, be able to state a specific reason each alternative fails. Keep those authoring reasons out of the student flow.
+
+8. Review the whole bank as well as individual questions. Mix precise meanings, noun/adjective/adverb forms, verb forms, logical links, timing, roles, scope, methods and spatial relationships. Include questions where several words have the same positive or negative tone. Revisit familiar words in different frames and contexts. Keep the mix varied without imposing a repeating sequence of question types. A clear clue should reward careful reading; obscurity and a second defensible answer do not add useful difficulty.
+
+All 80 Level 1 questions have been reviewed using these rules. The eight pilot examples are preserved. The `focus` labels describe each question’s primary decision; some questions also involve another skill. The current distribution records coverage and does not prescribe quotas for future writing:
+
+| Primary focus | Questions |
+| --- | ---: |
+| Word form | 14 |
+| Roles and agency | 9 |
+| Cause and contrast | 6 |
+| Precise meaning | 27 |
+| Scope and certainty | 4 |
+| Writer’s methods | 5 |
+| Verb form | 6 |
+| Time and change | 7 |
+| Place and relationships | 2 |
+
+Examples from the bank (the answer is bold here; the game shuffles questions and all four choices):
+
+| Sentence | Choices | Why the complete sentence matters |
+| --- | --- | --- |
+| Scrooge shows _____ when he frightens away a child who is singing at his door. | **cruelty**, unkind, kindness, gentle | Cruelty and unkind match the behaviour, but this frame needs a noun. Kindness fits the grammar but contradicts the action. |
+| Mrs Dilber shows _____ by selling possessions taken from the dead man’s home. | **disrespect**, rude, respect, respectful | Disrespect and rude match the behaviour; only disrespect has the required form. Respect has the right form but the wrong meaning. |
+| Dickens links Scrooge’s change with _____ as he becomes like a second father to Tiny Tim. | **care**, kind, neglect, neglectful | Care and neglect fit after with; the parental action selects care. Kind and neglectful do not stand alone in this frame. |
+| Scrooge _____ Bob’s life when he raises his wages instead of punishing him for arriving late. | **improves**, improve, harms, harm | Improves and harms agree with Scrooge; the pay rise supplies the meaning. |
+| Scrooge feels _____ because he wants a better future but is not sure it will happen. | **hopeful**, confident, grateful, proud | All four fit the grammar and have positive associations. The desired but uncertain outcome selects hopeful. |
+| Fezziwig is the _____ because he gives the party and welcomes his workers as guests. | **host**, guest, customer, visitor | Giving the party identifies the host rather than a person attending it or buying something. |
+| The Cratchits enjoy Christmas _____ they have little money, showing that poverty does not prevent happiness. | **although**, because, unless, before | The final clause establishes contrast, rather than cause, exclusion or sequence. |
+| Scrooge _____ reward the boy for fetching the turkey, promising payment for work not yet completed. | **will**, did, has, does | The payment is promised for the future. Did and does fit the verb form but describe different times; has requires rewarded. |
+| Tiny Tim addresses _____, making his blessing universal rather than limited to one named person. | **everyone**, himself, Scrooge, nobody | Universal scope rules out a single recipient or no recipients. |
+| Scrooge is welcomed _____ Fred’s home, joining the family indoors instead of staying out in the street. | **inside**, indoors, outside, outdoors | Inside and outside can take a following place as their object; the destination is indoors. |
+
+Level 2 and Level 3 retain their existing examples and random same-level alternatives for later review. Their three wrong-answer cells can be left blank together; filling all three switches that sentence to authored alternatives. Partial sets and duplicate choices cause a build error. Each level needs at least four different answer words. Save as UTF-8 CSV, quoting cells containing commas.
+
+Correct answers advance after three quarters of a second. Wrong answers show the definition and wait for Next question. The Essays page and Games page launch Serve Your Sentence. Existing links keep the `#play-word-in-context` address. To add a launch button elsewhere, use `id="play-word-in-context"`, `class="quote-launch"`, `type="button"`, `aria-haspopup="dialog"` and `aria-controls="word-in-context"`.
 
 ### Fog Run
 
@@ -154,7 +213,7 @@ Edit `src/assets/data/fog-run.csv` for the snowy maze game. Its controller, maze
 
 Each row contains `word`, `level`, `type`, `clue`, optional `definition` and `source`. Levels are 1–3. The maze keeps its 100 original sentence exercises and adds Crossword clues and quotation gaps. A `sentence` or `quote` clue contains one `____` gap; a `crossword` clue can be a direct question or contain one gap. The player collects the answer while avoiding the cash boxes. Answer choices are distinct even when the bank has several clues for the same answer. Each level needs at least three different answers.
 
-The CSV is independent of Word in Context. The optional definition is used when pausing a sentence exercise. The source column records where the content came from and is not shown in play.
+The CSV is independent of Serve Your Sentence. The optional definition is used when pausing a sentence exercise. The source column records where the content came from and is not shown in play.
 
 ### Fred’s or Dead
 
@@ -168,15 +227,19 @@ Each run chooses ten different answers and places them at shuffled positions. Th
 
 Historical duplicate game files are preserved under `archive/game-renames/`, outside the published source. Edit the current files under `src/`.
 
+Extract Challenge has been retired. Its template, script and styles are preserved under `archive/retired-games/extract-challenge/`, outside the published source; it is no longer registered in the launcher or advertised on the site.
+
 ### Hangman
 
-Edit `src/assets/data/christmas-carol-hangman.csv`. This is a separate list from Word in Context. Each row has a `word`, a `level` of 1, 2 or 3, and an optional `definition`. The word column is what the player spells. A short quotation goes in that same column: add the line and it is included. Letters are guessed. Spaces, hyphens and punctuation stay on screen. Each level needs at least one row. Each wrong letter draws more fog over the nightcap mouse. Seven wrong guesses lose the round. Solving the word clears the fog and restores the mouse. Hint shows the definition for the current row, when that cell has one. The build names the row if the word is missing, repeated, or has no letters. The Essays page launches the game. To add it to another page, use a launch button with `id="play-hangman"`, `class="quote-launch"`, `type="button"`, `aria-haspopup="dialog"` and `aria-controls="hangman"`.
+Edit `src/assets/data/christmas-carol-hangman.csv`. This is a separate list from Serve Your Sentence. Each row has a `word`, a `level` of 1, 2 or 3, and an optional `definition`. The word column is what the player spells. A short quotation goes in that same column: add the line and it is included. Letters are guessed. Spaces, hyphens and punctuation stay on screen. Each level needs at least one row. Each wrong letter draws more fog over the nightcap mouse. Seven wrong guesses lose the round. Solving the word clears the fog and restores the mouse. Hint shows the definition for the current row, when that cell has one. The build names the row if the word is missing, repeated, or has no letters. The Essays page launches the game. To add it to another page, use a launch button with `id="play-hangman"`, `class="quote-launch"`, `type="button"`, `aria-haspopup="dialog"` and `aria-controls="hangman"`.
 
 ### Crossword
 
 Edit `src/assets/data/christmas-carol-crossword.csv`. This is a separate list from the vocabulary bank. Each row is a `word` and a `clue`. Use letters only, with no spaces or hyphens, because each letter is one square. Opening the game deals a crossword of up to eight words from that list, and New deals another. Letter fills one missing letter in the selected word. The build names a row if the word is missing, repeated, or shares no letters with the rest of the list. The Essays page launches the game. To add it to another page, use a launch button with `id="play-crossword"`, `class="quote-launch"`, `type="button"`, `aria-haspopup="dialog"` and `aria-controls="crossword"`.
 
 ### Connecting Wall
+
+The active bank has 72 categories, with 24 at each level. Story details, vocabulary and analysis terms all have their own pools. Existing categories are retained. Where pools overlap, record the shared word in both so the generator can exclude it when those categories appear together.
 
 Edit `src/assets/data/christmas-carol-wall.csv` to add categories. Each row has a unique `id`, a `level` (1 = Easy, 2 = Mid, 3 = Hard), a `group` name, at least four numbered word columns (`word1`, `word2`, and so on), and an optional `explanation`. Larger pools provide different four-word samples. Words may appear in several categories; the generator selects four compatible pools and displays only words belonging to exactly one of them. The selected level comes first, with nearby levels used if needed. The build reports invalid rows or a bank that cannot supply a complete wall.
 

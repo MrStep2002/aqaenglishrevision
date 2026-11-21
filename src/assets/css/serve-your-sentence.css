@@ -1,0 +1,3 @@
+@media (max-width: 40rem) {
+  .quote-game.word-in-context .ghost-game-title { padding-inline: 3rem; }
+}

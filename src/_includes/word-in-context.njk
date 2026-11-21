@@ -1,11 +1,11 @@
 {% from "ghost-levels.njk" import ghostLevels %}
 <dialog class="quote-game word-in-context" id="word-in-context" aria-labelledby="word-in-context-title">
-  <form class="quote-close" method="dialog"><button type="submit" aria-label="Close Word in Context">×</button></form>
+  <form class="quote-close" method="dialog"><button type="submit" aria-label="Close Serve Your Sentence">×</button></form>
   <header class="ghost-game-header">
     {{ ghostLevels([1, 2, 3]) }}
     <div class="ghost-game-title">
       <span class="quote-holly" aria-hidden="true"><i></i></span>
-      <h2 id="word-in-context-title">Word in Context</h2>
+      <h2 id="word-in-context-title">Serve Your Sentence</h2>
       <span class="quote-holly" aria-hidden="true"><i></i></span>
     </div>
   </header>
@@ -14,7 +14,7 @@
     <meter id="word-in-context-accuracy" min="0" max="100" value="0"></meter>
   </div>
   <div class="quote-play">
-    <p class="quote-status">Choose the word that fills the gap.</p>
+    <p class="quote-status">Read the whole sentence and choose the word that fits.</p>
     <p class="quote-prompt" tabindex="-1" hidden></p>
     <div class="quote-options" role="group" aria-label="Answer choices" hidden></div>
     <div class="quote-result">
@@ -22,5 +22,5 @@
       <button class="quote-next" type="button" hidden>Next question</button>
     </div>
   </div>
-  <script class="quiz-bank" type="application/json">{{ vocabularyBank | safe }}</script>
+  <script class="quiz-bank" type="application/json">{{ serveYourSentenceBank | safe }}</script>
 </dialog>

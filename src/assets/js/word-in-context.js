@@ -49,9 +49,9 @@
     feedback.textContent = '';
     next.hidden = true;
     const item = deck[index];
-    const choices = shuffle([
-      item,
-      ...shuffle(deck.filter(entry => entry.word !== item.word)).slice(0, 3),
+    const choices = shuffle(item.choices ?? [
+      item.word,
+      ...shuffle([...new Set(deck.map(entry => entry.word))].filter(word => word !== item.word)).slice(0, 3),
     ]);
     prompt.hidden = false;
     prompt.textContent = sentence(item);
@@ -59,16 +59,16 @@
     options.replaceChildren(...choices.map(choice => {
       const button = document.createElement('button');
       button.type = 'button';
-      button.textContent = choice.word;
-      button.addEventListener('click', () => check(choice.word));
+      button.textContent = choice;
+      button.addEventListener('click', () => check(choice));
       return button;
     }));
     if (game.open) prompt.focus();
   }
 
-  function startLevel(previousWord) {
+  function startLevel(previousId) {
     deck = shuffle(items.filter(item => item.level === level));
-    if (deck.length > 1 && deck[0].word === previousWord) {
+    if (deck.length > 1 && deck[0].id === previousId) {
       [deck[0], deck[1]] = [deck[1], deck[0]];
     }
     index = 0;
@@ -77,9 +77,9 @@
   }
 
   function advance() {
-    const previousWord = deck[index].word;
+    const previousId = deck[index].id;
     index += 1;
-    if (index === deck.length) startLevel(previousWord);
+    if (index === deck.length) startLevel(previousId);
     else showQuestion();
   }
 

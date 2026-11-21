@@ -7,7 +7,6 @@
     'freds-or-dead': { page: 'key-quotes' },
     'quote-recall': { page: 'key-quotes', script: 'quote-game.js' },
     'quote-builder': { page: 'key-quotes' },
-    'extract-evidence': { page: 'key-quotes' },
     'context-quiz': { page: 'context', script: 'quote-game.js' },
     'plot-order': { page: 'plot', selector: '.plot-game', script: 'plot-game.js' },
     'plot-quiz': { page: 'plot', script: 'quote-game.js' },

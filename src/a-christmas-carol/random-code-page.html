@@ -6,6 +6,9 @@ eleventyExcludeFromCollections: true
 Copy-and-paste reference. Copy only the HTML block you need.
 
 
+
+
+
 To add a full width image mid text:
 
 <figure style="margin: 0 0 1em;">
@@ -42,6 +45,21 @@ Add quotes in the margin:
   <p>“I will honour Christmas in my heart, and try to keep it all the year.”</p>
   <p class="note-ref">Scrooge · Stave Five</p>
 </aside>
+
+
+
+TO ADD A RANDOM GAME IN THE MARGIN, COPY THIS BLOCK AND PASTE IT WHERE YOU WANT IT. CHANGE THE DATA-GAME ATTRIBUTE TO THE GAME YOU WANT. SEE BELOW FOR A LIST OF GAMES.
+
+<!-- Game slot 06: random game; move this whole aside to reposition it. -->
+<aside class="margin-card game-ad-slot" id="game-slot-06" data-game-slot="random" data-game="connecting-wall" aria-label="Revision game">
+  <a class="game-ad-link" href="/a-christmas-carol/essays#play-connecting-wall" data-game-title="Word Wall" aria-label="Play Word Wall" aria-haspopup="dialog">
+    <picture>
+      <source media="(max-width: 1180px)" srcset="/assets/pictures/acc/game-word-wall-landscape.jpg">
+      <img src="/assets/pictures/acc/game-word-wall.jpg" alt="Play Word Wall" width="640" height="1024" loading="lazy" decoding="async">
+    </picture>
+  </a>
+</aside>
+
 
 
 Add games in the margin. Place each block before the text it should sit beside. Use each button ID only once per page. If a text button already exists, replace it with the image button.
@@ -90,7 +108,7 @@ Learn the quotes:
 
 Context quiz:
 
-    <aside class="margin-card game-promos" aria-label="Revision games">
+<aside class="margin-card game-promos" aria-label="Revision games">
   <button id="play-context-quiz"
           class="quote-launch"
           type="button"

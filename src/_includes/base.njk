@@ -4,6 +4,7 @@
 {%- set sec = sections.list[slug] if slug else null %}
 {%- set world = sec.world if sec else "navy" %}
 {%- set isFront = sec and cur == "/" + slug %}
+{%- set hasMargin = not isFront and not essayLanding and cur != "/" and layoutClass != "games-page" %}
 {%- set navItem = nav | findUrl("/" + slug) if slug else null %}
 {%- set hasLessonSections = 'class="lesson-section"' in content %}
 {%- set showContents = (navItem and navItem.children) or hasLessonSections %}
@@ -11,7 +12,6 @@
 {%- set showFogRun = 'id="play-fog-run"' in content %}
 {%- set showFredsOrDead = 'id="play-freds-or-dead"' in content %}
 {%- set showQuoteBuilder = 'id="play-quote-builder"' in content %}
-{%- set showExtractEvidence = 'id="play-extract-evidence"' in content %}
 {%- set showParagraphGames = paragraphGames and (paragraphGames | length) %}
 {%- set showPlotGame = 'id="play-plot-order"' in content %}
 {%- set showContextQuiz = 'id="play-context-quiz"' in content %}
@@ -54,19 +54,20 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&display=swap">
   {% if 'carol-quote' in content %}<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Germania+One&display=swap">{% endif %}
-  <link rel="stylesheet" href="/assets/css/site.css">
+  <link rel="stylesheet" href="/assets/css/site.css?v=2">
   <link rel="stylesheet" href="/assets/css/game-launcher.css?v=2">
-  {% if showQuoteGame or showThemeRevision or showQuoteBuilder or showExtractEvidence or showPlotGame or showParagraphGames or showAnalysisGaps or showWordInContext or showHangman or showCrossword or showWordsearch or showConnectingWall or earningsGame %}<link rel="stylesheet" href="/assets/css/quote-game.css">{% endif %}
+  {% if isThemeQuiz %}<link rel="stylesheet" href="/assets/css/game-ads.css?v=1">{% endif %}
+  {% if showQuoteGame or showThemeRevision or showQuoteBuilder or showPlotGame or showParagraphGames or showAnalysisGaps or showWordInContext or showHangman or showCrossword or showWordsearch or showConnectingWall or earningsGame %}<link rel="stylesheet" href="/assets/css/quote-game.css">{% endif %}
   {% if showPicturePlanner %}<link rel="stylesheet" href="/assets/css/picture-planner.css">{% endif %}
   {% if showFogRun %}<link rel="stylesheet" href="/assets/css/fog-run.css?v=8">{% endif %}
   {% if showFredsOrDead %}<link rel="stylesheet" href="/assets/css/freds-or-dead.css?v=1">{% endif %}
   {% if showQuoteBuilder %}<link rel="stylesheet" href="/assets/css/quote-builder.css">{% endif %}
-  {% if showExtractEvidence %}<link rel="stylesheet" href="/assets/css/extract-evidence.css">{% endif %}
   {% if showPlotGame %}<link rel="stylesheet" href="/assets/css/plot-game.css">{% endif %}
   {% if showParagraphGames %}<link rel="stylesheet" href="/assets/css/essay-jigsaw.css?v=8">{% endif %}
-  {% if showThemeRevision %}<link rel="stylesheet" href="/assets/css/theme-revision.css?v=2">{% endif %}
+  {% if showThemeRevision %}<link rel="stylesheet" href="/assets/css/theme-revision.css?v=3">{% endif %}
   {% if showAnalysisGaps %}<link rel="stylesheet" href="/assets/css/analysis-gaps.css">{% endif %}
   {% if showWordFormation %}<link rel="stylesheet" href="/assets/css/word-formation.css">{% endif %}
+  {% if showWordInContext %}<link rel="stylesheet" href="/assets/css/serve-your-sentence.css?v=1">{% endif %}
   {% if showHangman %}<link rel="stylesheet" href="/assets/css/hangman.css?v=4">{% endif %}
   {% if showCrossword %}<link rel="stylesheet" href="/assets/css/crossword.css">{% endif %}
   {% if showWordsearch %}<link rel="stylesheet" href="/assets/css/wordsearch.css?v=3">{% endif %}
@@ -77,7 +78,7 @@
   {#- The local loader respects the visitor's choice and only counts on the live domain. -#}
   <script src="/assets/js/analytics.js" data-goatcounter-code="{{ site.goatcounter | escape }}" data-site-url="{{ site.url | escape }}"{% if analytics === false or cur == "/404" %} data-analytics-disabled{% endif %} defer></script>
 </head>
-<body class="{% if cur == '/' %}is-home{% elif isFront %}is-front{% else %}is-article{% endif %}{% if layoutClass %} {{ layoutClass }}{% endif %}">
+<body class="{% if cur == '/' %}is-home{% elif isFront or essayLanding %}is-front{% else %}is-article{% endif %}{% if layoutClass %} {{ layoutClass }}{% endif %}">
   <a class="skip-link" href="#main">Skip to content</a>
 
   {#- One slim bar: logo, main menu, reading settings. It stays at the top as you scroll. -#}
@@ -158,13 +159,13 @@
       <p class="plate-eyebrow">{{ sec.eyebrow }}</p>
       {%- endif %}
       {{ b.inner | safe }}
-      {%- if not isFront and cur != "/" %}
+      {%- if hasMargin %}
       <p class="plate-meta"><span>{{ rt.minutes }} min read</span><span>{{ rt.wordsText }} words</span></p>
       {%- endif %}
     </div>
   </header>
 
-  <div class="page{% if showContents %} has-contents{% endif %}{% if not isFront and cur != '/' %} has-margin{% endif %}">
+  <div class="page{% if showContents %} has-contents{% endif %}{% if hasMargin %} has-margin{% endif %}">
     {%- if showContents %}
     {#- Contents column: this text's pages, like the contents page of a book. The page you're on
         opens out to show its own sections ("On this page"), added by src/assets/js/site.js. -#}
@@ -197,7 +198,7 @@
     {%- endif %}
 
     <main id="main" class="content">
-      {%- if not isFront and cur != "/" %}
+      {%- if hasMargin %}
       {#- The right-hand margin: this box sits at its top; notes, pictures and games for the page float beside their paragraphs. -#}
       <aside class="page-info" aria-label="About this page">
         <p class="pi-label">This page</p>
@@ -221,10 +222,6 @@
     </div>
   </footer>
 
-  {% if showExtractEvidence %}
-  {% include "extract-evidence.njk" %}
-  <script src="/assets/js/extract-evidence.js" defer></script>
-  {% endif %}
   {% if showFogRun %}
   {% include "fog-run.njk" %}
   <script type="module" src="/assets/js/fog-run.js?v=8"></script>
@@ -269,7 +266,7 @@
   {% endif %}
   {% if showWordInContext %}
   {% include "word-in-context.njk" %}
-  <script src="/assets/js/word-in-context.js" defer></script>
+  <script src="/assets/js/word-in-context.js?v=2" defer></script>
   {% endif %}
   {% if showHangman %}
   {% include "hangman.njk" %}
@@ -291,7 +288,8 @@
   {% include "connecting-wall.njk" %}
   <script type="module" src="/assets/js/connecting-wall.js"></script>
   {% endif %}
-  <script src="/assets/js/game-launcher.js?v=3" defer></script>
+  {% if isThemeQuiz %}<script type="module" src="/assets/js/game-ads.js?v=2"></script>{% endif %}
+  <script src="/assets/js/game-launcher.js?v=4" defer></script>
   <script src="/assets/js/site.js" defer></script>
   {% if showPicturePlanner %}<script src="/assets/js/picture-planner.js" defer></script>{% endif %}
 </body>

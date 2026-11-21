@@ -249,7 +249,7 @@ mark, .mark { background: var(--mark); color: var(--mark-ink); }
 .games-page .games-categories a { padding: .6rem .85rem; border: 1px solid var(--rule); border-radius: 999px; background: var(--card); font-size: 1rem; line-height: 1.4; text-decoration: none; }
 .games-page .games-categories a:hover { border-color: var(--accent); }
 .games-page .content .game-category { margin-block: 2.25rem; }
-.games-page .content .game-category > h3 { margin: 0 0 1rem; padding-bottom: .6rem; border-bottom: 1px solid var(--rule); }
+.games-page .content .game-category > h2 { margin: 0 0 1rem; padding: 0 0 .6rem; border-top: 0; border-bottom: 1px solid var(--rule); font-family: var(--body); font-size: 1.18em; font-weight: 600; line-height: 1.3; letter-spacing: normal; }
 .games-page .content .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; gap: 1rem; }
 .games-page .content a.card, .games-page .game-choice-card { padding: 1.1rem; font-size: max(1rem, calc(var(--size) * .9)); }
 .games-page .game-choice-card { display: flex; flex-direction: column; gap: 3px; min-width: 0; border: 1px solid var(--rule); border-radius: 10px; background: var(--card); letter-spacing: normal; word-spacing: normal; }
@@ -364,6 +364,11 @@ div.slot::after { content: none; }
 .front-split > .main { flex: 999 1 520px; min-width: 0; max-width: 760px; }
 .front-split > .side { flex: 1 1 240px; max-width: 300px; display: flex; flex-direction: column; gap: 20px; }
 .front-split .main > p { max-width: 38em; }
+.home-intro { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 56px; align-items: start; }
+.home-intro > div { min-width: 0; }
+@media (max-width: 760px) {
+  .home-intro { grid-template-columns: 1fr; }
+}
 .front h2 { margin: 0 0 14px; font-family: var(--head); font-weight: var(--hw); font-size: 1.76em; line-height: 1.12; letter-spacing: -.005em; }
 .front-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 20px; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--ink); }
 .front h2, .front-head h2 { border-top: 0; padding-top: 0; }

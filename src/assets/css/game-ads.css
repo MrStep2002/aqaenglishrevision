@@ -1,0 +1,14 @@
+/* Authored slots stay beside the following text. Artwork always reserves its space. */
+.content aside.game-ad-slot { padding: 0; border: 0; background: none; }
+.game-ad-slot > .game-ad-link {
+  display: block; box-sizing: border-box; width: 100%; margin: 0; padding: 0;
+  border: 0; border-radius: 8px; overflow: hidden; background: transparent;
+  color: inherit; text-decoration: none; cursor: pointer;
+}
+.game-ad-link picture { display: block; aspect-ratio: 5 / 8; }
+.game-ad-link img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.game-ad-link:focus-visible { outline: 3px solid var(--accent, #235144); outline-offset: 4px; }
+
+@media (max-width: 1180px) {
+  .game-ad-link picture { aspect-ratio: 1410 / 600; }
+}
